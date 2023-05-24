@@ -1,4 +1,4 @@
-package kr.board.mapper;
+package kr.patpat.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 

@@ -1,4 +1,4 @@
-package kr.board.config;
+package kr.patpat.config;
 
 import javax.sql.DataSource;
 
@@ -15,7 +15,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
-@MapperScan(basePackages = {"kr.board.mapper"})
+@MapperScan(basePackages = {"kr.patpat.mapper"})
 @PropertySource({"classpath:persistence-mysql.properties"})
 public class RootConfig {
    // root-context.xml을 대체할 클래스

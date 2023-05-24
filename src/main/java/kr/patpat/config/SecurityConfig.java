@@ -1,4 +1,4 @@
-package kr.board.config;
+package kr.patpat.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

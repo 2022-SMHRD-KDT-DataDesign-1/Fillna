@@ -1,4 +1,4 @@
-package kr.board.config;
+package kr.patpat.config;
 
 import javax.servlet.Filter;
 

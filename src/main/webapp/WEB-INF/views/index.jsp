@@ -17,7 +17,13 @@
 <body>
 
 	<div class="container">
-		Test Page
+		<c:if test="${userEmail eq null}">
+			<div><a href='${contextPath}/login'>로그인</a></div>
+		</c:if>
+		<c:if test="${userEmail ne null}">
+			<div>로그인 성공티비</div>
+			<input type="button" value="로그아웃" onclick="location.href='${contextPath}/logout'">
+		</c:if>
 	</div>
 	
 	

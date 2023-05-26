@@ -32,8 +32,8 @@ public class MemberController {
 	@Autowired
 	private MemberMapper memberMapper;
 	
-	@RequestMapping("/kakaoLoginForm")
-	public String kakaoLoginForm() {
+	@RequestMapping("/login")
+	public String loginForm() {
 		return "member/kakaoLogin";
 	}
 
@@ -46,29 +46,30 @@ public class MemberController {
 		
 		Member member = memberMapper.selectMember(userInfo);
 		
+		System.out.println(member);
+		
 		session.setAttribute("accessToken", accessToken);
 		session.setAttribute("userEmail", userInfo.get("email"));
 
-		
-		if (member != null) {
+		if (member.getMbEmail() != null) {
 			// 이미 가입한 경우
 			return "redirect:/";
 		} else {
 			// 신규회원인 경우
 			memberMapper.join(userInfo);
-			return "redirect:/kakaoLoginForm";
+			return "redirect:/";
 		}
 
 		// JSONPObject kakaoInfo = new JSONPObject(userInfo);
 		// model.addAttribute("kakaoInfo", kakaoInfo);
 	}
 
-	@RequestMapping("/kakaoLogout")
+	@GetMapping("/logout")
 	public String kakaoLogout(HttpSession session) {
 		exeLogout((String) session.getAttribute("accessToken"));
 		session.invalidate();
 
-		return "redirect:/kakaoLoginForm";
+		return "redirect:/login";
 	}
 
 	private String getAccessToken(String code) {

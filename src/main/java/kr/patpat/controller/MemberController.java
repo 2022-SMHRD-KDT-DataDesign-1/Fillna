@@ -48,14 +48,17 @@ public class MemberController {
 		
 		System.out.println(member);
 		
-		session.setAttribute("accessToken", accessToken);
-		session.setAttribute("userEmail", userInfo.get("email"));
 
-		if (member.getMbEmail() != null) {
+		if (member != null) {
 			// 이미 가입한 경우
+			session.setAttribute("accessToken", accessToken);
+			session.setAttribute("userEmail", userInfo.get("email"));
 			return "redirect:/";
 		} else {
 			// 신규회원인 경우
+			session.setAttribute("accessToken", accessToken);
+			session.setAttribute("userEmail", userInfo.get("email"));
+
 			memberMapper.join(userInfo);
 			return "redirect:/";
 		}

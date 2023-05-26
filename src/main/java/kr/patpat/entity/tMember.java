@@ -2,7 +2,7 @@ package kr.patpat.entity;
 
 import java.sql.Timestamp;
 
-public class Member {
+public class tMember {
 
 	// 회원 식별자
     private String mb_idx;
@@ -124,21 +124,4 @@ public class Member {
     public void setAdminYn(String admin_yn) {
         this.admin_yn = admin_yn;
     }
-
-    // t_member 모델 복사
-    public void CopyData(Member param)
-    {
-        this.mb_idx = param.getMbIdx();
-        this.mb_token = param.getMbToken();
-        this.mb_name = param.getMbName();
-        this.mb_nick = param.getMbNick();
-        this.mb_email = param.getMbEmail();
-        this.mb_phone = param.getMbPhone();
-        this.mb_profile = param.getMbProfile();
-        this.mb_alarm = param.getMbAlarm();
-        this.mb_join_at = param.getMbJoinAt();
-        this.mb_update_at = param.getMbUpdateAt();
-        this.admin_yn = param.getAdminYn();
-    }
-
 }

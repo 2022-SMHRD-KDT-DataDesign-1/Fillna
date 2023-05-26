@@ -23,7 +23,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import kr.patpat.entity.Member;
+import kr.patpat.entity.tMember;
 import kr.patpat.mapper.MemberMapper;
 
 @Controller
@@ -44,11 +44,8 @@ public class MemberController {
 
 		HashMap<String, Object> userInfo = getUserInfo(accessToken);
 		
-		Member member = memberMapper.selectMember(userInfo);
+		tMember member = memberMapper.selectMember(userInfo);
 		
-		System.out.println(member);
-		
-
 		if (member != null) {
 			// 이미 가입한 경우
 			session.setAttribute("accessToken", accessToken);

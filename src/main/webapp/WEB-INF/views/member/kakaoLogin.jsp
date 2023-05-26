@@ -78,6 +78,11 @@
 				<div class="kakao_i"></div>
 				<div class="kakao_txt">카카오톡으로 간편로그인</div>
 			</a>
+			
+			<a class="kakao" href="${contextPath}/">
+				<div class="kakao_i"></div>
+				<div class="kakao_txt">메인화면으로 가기</div>
+			</a>
 		</div>
 	</div>
 </body>

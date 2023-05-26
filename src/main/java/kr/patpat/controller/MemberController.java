@@ -23,7 +23,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import kr.patpat.entity.Member;
+import kr.patpat.entity.tMember;
 import kr.patpat.mapper.MemberMapper;
 
 @Controller
@@ -32,8 +32,8 @@ public class MemberController {
 	@Autowired
 	private MemberMapper memberMapper;
 	
-	@RequestMapping("/kakaoLoginForm")
-	public String kakaoLoginForm() {
+	@RequestMapping("/login")
+	public String loginForm() {
 		return "member/kakaoLogin";
 	}
 
@@ -44,31 +44,32 @@ public class MemberController {
 
 		HashMap<String, Object> userInfo = getUserInfo(accessToken);
 		
-		Member member = memberMapper.selectMember(userInfo);
-		
-		session.setAttribute("accessToken", accessToken);
-		session.setAttribute("userEmail", userInfo.get("email"));
-
+		tMember member = memberMapper.selectMember(userInfo);
 		
 		if (member != null) {
 			// 이미 가입한 경우
+			session.setAttribute("accessToken", accessToken);
+			session.setAttribute("userEmail", userInfo.get("email"));
 			return "redirect:/";
 		} else {
 			// 신규회원인 경우
+			session.setAttribute("accessToken", accessToken);
+			session.setAttribute("userEmail", userInfo.get("email"));
+
 			memberMapper.join(userInfo);
-			return "redirect:/kakaoLoginForm";
+			return "redirect:/";
 		}
 
 		// JSONPObject kakaoInfo = new JSONPObject(userInfo);
 		// model.addAttribute("kakaoInfo", kakaoInfo);
 	}
 
-	@RequestMapping("/kakaoLogout")
+	@GetMapping("/logout")
 	public String kakaoLogout(HttpSession session) {
 		exeLogout((String) session.getAttribute("accessToken"));
 		session.invalidate();
 
-		return "redirect:/kakaoLoginForm";
+		return "redirect:/login";
 	}
 
 	private String getAccessToken(String code) {

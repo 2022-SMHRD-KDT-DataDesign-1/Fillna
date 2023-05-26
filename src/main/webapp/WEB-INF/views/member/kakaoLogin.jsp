@@ -72,20 +72,18 @@
 
 <body>
 	<div class="wrap">
-	<c:if test="${userEmail eq null}">
 		<div class="title">로그인</div>
 			<a class="kakao" href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=08c15618cbd45ecc0b82e9e3777c25b3&redirect_uri=http://localhost:8081/controller/kakaoLogin">
 	
 				<div class="kakao_i"></div>
 				<div class="kakao_txt">카카오톡으로 간편로그인</div>
 			</a>
+			
+			<a class="kakao" href="${contextPath}/">
+				<div class="kakao_i"></div>
+				<div class="kakao_txt">메인화면으로 가기</div>
+			</a>
 		</div>
-	</c:if>
-	
-	<c:if test="${userEmail ne null}">
-		<div class="title">로그인 성공티비</div>
-		<input type="button" value="로그아웃" onclick="location.href='${contextPah}/kakaoLogout'">
-	</c:if>
 	</div>
 </body>
 </html>

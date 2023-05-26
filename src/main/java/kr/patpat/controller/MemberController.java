@@ -23,17 +23,15 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import kr.patpat.entity.Kakao;
-import kr.patpat.mapper.KakaoMapper;
+import kr.patpat.entity.Member;
+import kr.patpat.mapper.MemberMapper;
 
 @Controller
 public class MemberController {
 
 	@Autowired
-	private KakaoMapper kakaoMapper;
-
-	// --------------------------------------------------------
-	// 카카오 로그인
+	private MemberMapper memberMapper;
+	
 	@RequestMapping("/kakaoLoginForm")
 	public String kakaoLoginForm() {
 		return "member/kakaoLogin";
@@ -43,25 +41,32 @@ public class MemberController {
 	public String kakaoLogin(@RequestParam("code") String code, Model model, HttpSession session) {
 
 		String accessToken = getAccessToken(code);
-		System.out.println(accessToken);
 
-		String email = getUserInfo(accessToken);
+		HashMap<String, Object> userInfo = getUserInfo(accessToken);
+		
+		Member member = memberMapper.selectMember(userInfo);
+		
+		session.setAttribute("accessToken", accessToken);
+		session.setAttribute("userEmail", userInfo.get("email"));
+
+		
+		if (member != null) {
+			// 이미 가입한 경우
+			return "redirect:/";
+		} else {
+			// 신규회원인 경우
+			memberMapper.join(userInfo);
+			return "redirect:/kakaoLoginForm";
+		}
 
 		// JSONPObject kakaoInfo = new JSONPObject(userInfo);
 		// model.addAttribute("kakaoInfo", kakaoInfo);
-
-		session.setAttribute("userEmail", email);
-		session.setAttribute("accessToken", accessToken);
-
-		return "redirect:/";
-
 	}
 
 	@RequestMapping("/kakaoLogout")
 	public String kakaoLogout(HttpSession session) {
 		exeLogout((String) session.getAttribute("accessToken"));
-		session.removeAttribute("accessToken");
-		session.removeAttribute("userEmail");
+		session.invalidate();
 
 		return "redirect:/kakaoLoginForm";
 	}
@@ -118,7 +123,7 @@ public class MemberController {
 		return accessToken;
 	}
 
-	private String getUserInfo(String accessToken) {
+	private HashMap<String, Object> getUserInfo(String accessToken) {
 		HashMap<String, Object> userInfo = new HashMap<String, Object>();
 
 		String reqURL = "https://kapi.kakao.com/v2/user/me";
@@ -160,19 +165,18 @@ public class MemberController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		System.out.println(userInfo);
-		System.out.println(userInfo.getClass().getName());
-
-		Kakao kakao = kakaoMapper.selectKakao(userInfo);
-
-		if (kakao != null) {
-			return kakao.getMemEmail();
-		} else {
-			kakaoMapper.kakaoJoin(userInfo);
-			Kakao kakao2 = kakaoMapper.selectKakao(userInfo);
-			return kakao2.getMemEmail();
-		}
+		
+		return userInfo;
+//		Member member = memberMapper.selectMember(userInfo);
+//
+//		if (member != null) {
+//			return member.getMbEmail();
+//		} else {
+//			memberMapper.join(userInfo);
+//			System.out.println(userInfo);
+//			Member member2 = memberMapper.selectMember(userInfo);
+//			return member2.getMbEmail();
+//		}
 
 	}
 

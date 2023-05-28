@@ -22,7 +22,8 @@
 		</c:if>
 		<c:if test="${userEmail ne null}">
 			<div>로그인 성공티비</div>
-			<input type="button" value="로그아웃" onclick="location.href='${contextPath}/logout'">
+			<a href="https://kauth.kakao.com/oauth/logout?client_id=08c15618cbd45ecc0b82e9e3777c25b3&logout_redirect_uri=http://localhost:8081/controller/logout">로그아웃</a>
+			
 		</c:if>
 	</div>
 	

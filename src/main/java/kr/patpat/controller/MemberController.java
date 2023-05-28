@@ -66,7 +66,6 @@ public class MemberController {
 
 	@GetMapping("/logout")
 	public String kakaoLogout(HttpSession session) {
-		exeLogout((String) session.getAttribute("accessToken"));
 		session.invalidate();
 
 		return "redirect:/login";
@@ -168,43 +167,6 @@ public class MemberController {
 		}
 		
 		return userInfo;
-//		Member member = memberMapper.selectMember(userInfo);
-//
-//		if (member != null) {
-//			return member.getMbEmail();
-//		} else {
-//			memberMapper.join(userInfo);
-//			System.out.println(userInfo);
-//			Member member2 = memberMapper.selectMember(userInfo);
-//			return member2.getMbEmail();
-//		}
-
-	}
-
-	public void exeLogout(String accessToken) {
-		String reqURL = "https://kapi.kakao.com/v1/user/logout";
-		try {
-			URL url = new URL(reqURL);
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setRequestMethod("POST");
-			conn.setRequestProperty("Authorization", "Bearer " + accessToken);
-
-			int responseCode = conn.getResponseCode();
-			System.out.println("responseCode : " + responseCode);
-
-			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-
-			String result = "";
-			String line = "";
-
-			while ((line = br.readLine()) != null) {
-				result += line;
-			}
-			System.out.println(result);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 }

@@ -44,6 +44,8 @@ public class MemberController {
 		String pet_adoption = (String) param.get("pet_adoption_at");
 		String pet_gender = (String) param.get("pet_gender");
 		String pet_photo = (String) param.get("pet_photo");
+		
+		
 	}
 	
 	// updateForm

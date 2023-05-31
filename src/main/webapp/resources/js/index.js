@@ -22,5 +22,10 @@ $(document).ready(function(){
 	$("#submit").on("click", function(){
 		$("#update_form").submit();
 	});
+	
+	$('#time').timepicker({
+        timeFormat:"HH:mm",
+        dropdown:false,
+    });
 });    
 

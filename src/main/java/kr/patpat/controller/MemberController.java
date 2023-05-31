@@ -34,7 +34,7 @@ public class MemberController {
 	
 	@RequestMapping("/login")
 	public String loginForm() {
-		return "member/kakaoLogin";
+		return "member/login";
 	}
 
 	@GetMapping("/kakaoLogin")
@@ -57,7 +57,7 @@ public class MemberController {
 			session.setAttribute("userEmail", userInfo.get("email"));
 
 			memberMapper.join(userInfo);
-			return "redirect:/";
+			return "member/welcome";
 		}
 
 		// JSONPObject kakaoInfo = new JSONPObject(userInfo);

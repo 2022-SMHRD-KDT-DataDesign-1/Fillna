@@ -39,12 +39,8 @@ public class MemberController {
 	public void update(@RequestParam HashMap<String, Object> param) {
 		System.out.println(param.toString());
 		
-		String mb_alarm = (String) param.get("mb_alarm");
-		String pet_name = (String) param.get("pet_name");
-		String pet_adoption = (String) param.get("pet_adoption_at");
-		String pet_gender = (String) param.get("pet_gender");
-		String pet_photo = (String) param.get("pet_photo");
-		
+		memberMapper.setAlarm(param);
+		memberMapper.setPet(param);
 		
 	}
 	
@@ -71,23 +67,16 @@ public class MemberController {
 		
 		if (member != null) {
 			// 이미 가입한 경우
-			session.setAttribute("accessToken", accessToken);
-			session.setAttribute("nickname", userInfo.get("nickname"));
-			session.setAttribute("email", userInfo.get("email"));
-			
+			session.setAttribute("vo", member);
 			return "redirect:/";
 		} else {
 			// 신규회원인 경우
-			session.setAttribute("accessToken", accessToken);
-			session.setAttribute("nickname", userInfo.get("nickname"));
-			session.setAttribute("email", userInfo.get("email"));
-			
 			memberMapper.join(userInfo);
+			Member memberNew = memberMapper.selectMember(userInfo);
+			session.setAttribute("vo", memberNew);
 			return "member/welcome";
 		}
 
-		// JSONPObject kakaoInfo = new JSONPObject(userInfo);
-		// model.addAttribute("kakaoInfo", kakaoInfo);
 	}
 
 	@GetMapping("/logout")

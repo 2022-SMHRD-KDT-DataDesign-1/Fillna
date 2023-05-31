@@ -49,13 +49,14 @@
                 <div class="member_info">
                     <img class="profile_img" src="resources/images/tan_e.png" alt="">
                     <div>
-                        <p>${nickname} 님</p>
-                        <span>${nickname} (${email})<br>
+                        <p>${vo.mb_nick} 님</p>
+                        <span>${vo.mb_nick} (${vo.mb_email})<br>
                         010-6792-5045
                         </span>
                     </div>
                 </div>
-                <form action="${contextPath}/update" method="post" id="update_form">
+                <form action="${contextPath}/update" method="post" id="update_form"></form>
+                	<input type="hidden" name="mb_idx" value="${vo.mb_idx}">
 	                <div class="pet_info">
 	                    <div class="top_info">
 	                        <h3>필수정보 입력</h3>

@@ -10,5 +10,13 @@
    <select id="selectMember" parameterType="java.util.HashMap" resultType="kr.patpat.entity.Member">
 		select * from t_member where mb_email=#{email}
    </select>
-
+   
+   <insert id="setAlarm" parameterType="java.util.HashMap">
+   		insert into t_member(mb_alarm) values (${mb_alarm}) where mb_idx=${mb_idx}
+   </insert>
+   
+	<insert id="setPet" parameterType="java.util.HashMap">
+		insert into t_pet values(${pet_name), ${pet_adoption_at}, ${pet_photo}, ${mb_idx}, ${pet_gender})
+		where mb_idx = ${mb_idx};
+	</insert>
 </mapper>

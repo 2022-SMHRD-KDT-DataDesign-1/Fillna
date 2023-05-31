@@ -64,11 +64,12 @@ public class MemberController {
 		HashMap<String, Object> userInfo = getUserInfo(accessToken);
 		
 		Member member = memberMapper.selectMember(userInfo);
+		System.out.println(member);
 		
 		if (member != null) {
 			// 이미 가입한 경우
 			session.setAttribute("vo", member);
-			return "redirect:/";
+			return "member/welcome";
 		} else {
 			// 신규회원인 경우
 			memberMapper.join(userInfo);

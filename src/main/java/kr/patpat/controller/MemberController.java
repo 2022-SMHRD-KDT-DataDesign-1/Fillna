@@ -13,7 +13,6 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,7 +43,7 @@ public class MemberController {
 		String pet_name = (String) param.get("pet_name");
 		String pet_adoption = (String) param.get("pet_adoption_at");
 		String pet_gender = (String) param.get("pet_gender");
-		String pet_photo = (String) cram.get("pet_photo");
+		String pet_photo = (String) param.get("pet_photo");
 	}
 	
 	// updateForm

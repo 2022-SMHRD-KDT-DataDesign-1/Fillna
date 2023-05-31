@@ -40,7 +40,7 @@
                         <img src="resources/images/logo_black.png">
                     </a>
                     <div>
-                        똥꾸멍님 환영합니다!<br>
+                        ${nickname}님 환영합니다!<br>
                         회원가입에 성공하셨습니다
                     </div>
                     <p>

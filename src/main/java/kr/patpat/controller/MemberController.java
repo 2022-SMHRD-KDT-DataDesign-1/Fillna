@@ -49,12 +49,12 @@ public class MemberController {
 		if (member != null) {
 			// 이미 가입한 경우
 			session.setAttribute("accessToken", accessToken);
-			session.setAttribute("userEmail", userInfo.get("email"));
+			session.setAttribute("nickname", userInfo.get("nickname"));
 			return "redirect:/";
 		} else {
 			// 신규회원인 경우
 			session.setAttribute("accessToken", accessToken);
-			session.setAttribute("userEmail", userInfo.get("email"));
+			session.setAttribute("nickname", userInfo.get("nickname"));
 
 			memberMapper.join(userInfo);
 			return "member/welcome";

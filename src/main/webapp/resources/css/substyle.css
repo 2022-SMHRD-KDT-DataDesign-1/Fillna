@@ -145,6 +145,10 @@ body{font-family: 'Pretendard';}
 
 }
 
+@media screen and (min-width:768px) {
+  body{display: none;}
+}
+
 /*구글아이콘*/
 .material-symbols-outlined {
   font-variation-settings:

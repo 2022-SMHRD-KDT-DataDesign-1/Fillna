@@ -25,7 +25,7 @@
                 </a>
             </div>
             <div id="nav">
-                <a href="#">서비스 바로가기</a>
+                <a href="${contextPath}/login">서비스 바로가기</a>
             </div>
         </header>
         <div id="content">
@@ -44,7 +44,7 @@
                 </ul>
             </div>
             <div id="nav_mo">
-                <a href="#"><span>서비스 바로가기</span><span class="icon_pointer material-symbols-outlined">touch_app</span></a>
+                <a href="${contextPath}/login"><span>서비스 바로가기</span><span class="icon_pointer material-symbols-outlined">touch_app</span></a>
             </div>
             <div class="landingC">
                 <ul class="landingC_in">
@@ -53,7 +53,7 @@
                         <p>실시간 반려동물 건강상태 모니터링 서비스</p>
                     </li>
                     <li>
-                        <a href="#"  data-aos="fade-up" data-aos-offset="10" data-aos-easing="linear" data-aos-duration="500">서비스 시작하기</a>
+                        <a href="${contextPath}/login"  data-aos="fade-up" data-aos-offset="10" data-aos-easing="linear" data-aos-duration="500">서비스 시작하기</a>
                     </li>
                 </ul>
             </div>

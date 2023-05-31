@@ -7,7 +7,7 @@
 		VALUES ('1', '1', #{nickname}, #{email}, '01012345678', '1', '24', NOW(), NOW(), 'N');
    </insert>
    
-   <select id="selectMember" parameterType="java.util.HashMap" resultType="kr.patpat.entity.tMember">
+   <select id="selectMember" parameterType="java.util.HashMap" resultType="kr.patpat.entity.Member">
 		select * from t_member where mb_email=#{email}
    </select>
 

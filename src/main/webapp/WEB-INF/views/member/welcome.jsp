@@ -36,7 +36,7 @@
         <div class="content member">
             <div class="con">
                 <div class="m_top">
-                    <a href="#">
+                    <a href="${contextPath}/">
                         <img src="resources/images/logo_black.png">
                     </a>
                     <div>
@@ -50,7 +50,7 @@
                 </div>
                 <div class="s_btm">
                     <div>
-                        <a href="#" class="go_link red">
+                        <a href="${contextPath}/updateForm" class="go_link red">
                             <span>알림시간/반려동물 설정하기</span>
                             <span class="material-symbols-outlined icon_go">
                                 arrow_forward_ios

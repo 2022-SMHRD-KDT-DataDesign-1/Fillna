@@ -2,7 +2,14 @@ package kr.patpat.entity;
 
 import java.sql.Timestamp;
 
-public class tMember {
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+public class Member {
 
 	// 회원 식별자
     private String mb_idx;

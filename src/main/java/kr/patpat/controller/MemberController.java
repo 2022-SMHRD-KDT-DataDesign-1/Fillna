@@ -13,9 +13,11 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -23,7 +25,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import kr.patpat.entity.tMember;
+import kr.patpat.entity.Member;
 import kr.patpat.mapper.MemberMapper;
 
 @Controller
@@ -32,6 +34,26 @@ public class MemberController {
 	@Autowired
 	private MemberMapper memberMapper;
 	
+	
+	// update
+	@PostMapping("/update")
+	public void update(@RequestParam HashMap<String, Object> param) {
+		System.out.println(param.toString());
+		
+		String mb_alarm = (String) param.get("mb_alarm");
+		String pet_name = (String) param.get("pet_name");
+		String pet_adoption = (String) param.get("pet_adoption_at");
+		String pet_gender = (String) param.get("pet_gender");
+		String pet_photo = (String) cram.get("pet_photo");
+	}
+	
+	// updateForm
+	@RequestMapping("/updateForm")
+	public String updateForm() {
+		return "member/update";
+	}
+	
+	// 로그인
 	@RequestMapping("/login")
 	public String loginForm() {
 		return "member/login";
@@ -44,18 +66,21 @@ public class MemberController {
 
 		HashMap<String, Object> userInfo = getUserInfo(accessToken);
 		
-		tMember member = memberMapper.selectMember(userInfo);
+		Member member = memberMapper.selectMember(userInfo);
 		
 		if (member != null) {
 			// 이미 가입한 경우
 			session.setAttribute("accessToken", accessToken);
 			session.setAttribute("nickname", userInfo.get("nickname"));
+			session.setAttribute("email", userInfo.get("email"));
+			
 			return "redirect:/";
 		} else {
 			// 신규회원인 경우
 			session.setAttribute("accessToken", accessToken);
 			session.setAttribute("nickname", userInfo.get("nickname"));
-
+			session.setAttribute("email", userInfo.get("email"));
+			
 			memberMapper.join(userInfo);
 			return "member/welcome";
 		}

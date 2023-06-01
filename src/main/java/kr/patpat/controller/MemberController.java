@@ -74,7 +74,8 @@ public class MemberController {
 
 		return "redirect:/login";
 	}
-
+	
+	// 함수1 - token 가져오는 함수
 	private String getAccessToken(String code) {
 		String accessToken = "";
 		String refreshToken = "";
@@ -126,7 +127,8 @@ public class MemberController {
 		}
 		return accessToken;
 	}
-
+	
+	// 함수2 - 가져온 토큰으로 user정보 가져오는 함수
 	private HashMap<String, Object> getUserInfo(String accessToken) {
 		HashMap<String, Object> userInfo = new HashMap<String, Object>();
 
@@ -183,7 +185,8 @@ public class MemberController {
 //		}
 
 	}
-
+	
+	//함수3 - 로그아웃
 	public void exeLogout(String accessToken) {
 		String reqURL = "https://kapi.kakao.com/v1/user/logout";
 		try {

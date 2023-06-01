@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -32,9 +33,29 @@ public class MemberController {
 	@Autowired
 	private MemberMapper memberMapper;
 	
+	
+	// update
+	@PostMapping("/update")
+	public String update(@RequestParam HashMap<String, String> param) {
+		
+		System.out.println(param.toString());
+		
+		memberMapper.setAlarm(param);
+		memberMapper.setPet(param);
+		
+		return "redirect:/";
+	}
+	
+	// updateForm
+	@RequestMapping("/updateForm")
+	public String updateForm() {
+		return "member/update";
+	}
+	
+	// 로그인
 	@RequestMapping("/login")
 	public String loginForm() {
-		return "member/kakaoLogin";
+		return "member/login";
 	}
 
 	@GetMapping("/kakaoLogin")
@@ -46,30 +67,24 @@ public class MemberController {
 		
 		Member member = memberMapper.selectMember(userInfo);
 		
-		System.out.println(member);
-		
-
 		if (member != null) {
 			// 이미 가입한 경우
-			session.setAttribute("accessToken", accessToken);
-			session.setAttribute("userEmail", userInfo.get("email"));
-			return "redirect:/";
+			session.setAttribute("vo", member);
+			return "member/welcome";
 		} else {
 			// 신규회원인 경우
-			session.setAttribute("accessToken", accessToken);
-			session.setAttribute("userEmail", userInfo.get("email"));
-
 			memberMapper.join(userInfo);
-			return "redirect:/";
+			Member memberNew = memberMapper.selectMember(userInfo);
+			session.setAttribute("vo", memberNew);
+			// pet 테이블에 NULL값 INSERT
+			memberMapper.joinPet(memberNew.getMbIdx());
+			return "member/welcome";
 		}
 
-		// JSONPObject kakaoInfo = new JSONPObject(userInfo);
-		// model.addAttribute("kakaoInfo", kakaoInfo);
 	}
 
 	@GetMapping("/logout")
 	public String kakaoLogout(HttpSession session) {
-		exeLogout((String) session.getAttribute("accessToken"));
 		session.invalidate();
 
 		return "redirect:/login";
@@ -173,17 +188,6 @@ public class MemberController {
 		}
 		
 		return userInfo;
-//		Member member = memberMapper.selectMember(userInfo);
-//
-//		if (member != null) {
-//			return member.getMbEmail();
-//		} else {
-//			memberMapper.join(userInfo);
-//			System.out.println(userInfo);
-//			Member member2 = memberMapper.selectMember(userInfo);
-//			return member2.getMbEmail();
-//		}
-
 	}
 	
 	//함수3 - 로그아웃
@@ -211,6 +215,7 @@ public class MemberController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
 
 }

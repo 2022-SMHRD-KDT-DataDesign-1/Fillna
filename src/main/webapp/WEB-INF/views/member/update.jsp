@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="resources/css/reset.css">
     <link rel="stylesheet" href="resources/css/substyle.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
@@ -37,7 +38,7 @@
                     </a>
                 </li>
                 <li class="save_wrap">
-                    <a href="#" id="submit">
+                    <a href="#" id="save">
                         <span>저장</span>
                     </a>
                 </li>
@@ -55,13 +56,13 @@
                         </span>
                     </div>
                 </div>
-                <form action="${contextPath}/update" method="post" id="update_form"></form>
+                <form action="${contextPath}/update" method="post" id="update_form">
                 	<input type="hidden" name="mb_idx" value="${vo.mbIdx}">
 	                <div class="pet_info">
 	                    <div class="top_info">
 	                        <h3>필수정보 입력</h3>
 	                        <p>일지 알림시간</p>
-	                        <input type="text" placeholder="24:00" name="mb_alarm">
+	                        <input type="text" placeholder="24:00" name="mb_alarm" id="time">
 	                        <p>반려동물 이름</p>
 	                        <input type="text" placeholder="pet" name="pet_name">
 	                    </div>
@@ -83,13 +84,13 @@
 	                                </span>
 	                                <p>여아</p>
 	                            </button>
-	                            <input name="pet_gender" type="hidden" id="pet_gender" value="">
+	                            <input name="pet_gender" type="hidden" id="gender" value="">
 	                        </div>
 	                        <p>반려동물 사진</p>
 	                        <div class="file_wrap">
 	                            <input class="file_name" value="" disabled>
 	                            <label for="file">upload</label>
-	                            <input name="pet_photo" type="file" id="file">
+	                            <input type="file" id="file" name="pet_photo">
 	                        </div>
 	                    </div>
 	                </div> 

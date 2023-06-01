@@ -13,9 +13,11 @@ public interface MemberMapper {
 
 	public Member selectMember(HashMap<String, Object> userInfo);
 
-	public void setAlarm(HashMap<String, Object> param);
+	public void setAlarm(HashMap<String, String> param);
 
-	public void setPet(HashMap<String, Object> param);
+	public void setPet(HashMap<String, String> param);
+
+	public void joinPet(String mbIdx);
 
 }
 

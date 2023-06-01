@@ -36,12 +36,14 @@ public class MemberController {
 	
 	// update
 	@PostMapping("/update")
-	public void update(@RequestParam HashMap<String, Object> param) {
+	public String update(@RequestParam HashMap<String, String> param) {
+		
 		System.out.println(param.toString());
 		
 		memberMapper.setAlarm(param);
 		memberMapper.setPet(param);
 		
+		return "redirect:/";
 	}
 	
 	// updateForm
@@ -64,7 +66,6 @@ public class MemberController {
 		HashMap<String, Object> userInfo = getUserInfo(accessToken);
 		
 		Member member = memberMapper.selectMember(userInfo);
-		System.out.println(member);
 		
 		if (member != null) {
 			// 이미 가입한 경우
@@ -75,6 +76,8 @@ public class MemberController {
 			memberMapper.join(userInfo);
 			Member memberNew = memberMapper.selectMember(userInfo);
 			session.setAttribute("vo", memberNew);
+			// pet 테이블에 NULL값 INSERT
+			memberMapper.joinPet(memberNew.getMbIdx());
 			return "member/welcome";
 		}
 

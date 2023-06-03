@@ -24,7 +24,7 @@
                     </a>
                 </li>
                 <li class="icon_alarm_wrap">
-                    <a href="#">
+                    <a href="${contextPath}/alarm">
                         <span class="material-symbols-outlined icon_alarm">
                             notifications
                         </span>

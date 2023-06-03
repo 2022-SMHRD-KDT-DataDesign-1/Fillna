@@ -25,6 +25,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import kr.patpat.entity.Member;
+import kr.patpat.entity.Pet;
 import kr.patpat.mapper.MemberMapper;
 
 @Controller
@@ -33,17 +34,21 @@ public class MemberController {
 	@Autowired
 	private MemberMapper memberMapper;
 	
+	@RequestMapping("/alarm")
+	public String alarm() {
+		return "alarm/alarm";
+	}
 	
 	// update
 	@PostMapping("/update")
-	public String update(@RequestParam HashMap<String, String> param) {
-		
-		System.out.println(param.toString());
-		
+	public String update(@RequestParam HashMap<String, String> param, HttpSession session) {
 		memberMapper.setAlarm(param);
 		memberMapper.setPet(param);
 		
-		return "redirect:/";
+		Pet pet = memberMapper.selectPet(param.get("mb_idx"));
+		session.setAttribute("pvo", pet);
+		
+		return "redirect:updateForm";
 	}
 	
 	// updateForm
@@ -70,14 +75,23 @@ public class MemberController {
 		if (member != null) {
 			// 이미 가입한 경우
 			session.setAttribute("vo", member);
+			String mbIdx = member.getMbIdx();
+			Pet pet = memberMapper.selectPet(mbIdx);
+			session.setAttribute("pvo", pet);
+			
 			return "member/welcome";
 		} else {
 			// 신규회원인 경우
 			memberMapper.join(userInfo);
 			Member memberNew = memberMapper.selectMember(userInfo);
 			session.setAttribute("vo", memberNew);
+			
 			// pet 테이블에 NULL값 INSERT
-			memberMapper.joinPet(memberNew.getMbIdx());
+			String mbIdx = memberNew.getMbIdx();
+			memberMapper.joinPet(mbIdx);
+			Pet pet = memberMapper.selectPet(mbIdx);
+			session.setAttribute("pvo", pet);
+			
 			return "member/welcome";
 		}
 

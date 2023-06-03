@@ -1,6 +1,4 @@
 package kr.patpat.entity;
-import java.sql.Timestamp;
-
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -17,16 +15,17 @@ public class Pet {
     private String petName;
 
     // 반려동물 입양일
-    private Timestamp petAdoptionAt;
+    private String petAdoptionAt;
 
     // 반려동물 사진
     private String petPhoto;
 
+    // 주인 아이디
+    private String mbIdx;
+    
     // 반려동물 성별
     private String petGender;
 
-    // 주인 아이디
-    private String mbIdx;
 
     public String getPetIdx() {
         return petIdx;
@@ -44,11 +43,11 @@ public class Pet {
         this.petName = petName;
     }
 
-    public Timestamp getPetAdoptionAt() {
+    public String getPetAdoptionAt() {
         return petAdoptionAt;
     }
 
-    public void setPetAdoptionAt(Timestamp petAdoptionAt) {
+    public void setPetAdoptionAt(String petAdoptionAt) {
         this.petAdoptionAt = petAdoptionAt;
     }
 
@@ -60,6 +59,14 @@ public class Pet {
         this.petPhoto = petPhoto;
     }
 
+    public String getMbIdx() {
+    	return mbIdx;
+    }
+    
+    public void setMbIdx(String mbIdx) {
+    	this.mbIdx = mbIdx;
+    }
+    
     public String getPetGender() {
         return petGender;
     }
@@ -68,11 +75,4 @@ public class Pet {
         this.petGender = petGender;
     }
 
-    public String getMbIdx() {
-        return mbIdx;
-    }
-
-    public void setMbIdx(String mbIdx) {
-        this.mbIdx = mbIdx;
-    }
 }

@@ -30,7 +30,7 @@
                     </a>
                 </li>
                 <li class="icon_alarm_wrap">
-                    <a href="#">
+                    <a href="${contextPath}/alarm/alarm.jsp">
                         <span class="material-symbols-outlined icon_alarm">
                             notifications
                         </span>
@@ -62,35 +62,76 @@
 	                    <div class="top_info">
 	                        <h3>필수정보 입력</h3>
 	                        <p>일지 알림시간</p>
-	                        <input type="text" placeholder="24:00" name="mb_alarm" id="time">
+	                        <c:if test="${empty vo.mbAlarm}"><input type="text" placeholder="24:00" name="mb_alarm" id="time"></c:if>
+	                        <c:if test="${not empty vo.mbAlarm}"><input type="text" placeholder="${vo.mbAlarm}" name="mb_alarm" id="time" value="${vo.mbAlarm}"></c:if>
 	                        <p>반려동물 이름</p>
-	                        <input type="text" placeholder="pet" name="pet_name">
+	                        <c:if test="${empty pvo.petName}"><input type="text" placeholder="pet" name="pet_name"></c:if>
+	                        <c:if test="${not empty pvo.petName}"><input type="text" placeholder="${pvo.petName}" value="${pvo.petName}" name="pet_name"></c:if>
 	                    </div>
 	                    <div class="bottom_info">
 	                        <h3>선택정보 입력</h3>
 	                        <p>반려동물 생일</p>
-	                        <input name="pet_adoption_at" type="date" data-placeholder="선택해주세요" required aria-required="true">
+	                        <c:if test="${empty pvo.petAdoptionAt}"><input name="pet_adoption_at" type="date" data-placeholder="선택해주세요" required aria-required="true"></c:if>
+	                        <c:if test="${not empty pvo.petAdoptionAt}"><input name="pet_adoption_at" type="date" data-placeholder="${pvo.petAdoptionAt}" value="${pvo.petAdoptionAt}" required aria-required="true"></c:if>
 	                        <p>반려동물 성별</p>
 	                        <div>
-	                            <button type="button" id="male" class="btn">
-	                                <span class="material-symbols-outlined icon_gender">
-	                                    male
-	                                </span>
-	                                <p>남아</p>
-	                            </button>
-	                            <button type="button" id="female" class="btn">
-	                                <span class="material-symbols-outlined icon_gender">
-	                                    female
-	                                </span>
-	                                <p>여아</p>
-	                            </button>
-	                            <input name="pet_gender" type="hidden" id="gender" value="">
+	                        	<c:if test="${empty pvo.petGender}">
+		                            <button type="button" id="male" class="btn">
+		                                <span class="material-symbols-outlined icon_gender">
+		                                    male
+		                                </span>
+		                                <p>남아</p>
+		                            </button>
+		                            <button type="button" id="female" class="btn">
+		                                <span class="material-symbols-outlined icon_gender">
+		                                    female
+		                                </span>
+		                                <p>여아</p>
+		                            </button>
+	                        	</c:if>
+	                        	<c:if test="${pvo.petGender eq 'M'}">
+	                        		<button type="button" id="male" class="btn active">
+		                                <span class="material-symbols-outlined icon_gender">
+		                                    male
+		                                </span>
+		                                <p>남아</p>
+		                            </button>
+		                            <button type="button" id="female" class="btn">
+		                                <span class="material-symbols-outlined icon_gender">
+		                                    female
+		                                </span>
+		                                <p>여아</p>
+		                            </button>
+		                            <input name="pet_gender" type="hidden" id="gender" value="M">
+	                        	</c:if>
+	                        	<c:if test="${pvo.petGender eq 'F'}">
+	                        		<button type="button" id="male" class="btn">
+		                                <span class="material-symbols-outlined icon_gender">
+		                                    male
+		                                </span>
+		                                <p>남아</p>
+		                            </button>
+		                            <button type="button" id="female" class="btn active">
+		                                <span class="material-symbols-outlined icon_gender">
+		                                    female
+		                                </span>
+		                                <p>여아</p>
+		                            </button>
+	                           		<input name="pet_gender" type="hidden" id="gender" value="F">
+	                        	</c:if>
 	                        </div>
 	                        <p>반려동물 사진</p>
 	                        <div class="file_wrap">
-	                            <input class="file_name" value="" disabled>
-	                            <label for="file">upload</label>
-	                            <input type="file" id="file" name="pet_photo">
+	                        	<c:if test="${empty pvo.petPhoto}">
+		                            <input class="file_name" value="" disabled>
+		                            <label for="file">upload</label>
+		                            <input type="file" id="file" name="pet_photo">
+	                        	</c:if>
+	   							<c:if test="${not empty pvo.petPhoto}">
+		                            <input class="file_name" value="${pvo.petPhoto}" disabled>
+		                            <label for="file">upload</label>
+		                            <input type="file" id="file" name="pet_photo">
+	                        	</c:if>
 	                        </div>
 	                    </div>
 	                </div> 

@@ -15,19 +15,32 @@
 		<result property="mbUpdateAt" column="mb_update_at"/>
 		<result property="adminYn" column="admin_yn"/>
 	</resultMap>
+	
+	<resultMap type="kr.patpat.entity.Pet" id="pet">
+		<result property="petIdx" column="pet_idx"/>
+		<result property="petName" column="pet_name"/>
+		<result property="petAdoptionAt" column="pet_adoption_at"/>
+		<result property="petPhoto" column="pet_photo"/>
+		<result property="mbIdx" column="mb_idx"/>
+		<result property="petGender" column="pet_gender"/>
+	</resultMap>
 
 	<insert id="join" parameterType="java.util.HashMap">
 		insert into t_member (mb_token, mb_name, mb_nick, mb_email, mb_phone, mb_profile, mb_alarm, mb_join_at, mb_update_at, admin_yn) 
-		values ('1', '1', #{nickname}, #{email}, '01012345678', '1', '24', NOW(), NOW(), 'N');
+		values ('1', '1', #{nickname}, #{email}, '01012345678', '1', null, NOW(), NOW(), 'N');
 	</insert>
    
 	<select id="selectMember" parameterType="java.util.HashMap" resultMap="member">
 		select * from t_member where mb_email=#{email}
 	</select>
+	
+	<select id="selectPet" parameterType="String" resultMap="pet">
+		select pet_idx, pet_name, pet_adoption_at, pet_photo, mb_idx, pet_gender from t_pet where mb_idx=#{mbIdx}
+	</select>
    
 	<insert id="joinPet" parameterType="kr.patpat.entity.Member">
 		insert into t_pet(pet_name, pet_adoption_at, pet_photo, mb_idx, pet_gender) 
-		values('pet', '1', null, #{mbIdx}, null)
+		values('pet', null, null, #{mbIdx}, null)
 	</insert>
 	
 	<update id="setAlarm" parameterType="java.util.HashMap">

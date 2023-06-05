@@ -40,29 +40,25 @@
             </ul>
         </header>
         <!-- content -->
-        <div class="">
+        <div>
             <div class="con con_alarm">
-                <div class="alarm_line">
-                </div>
                 <div class="alarm_wrap">
                     <div class="alarm_date">
-                        <img src="resources/images/icon_check.png" alt="" class="icon_check">
-                        <span class="today date">2023.06.01(목) - 오늘</span>
+                        <img class="icon_check" src="resources/images/icon_check.png" alt="">
+                        <span class="today">2023.06.01(목) - 오늘</span>
                     </div>
                     <div class="alaram_list_wrap">
                         <ul class="alaram_list">
-                            <li class="go_alarm_detail">
+                            <li>
                                 <span>17:10</span>
                                 <span class="material-symbols-outlined icon_circle yel circle">
                                     circle
                                 </span>
                                 <span class="alarm_type">[주의]</span>
                                 <span>- 구토 2회</span>
-                                <button class="btn_show_detail">
-                                    <span class="material-symbols-outlined icon_up">
-                                        arrow_drop_up
-                                    </span>
-                                </button>
+                                <span class="material-symbols-outlined icon_up">
+                                    arrow_drop_up
+                                </span>
                             </li>
                             <div class="alarm_detail">
                                 <div class="alarm_title">
@@ -81,22 +77,20 @@
                                     </a>
                                 </div>
                             </div>
-                            <li class="go_alarm_detail">
+                            <li>
                                 <span>17:10</span>
                                 <span class="material-symbols-outlined icon_circle yel circle">
                                     circle
                                 </span>
                                 <span>[주의]</span>
                                 <span>- 구토 2회</span>
-                                <button class="btn_show_detail hide">
-                                    <span class="material-symbols-outlined icon_up">
-                                        arrow_drop_up
-                                    </span>
-                                </button>
+                                <span class="material-symbols-outlined icon_up hide">
+                                    arrow_drop_up
+                                </span>
                             </li>
                             <div class="alarm_detail hide">
                                 <div class="alarm_title">
-                                    <span class="alarm_type">[주의]</span>
+                                    <span>[주의]</span>
                                     나비가 17:10분에 구토를 2회 하였습니다.
                                 </div>
                                 <div class="alarm_content">
@@ -117,8 +111,8 @@
                 </div>
                 <div class="alarm_wrap">
                     <div class="alarm_date">
-                        <img src="resources/images/icon_check.png" alt="" class="icon_check">
-                        <span class="date">2023.05.41(수)</span>
+                        <img class="icon_check" src="resources/images/icon_check.png" alt="">
+                        <span>2023.05.41(수)</span>
                     </div>
                     <div class="alaram_list_wrap">
                         <ul class="alaram_list">
@@ -160,8 +154,8 @@
                 </div>
                 <div class="alarm_wrap">
                     <div class="alarm_date">
-                        <img src="resources/images/icon_check.png" alt="" class="icon_check">
-                        <span class="date">2023.05.21(화)</span>
+                        <img class="icon_check" src="resources/images/icon_check.png" alt="">
+                        <span>2023.05.21(화)</span>
                     </div>
                     <div class="alaram_list_wrap">
                         <ul class="alaram_list">
@@ -195,8 +189,8 @@
                 </div>
                 <div class="alarm_wrap">
                     <div class="alarm_date">
-                        <img src="resources/images/icon_check.png" alt="" class="icon_check">
-                        <span class="date">2023.05.11(월)</span>
+                        <img class="icon_check" src="resources/images/icon_check.png" alt="">
+                        <span>2023.05.11(월)</span>
                     </div>
                     <div class="alaram_list_wrap">
                         <ul class="alaram_list">
@@ -214,8 +208,8 @@
                 </div>
                 <div class="alarm_wrap">
                     <div class="alarm_date">
-                        <img src="resources/images/icon_check.png" alt="" class="icon_check">
-                        <span class="date">2023.05.11(월)</span>
+                        <img class="icon_check" src="resources/images/icon_check.png" alt="">
+                        <span>2023.05.11(월)</span>
                     </div>
                     <div class="alaram_list_wrap">
                         <ul class="alaram_list">
@@ -231,8 +225,8 @@
                 </div>
                 <div class="alarm_wrap">
                     <div class="alarm_date">
-                        <img src="resources/images/icon_check.png" alt="" class="icon_check">
-                        <span class="date">2023.05.11(월)</span>
+                        <img class="icon_check" src="resources/images/icon_check.png" alt="">
+                        <span>2023.05.11(월)</span>
                     </div>
                     <div class="alaram_list_wrap">
                         <ul class="alaram_list">
@@ -248,8 +242,8 @@
                 </div>
                 <div class="alarm_wrap">
                     <div class="alarm_date">
-                        <img src="resources/images/icon_check.png" alt="" class="icon_check">
-                        <span class="date">2023.05.11(월)</span>
+                        <img class="icon_check" src="resources/images/icon_check.png" alt="">
+                        <span>2023.05.11(월)</span>
                     </div>
                     <div class="alaram_list_wrap">
                         <ul class="alaram_list">
@@ -265,52 +259,56 @@
                 </div>
                 <div class="alarm_wrap">
                     <div class="alarm_date">
-                        <img src="resources/images/icon_check.png" alt="" class="icon_check">
-                        <span class="date">2023.05.11(월)</span>
+                        <img class="icon_check" src="resources/images/icon_check.png" alt="">
+                        <span>2023.05.11(월)</span>
                     </div>
                     <div class="alaram_list_wrap">
                         <ul class="alaram_list">
                             <li>
                                 <span>10:01</span>
                                 <span class="circle green"></span>
-                                <span class="alarm_type ">[일지]</span>
+                                <span class="alarm_type">[일지]</span>
                                 <span>- 5월 30일</span>
                             </li>
                         </ul>
                     </div>
                     
                 </div>
+
+                <!-- 더보기 -->
                 <div class="btn_more_wrap">
                     <button class="btn_more">더보기</button>
                 </div>
             </div>
+            <!-- bottom -->
+            <div class="bottom">
+                <div>
+                    <a href="#">
+                        <span class="material-symbols-outlined">
+                            slideshow
+                        </span>
+                        <p>모니터링</p>
+                    </a>
+                </div>
+                <div>
+                    <a href="#">
+                        <span class="material-symbols-outlined">
+                            analytics
+                        </span>
+                        <p>PATPAT리포트</p>
+                    </a>
+                </div>
+                <div>
+                    <a href="#">
+                        <span class="material-symbols-outlined">
+                        edit_square
+                        </span>
+                        <p>건강수첩</p>
+                    </a>
+                </div>
+            </div>
         </div>
-        <div class="bottom">
-            <div>
-                <a href="#">
-                    <span class="material-symbols-outlined">
-                        slideshow
-                    </span>
-                    <p>모니터링</p>
-                </a>
-            </div>
-            <div>
-                <a href="#">
-                    <span class="material-symbols-outlined">
-                        analytics
-                    </span>
-                    <p>PATPAT리포트</p>
-                </a>
-            </div>
-            <div>
-                <a href="#">
-                    <span class="material-symbols-outlined">
-                    edit_square
-                    </span>
-                    <p>건강수첩</p>
-                </a>
-            </div>
-        </div>
+
     </div>
 </div>
 </body>

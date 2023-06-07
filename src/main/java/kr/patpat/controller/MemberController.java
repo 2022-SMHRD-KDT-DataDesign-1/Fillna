@@ -34,10 +34,7 @@ public class MemberController {
 	@Autowired
 	private MemberMapper memberMapper;
 	
-	@RequestMapping("/alarm")
-	public String alarm() {
-		return "alarm/alarm";
-	}
+
 	
 	// update
 	@PostMapping("/update")

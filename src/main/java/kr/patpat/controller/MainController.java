@@ -11,6 +11,8 @@ public class MainController {
 		return "index";
 	}
 	
+
+	
 	@RequestMapping("/alarm")
 	public String alarm() {
 		return "menu/alarm";

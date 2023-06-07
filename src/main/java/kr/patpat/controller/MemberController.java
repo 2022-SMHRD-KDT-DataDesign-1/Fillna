@@ -34,7 +34,10 @@ public class MemberController {
 	@Autowired
 	private MemberMapper memberMapper;
 	
-
+	@RequestMapping("/welcome")
+	public String welcome() {
+		return "member/welcome";
+	}
 	
 	// update
 	@PostMapping("/update")

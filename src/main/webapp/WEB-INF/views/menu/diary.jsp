@@ -15,96 +15,8 @@
     <script src="resources/js/my.js"></script>
 </head>
 <body class="bg">
-    <div class="modal_overlay hide"></div>
-    <div class="my_content">
-        <div class="my_top">
-            <a href="#">
-                <img src="resources/images/logo4.png" alt="">
-            </a>
-            <a href="#" class="icon_x">
-                <img src="resources/images/icon_x.png" alt="">
-            </a>
-            <a href="#">
-                <img src="resources/images/icon_logout.png" alt="">
-            </a>
-            <a href="#">
-                <img src="resources/images/icon_my_set.png" alt="">
-            </a>
-        </div>
-        <div class="my_profile">
-            <img src="resources/images/tan_e_2.png" alt="">
-            <p>탄이 <span>5월 21일 (3년)</span></p>
-        </div>
-        <div>
-            <a href="#">
-                <img src="resources/images/ad.png" alt="">
-            </a>
-        </div>
-        <div class="my_menu">
-            <ul>
-                <li>
-                    <a href="">
-                        <img src="resources/images/icon_my_alarm.png" alt="">
-                        <span>알림톡 리스트</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="resources/images/icon_my_monitor.png" alt="">
-                        <span>모니터링</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="resources/images/icon_my_report.png" alt="">
-                        <span>PATPAT 리포트</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="resources/images/icon_my_diary.png" alt="">
-                        <span>건강수첩</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="my_bottom">
-            <a href="#">
-                <span>공지사항</span>
-            </a>
-            <span>|</span>
-            <a href="#">
-                <span>FAQ</span>
-            </a>
-        </div>
-    </div>
     <div class="wrapper">
-        <header class="header">
-            <ul>
-                <li>
-                    <a href="#">
-                        <span class="material-symbols-outlined icon_ham">
-                            menu
-                        </span>
-                    </a>
-                </li>
-                <li class="icon_alarm_wrap">
-                    <a href="#">
-                        <span class="material-symbols-outlined icon_alarm">
-                            notifications
-                        </span>
-                        <!-- <img class="alarm_yn" src="img/icon_red_circle.svg" alt=""> -->
-                    </a>
-                </li>
-                <li class="title">
-                    <span>6월 1일</span>
-                    <span>목요일</span>
-                    <span class="material-symbols-outlined icon_calendar">
-                        calendar_month
-                    </span>
-                </li>
-            </ul>
-        </header>
+		<jsp:include page="../common/header2.jsp"></jsp:include>
         <div>
             <!-- date -->
             <div class="date_wrap">
@@ -300,32 +212,7 @@
             </div>
 
             <!-- bottom -->
-            <div class="bottom">
-                <div>
-                    <a href="#">
-                        <span class="material-symbols-outlined">
-                            slideshow
-                        </span>
-                        <p>모니터링</p>
-                    </a>
-                </div>
-                <div>
-                    <a href="#">
-                        <span class="material-symbols-outlined">
-                            analytics
-                        </span>
-                        <p>PATPAT리포트</p>
-                    </a>
-                </div>
-                <div class="this_menu">
-                    <a href="#">
-                        <span class="material-symbols-outlined">
-                        edit_square
-                        </span>
-                        <p>건강수첩</p>
-                    </a>
-                </div>
-            </div>
+			<jsp:include page="../common/footer.jsp"></jsp:include>
         </div>
     </div>
 </div>
@@ -333,29 +220,32 @@
 
 <script>
     $(function() {
-    var x = 0;
-    var tabx = 0;
-    var xx = 0;
-    var limit = $(".date_ul").width() - $(".date_wrap").width() + 12;
-    $(".date_ul").bind('touchstart', function(e) {
-        var event = e.originalEvent;
-        x = event.touches[0].screenX;
-        tabx = $(".date_ul").css("transform").replace(/[^0-9\-.,]/g, '').split(',')[4];
-    });
-    $(".date_ul").bind('touchmove', function(e) {
-        var event = e.originalEvent;
-        xx = parseInt(tabx) + parseInt(event.touches[0].screenX - x);
-        $(".date_ul").css("transform", "translate(" + xx + "px, 0px)");
-        event.preventDefault();
-    });
-    $(".date_ul").bind('touchend', function(e) {
-        if ((xx > 0) && (tabx <= 0)) {
-        $(".date_ul").css("transform", "translate(0px, 0px)");
-        }
-        if (Math.abs(xx) > limit) {
-        $(".date_ul").css("transform", "translate(" + -limit + "px, 0px)");
-        }
-    });
+    	$(".diary_title").toggleClass("hide");
+    	$("#diary_footer").toggleClass("this_menu");
+    	
+	    var x = 0;
+	    var tabx = 0;
+	    var xx = 0;
+	    var limit = $(".date_ul").width() - $(".date_wrap").width() + 12;
+	    $(".date_ul").bind('touchstart', function(e) {
+	        var event = e.originalEvent;
+	        x = event.touches[0].screenX;
+	        tabx = $(".date_ul").css("transform").replace(/[^0-9\-.,]/g, '').split(',')[4];
+	    });
+	    $(".date_ul").bind('touchmove', function(e) {
+	        var event = e.originalEvent;
+	        xx = parseInt(tabx) + parseInt(event.touches[0].screenX - x);
+	        $(".date_ul").css("transform", "translate(" + xx + "px, 0px)");
+	        event.preventDefault();
+	    });
+	    $(".date_ul").bind('touchend', function(e) {
+	        if ((xx > 0) && (tabx <= 0)) {
+	        $(".date_ul").css("transform", "translate(0px, 0px)");
+	        }
+	        if (Math.abs(xx) > limit) {
+	        $(".date_ul").css("transform", "translate(" + -limit + "px, 0px)");
+	        }
+	    });
 
     });
 

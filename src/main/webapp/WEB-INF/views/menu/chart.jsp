@@ -208,7 +208,6 @@
                                     <div class="chart_hide hide">
                                         <div class="chart_week">
                                             <!-- chart 들어갈 자리 -->
-                                            <img src="img/chart_ex_2.png" alt="" style="width:100%;">
                                         </div>
                                         <div class="chart_result">
                                             그루밍 시간은 전체적으로 높은 편으로, 한 주 평균 4시간 정도입니다. 월(4.2h), 화(4H), 수(5.5H), 목(5.5H), 금(3.5H),
@@ -237,7 +236,6 @@
                                     <div class="chart_hide hide">
                                         <div class="chart_week">
                                             <!-- chart 들어갈 자리 -->
-                                            <img src="img/chart_ex_2.png" alt="" style="width:100%;">
                                         </div>
                                         <div class="chart_result">
                                             그루밍 시간은 전체적으로 높은 편으로, 한 주 평균 4시간 정도입니다. 월(4.2h), 화(4H), 수(5.5H), 목(5.5H), 금(3.5H),
@@ -266,7 +264,6 @@
                                     <div class="chart_hide hide">
                                         <div class="chart_week">
                                             <!-- chart 들어갈 자리 -->
-                                            <img src="img/chart_ex_2.png" alt="" style="width:100%;">
                                         </div>
                                         <div class="chart_result">
                                             그루밍 시간은 전체적으로 높은 편으로, 한 주 평균 4시간 정도입니다. 월(4.2h), 화(4H), 수(5.5H), 목(5.5H), 금(3.5H),
@@ -295,7 +292,6 @@
                                     <div class="chart_hide hide">
                                         <div class="chart_week">
                                             <!-- chart 들어갈 자리 -->
-                                            <img src="img/chart_ex_2.png" alt="" style="width:100%;">
                                         </div>
                                         <div class="chart_result">
                                             그루밍 시간은 전체적으로 높은 편으로, 한 주 평균 4시간 정도입니다. 월(4.2h), 화(4H), 수(5.5H), 목(5.5H), 금(3.5H),
@@ -324,7 +320,6 @@
                                     <div class="chart_hide hide">
                                         <div class="chart_week">
                                             <!-- chart 들어갈 자리 -->
-                                            <img src="img/chart_ex_2.png" alt="" style="width:100%;">
                                         </div>
                                         <div class="chart_result">
                                             그루밍 시간은 전체적으로 높은 편으로, 한 주 평균 4시간 정도입니다. 월(4.2h), 화(4H), 수(5.5H), 목(5.5H), 금(3.5H),
@@ -353,7 +348,6 @@
                                     <div class="chart_hide hide">
                                         <div class="chart_week">
                                             <!-- chart 들어갈 자리 -->
-                                            <img src="img/chart_ex_2.png" alt="" style="width:100%;">
                                         </div>
                                         <div class="chart_result">
                                             그루밍 시간은 전체적으로 높은 편으로, 한 주 평균 4시간 정도입니다. 월(4.2h), 화(4H), 수(5.5H), 목(5.5H), 금(3.5H),
@@ -382,7 +376,6 @@
                                     <div class="chart_hide hide">
                                         <div class="chart_week">
                                             <!-- chart 들어갈 자리 -->
-                                            <img src="img/chart_ex_2.png" alt="" style="width:100%;">
                                         </div>
                                         <div class="chart_result">
                                             그루밍 시간은 전체적으로 높은 편으로, 한 주 평균 4시간 정도입니다. 월(4.2h), 화(4H), 수(5.5H), 목(5.5H), 금(3.5H),
@@ -411,7 +404,6 @@
                                     <div class="chart_hide hide">
                                         <div class="chart_week">
                                             <!-- chart 들어갈 자리 -->
-                                            <img src="img/chart_ex_2.png" alt="" style="width:100%;">
                                         </div>
                                         <div class="chart_result">
                                             그루밍 시간은 전체적으로 높은 편으로, 한 주 평균 4시간 정도입니다. 월(4.2h), 화(4H), 수(5.5H), 목(5.5H), 금(3.5H),
@@ -440,7 +432,6 @@
                                     <div class="chart_hide hide">
                                         <div class="chart_week">
                                             <!-- chart 들어갈 자리 -->
-                                            <img src="img/chart_ex_2.png" alt="" style="width:100%;">
                                         </div>
                                         <div class="chart_result">
                                             그루밍 시간은 전체적으로 높은 편으로, 한 주 평균 4시간 정도입니다. 월(4.2h), 화(4H), 수(5.5H), 목(5.5H), 금(3.5H),
@@ -492,7 +483,6 @@
                             <div class="chart_name">똥싸기</div>
                             <div class="">
                                 <!-- chart 들어갈 자리 -->
-                                <img src="img/chart_ex_1.png" alt="" style="width:100%">
                             </div>
                             <div class="chart_result">
                                 일주일 기준, 이상행동의 일 평균 시간과 횟수는 다음과 같습니다. 그루밍 평균 4.5시간, 귀/피부 긁는 행동 3회,
@@ -517,7 +507,6 @@
                                     <div class="chart_hide">
                                         <div class="chart_week">
                                             <!-- chart 들어갈 자리 -->
-                                            <img src="img/chart_ex_2.png" alt="" style="width:100%;">
                                         </div>
                                         <div class="chart_result">
                                             그루밍 시간은 전체적으로 높은 편으로, 한 주 평균 4시간 정도입니다. 월(4.2h), 화(4H), 수(5.5H), 목(5.5H), 금(3.5H),
@@ -546,7 +535,6 @@
                                     <div class="chart_hide hide">
                                         <div class="chart_week">
                                             <!-- chart 들어갈 자리 -->
-                                            <img src="img/chart_ex_2.png" alt="" style="width:100%;">
                                         </div>
                                         <div class="chart_result">
                                             그루밍 시간은 전체적으로 높은 편으로, 한 주 평균 4시간 정도입니다. 월(4.2h), 화(4H), 수(5.5H), 목(5.5H), 금(3.5H),
@@ -575,7 +563,6 @@
                                     <div class="chart_hide hide">
                                         <div class="chart_week">
                                             <!-- chart 들어갈 자리 -->
-                                            <img src="img/chart_ex_2.png" alt="" style="width:100%;">
                                         </div>
                                         <div class="chart_result">
                                             그루밍 시간은 전체적으로 높은 편으로, 한 주 평균 4시간 정도입니다. 월(4.2h), 화(4H), 수(5.5H), 목(5.5H), 금(3.5H),
@@ -604,7 +591,6 @@
                                     <div class="chart_hide hide">
                                         <div class="chart_week">
                                             <!-- chart 들어갈 자리 -->
-                                            <img src="img/chart_ex_2.png" alt="" style="width:100%;">
                                         </div>
                                         <div class="chart_result">
                                             그루밍 시간은 전체적으로 높은 편으로, 한 주 평균 4시간 정도입니다. 월(4.2h), 화(4H), 수(5.5H), 목(5.5H), 금(3.5H),
@@ -633,7 +619,6 @@
                                     <div class="chart_hide hide">
                                         <div class="chart_week">
                                             <!-- chart 들어갈 자리 -->
-                                            <img src="img/chart_ex_2.png" alt="" style="width:100%;">
                                         </div>
                                         <div class="chart_result">
                                             그루밍 시간은 전체적으로 높은 편으로, 한 주 평균 4시간 정도입니다. 월(4.2h), 화(4H), 수(5.5H), 목(5.5H), 금(3.5H),
@@ -662,7 +647,6 @@
                                     <div class="chart_hide hide">
                                         <div class="chart_week">
                                             <!-- chart 들어갈 자리 -->
-                                            <img src="img/chart_ex_2.png" alt="" style="width:100%;">
                                         </div>
                                         <div class="chart_result">
                                             그루밍 시간은 전체적으로 높은 편으로, 한 주 평균 4시간 정도입니다. 월(4.2h), 화(4H), 수(5.5H), 목(5.5H), 금(3.5H),
@@ -691,7 +675,6 @@
                                     <div class="chart_hide hide">
                                         <div class="chart_week">
                                             <!-- chart 들어갈 자리 -->
-                                            <img src="img/chart_ex_2.png" alt="" style="width:100%;">
                                         </div>
                                         <div class="chart_result">
                                             그루밍 시간은 전체적으로 높은 편으로, 한 주 평균 4시간 정도입니다. 월(4.2h), 화(4H), 수(5.5H), 목(5.5H), 금(3.5H),
@@ -720,7 +703,6 @@
                                     <div class="chart_hide hide">
                                         <div class="chart_week">
                                             <!-- chart 들어갈 자리 -->
-                                            <img src="img/chart_ex_2.png" alt="" style="width:100%;">
                                         </div>
                                         <div class="chart_result">
                                             그루밍 시간은 전체적으로 높은 편으로, 한 주 평균 4시간 정도입니다. 월(4.2h), 화(4H), 수(5.5H), 목(5.5H), 금(3.5H),
@@ -749,7 +731,6 @@
                                     <div class="chart_hide hide">
                                         <div class="chart_week">
                                             <!-- chart 들어갈 자리 -->
-                                            <img src="img/chart_ex_2.png" alt="" style="width:100%;">
                                         </div>
                                         <div class="chart_result">
                                             그루밍 시간은 전체적으로 높은 편으로, 한 주 평균 4시간 정도입니다. 월(4.2h), 화(4H), 수(5.5H), 목(5.5H), 금(3.5H),
@@ -778,7 +759,6 @@
                                     <div class="chart_hide hide">
                                         <div class="chart_week">
                                             <!-- chart 들어갈 자리 -->
-                                            <img src="img/chart_ex_2.png" alt="" style="width:100%;">
                                         </div>
                                         <div class="chart_result">
                                             그루밍 시간은 전체적으로 높은 편으로, 한 주 평균 4시간 정도입니다. 월(4.2h), 화(4H), 수(5.5H), 목(5.5H), 금(3.5H),
@@ -796,37 +776,16 @@
                 </div>
             </div>
 
-            <div class="bottom">
-                <div>
-                    <a href="#">
-                        <span class="material-symbols-outlined">
-                            slideshow
-                        </span>
-                        <p>모니터링</p>
-                    </a>
-                </div>
-                <div>
-                    <a href="#">
-                        <span class="material-symbols-outlined">
-                            analytics
-                        </span>
-                        <p>PATPAT리포트</p>
-                    </a>
-                </div>
-                <div>
-                    <a href="#">
-                        <span class="material-symbols-outlined">
-                        edit_square
-                        </span>
-                        <p>건강수첩</p>
-                    </a>
-                </div>
-            </div>
+		<jsp:include page="../common/footer.jsp">
+			<jsp:param name="tel" value="010-1234-5678" />
+		</jsp:include>
         </div>
     </div>
 
     <script>
         $(document).ready(function(e) {
+        	
+        	$("#chart_footer").toggleClass("this_menu");
 
             let changeChart = function(){
                 $(".monthly").toggleClass("select");

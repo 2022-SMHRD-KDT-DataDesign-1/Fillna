@@ -11,28 +11,13 @@
     <link rel="stylesheet" href="resources/css/reset.css">
     <link rel="stylesheet" href="resources/css/substyle.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script scr="resources/js/my.js"></script>
 </head>
 <body class="bg">
     <div class="wrapper">
-        <header class="header">
-            <ul>
-                <li>
-                    <a href="#">
-                        <span class="material-symbols-outlined icon_ham">
-                            menu
-                        </span>
-                    </a>
-                </li>
-                <li class="icon_alarm_wrap">
-                    <a href="${contextPath}/alarm">
-                        <span class="material-symbols-outlined icon_alarm">
-                            notifications
-                        </span>
-                        <img class="alarm_yn" src="resources/images/icon_red_circle.svg" alt="">
-                    </a>
-                </li>
-            </ul>
-        </header>
+		<jsp:include page="../common/header1.jsp"></jsp:include>
         <div class="content member">
             <div class="con">
                 <div class="m_top">
@@ -68,32 +53,7 @@
                 </div>
             </div>
 
-            <div class="bottom">
-                <div>
-                    <a href="#">
-                        <span class="material-symbols-outlined">
-                            slideshow
-                        </span>
-                        <p>모니터링</p>
-                    </a>
-                </div>
-                <div>
-                    <a href="#">
-                        <span class="material-symbols-outlined">
-                            analytics
-                        </span>
-                        <p>PATPAT리포트</p>
-                    </a>
-                </div>
-                <div>
-                    <a href="#">
-                        <span class="material-symbols-outlined">
-                        edit_square
-                        </span>
-                        <p>건강수첩</p>
-                    </a>
-                </div>
-            </div>
+        	<jsp:include page="../common/footer.jsp"></jsp:include>
         </div>
     </div>
 </body>

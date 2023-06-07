@@ -21,7 +21,7 @@ body{font-family: 'Pretendard';}
     /* modal */
     .hide{display: none !important;}
     .modal{position: fixed; top:0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;}
-    .modal_overlay{background-color: rgba(56, 56, 56, 0.75); width: 100%; height: 100%; position: absolute; z-index: 999; background-size: cover; background-attachment: fixed;}
+    .modal_overlay{background-color: rgba(56, 56, 56, 0.75); width: 100%; height: 100%; position: absolute; z-index: 999; background-size: cover;}
     .modal_content{background-color: #f6f7f8; color: #999; text-align: center; position: relative; padding: 10vw 10vw; border-radius: 15px; font-size:4vw; box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1); z-index: 9999;}
     .btn_close{border: 0; outline: 0; position: absolute; right: 2vw; top: 3vw; background-color: transparent;}
     .icon_close{font-size:3.5vw !important;}
@@ -60,13 +60,16 @@ body{font-family: 'Pretendard';}
     .icon_alarm_wrap {margin: 0.8vw 5vw 0 0;}
     .save_wrap {float:left; margin: 2vw 0 0 2vw;}
     .save_wrap > a > span{color:#999; vertical-align: middle; display: inline-block; font-size: 4.3vw;}
-    .title{float: left; font-size: 5vw; font-weight: 700; color:#5e5e5e; margin-top:0.8vw;}
+    .title, .alarm_title, .diary_title{float: left; font-size: 5vw; font-weight: 700; color:#5e5e5e; margin-top:0.8vw;}
     .title>span:last-child{font-size: 3.5vw; color:#aeaeae;}
+    .diary_title{font-size:6vw !important;}
+    .diary_title>span:nth-child(2){font-size: 3.5vw; color:#aeaeae;}
+    .alarm_title{font-size: 6vw !important;}
     .icon_ham{font-size: 8vw !important;}
     .icon_sound{font-size: 8vw !important; padding: 3vw 0;}
     .icon_alarm{font-size: 7vw !important;}
     .alarm_yn{position:absolute; width:1.34vw; margin-left: -1.3vw; z-index:-999;}
-    .icon_calendar{font-size: 5vw !important; vertical-align: middle;}
+    .icon_calendar{font-size: 6vw !important; vertical-align: middle;}
     .icon_back{font-size: 7vw !important; vertical-align: middle; cursor: pointer;}
 
     /*content*/
@@ -153,7 +156,7 @@ body{font-family: 'Pretendard';}
         }
 
         /* alarm content */
-        .con_alarm{background:url("../images/line.png") no-repeat;background-position: 10vw 9vw;}
+        .con_alarm{background:url("../images/line.png") no-repeat;background-position: 8vw 9vw;}
         .alarm_wrap{margin-bottom: 5vw;}
         .icon_check{vertical-align: middle; width: 4.5vw;}
         .alarm_date{overflow: hidden; vertical-align: middle;}

@@ -15,111 +15,10 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
-    <script src="resources/js/my.js"></script>
-    <script defer src="resources/js/index.js"></script>
 </head>
 <body class="bg">
     <div class="wrapper">
-        <div class="modal_overlay hide"></div>
-        <div class="my_content">
-            <div class="my_top">
-                <a href="#">
-                    <img src="resources/images/logo4.png" alt="">
-                </a>
-                <a href="#" class="icon_x">
-                    <img src="resources/images/icon_x.png" alt="">
-                </a>
-                <a href="#">
-                    <img src="resources/images/icon_logout.png" alt="">
-                </a>
-                <a href="#">
-                    <img src="resources/images/icon_my_set.png" alt="">
-                </a>
-            </div>
-            <div class="my_profile">
-                <img src="resources/images/tan_e_2.png" alt="">
-                <p>탄이 <span>5월 21일 (3년)</span></p>
-            </div>
-            <div>
-                <a href="#">
-                    <img src="resources/images/ad.png" alt="">
-                </a>
-            </div>
-            <div class="my_menu">
-                <ul>
-                    <li>
-                        <a href="">
-                            <img src="resources/images/icon_my_alarm.png" alt="">
-                            <span>알림톡 리스트</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <img src="resources/images/icon_my_monitor.png" alt="">
-                            <span>모니터링</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <img src="resources/images/icon_my_report.png" alt="">
-                            <span>PATPAT 리포트</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <img src="resources/images/icon_my_diary.png" alt="">
-                            <span>건강수첩</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="my_bottom">
-                <a href="#">
-                    <span>공지사항</span>
-                </a>
-                <span>|</span>
-                <a href="#">
-                    <span>FAQ</span>
-                </a>
-            </div>
-        </div>
-        <!-- modal -->
-        <div class="modal hide">
-            <div class="modal_overlay"></div>
-            <div class="modal_content">
-                저장이 완료되었습니다.
-                <button class="btn_close">
-                    <span class="material-symbols-outlined icon_close">
-                    close
-                    </span>
-                </button>
-            </div>
-        </div>
-        <!-- header -->
-        <header class="header">
-            <ul>
-                <li>
-                    <a href="#">
-                        <span class="material-symbols-outlined icon_ham">
-                            menu
-                        </span>
-                    </a>
-                </li>
-                <li class="icon_alarm_wrap">
-                    <a href="${contextPath}/alarm">
-                        <span class="material-symbols-outlined icon_alarm">
-                            notifications
-                        </span>
-                        <img class="alarm_yn" src="resources/icon_red_circle.svg" alt="">
-                    </a>
-                </li>
-                <li class="save_wrap">
-                    <a href="#" id="save">
-                        <span>저장</span>
-                    </a>
-                </li>
-            </ul>
-        </header>
+		<jsp:include page="../common/header2.jsp"></jsp:include>
         <!-- content -->
         <div class="content">
             <div class="con">
@@ -127,7 +26,7 @@
                     <img class="profile_img" src="resources/images/tan_e.png" alt="">
                     <div>
                         <p>${vo.mbNick}</p>
-                        <span>${vo.mbNick} (${vo.mbEmail}))<br>
+                        <span>${vo.mbNick} (${vo.mbEmail})<br>
                         010-6792-5045
                         </span>
                     </div>
@@ -213,34 +112,42 @@
                 </div> 
             </div>
             <!-- bottom menu -->
-            <div class="bottom">
-                <div>
-                    <a href="#">
-                        <span class="material-symbols-outlined">
-                            slideshow
-                        </span>
-                        <p>모니터링</p>
-                    </a>
-                </div>
-                <div>
-                    <a href="#">
-                        <span class="material-symbols-outlined">
-                            analytics
-                        </span>
-                        <p>PATPAT리포트</p>
-                    </a>
-                </div>
-                <div>
-                    <a href="#">
-                        <span class="material-symbols-outlined">
-                        edit_square
-                        </span>
-                        <p>건강수첩</p>
-                    </a>
-                </div>
-            </div>
+			<jsp:include page="../common/footer.jsp"></jsp:include>
         </div>
     </div>
-
+<script>
+$(document).ready(function(){
+	
+	$(".save_wrap").toggleClass("hide");
+	
+	$("#male").on("click", function(){
+	    $("#gender").val("M");
+	    console.log($("#gender").val());
+		$(this).toggleClass("active");
+		$(".btn").not($(this)).removeClass("active");
+	});
+	
+	$("#female").on("click", function(){
+	    $("#gender").val("F");
+	    console.log($("#gender").val());
+		$(this).toggleClass("active");
+		$(".btn").not($(this)).removeClass("active");
+	});
+		
+	$("#file").change(function(){
+	    let fileName = $("#file").val();
+	    $(".file_name").val(fileName);
+	});
+	
+	$("#time").timepicker({
+        timeFormat:"HH:mm",
+        dropdown: true
+    });
+	
+	$("#save").on("click", function(){
+		$("#update_form").submit();
+	});
+});    
+</script>
 </body>
 </html>

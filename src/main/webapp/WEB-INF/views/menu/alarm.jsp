@@ -13,10 +13,74 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="resources/js/my.js"></script>
     <script defer src="resources/js/alarm.js"></script>
 </head>
 <body class="bg">
     <div class="wrapper">
+        <div class="modal_overlay hide"></div>
+        <div class="my_content">
+            <div class="my_top">
+                <a href="#">
+                    <img src="resources/images/logo4.png" alt="">
+                </a>
+                <a href="#" class="icon_x">
+                    <img src="resources/images/icon_x.png" alt="">
+                </a>
+                <a href="#">
+                    <img src="resources/images/icon_logout.png" alt="">
+                </a>
+                <a href="#">
+                    <img src="resources/images/icon_my_set.png" alt="">
+                </a>
+            </div>
+            <div class="my_profile">
+                <img src="resources/images/tan_e_2.png" alt="">
+                <p>탄이 <span>5월 21일 (3년)</span></p>
+            </div>
+            <div>
+                <a href="#">
+                    <img src="resources/images/ad.png" alt="">
+                </a>
+            </div>
+            <div class="my_menu">
+                <ul>
+                    <li>
+                        <a href="">
+                            <img src="resources/images/icon_my_alarm.png" alt="">
+                            <span>알림톡 리스트</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <img src="resources/images/icon_my_monitor.png" alt="">
+                            <span>모니터링</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <img src="resources/images/icon_my_report.png" alt="">
+                            <span>PATPAT 리포트</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <img src="resources/images/icon_my_diary.png" alt="">
+                            <span>건강수첩</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="my_bottom">
+                <a href="#">
+                    <span>공지사항</span>
+                </a>
+                <span>|</span>
+                <a href="#">
+                    <span>FAQ</span>
+                </a>
+            </div>
+        </div>
         <header class="header">
             <ul>
                 <li>
@@ -36,6 +100,7 @@
                 </li>
                 <li class="title">
                     <span>알림톡 LIST</span>
+                    <span></span>
                 </li>
             </ul>
         </header>
@@ -215,7 +280,9 @@
                         <ul class="alaram_list">
                             <li>
                                 <span>10:01</span>
-                                <span class="circle green"></span>
+                                <span class="material-symbols-outlined icon_circle green circle">
+                                    circle
+                                </span>
                                 <span class="alarm_type ">[일지]</span>
                                 <span>- 5월 30일</span>
                             </li>
@@ -232,7 +299,9 @@
                         <ul class="alaram_list">
                             <li>
                                 <span>10:01</span>
-                                <span class="circle green"></span>
+                                <span class="material-symbols-outlined icon_circle green circle">
+                                    circle
+                                </span>
                                 <span class="alarm_type ">[일지]</span>
                                 <span>- 5월 30일</span>
                             </li>
@@ -249,7 +318,9 @@
                         <ul class="alaram_list">
                             <li>
                                 <span>10:01</span>
-                                <span class="circle green"></span>
+                                <span class="material-symbols-outlined icon_circle green circle">
+                                    circle
+                                </span>
                                 <span class="alarm_type ">[일지]</span>
                                 <span>- 5월 30일</span>
                             </li>
@@ -266,7 +337,9 @@
                         <ul class="alaram_list">
                             <li>
                                 <span>10:01</span>
-                                <span class="circle green"></span>
+                                <span class="material-symbols-outlined icon_circle green circle">
+                                    circle
+                                </span>
                                 <span class="alarm_type">[일지]</span>
                                 <span>- 5월 30일</span>
                             </li>

@@ -48,6 +48,7 @@
                     <span>목요일</span>
                     <span class="material-symbols-outlined icon_calendar">
                         calendar_month
+                        <input type=date class=diary_header_date/>
                     </span>
                 </li>
                 

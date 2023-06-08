@@ -176,7 +176,7 @@ body{font-family: 'Pretendard';}
         .alaram_list>li{margin:0 0 2vw 15vw; font-size: 3.8vw; letter-spacing: 0.1vw; cursor: pointer; position: relative;}
         .alaram_list > li > span:nth-child(1){ margin-right: 8vw;}
         .icon_up{font-size: 6vw !important; vertical-align: middle;}
-        .alarm_detail{padding:5vw; margin: 0 0 6vw 3vw; width: 100%; border: 1px solid #d2d2d2; border-radius: 15px; background-color: #fff; font-size: 3.8vw; box-sizing: border-box;}
+        .alarm_detail{padding:5vw; margin: 0 0 6vw 0; width: 100%; border: 1px solid #d2d2d2; border-radius: 15px; background-color: #fff; font-size: 3.8vw; box-sizing: border-box;}
         .alarm_title{font-weight: 700; color:#5e5e5e;}
         .alarm_content{padding:2vw 0 2vw 0; font-weight: 300;}
         .alarm_content>span{color:#ff0000; font-weight: 500;}
@@ -186,6 +186,7 @@ body{font-family: 'Pretendard';}
         .btn_more{border:none; background-color: #587789; padding: 2vw 10vw; color: #fff; border-radius: 30px; cursor: pointer; font-size: 4vw; box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;}
 
         /* monitoring content */
+        .monitoring_con{margin-bottom: 20vw;}
         .monitoring_top{margin-bottom: 10vw;}
         .monitoring_top>div{border:1px solid #d2d2d2; border-radius: 15px; padding:3vw; margin-bottom: 2vw;}
         .monitoring_top>div:first-child{font-weight: 500; font-size: 3.8vw; text-align: center; background:url('../images/icon_sos.png') 3vw 0vw no-repeat; background-size: 11vw;}
@@ -202,7 +203,7 @@ body{font-family: 'Pretendard';}
         .monitoring_top>div:nth-child(3)>a>p{font-size: 3.8vw; font-weight: 500;}
 
         .rec_date{cursor: pointer; margin-bottom: 2vw;}
-        .monitoring_bottom{background:url("../images/line.png") no-repeat;background-position: 2vw 17vw;}
+        .monitoring_bottom{background:url("../images/line.png") no-repeat;background-position: 2vw 15vw;}
         .monitoring_bottom>div:first-child{color:#5e5e5e;}
         .monitoring_bottom>div:first-child>p{margin-bottom: 2vw;}
         .monitoring_bottom>div:first-child>p:first-child{font-size: 4vw; font-weight: 800;}
@@ -247,7 +248,7 @@ body{font-family: 'Pretendard';}
           .diary_middle_list>li>div>span:nth-child(2){font-size: 3vw; color: #aeaeae;}
           .diary_middle_list>li>div>img{width:100%; border-radius: 10px; margin-top:2vw;}
           .diary_middle_list>li>div>p{font-size: 3.5vw; color:#aeaeae; padding: 1vw;}
-          .icon_more{font-size: 4vw !important; color:#5e5e5e;}
+          .icon_more{font-size: 4vw !important; color:#5e5e5e; vertical-align:middle;}
 
             /* 이상행동 녹화영상 */
           .diary_bottom{margin-bottom: 17vw;margin-top: 4vw;}
@@ -263,7 +264,7 @@ body{font-family: 'Pretendard';}
         .mini_title{font-size: 3.8vw; color:#5e5e5e; margin-bottom: 2vw;}
         .select_symptom_list{width: 100%; padding: 1vw; text-align: left; font-size: 5vw; color:#cd0000; background-color: transparent; border:none; box-sizing: border-box; cursor: pointer; border-bottom: 0.5px solid #d2d2d2; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
         .icon_down{position: absolute; left:85%; font-size: 7vw !important; float: right; color: #d2d2d2; vertical-align: middle; cursor: pointer; z-index: -999;}
-        .icon_up{position: absolute; left:85%; font-size: 7vw !important; float: right; color: #d2d2d2; vertical-align: middle; cursor: pointer; z-index: -999;}
+        .icon_up{margin-top:-1vw; font-size: 7vw !important; float: right; color: #d2d2d2; vertical-align: middle; cursor: pointer; z-index: -999;}
         .sympton_list{margin-top:1vw; display: none; width: 100%; border: 0.5px solid #d2d2d2; box-sizing: border-box; border-radius: 2vw; background-color: #f6f7f8; height: 40vw; overflow-y: scroll;}
         .sympton_list.on{display: block;}
         .sympton_list>li{padding: 1vw; box-sizing: border-box; /*border-radius: 2vw;*/}
@@ -279,6 +280,7 @@ body{font-family: 'Pretendard';}
         .memo_save>a{display: block; width: 100%;}
 
         /* chart */
+        .chart_con{margin-bottom: 20vw;}
         .date_month{display:table; height: 9vw;}
         .date_month>span:nth-child(1){display:table-cell; vertical-align: middle; font-weight: 800; font-size: 5vw;}
         .date_month>span>span{font-size: 3vw; font-weight: 400; vertical-align: middle;}

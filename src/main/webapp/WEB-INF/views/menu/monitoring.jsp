@@ -19,7 +19,7 @@
         <jsp:include page="../common/my.jsp"></jsp:include>
         <jsp:include page="../common/header1.jsp"></jsp:include>
         <div>
-            <div class="con">
+            <div class="con monitoring_con">
                 <div class="monitoring_top">
                     <div>
                         <a href="">
@@ -46,7 +46,7 @@
                 <div class="monitoring_bottom">
                     <div>
                         <p>녹화영상 리스트</p>
-                        <p>최대 7일간 보관됩니다. 중요한 영상은 다운로드하여 보관해주세요.</p>
+                        <p>최대 7일간 보관됩니다. 중요한 영상은 다운로드 해주세요.</p>
                     </div>
 
                     <div class="monitoring_wrap">
@@ -106,6 +106,24 @@
                             </ul>
                         </div>
                         
+                    </div>
+                	<div class="monitoring_wrap">
+                        <div class="alarm_date rec_date">
+                            <img class="icon_check" src="resources/images/icon_check.png" alt="">
+                            <span>2023.05.31(목)</span>
+                        </div>
+                    </div>
+                    <div class="monitoring_wrap">
+                        <div class="alarm_date rec_date">
+                            <img class="icon_check" src="resources/images/icon_check.png" alt="">
+                            <span>2023.05.31(목)</span>
+                        </div>
+                    </div>
+                    <div class="monitoring_wrap">
+                        <div class="alarm_date rec_date">
+                            <img class="icon_check" src="resources/images/icon_check.png" alt="">
+                            <span>2023.05.31(목)</span>
+                        </div>
                     </div>
                 </div>
             </div>

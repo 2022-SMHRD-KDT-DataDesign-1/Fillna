@@ -18,7 +18,7 @@
     <div class="wrapper">
 		<jsp:include page="../common/my.jsp"></jsp:include>
 		<jsp:include page="../common/header2.jsp"></jsp:include>
-        <div class="content">
+        <div class="content chart_con">
             <div class="chart_type">
                 <div class="select weekly">
                     <span class="select weekly">주간 리포트</span>

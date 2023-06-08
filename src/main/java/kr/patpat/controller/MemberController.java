@@ -79,7 +79,7 @@ public class MemberController {
 			Pet pet = memberMapper.selectPet(mbIdx);
 			session.setAttribute("pvo", pet);
 			
-			return "member/welcome";
+			return "menu/monitoring";
 		} else {
 			// 신규회원인 경우
 			memberMapper.join(userInfo);

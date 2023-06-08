@@ -22,7 +22,7 @@
 		<jsp:include page="../common/header2.jsp"></jsp:include>
 		<!-- modal -->
         <div class="modal hide">
-            <div class="modal_overlay"></div>
+            <div class="modal_overlay2"></div>
             <div class="modal_content">
                 저장이 완료되었습니다.
                 <button class="btn_close">
@@ -159,7 +159,17 @@ $(document).ready(function(){
 	
 	$("#save").on("click", function(){
 		$("#update_form").submit();
+		$(".modal").toggleClass("hide");
 	});
+	
+	$(".btn_close").click(function(){
+		$(".modal").toggleClass("hide");
+	});
+	
+	$(".modal_overlay2").click(function(){
+		$(".modal").toggleClass("hide");
+	});
+
 });    
 </script>
 </body>

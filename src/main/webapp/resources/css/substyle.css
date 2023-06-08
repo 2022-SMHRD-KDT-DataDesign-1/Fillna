@@ -40,13 +40,13 @@ body{font-family: 'Pretendard';}
     .my_content>div:nth-child(3)>a>img{width: 85%;}
     .my_menu{padding:6vw;}
     .my_menu>ul>li{padding:5vw 0; text-align: left;}
-    .my_menu>ul>li>a>img{margin-right: 8vw; vertical-align: -30%;}
+    .my_menu>ul>li>a>img{margin-right: 7vw; vertical-align: -30%;}
     .my_menu>ul>li:nth-child(1)>a>img{width:4.4vw; margin-left:0.5vw;}
     .my_menu>ul>li:nth-child(2)>a>img{vertical-align: -15% !important; width: 5vw;}
     .my_menu>ul>li:nth-child(3)>a>img{width: 5vw;}
-    .my_menu>ul>li:nth-child(4)>a>img{width:4.9vw; vertical-align: -26% !important;}
-    .my_menu>ul>li>a>span{font-size: 4vw; color:#515151; font-weight: 500; margin-left:2vw;}
-    .my_bottom{overflow: hidden; color: #515151; font-weight: 500; bottom: 0; padding:10vw; position: fixed; display: flex; justify-content: space-between; width: 50%;} 
+    .my_menu>ul>li:nth-child(4)>a>img{width:4.9vw; vertical-align: -32% !important;}
+    .my_menu>ul>li>a>span{font-size: 4vw; color:#515151; font-weight: 500;}
+    .my_bottom{overflow: hidden; color: #515151; font-weight: 500; bottom: 0; padding:10vw; position: fixed; display: flex; justify-content: space-around; width: 50%;} 
 
     /*header*/
     .header{color: #000;padding:6vw;}
@@ -75,6 +75,8 @@ body{font-family: 'Pretendard';}
     /*content*/
 
       .con{padding: 6vw;}
+      
+
 
         /* m_top */
         .m_top{margin-top:5vw;}
@@ -298,6 +300,7 @@ body{font-family: 'Pretendard';}
 
 
         /* login_btm */
+        .s_btm > div > a > span, .m_btm > a > span{vertical-align:middle;}
         .m_btm{margin: 15vw 0 5vw 0; text-align: center; font-size: 4.5vw;}
         .go_link{border: 1px solid #e2e2e2; overflow: hidden; display: block; width: 100%; left:0; padding: 4vw; box-sizing: border-box;}
         .icon_go{float:right; font-size: 5vw !important;}

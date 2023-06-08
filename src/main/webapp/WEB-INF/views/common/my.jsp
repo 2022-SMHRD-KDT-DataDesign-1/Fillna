@@ -15,16 +15,16 @@
         <div class="modal_overlay hide"></div>
         <div class="my_content">
             <div class="my_top">
-                <a href="#">
+                <a href="${contextPath}/monitoring">
                     <img src="resources/images/logo4.png" alt="">
                 </a>
-                <a href="#" class="icon_x">
+                <a href="" class="icon_x">
                     <img src="resources/images/icon_x.png" alt="">
                 </a>
-                <a href="#">
+                <a href="https://kauth.kakao.com/oauth/logout?client_id=08c15618cbd45ecc0b82e9e3777c25b3&logout_redirect_uri=http://localhost:8081/controller/logout">
                     <img src="resources/images/icon_logout.png" alt="">
                 </a>
-                <a href="#">
+                <a href="${contextPath}/updateForm">
                     <img src="resources/images/icon_my_set.png" alt="">
                 </a>
             </div>
@@ -40,25 +40,25 @@
             <div class="my_menu">
                 <ul>
                     <li>
-                        <a href="">
+                        <a href="${contextPath}/alarm">
                             <img src="resources/images/icon_my_alarm.png" alt="">
                             <span>알림톡 리스트</span>
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a href="${contextPath}/monitoring">
                             <img src="resources/images/icon_my_monitor.png" alt="">
                             <span>모니터링</span>
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a href="${contextPath}/chart">
                             <img src="resources/images/icon_my_report.png" alt="">
                             <span>PATPAT 리포트</span>
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a href="${contextPath}/diary">
                             <img src="resources/images/icon_my_diary.png" alt="">
                             <span>건강수첩</span>
                         </a>

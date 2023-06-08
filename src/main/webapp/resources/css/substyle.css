@@ -47,8 +47,10 @@ body{font-family: 'Pretendard';}
     .my_menu>ul>li:nth-child(3)>a>img{width: 5vw;}
     .my_menu>ul>li:nth-child(4)>a>img{width:4.9vw; vertical-align: -32% !important;}
     .my_menu>ul>li>a>span{font-size: 4vw; color:#515151; font-weight: 500;}
-    .my_bottom{overflow: hidden; color: #515151; font-weight: 500; bottom: 0; padding:10vw; position: fixed; display: flex; justify-content: space-around; width: 50%;} 
-
+	.my_bottom {overflow: hidden;color: #515151;font-weight: 500;bottom: 0;padding: 9vw 0;position: fixed;width: 100%;}
+    .my_bottom > a{ display: inline-block;width: 37.5vw;text-align: center;}
+    .my_bottom > a:nth-child(2){position:relative;}
+    .my_bottom > a:nth-child(2)::before{content:"｜";position: absolute;left: 0;top: 0;}
     /*header*/
     .header{color: #000;padding:6vw;}
     .cctv_header{color:#fff; padding: 6vw;}

@@ -72,5 +72,23 @@
                 
             </ul>
         </header>
+        
+<script>
+	$(function(){
+		$("#save").on("click", function(){
+	/* 		$("#update_form").submit(); */
+			console.log("save click")
+			$(".modal").toggleClass("hide");
+		});
+		
+		$(".btn_close").click(function(){
+			$(".modal").toggleClass("hide");
+		});
+		
+		$(".modal_back").click(function(){
+			$(".modal").toggleClass("hide");
+		});
+	});
+</script>
 </body>
 </html>

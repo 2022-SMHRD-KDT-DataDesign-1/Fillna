@@ -18,9 +18,9 @@
                 <a href="${contextPath}/monitoring">
                     <img src="resources/images/logo4.png" alt="">
                 </a>
-                <a href="" class="icon_x">
+                <div class="icon_x">
                     <img src="resources/images/icon_x.png" alt="">
-                </a>
+                </div>
                 <a href="https://kauth.kakao.com/oauth/logout?client_id=08c15618cbd45ecc0b82e9e3777c25b3&logout_redirect_uri=http://localhost:8081/controller/logout">
                     <img src="resources/images/icon_logout.png" alt="">
                 </a>

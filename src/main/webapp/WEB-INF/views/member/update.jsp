@@ -156,19 +156,6 @@ $(function(){
         timeFormat:"HH:mm",
         dropdown: true
     });
-	
-	$("#save").on("click", function(){
-		$("#update_form").submit();
-		$(".modal").toggleClass("hide");
-	});
-	
-	$(".btn_close").click(function(){
-		$(".modal").toggleClass("hide");
-	});
-	
-	$(".modal_overlay2").click(function(){
-		$(".modal").toggleClass("hide");
-	});
 
 });    
 </script>

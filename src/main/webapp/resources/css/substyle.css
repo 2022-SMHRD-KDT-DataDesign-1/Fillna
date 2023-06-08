@@ -21,7 +21,8 @@ body{font-family: 'Pretendard';}
     /* modal */
     .hide{display: none !important;}
     .modal{position: fixed; top:0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;}
-    .modal_overlay, .modal_back{background-color: rgba(56, 56, 56, 0.75); width: 100%; height: 100%; position: absolute; z-index: 999; background-size: cover;}
+    .modal_overlay{background-color: rgba(56, 56, 56, 0.75); width: 100%; height: 100%; position: absolute; z-index: 999;}
+    .modal_back{background-color: rgba(56, 56, 56, 0.75); width: 100%; height: 100%; position: absolute;}
     .modal_content{background-color: #f6f7f8; color: #999; text-align: center; position: relative; padding: 10vw 10vw; border-radius: 15px; font-size:4vw; box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1); z-index: 9999;}
     .btn_close{border: 0; outline: 0; position: absolute; right: 2vw; top: 3vw; background-color: transparent;}
     .icon_close{font-size:3.5vw !important;}
@@ -30,8 +31,8 @@ body{font-family: 'Pretendard';}
     .my_content{position: fixed; top:0; right: -75%; height: 100%; width: 75%; background-color: #f6f7f8; z-index: 999;}
     .my_top{overflow: hidden; padding:6vw;}
     .my_top>a:first-child>img{float:left; width:25vw}
-    .my_top>a:nth-child(n+2):nth-child(-n+5){float: right; margin-left:5vw;}
-    .my_top>a:nth-child(n+2):nth-child(-n+5)>img{width: 4vw; margin-top:1vw;}
+    .my_top>a:nth-child(n+3):nth-child(-n+5), .my_top>.icon_x{float: right; margin-left:5vw;}
+    .my_top>a:nth-child(n+3):nth-child(-n+5)>img, .icon_x>img{width: 4vw; margin-top:1vw;}
     .my_profile{text-align: center; padding:8vw}
     .my_profile>img{margin-bottom: 1vw; width: 25vw;}
     .my_profile>p{font-weight: 600; color:#515151;}

@@ -69,7 +69,6 @@
                 <a href="#">
                     <span>공지사항</span>
                 </a>
-                <span>|</span>
                 <a href="#">
                     <span>FAQ</span>
                 </a>

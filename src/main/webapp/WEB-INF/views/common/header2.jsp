@@ -73,17 +73,21 @@
 <script>
 	$(function(){
 		$("#save").on("click", function(){
-			$(".modal").toggleClass("hide");
 			$("#update_form").submit();
 		});
 		
-		$(".btn_close").click(function(){
+		if(${not empty msg}){
 			$(".modal").toggleClass("hide");
-		});
+			$(".btn_close").click(function(){
+				$(".modal").toggleClass("hide");
+			});
+			
+			$(".modal_back").click(function(){
+				$(".modal").toggleClass("hide");
+			});
+		}
 		
-		$(".modal_back").click(function(){
-			$(".modal").toggleClass("hide");
-		});
+		
 	});
 </script>
 </body>

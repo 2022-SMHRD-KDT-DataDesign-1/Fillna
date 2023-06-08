@@ -111,14 +111,14 @@
                         <p>반려동물 사진</p>
                         <div class="file_wrap">
      	                        <c:if test="${empty pvo.petPhoto}">
-		                            <input class="file_name" value="" disabled>
+		                            <input class="file_name" value="" name="pet_photo" readonly="true">
 		                            <label for="file">upload</label>
-		                            <input type="file" id="file" name="pet_photo">
+		                            <input type="file" id="file">
 	                        	</c:if>
 	   							<c:if test="${not empty pvo.petPhoto}">
-		                            <input class="file_name" value="${pvo.petPhoto}" disabled>
+		                            <input class="file_name" value="${pvo.petPhoto}" name="pet_photo" readonly="true">
 		                            <label for="file">upload</label>
-		                            <input type="file" id="file" name="pet_photo">
+		                            <input type="file" id="file">
 	                        	</c:if>
                         </div>
                     </div>

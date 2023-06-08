@@ -22,7 +22,7 @@
 		<jsp:include page="../common/header2.jsp"></jsp:include>
 		<!-- modal -->
         <div class="modal hide">
-            <div class="modal_overlay2"></div>
+            <div class="modal_back"></div>
             <div class="modal_content">
                 저장이 완료되었습니다.
                 <button class="btn_close">
@@ -129,7 +129,7 @@
         </div>
     </div>
 <script>
-$(document).ready(function(){
+$(function(){
 	
 	$(".save_wrap").toggleClass("hide");
 	

@@ -73,7 +73,7 @@
 <script>
 	$(function(){
 		$("#save").on("click", function(){
-	/* 		$("#update_form").submit(); */
+			$("#update_form").submit();
 			console.log("save click")
 			$(".modal").toggleClass("hide");
 		});

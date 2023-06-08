@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -41,7 +42,7 @@ public class MemberController {
 	
 	// update
 	@PostMapping("/update")
-	public String update(@RequestParam HashMap<String, String> param, HttpSession session) {
+	public String update(@RequestParam HashMap<String, String> param, HttpSession session, RedirectAttributes rttr) {
 		System.out.println(param.toString());
 		memberMapper.setAlarm(param);
 		memberMapper.setPet(param);
@@ -50,6 +51,8 @@ public class MemberController {
 		session.setAttribute("pvo", pet);
 		Member member = memberMapper.selectUpdateMember(param.get("mb_idx"));
 		session.setAttribute("vo", member);
+		
+		rttr.addFlashAttribute("msg", "성공티비");
 		
 		return "redirect:/updateForm";
 	}

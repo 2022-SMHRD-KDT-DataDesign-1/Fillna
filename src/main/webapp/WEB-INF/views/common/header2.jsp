@@ -9,8 +9,6 @@
 <title>Insert title here</title>
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="resources/js/my.js"></script>
-<script scr="resources/js/index.js"></script>
 <body>
 
         <!-- header -->

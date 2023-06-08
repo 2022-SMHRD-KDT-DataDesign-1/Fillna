@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -32,9 +33,29 @@ public class MemberController {
 	@Autowired
 	private MemberMapper memberMapper;
 	
-	@RequestMapping("/kakaoLoginForm")
-	public String kakaoLoginForm() {
-		return "member/kakaoLogin";
+	
+	// update
+	@PostMapping("/update")
+	public void update(@RequestParam HashMap<String, Object> param) {
+		System.out.println(param.toString());
+		
+		String mb_alarm = (String) param.get("mb_alarm");
+		String pet_name = (String) param.get("pet_name");
+		String pet_adoption = (String) param.get("pet_adoption_at");
+		String pet_gender = (String) param.get("pet_gender");
+		String pet_photo = (String) param.get("pet_photo");
+	}
+	
+	// updateForm
+	@RequestMapping("/updateForm")
+	public String updateForm() {
+		return "member/update";
+	}
+	
+	// 로그인
+	@RequestMapping("/login")
+	public String loginForm() {
+		return "member/login";
 	}
 
 	@GetMapping("/kakaoLogin")
@@ -46,29 +67,32 @@ public class MemberController {
 		
 		Member member = memberMapper.selectMember(userInfo);
 		
-		session.setAttribute("accessToken", accessToken);
-		session.setAttribute("userEmail", userInfo.get("email"));
-
-		
 		if (member != null) {
 			// 이미 가입한 경우
+			session.setAttribute("accessToken", accessToken);
+			session.setAttribute("nickname", userInfo.get("nickname"));
+			session.setAttribute("email", userInfo.get("email"));
+			
 			return "redirect:/";
 		} else {
 			// 신규회원인 경우
+			session.setAttribute("accessToken", accessToken);
+			session.setAttribute("nickname", userInfo.get("nickname"));
+			session.setAttribute("email", userInfo.get("email"));
+			
 			memberMapper.join(userInfo);
-			return "redirect:/kakaoLoginForm";
+			return "member/welcome";
 		}
 
 		// JSONPObject kakaoInfo = new JSONPObject(userInfo);
 		// model.addAttribute("kakaoInfo", kakaoInfo);
 	}
 
-	@RequestMapping("/kakaoLogout")
+	@GetMapping("/logout")
 	public String kakaoLogout(HttpSession session) {
-		exeLogout((String) session.getAttribute("accessToken"));
 		session.invalidate();
 
-		return "redirect:/kakaoLoginForm";
+		return "redirect:/login";
 	}
 
 	private String getAccessToken(String code) {
@@ -167,43 +191,6 @@ public class MemberController {
 		}
 		
 		return userInfo;
-//		Member member = memberMapper.selectMember(userInfo);
-//
-//		if (member != null) {
-//			return member.getMbEmail();
-//		} else {
-//			memberMapper.join(userInfo);
-//			System.out.println(userInfo);
-//			Member member2 = memberMapper.selectMember(userInfo);
-//			return member2.getMbEmail();
-//		}
-
-	}
-
-	public void exeLogout(String accessToken) {
-		String reqURL = "https://kapi.kakao.com/v1/user/logout";
-		try {
-			URL url = new URL(reqURL);
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setRequestMethod("POST");
-			conn.setRequestProperty("Authorization", "Bearer " + accessToken);
-
-			int responseCode = conn.getResponseCode();
-			System.out.println("responseCode : " + responseCode);
-
-			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-
-			String result = "";
-			String line = "";
-
-			while ((line = br.readLine()) != null) {
-				result += line;
-			}
-			System.out.println(result);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 }

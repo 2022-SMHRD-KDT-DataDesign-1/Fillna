@@ -6,9 +6,11 @@ $(document).ready(function(e) {
         $("body").css("overflow", "hidden");
     });
 
-    $(".icon_x").click(function(){
+    $(".icon_x, .modal_overlay").click(function(){
         $(".modal_overlay").toggleClass("hide");
         $(".my_content").animate({right:"-75%"}, 200);
     })
+    
+    
 
 });

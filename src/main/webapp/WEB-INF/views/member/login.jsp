@@ -15,7 +15,7 @@
 </head>
 <body class="bg">
     <div class="wrapper">
-    	<jsp:include page="../common/header1.jsp"></jsp:include>
+    	<div style="height:20.7vw;width:100%;"></div>
         <div class="content member">
             <div class="con">
                 <div class="m_top">

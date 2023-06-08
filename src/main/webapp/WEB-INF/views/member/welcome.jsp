@@ -44,7 +44,7 @@
                         </a>
                     </div>
                     <div>
-                        <a href="${contextPath}/" class="go_link">
+                        <a href="${contextPath}/monitoring" class="go_link">
                             <span>메인으로 가기</span>
                             <span class="material-symbols-outlined icon_go">
                                 arrow_forward_ios

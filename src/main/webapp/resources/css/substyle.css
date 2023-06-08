@@ -31,7 +31,7 @@ body{font-family: 'Pretendard';}
     .my_content{position: fixed; top:0; right: -75%; height: 100%; width: 75%; background-color: #f6f7f8; z-index: 999;}
     .my_top{overflow: hidden; padding:6vw;}
     .my_top>a:first-child>img{float:left; width:25vw}
-    .my_top>a:nth-child(n+3):nth-child(-n+5), .my_top>.icon_x{float: right; margin-left:5vw;}
+    .my_top>a:nth-child(n+3):nth-child(-n+5), .my_top>.icon_x{float: right; margin-left:5vw; cursor:pointer;}
     .my_top>a:nth-child(n+3):nth-child(-n+5)>img, .icon_x>img{width: 4vw; margin-top:1vw;}
     .my_profile{text-align: center; padding:8vw}
     .my_profile>img{margin-bottom: 1vw; width: 25vw;}

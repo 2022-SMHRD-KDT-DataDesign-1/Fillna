@@ -18,6 +18,7 @@
 <body>
     <body class="bg">
     <div class="wrapper">
+		<jsp:include page="../common/my.jsp"></jsp:include>
 		<jsp:include page="../common/header2.jsp"></jsp:include>
         <div class="content">
             <div class="con">

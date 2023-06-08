@@ -16,6 +16,7 @@
 </head>
 <body class="bg">
     <div class="wrapper">
+        <jsp:include page="../common/my.jsp"></jsp:include>
         <jsp:include page="../common/header1.jsp"></jsp:include>
         <div>
             <div class="con">

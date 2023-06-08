@@ -60,11 +60,11 @@ body{font-family: 'Pretendard';}
     .icon_alarm_wrap {margin: 0.8vw 5vw 0 0;}
     .save_wrap {float:left; margin: 2vw 0 0 2vw;}
     .save_wrap > a > span{color:#999; vertical-align: middle; display: inline-block; font-size: 4.3vw;}
-    .title, .alarm_title, .diary_title{float: left; font-size: 5vw; font-weight: 700; color:#5e5e5e; margin-top:0.8vw;}
+    .title, .alarm_title, .diary_title, .chart_title{float: left; font-size: 5vw; font-weight: 700; color:#5e5e5e; margin-top:0.8vw;}
     .title>span:last-child{font-size: 3.5vw; color:#aeaeae;}
     .diary_title{font-size:6vw !important;}
     .diary_title>span:nth-child(2){font-size: 3.5vw; color:#aeaeae;}
-    .alarm_title{font-size: 6vw !important;}
+    .alarm_title, .chart_title{font-size: 6vw !important;}
     .icon_ham{font-size: 8vw !important;}
     .icon_sound{font-size: 8vw !important; padding: 3vw 0;}
     .icon_alarm{font-size: 7vw !important;}

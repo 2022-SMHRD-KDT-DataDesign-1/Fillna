@@ -18,7 +18,20 @@
 </head>
 <body class="bg">
     <div class="wrapper">
+		<jsp:include page="../common/my.jsp"></jsp:include>
 		<jsp:include page="../common/header2.jsp"></jsp:include>
+		<!-- modal -->
+        <div class="modal hide">
+            <div class="modal_overlay"></div>
+            <div class="modal_content">
+                저장이 완료되었습니다.
+                <button class="btn_close">
+                    <span class="material-symbols-outlined icon_close">
+                    close
+                    </span>
+                </button>
+            </div>
+        </div>
         <!-- content -->
         <div class="content">
             <div class="con">

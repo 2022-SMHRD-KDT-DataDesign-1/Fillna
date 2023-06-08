@@ -700,7 +700,7 @@
     <script>
         $(document).ready(function(e) {
         	
-        	$(".chart_title").toggleClass("hide");
+        	$(".chart_header").toggleClass("hide");
         	$("#chart_footer").toggleClass("this_menu");
 
             let changeChart = function(){

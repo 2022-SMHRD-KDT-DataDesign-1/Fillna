@@ -277,7 +277,7 @@
 <script>
 	$(document).ready(function(e) {
 		
-		$(".alarm_title").toggleClass("hide");
+		$(".alarm_header").toggleClass("hide");
 	
 	    $(".alaram_list").children("li").on("click", function(){
 	        console.log('click');

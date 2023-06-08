@@ -220,7 +220,7 @@
 
 <script>
     $(function() {
-    	$(".diary_title").toggleClass("hide");
+    	$(".diary_header").toggleClass("hide");
     	$("#diary_footer").toggleClass("this_menu");
     	
 	    var x = 0;

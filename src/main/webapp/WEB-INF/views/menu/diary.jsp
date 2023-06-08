@@ -220,7 +220,7 @@
 
 <script>
     $(function() {
-    	$(".diary_title").toggleClass("hide");
+    	$(".diary_header").toggleClass("hide");
     	$("#diary_footer").toggleClass("this_menu");
     	
 	    var x = 0;
@@ -245,6 +245,12 @@
 	        if (Math.abs(xx) > limit) {
 	        $(".date_ul").css("transform", "translate(" + -limit + "px, 0px)");
 	        }
+	    });
+	    
+	    $(".alaram_list").children("li").on("click", function(){
+	        console.log('click');
+	        $(this).children(".icon_up").toggleClass("hide");
+	        $(this).next().toggleClass("hide");
 	    });
 
     });

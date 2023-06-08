@@ -37,22 +37,23 @@
                 </li>
                 
                 <!-- alarm header -->
-                <li class="alarm_title hide">
+                <li class="alarm_header hide">
                     <span>알림톡 LIST</span>
                     <span></span>
                 </li>
                 
                 <!-- diary header -->
-                <li class="diary_title hide">
+                <li class="diary_header hide">
                     <span>6월 1일</span>
                     <span>목요일</span>
                     <span class="material-symbols-outlined icon_calendar">
                         calendar_month
+                        <input type=date class=diary_header_date/>
                     </span>
                 </li>
                 
                 <!-- chart header -->
-                <li class="chart_title hide">
+                <li class="chart_header hide">
                     <span>PATPAT 리포트</span>
                     <span></span>
                 </li>

@@ -275,16 +275,33 @@
     </div>
 </div>
 <script>
-	$(document).ready(function(e) {
+	
+$(document).ready(function(e) {
 		
-		$(".alarm_title").toggleClass("hide");
+		$(".alarm_header").toggleClass("hide");
 	
 	    $(".alaram_list").children("li").on("click", function(){
 	        console.log('click');
 	        $(this).children(".icon_up").toggleClass("hide");
 	        $(this).next().toggleClass("hide");
 	    });
+	    load_alarm_content();
 	});
+	
+/* 알림 내용 데이터 가져오기 */
+function load_alarm_content(){
+	$.ajax(
+		url : "alarm/all",
+		type : "get",
+		dataType : "json",
+		success : function(data){
+			console.log("성공");
+			console.log(data);
+		},
+		error : function(){alert("error");}
+)};
+
+		
 </script>
 </body>
 </html>

@@ -44,7 +44,7 @@
                         </span>
                     </div>
                 </div>
-                <form action="${contextPath}/update" method="post" id="update_form"></form>
+                <form action="${contextPath}/update" method="post" id="update_form">
                 <input type="hidden" name="mb_idx" value="${vo.mbIdx}">
                 <div class="pet_info">
                     <div class="top_info">
@@ -123,6 +123,7 @@
                         </div>
                     </div>
                 </div> 
+                </form>
             </div>
             <!-- bottom menu -->
 			<jsp:include page="../common/footer.jsp"></jsp:include>

@@ -34,6 +34,10 @@
 		select * from t_member where mb_email=#{email}
 	</select>
 	
+	<select id="selectUpdateMember" parameterType="String" resultMap="member">
+		select * from t_member where mb_idx=#{mb_idx}
+	</select>
+	
 	<select id="selectPet" parameterType="String" resultMap="pet">
 		select pet_idx, pet_name, pet_adoption_at, pet_photo, mb_idx, pet_gender from t_pet where mb_idx=#{mbIdx}
 	</select>

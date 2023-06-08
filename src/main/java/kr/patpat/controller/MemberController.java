@@ -42,13 +42,16 @@ public class MemberController {
 	// update
 	@PostMapping("/update")
 	public String update(@RequestParam HashMap<String, String> param, HttpSession session) {
+		System.out.println(param.toString());
 		memberMapper.setAlarm(param);
 		memberMapper.setPet(param);
 		
 		Pet pet = memberMapper.selectPet(param.get("mb_idx"));
 		session.setAttribute("pvo", pet);
+		Member member = memberMapper.selectUpdateMember(param.get("mb_idx"));
+		session.setAttribute("vo", member);
 		
-		return "redirect:updateForm";
+		return "redirect:/updateForm";
 	}
 	
 	// updateForm

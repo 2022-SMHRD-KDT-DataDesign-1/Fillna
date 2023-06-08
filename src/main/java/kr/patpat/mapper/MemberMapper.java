@@ -22,5 +22,7 @@ public interface MemberMapper {
 
 	public Pet selectPet(String mbIdx);
 
+	public Member selectUpdateMember(String string);
+
 }
 

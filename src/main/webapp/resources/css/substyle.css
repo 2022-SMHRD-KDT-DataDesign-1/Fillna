@@ -104,7 +104,7 @@ body{font-family: 'Pretendard';}
 
         .bottom_info>p{font-size:4vw;}
         .bottom_info>input{margin-bottom: 3vw; position: relative;}
-        input[type=date]{z-index:-999; color:#a1a1a1;width:100%; font-size: 4vw; padding: 2vw; box-sizing: border-box; border:none; border-bottom: 1px solid #cbcbcb; background:none;margin-bottom:5vw;margin-top:1vw;}
+        input[type=date]{color:#a1a1a1;width:100%; font-size: 4vw; padding: 2vw; box-sizing: border-box; border:none; border-bottom: 1px solid #cbcbcb; background:none;margin-bottom:5vw;margin-top:1vw;}
         input[type=date]::before{content: attr(data-placeholder); width: 100%;}
         input[type=date]:focus::before,
         input[type=date]:valid::before{display: none;}

@@ -22,7 +22,7 @@
         <!-- content -->
         <div>
             <div class="con con_alarm">
-                <div class="alarm_wrap">
+<!--                 <div class="alarm_wrap">
                     <div class="alarm_date">
                         <img class="icon_check" src="resources/images/icon_check.png" alt="">
                         <span class="today">2023.06.01(목) - 오늘</span>
@@ -88,8 +88,8 @@
                         </ul>
                     </div>
                     
-                </div>
-                <div class="alarm_wrap">
+                </div> -->
+<!--                 <div class="alarm_wrap">
                     <div class="alarm_date">
                         <img class="icon_check" src="resources/images/icon_check.png" alt="">
                         <span>2023.05.41(수)</span>
@@ -262,7 +262,7 @@
                     </div>
                     
                 </div>
-
+ -->
                 <!-- 더보기 -->
                 <div class="btn_more_wrap">
                     <button class="btn_more">더보기</button>
@@ -274,7 +274,7 @@
 
     </div>
 </div>
-<script>
+<script type= "text/javascript">
 
 $(document).ready(function(e) {
 		
@@ -290,18 +290,98 @@ $(document).ready(function(e) {
 	
 /* C61A727500F311EE875C0242AC14000B */	
 /* 알림 내용 데이터 가져오기 */
+/* 
+ * alarm_idx : 인덱스
+ * mb_idx : 회원번호
+   pet_name : 반려동물 이름
+   alarm_type : 주의, 긴급 , 일지
+   category_name : 행동
+   cnt : 횟수
+   alarm_content : 알림 내용  
+   alarm_at : 시간
+   alarm_week : 요일 
+ */
 function load_alarm(){
 	$.ajax({
 		url : "alarm/all",
 		type : "get",
 		dataType : "json",
-		success : function(data){
-			console.log("성공");
-			console.log(data);
-		},
+		success : makeview,
 		error : function(){alert("error");}
 	})
 };
+
+/* 오늘 날짜를 구하는 함수 */
+function getToday(){
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = ("0" + (1 + date.getMonth())).slice(-2);
+    var day = ("0" + date.getDate()).slice(-2);
+
+    return year +"."+ month + "."+ day;
+}
+
+function alarm_list_wrap(idx,val){
+	var list_html = "" 
+		list_html += '<div class="alaram_list_wrap">';
+		list_html += '<ul class="alaram_list">';
+		list_html += '<li>';
+		list_html += '<span>'+ val.alarm_at.split(" ")[1].slice(0,5) +'</span>';
+		if(val.alarm_type === "주의"){
+			list_html += '<span class="material-symbols-outlined icon_circle yel circle">';
+		}else if(val.alarm_type === "긴급"){
+			list_html += '<span class="material-symbols-outlined icon_circle red circle">';
+		}else{
+			list_html += '<span class="material-symbols-outlined icon_circle green circle">';	
+		}
+		list_html += "circle</span>";
+		list_html += '<span class="alarm_type">['+ val.alarm_type +']</span>';
+		if(val.alarm_type === "일지"){
+			var split_month = val.alarm_at.split(" ")[0].slice(5,7);
+			var split_day   = val.alarm_at.split(" ")[0].slice(8,10);
+			list_html += '<span> - '+split_month.replace(/(^0+)/, "")+"월 "+ split_day.replace(/(^0+)/, "") +"일"+'</span>';
+		}else{
+			list_html +- '<span> - '+val.category_name+' '+ val.cnt+'회</span>';			
+		}
+		list_html += '<span class="material-symbols-outlined icon_up">';
+		list_html += 'arrow_drop_up</span></li>';
+		/* alarm detail */
+/* 		list_html += '<div class="alarm_detail">';
+		list_html += '<div class="alarm_title">'; */
+		/* end */
+		list_html += "</ul></div></div>";
+		
+	
+	return list_html;
+}
+
+
+function makeview(data){
+	console.log("성공");
+	console.log(data);
+	var list_html = ""
+	var today = getToday();
+	var day = ""
+	$.each(data, function(idx, val){
+		if(day === val.alarm_at.split(" ")[0]){
+			list_html += alarm_list_wrap(idx,val);
+		}else{
+			day = val.alarm_at.split(" ")[0];
+			list_html += '<div class="alarm_wrap">' ;
+			list_html += '<div class="alarm_date">' ;
+			list_html += '<img class="icon_check" src="resources/images/icon_check.png" alt="">' ;
+			if(today === val.alarm_at.split(" ")[0]){
+				list_html += '<span class="today"> '+ val.alarm_at.split(" ")[0].replace("-/g",".") + "(" + val.alarm_week[0] + ")" + " - 오늘"+'</span>' ;			
+			}else{
+				list_html += '<span> '+ val.alarm_at.split(" ")[0].replace("-/g",".") + "(" + val.alarm_week[0] + ")" + '</span>' ;
+			}
+			list_html += '</div>';
+			list_html += alarm_list_wrap(idx,val);
+		}
+	});
+	
+	$('.con_alarm').html(list_html).trigger("create");
+}
 		
 </script>
 </body>

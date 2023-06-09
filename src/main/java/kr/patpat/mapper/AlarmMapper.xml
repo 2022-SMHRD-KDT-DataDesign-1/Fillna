@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.patpat.mapper.AlarmMapper">
 
-	<resultMap type="HashMap" id="alarm">
+<!-- 	<resultMap type="HashMap" id="alarm">
 		<id column="alarm_idx"  property="alarm_idx"/>
 		<id column="cnt"  property="cnt"/>
 		<id column="pet_name"  property="pet_name"/>
@@ -12,9 +12,9 @@
 		<id column="category_name"  property="category_name"/>
 		<id column="alarm_at"  property="alarm_at"/>
 		<id column="alarm_week"  property="alarm_week"/>
-	</resultMap>
+	</resultMap> -->
 
-	<select id="alarmContentList" resultMap="alarm">
+	<select id="alarmContentList" resultType="HashMap">
 		select alarm_idx 
 	 		 , convert(( select cnt from t_action where action_idx = A.action_idx ), char) as cnt
      		 , ( select pet_name from t_pet where mb_idx = 'C61A727500F311EE875C0242AC14000B') as pet_name
@@ -25,7 +25,8 @@
 	 		 , date_format(alarm_at, '%Y-%m-%d %H:%i:%s') as alarm_at
      		 , alarm_week
 	 	  from t_alarm as A
-	     where mb_idx = 'C61A727500F311EE875C0242AC14000B';
+	     where mb_idx = 'C61A727500F311EE875C0242AC14000B'
+	     order by alarm_at desc
 	</select>
 
 </mapper>

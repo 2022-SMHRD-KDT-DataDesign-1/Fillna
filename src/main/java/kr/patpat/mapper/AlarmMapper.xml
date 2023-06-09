@@ -2,8 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.patpat.mapper.AlarmMapper">
 
-<select id="alarmContentList" resultType="kr.patpat.entity.AlarmContent">
-	select * from t_alarm_content
-</select>
+<!-- 	<resultMap type="HashMap" id="alarm">
+		<id column="alarm_idx"  property="alarm_idx"/>
+		<id column="cnt"  property="cnt"/>
+		<id column="pet_name"  property="pet_name"/>
+		<id column="mb_idx"  property="mb_idx"/>
+		<id column="alarm_type"  property="alarm_type"/>
+		<id column="alarm_content"  property="alarm_content"/>
+		<id column="category_name"  property="category_name"/>
+		<id column="alarm_at"  property="alarm_at"/>
+		<id column="alarm_week"  property="alarm_week"/>
+	</resultMap> -->
+
+	<select id="alarmContentList" resultType="HashMap">
+		select alarm_idx 
+	 		 , convert(( select cnt from t_action where action_idx = A.action_idx ), char) as cnt
+     		 , ( select pet_name from t_pet where mb_idx = 'C61A727500F311EE875C0242AC14000B') as pet_name
+     		 , mb_idx
+     		 , ( select alarm_type from t_alarm_content where alarm_content_idx = A.alarm_content_idx ) as alarm_type
+     		 , ( select alarm_content from t_alarm_content where alarm_content_idx = A.alarm_content_idx ) as alarm_content
+     	  	 , ( select category_name from t_category where category_idx = ( select category_idx from t_alarm_content where alarm_content_idx = A.alarm_content_idx )) as category_name
+	 		 , date_format(alarm_at, '%Y-%m-%d %H:%i:%s') as alarm_at
+     		 , alarm_week
+	 	  from t_alarm as A
+	     where mb_idx = 'C61A727500F311EE875C0242AC14000B'
+	     order by alarm_at desc
+	</select>
 
 </mapper>

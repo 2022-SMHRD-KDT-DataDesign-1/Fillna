@@ -1,13 +1,13 @@
 package kr.patpat.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import kr.patpat.entity.AlarmContent;
 import kr.patpat.mapper.AlarmMapper;
 
 @RequestMapping("/alarm")
@@ -19,9 +19,9 @@ public class AlarmController {
 	
     // 알림 내용 List 가져오기
 	@GetMapping("/all")
-	public List<AlarmContent>alarm_content_list(){
+	public List<Map<String, String>> alarm_content_list(){
 		
-		List<AlarmContent> list = mapper.alarmContentList(); 
+		List<Map<String, String>> list = mapper.alarmContentList(); 
 		
 		return list;
 	}

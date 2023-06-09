@@ -275,7 +275,7 @@
     </div>
 </div>
 <script>
-	
+
 $(document).ready(function(e) {
 		
 		$(".alarm_header").toggleClass("hide");
@@ -285,12 +285,13 @@ $(document).ready(function(e) {
 	        $(this).children(".icon_up").toggleClass("hide");
 	        $(this).next().toggleClass("hide");
 	    });
-	    load_alarm_content();
+	    load_alarm();
 	});
 	
+/* C61A727500F311EE875C0242AC14000B */	
 /* 알림 내용 데이터 가져오기 */
-function load_alarm_content(){
-	$.ajax(
+function load_alarm(){
+	$.ajax({
 		url : "alarm/all",
 		type : "get",
 		dataType : "json",
@@ -299,8 +300,8 @@ function load_alarm_content(){
 			console.log(data);
 		},
 		error : function(){alert("error");}
-)};
-
+	})
+};
 		
 </script>
 </body>

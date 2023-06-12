@@ -161,7 +161,7 @@ body{font-family: 'Pretendard';}
         }
 
         /* alarm content */
-        .con_alarm{background:url("../images/line.png") no-repeat;background-position: 8vw 9vw;}
+        .con_alarm{background:url("../images/line.png") no-repeat;background-position: 8vw 9vw; margin-bottom:20vw;}
         .alarm_wrap{margin-bottom: 5vw;}
         .icon_check{vertical-align: middle; width: 4.5vw;}
         .alarm_date{overflow: hidden; vertical-align: middle;}
@@ -175,6 +175,7 @@ body{font-family: 'Pretendard';}
         .alaram_list_wrap{padding: 2vw;}
         .alaram_list>li{margin:0 0 2vw 15vw; font-size: 3.8vw; letter-spacing: 0.1vw; cursor: pointer; position: relative;}
         .alaram_list > li > span:nth-child(1){ margin-right: 8vw;}
+        .alaram_list > li > span:nth-child(3){position: absolute;left: 19vw;top: 0;}
         .icon_up{font-size: 6vw !important; vertical-align: middle;}
         .alarm_detail{padding:5vw; margin: 0 0 6vw 0; width: 100%; border: 1px solid #d2d2d2; border-radius: 15px; background-color: #fff; font-size: 3.8vw; box-sizing: border-box;}
         .alarm_title{font-weight: 700; color:#5e5e5e;}
@@ -182,7 +183,7 @@ body{font-family: 'Pretendard';}
         .alarm_content>span{color:#ff0000; font-weight: 500;}
         .alarm_go{background-color: #587789; text-align: center; color:#fff; padding: 1.5vw; font-weight: 600;}
         .icon_alarm_go{vertical-align: middle;}
-        .btn_more_wrap{text-align: center; position: absolute; bottom:10%; left:35%}
+        .btn_more_wrap{text-align: center; position: relavtive;}
         .btn_more{border:none; background-color: #587789; padding: 2vw 10vw; color: #fff; border-radius: 30px; cursor: pointer; font-size: 4vw; box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;}
 
         /* monitoring content */

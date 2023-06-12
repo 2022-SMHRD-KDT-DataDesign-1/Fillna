@@ -62,9 +62,9 @@
                 </div>
 
                 <!-- 더보기 -->
-                <div class="btn_more_wrap">
+<!--                 <div class="btn_more_wrap">
                     <button class="btn_more">더보기</button>
-                </div>
+                </div> -->
             </div>
             <!-- bottom -->
 			<jsp:include page="../common/footer.jsp"></jsp:include>
@@ -124,6 +124,25 @@ function makeview(data){
 	var list_html = "";
 	var day = "";
 	var check = false;
+	var data_day = [];
+	var index = 0;
+	for(var i = 0; i < data.length;i++){
+		var today = data[i].alarm_at.split(" ")[0];
+		if(day != today){
+			if(day != ""){
+				data_day.push(data.slice(index,i));
+				index = i;
+			}
+			day = today;
+		}
+	}
+	data_day.push(data.slice(index,data.length));
+	if(data_day.length >= 10){
+		const flattenedArray = data_day.splice(0,10).reduce((previousValue, currentValue) => {
+			return previousValue.concat(currentValue);
+		});
+		data = flattenedArray;
+	}  
 	$.each(data, function(idx, val){
         var today = val.alarm_at.split(" ")[0];
         var time = val.alarm_at.split(" ")[1].slice(0,5);
@@ -136,8 +155,8 @@ function makeview(data){
 			list_html += '<div class="alarm_wrap">';
 			list_html += '<div class="alarm_date">';
 			list_html += '<img class="icon_check" src="resources/images/icon_check.png" alt="">';
-			if(getToday() === today){ /* 오늘이라면 */
-				list_html += '<span class="today">'+today.replace("/-/g",".")+'('+val.alarm_week.slice(0,1)+') - 오늘</span>';
+			if('2023-06-08' === today){ /* 오늘이라면 */
+				list_html += '<span class="today">'+today.replace(/-/g,".")+'('+val.alarm_week.slice(0,1)+') - 오늘</span>';
 			}else{ 					  /* 오늘이 아니라면  */
 				list_html += '<span>'+today.replace(/-/g,".")+'('+val.alarm_week.slice(0,1)+')</span>';
 			}
@@ -185,6 +204,11 @@ function makeview(data){
 		check = true;
 	});
 	$('.con_alarm').prepend(list_html).trigger("create");
+	console.log($('.alarm_wrap').length);
+	
+	/* <div class="btn_more_wrap">
+    <button class="btn_more">더보기</button>
+	</div> */
 
 }
 

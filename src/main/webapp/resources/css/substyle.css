@@ -216,8 +216,8 @@ body{font-family: 'Pretendard';}
 
         /* diary content */
         .date_wrap{width:100%;overflow:hidden;position:relative;}
-        .date_ul{border-spacing: 3vw 0vw;width:auto;display:table;transform: translate(-108vw, 0px);transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);transition-duration: 400ms;}
-        .date{display:table-cell;border-radius: 5px; background-color: #e6e6e6; padding: 2vw 2.5vw; text-align: center; color:#999; margin-right: 3vw;}
+        .date_ul{border-spacing: 3vw 0vw;width:auto;display:table;transform: translate(-120vw, 0px);transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);transition-duration: 400ms;}
+        .date{display:table-cell;border-radius: 5px; background-color: #e6e6e6; padding: 2vw 2.5vw; text-align: center; color:#999; margin-right: 3vw; cursor: pointer;}
         .date_today{background-color: #f6cccc; color: #cd0000;}
         .date>p:nth-child(1){font-size: 3vw;}
         .date>p:nth-child(2){font-weight: 800; font-size: 5vw; margin-top:1vw}

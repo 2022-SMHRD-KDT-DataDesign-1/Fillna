@@ -55,7 +55,7 @@
 				  SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-E");
 				  
 				  String today = dateFormat.format(currentDate);
-				  out.print("<span>"+today.substring(1, 2)+"월 "+today.substring(4, 5)+"일 </span>");  
+				  out.print("<span>"+today.substring(1, 2)+"월 "+today.substring(3, 5)+"일 </span>");  
 				  out.print("<span>"+today.substring(6, 7)+"요일 </span>");
                   out.print("<span class='material-symbols-outlined icon_calendar'>calendar_month</span>");
                 %>

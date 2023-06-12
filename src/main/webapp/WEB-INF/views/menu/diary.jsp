@@ -35,9 +35,10 @@
 					
 					  // 날짜 포맷 설정
 					  SimpleDateFormat dateFormat = new SimpleDateFormat("dd-E");
+					  SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
 					
-					  // 현재 날짜 출력
-					  // out.println("today:" + dateFormat.format(currentDate) + "<br>");
+					  // 현재 날짜
+					  String today = dateFormat2.format(currentDate);
 					
 					  String[] dateList = new String[15];
 					  int i = 0;
@@ -260,26 +261,7 @@
 	        $(this).children(".icon_up").toggleClass("hide");
 	        $(this).next().toggleClass("hide");
 	    });
-	    
-
-	    let now = new Date();
-	    let day = ('0'+now.getDate()).slice(-2);
-	    const week = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
-	    let dayOfWeek = week[now.getDay()];
-    	
-	    let result = day+"-"+dayOfWeek;
-	    console.log(result);
-	    
-	    let yes = new Date(now.setDate(now.getDate()-1));
-	    /* let yesDayOfWeek = now.setDay(now.getDay()-1); */
-	    
-	    console.log(yes.getDate());
-	    /* console.log(yesDayOfWeek) */
-	    
-	    
-	    $(".nalzza").text(day);
-	    $(".yoil").text(dayOfWeek);
-	    
+	   
 	    
 
     });

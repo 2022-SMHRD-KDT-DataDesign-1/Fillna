@@ -176,9 +176,9 @@ function makeview(data){
 		}
 		list_html += 'circle</span>';
 		if(val.alarm_type != "일지"){
-			list_html += '<span>['+val.alarm_type +'] - '+val.category_name+' '+val.cnt +'회</span>';
+			list_html += '<span class="a_alarm_type">['+val.alarm_type +'] - '+val.category_name+' '+val.cnt +'회</span>';
 		}else{
-			list_html += '<span>['+val.alarm_type +']</span>';
+			list_html += '<span class="a_alarm_type">['+val.alarm_type +']</span>';
 		}
 		
 		list_html += '<span class="material-symbols-outlined icon_up hide">arrow_drop_up</span></li>';

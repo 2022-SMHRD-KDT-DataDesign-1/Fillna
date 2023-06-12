@@ -175,7 +175,8 @@ body{font-family: 'Pretendard';}
         .alaram_list_wrap{padding: 2vw;}
         .alaram_list>li{margin:0 0 2vw 15vw; font-size: 3.8vw; letter-spacing: 0.1vw; cursor: pointer; position: relative;}
         .alaram_list > li > span:nth-child(1){ margin-right: 8vw;}
-        .alaram_list > li > span:nth-child(3){position: absolute;left: 19vw;top: 0;}
+        .alaram_list > li > span:nth-child(3){left: 19vw;top: 0;}
+        .a_alarm_type{position: absolute;left: 19vw;top: 0;}
         .icon_up{font-size: 6vw !important; vertical-align: middle;}
         .alarm_detail{padding:5vw; margin: 0 0 6vw 0; width: 100%; border: 1px solid #d2d2d2; border-radius: 15px; background-color: #fff; font-size: 3.8vw; box-sizing: border-box;}
         .alarm_title{font-weight: 700; color:#5e5e5e;}

@@ -40,7 +40,7 @@
 					
 					  // 현재 날짜
 					  String today = dateFormat.format(currentDate);
-					  // out.print("<input type='hidden' value='"+today+"' id='todayDate'>");
+					  out.print("<input type='hidden' value='"+today+"' id='today'>");
 					
 					  String[] dateList = new String[15];
 					  int i = 0;
@@ -225,7 +225,7 @@
     function loadDiary(){
     	var mbIdx = $("#memId").val();
     	var petIdx = $("#petId").val();
-    	var date = $(".today").val();
+    	var date = $("#today").val();
     	
     	$.ajax({
     		url : "diary/diary-all",
@@ -282,7 +282,18 @@
         		}
 	        	listHtml += "<div class='alarm_title'>";
 	        	listHtml += "<span>["+dInfo.alarm_type+"]</span>";
-	        	listHtml += "${pvo.petName}가 "+dInfo.action_at.hour+"시 "+dInfo.action_at.minute+"분에 "+dInfo.category_name+"를 "+dInfo.cnt+"회 하였습니다.</div>";
+	        	
+	        	var hour = "";
+	        	var min = "";
+	        	
+	        	var len = dInfo.action_at.minute.length;
+	        	console.log(len);
+	        	
+	        	if(dInfo.action_at.minute.length < 2){
+		        	listHtml += "${pvo.petName}가 "+dInfo.action_at.hour+"시 0"+dInfo.action_at.minute+"분에 "+dInfo.category_name+"를 "+dInfo.cnt+"회 하였습니다.</div>";
+	        	} else {
+		        	listHtml += "${pvo.petName}가 "+dInfo.action_at.hour+"시 "+dInfo.action_at.minute+"분에 "+dInfo.category_name+"를 "+dInfo.cnt+"회 하였습니다.</div>";
+	        	}
 	        	listHtml += "<div class='alarm_content'>";
 	        	listHtml += dInfo.alarm_content+"</div>";
 	        	listHtml += "<div class='alarm_go'>";

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -21,6 +21,8 @@
     <div class="wrapper">
     	<jsp:include page="../common/my.jsp"></jsp:include>
 		<jsp:include page="../common/header2.jsp"></jsp:include>
+		<input type="hidden" value="${vo.mbIdx}" id="memId">
+        <input type="hidden" value="${pvo.petIdx}" id="petId">
         <div>
             <!-- date -->
             <div class="date_wrap">
@@ -39,6 +41,7 @@
 					
 					  // 현재 날짜
 					  String today = dateFormat2.format(currentDate);
+					  out.print("<input type='hidden' value='"+today+"' id='todayDate'>");
 					
 					  String[] dateList = new String[15];
 					  int i = 0;
@@ -88,79 +91,11 @@
 				%>
                 </ul>
             </div>
+
             <!-- content -->
             <div class="con">
                 <div class="diary_top">
-                    <div>오늘의 일지</div>
-                    <div class="today_ment">
-                        "오늘 하루, 탄이와 얼마나 오랫동안 눈을 맞추었나요?"
-                    </div>
-                    <div class="today_ment2">
-                        <img src="resources/images//tan_e_2.png" alt="">
-                        <p>나비는 오늘 조금 힘들었어요.<br>
-                        구토, 심한 재채기로 컨디션이 정상적이지 않아요.<br>
-                        식사에는 큰 문제는 없었지만, 물과 밥양을 확인해주세요.<br>
-                        그루밍도 평소보다 적게 했어요. 피부와 구강상태를 한번 체크해주세요<br>
-                        <br>
-                        당분간 세심하게 나비를 신경써주세요
-                        <span class="material-symbols-outlined icon_pets">
-                            pets
-                        </span>
-                        </p>
-                    </div>
-                    <ul class="alaram_list">
-                        <li>
-                            <span>17:10</span>
-                            <span class="material-symbols-outlined icon_circle yel circle">
-                                circle
-                            </span>
-                            <span>[주의]</span>
-                            <span>- 구토 2회</span>
-                            <span class="material-symbols-outlined icon_up">
-                                arrow_drop_up
-                            </span>
-                        </li>
-                        <div class="alarm_detail">
-                            <div class="alarm_title">
-                                <span>[주의]</span>
-                                나비가 17:10분에 구토를 2회 하였습니다.
-                            </div>
-                            <div class="alarm_content">
-                                잦은 구토의 원인은 헤어볼 잦은 구토의 원인은 헤어볼
-                                <span>+ 구체적으로 확인해야할 부위들 : 귓속의 상태</span>
-                            </div>
-                            <div class="alarm_go">
-                                <a href="#">
-                                    이상행동 녹화영상
-                                    <span class="material-symbols-outlined icon_alarm_go">
-                                        chevron_right
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                        <li>
-                            <span>16:11</span>
-                            <span class="material-symbols-outlined icon_circle yel circle">
-                                circle
-                            </span>
-                            <span>[주의]</span>
-                            <span>- 재채기 4회</span>
-                            <span class="material-symbols-outlined icon_up hide">
-                                arrow_drop_up
-                            </span>
-                        </li>
-                        <li>
-                            <span>15:15</span>
-                            <span class="material-symbols-outlined icon_circle green circle">
-                                circle
-                            </span>
-                            <span>[일지]</span>
-                            <span>- 6월 1일</span>
-                            <span class="material-symbols-outlined hide">
-                                arrow_drop_up
-                            </span>
-                        </li>
-                    </ul>
+					<!-- 일지 -->
                 </div>
                 <div class="diary_middle">
                     <div>
@@ -228,7 +163,9 @@
 </body>
 
 <script>
-    $(function() {
+	$(document).ready(function(e) {
+		loadDiary();
+		
     	$(".diary_header").toggleClass("hide");
     	$("#diary_footer").toggleClass("this_menu");
     	
@@ -261,10 +198,74 @@
 	        $(this).children(".icon_up").toggleClass("hide");
 	        $(this).next().toggleClass("hide");
 	    });
-	   
 	    
-
+	    
     });
+    
+    
+    function loadDiary(){
+    	var mbIdx = $("#memId").val();
+    	var petIdx = $("#petId").val();
+    	var today = $("#todayDate").val();
+    	
+    	$.ajax({
+    		url : "diary/diary-all",
+    		type : "get",
+    		data : {"mbIdx":mbIdx, "petIdx":petIdx, "today":today},
+    		dataType : "json",
+    		success : showDiary,
+    		error : function(){alert("error");}
+    	})
+    };
+    
+    function showDiary(data){
+    	var listHtml = "";
+        listHtml += "<div>오늘의 일지</div>";
+        listHtml += "<div class='today_ment'>";
+        listHtml += "오늘 하루, 탄이와 얼마나 오랫동안 눈을 맞추었나요?</div>";
+        listHtml += "<div class='today_ment2'>";
+        listHtml += "<img src='resources/images//tan_e_2.png' alt=''>";
+        listHtml += "<p>나비는 오늘 조금 힘들었어요.<br>구토, 심한 재채기로 컨디션이 정상적이지 않아요.<br>식사에는 큰 문제는 없었지만, 물과 밥양을 확인해주세요.<br>그루밍도 평소보다 적게 했어요. 피부와 구강상태를 한번 체크해주세요<br><br>당분간 세심하게 나비를 신경써주세요";
+        listHtml += "<span class='material-symbols-outlined icon_pets'>pets</span></p></div>";
+            
+        listHtml += "<ul class='alaram_list'>";    
+        $.each(data, function(index, dInfo){
+        	listHtml += "<li>";
+        	listHtml += "<span>"+dInfo.action_at+"</span>";
+     		listHtml += "<span class='material-symbols-outlined icon_circle";
+    		if(dInfo.alarm_type === "일지"){
+    			listHtml += " green circle'>";
+    		}else if(dInfo.alarm_type === "주의"){
+    			listHtml += " yel circle'>";
+    		}else{
+    			listHtml += " red circle'>";
+    		}
+    		listHtml += "circle</span>";
+        	listHtml += "<span>["+dInfo.alarm_type+"]</span>";
+        	if(dInfo.alarm_type != "일지"){
+	        	listHtml += "<span>-"+dInfo.category_name+" "+dInfo.cnt+"회</span>";
+        	}
+        	listHtml += "<span class='material-symbols-outlined icon_up'>arrow_drop_up</span>";
+        	listHtml += "</li>";
+			
+        	listHtml += "<div class='alarm_detail'>";
+        	listHtml += "<div class='alarm_title'>";
+        	listHtml += "<span>["+dInfo.alarm_type+"]</span>";
+        	listHtml += "${pvo.petName}가 "+dInfo.action_at+"분에 "+dInfo.category_name+"를 "+dInfo.cnt+"회 하였습니다.</div>";
+        	listHtml += "<div class='alarm_content'>";
+        	listHtml += dInfo.alarm_content+"</div>";
+        	listHtml += "<div class='alarm_go'>";
+        	listHtml += "<a href='#'>이상행동 녹화영상";
+        	listHtml += "<span class='material-symbols-outlined icon_alarm_go'>chevron_right</span>";
+        	listHtml += "</a></div></div>"
+        });
+        
+        listHtml += "</ul></div>";
+        
+    	console.log("성공티비");
+    	$(".diary_top").html(listHtml);
+    };
+   
 
 </script>
 </html>

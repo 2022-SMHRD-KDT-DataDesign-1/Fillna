@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Calendar" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,34 +34,69 @@
             <!-- date -->
             <div class="chart1">
                 <div class="date_wrap">
-                    <div class="date">
-                        <p>THU</p>
-                        <p>01</p>
-                    </div>
-                    <div class="date">
-                        <p>FRI</p>
-                        <p>31</p>
-                    </div>
-                    <div class="date">
-                        <p>SAT</p>
-                        <p>20</p>
-                    </div>
-                    <div class="date">
-                        <p>SUN</p>
-                        <p>21</p>
-                    </div>
-                    <div class="date">
-                        <p>MON</p>
-                        <p>09</p>
-                    </div>
-                    <div class="date">
-                        <p>TUE</p>
-                        <p>14</p>
-                    </div>
-                    <div class="date date_today">
-                        <p>WEN</p>
-                        <p>07</p>
-                    </div>
+                <ul class="date_ul">
+                <%
+					  // 현재 날짜 가져오기
+					  Date currentDate = new Date();
+					
+					  // 2주 전 날짜 계산
+					  long twoWeeksInMillis = 15 * 24 * 60 * 60 * 1000L;
+					  Date twoWeeksAgoDate = new Date(currentDate.getTime() - twoWeeksInMillis);
+					
+					  // 날짜 포맷 설정
+					  SimpleDateFormat dateFormat = new SimpleDateFormat("dd-E");
+					  SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
+					
+					  // 현재 날짜
+					  String today = dateFormat2.format(currentDate);
+					
+					  String[] dateList = new String[15];
+					  int i = 0;
+					  
+					  // 2주 전 날짜부터 하루씩 감소하며 출력
+					  Date date = currentDate;
+					  while (date.after(twoWeeksAgoDate)) {
+						dateList[i] = dateFormat.format(date);
+						i+=1;
+					    long oneDayInMillis = 24 * 60 * 60 * 1000L;
+					    date = new Date(date.getTime() - oneDayInMillis);
+					  }
+					
+					  String dayOfWeek = "";
+					  for(int j=14; j>=0; j--){
+						String[] temp = dateList[j].split("-");
+						if(j>=0){
+							if(temp[1].equals("월")) {
+								dayOfWeek="MON";
+							} else if(temp[1].equals("화")) {
+								dayOfWeek="TUE";
+							} else if(temp[1].equals("수")) {
+								dayOfWeek="WED";
+							} else if(temp[1].equals("목")) {
+								dayOfWeek="THU";
+							} else if(temp[1].equals("금")) {
+								dayOfWeek="FRI";
+							} else if(temp[1].equals("토")) {
+								dayOfWeek="SAT";
+							} else if(temp[1].equals("일")) {
+								dayOfWeek="SUN";
+							}
+							
+							if(j==0){
+								out.print("<li class='date today'>");
+							    out.print("<p>"+dayOfWeek+"</p>");
+							    out.print("<p>"+temp[0]+"</p>");
+								out.print("</li>");
+							} else{
+								out.print("<li class='date'>");
+							    out.print("<p>"+dayOfWeek+"</p>");
+							    out.print("<p>"+temp[0]+"</p>");
+								out.print("</li>");
+							} 
+						}
+					  }
+				%>
+                </ul>
                 </div>
                 <div class="con">
                     <div class="chart_date">

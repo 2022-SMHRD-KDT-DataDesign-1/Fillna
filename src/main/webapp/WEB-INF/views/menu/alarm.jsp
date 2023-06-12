@@ -22,7 +22,7 @@
         <!-- content -->
         <div>
             <div class="con con_alarm">
-                <div class="alarm_wrap">
+<!--                 <div class="alarm_wrap">
                     <div class="alarm_date">
                         <img class="icon_check" src="resources/images/icon_check.png" alt="">
                         <span class="today">2023.06.01(목) - 오늘</span>
@@ -57,210 +57,8 @@
                                     </a>
                                 </div>
                             </div>
-                            <li>
-                                <span>17:10</span>
-                                <span class="material-symbols-outlined icon_circle yel circle">
-                                    circle
-                                </span>
-                                <span>[주의]</span>
-                                <span>- 구토 2회</span>
-                                <span class="material-symbols-outlined icon_up hide">
-                                    arrow_drop_up
-                                </span>
-                            </li>
-                            <div class="alarm_detail hide">
-                                <div class="alarm_title">
-                                    <span>[주의]</span>
-                                    나비가 17:10분에 구토를 2회 하였습니다.
-                                </div>
-                                <div class="alarm_content">
-                                    잦은 구토의 원인은 헤어볼 잦은 구토의 원인은 헤어볼 잦은 구토의 원인은 헤어볼
-                                </div>
-                                <div class="alarm_go">
-                                    <a href="#">
-                                        이상행동 녹화영상
-                                        <span class="material-symbols-outlined icon_alarm_go">
-                                            chevron_right
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
                         </ul>
                     </div>
-                    
-                </div>
-                <div class="alarm_wrap">
-                    <div class="alarm_date">
-                        <img class="icon_check" src="resources/images/icon_check.png" alt="">
-                        <span>2023.05.41(수)</span>
-                    </div>
-                    <div class="alaram_list_wrap">
-                        <ul class="alaram_list">
-                            <li>
-                                <span>17:10</span>
-                                <span class="material-symbols-outlined icon_circle red circle">
-                                    circle
-                                </span>
-                                <span class="alarm_type">[긴급]</span>
-                                <span>- 구토 2회</span>
-                            </li>
-                            <li>
-                                <span>17:10</span>
-                                <span class="material-symbols-outlined icon_circle yel circle">
-                                    circle
-                                </span>
-                                <span class="alarm_type">[주의]</span>
-                                <span>- 재패기 5회</span>
-                            </li>
-                            <li>
-                                <span>17:10</span>
-                                <span class="material-symbols-outlined icon_circle yel circle">
-                                    circle
-                                </span>
-                                <span class="alarm_type">[주의]</span>
-                                <span>- 써클링 1회</span>
-                            </li>
-                            <li>
-                                <span>10:01</span>
-                                <span class="material-symbols-outlined icon_circle green circle">
-                                    circle
-                                </span>
-                                <span class="alarm_type ">[일지]</span>
-                                <span>- 6월 1일</span>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                </div>
-                <div class="alarm_wrap">
-                    <div class="alarm_date">
-                        <img class="icon_check" src="resources/images/icon_check.png" alt="">
-                        <span>2023.05.21(화)</span>
-                    </div>
-                    <div class="alaram_list_wrap">
-                        <ul class="alaram_list">
-                            <li>
-                                <span>17:10</span>
-                                <span class="material-symbols-outlined icon_circle yel circle">
-                                    circle
-                                </span>
-                                <span class="alarm_type">[주의]</span>
-                                <span>- 구토 2회</span>
-                            </li>
-                            <li>
-                                <span>17:10</span>
-                                <span class="material-symbols-outlined icon_circle red circle">
-                                    circle
-                                </span>
-                                <span class="alarm_type">[주의]</span>
-                                <span>- 구토 2회</span>
-                            </li>
-                            <li>
-                                <span>10:01</span>
-                                <span class="material-symbols-outlined icon_circle green circle">
-                                    circle
-                                </span>
-                                <span class="alarm_type ">[일지]</span>
-                                <span>- 구토 2회</span>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                </div>
-                <div class="alarm_wrap">
-                    <div class="alarm_date">
-                        <img class="icon_check" src="resources/images/icon_check.png" alt="">
-                        <span>2023.05.11(월)</span>
-                    </div>
-                    <div class="alaram_list_wrap">
-                        <ul class="alaram_list">
-                            <li>
-                                <span>10:01</span>
-                                <span class="material-symbols-outlined icon_circle green circle">
-                                    circle
-                                </span>
-                                <span class="alarm_type ">[일지]</span>
-                                <span>- 5월 30일</span>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                </div>
-                <div class="alarm_wrap">
-                    <div class="alarm_date">
-                        <img class="icon_check" src="resources/images/icon_check.png" alt="">
-                        <span>2023.05.11(월)</span>
-                    </div>
-                    <div class="alaram_list_wrap">
-                        <ul class="alaram_list">
-                            <li>
-                                <span>10:01</span>
-                                <span class="material-symbols-outlined icon_circle green circle">
-                                    circle
-                                </span>
-                                <span class="alarm_type ">[일지]</span>
-                                <span>- 5월 30일</span>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                </div>
-                <div class="alarm_wrap">
-                    <div class="alarm_date">
-                        <img class="icon_check" src="resources/images/icon_check.png" alt="">
-                        <span>2023.05.11(월)</span>
-                    </div>
-                    <div class="alaram_list_wrap">
-                        <ul class="alaram_list">
-                            <li>
-                                <span>10:01</span>
-                                <span class="material-symbols-outlined icon_circle green circle">
-                                    circle
-                                </span>
-                                <span class="alarm_type ">[일지]</span>
-                                <span>- 5월 30일</span>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                </div>
-                <div class="alarm_wrap">
-                    <div class="alarm_date">
-                        <img class="icon_check" src="resources/images/icon_check.png" alt="">
-                        <span>2023.05.11(월)</span>
-                    </div>
-                    <div class="alaram_list_wrap">
-                        <ul class="alaram_list">
-                            <li>
-                                <span>10:01</span>
-                                <span class="material-symbols-outlined icon_circle green circle">
-                                    circle
-                                </span>
-                                <span class="alarm_type ">[일지]</span>
-                                <span>- 5월 30일</span>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                </div>
-                <div class="alarm_wrap">
-                    <div class="alarm_date">
-                        <img class="icon_check" src="resources/images/icon_check.png" alt="">
-                        <span>2023.05.11(월)</span>
-                    </div>
-                    <div class="alaram_list_wrap">
-                        <ul class="alaram_list">
-                            <li>
-                                <span>10:01</span>
-                                <span class="material-symbols-outlined icon_circle green circle">
-                                    circle
-                                </span>
-                                <span class="alarm_type">[일지]</span>
-                                <span>- 5월 30일</span>
-                            </li>
-                        </ul>
-                    </div>
-                    
                 </div>
 
                 <!-- 더보기 -->
@@ -274,32 +72,120 @@
 
     </div>
 </div>
-<script>
-	
+<script type= "text/javascript">
+
 $(document).ready(function(e) {
 		
+	    load_alarm();
 		$(".alarm_header").toggleClass("hide");
-	
-	    $(".alaram_list").children("li").on("click", function(){
-	        console.log('click');
-	        $(this).children(".icon_up").toggleClass("hide");
-	        $(this).next().toggleClass("hide");
-	    });
-	    load_alarm_content();
+    
+	    $(document).on("click","li", function(e){
+	    	console.log("click");
+	    	$(this).children(".icon_up").toggleClass("hide");
+	    	$(this).next().toggleClass("hide");
+	    })
+
 	});
 	
+/* C61A727500F311EE875C0242AC14000B */	
 /* 알림 내용 데이터 가져오기 */
-function load_alarm_content(){
-	$.ajax(
+/* 
+ * alarm_idx : 인덱스
+ * mb_idx : 회원번호
+   pet_name : 반려동물 이름
+   alarm_type : 주의, 긴급 , 일지
+   category_name : 행동
+   cnt : 횟수
+   alarm_content : 알림 내용  
+   alarm_at : 시간
+   alarm_week : 요일 
+ */
+function load_alarm(){
+	$.ajax({
 		url : "alarm/all",
 		type : "get",
 		dataType : "json",
-		success : function(data){
-			console.log("성공");
-			console.log(data);
-		},
+		success : makeview,
 		error : function(){alert("error");}
-)};
+	})
+};
+
+/* 오늘 날짜를 구하는 함수 */
+function getToday(){
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = ("0" + (1 + date.getMonth())).slice(-2);
+    var day = ("0" + date.getDate()).slice(-2);
+
+    return year +"-"+ month + "-"+ day;
+}
+
+function makeview(data){
+	var list_html = "";
+	var day = "";
+	var check = false;
+	$.each(data, function(idx, val){
+        var today = val.alarm_at.split(" ")[0];
+        var time = val.alarm_at.split(" ")[1].slice(0,5);
+		if(day != today){ /* 전 날과 같은 날짜가 아니라면  */
+			day = today
+			if(check){
+				list_html += '</ul></div></div>';
+				check = false;
+			}
+			list_html += '<div class="alarm_wrap">';
+			list_html += '<div class="alarm_date">';
+			list_html += '<img class="icon_check" src="resources/images/icon_check.png" alt="">';
+			if(getToday() === today){ /* 오늘이라면 */
+				list_html += '<span class="today">'+today.replace("/-/g",".")+'('+val.alarm_week.slice(0,1)+') - 오늘</span>';
+			}else{ 					  /* 오늘이 아니라면  */
+				list_html += '<span>'+today.replace(/-/g,".")+'('+val.alarm_week.slice(0,1)+')</span>';
+			}
+			list_html += '</div>';
+			list_html += '<div class="alaram_list_wrap">';
+			list_html += '<ul class="alaram_list">';
+        }
+		list_html += '<li>';
+		list_html += '<span>'+ time +'</span>';
+		list_html += '<span class="material-symbols-outlined icon_circle';
+		if(val.alarm_type === "일지"){
+			list_html += ' green circle">';
+		}else if(val.alarm_type === "주의"){
+			list_html += ' yel circle">';
+		}else{
+			list_html += ' red circle">';
+		}
+		list_html += 'circle</span>';
+		list_html += '<span class="alarm_type">['+val.alarm_type+']</span>';
+		if(val.alarm_type != "일지"){
+			list_html += '<span>- '+val.category_name+' '+val.cnt +'회</span>';
+		}
+		
+		list_html += '<span class="material-symbols-outlined icon_up hide">arrow_drop_up</span></li>';
+		list_html += '<div class="alarm_detail hide">';
+		list_html += '<div class="alarm_title">';
+		if(val.alarm_type != "일지"){
+			list_html += '<span class="alarm_type">['+val.alarm_type+']</span>';
+			list_html += ' '+val.pet_name+'가 '+ time+'분에 '+ val.category_name+'를 '+val.cnt +'회 하였습니다.</div>';
+			list_html += '<div class="alarm_content">';
+			list_html += val.alarm_content;
+		}else{
+			list_html += '<span class="alarm_type">['+val.alarm_type+'] </span>';
+			var pet_name = val.alarm_content.split("+")
+			list_html += pet_name[0].replace(/네로/g,val.pet_name);
+			list_html += '<div class="alarm_content">';
+			list_html += pet_name[1].replace(/네로/g,val.pet_name);
+		}
+
+		list_html += '</div>';
+		list_html += '<div class="alarm_go"><a href="#">이상행동 녹화영상';
+		list_html += '<span class="material-symbols-outlined icon_alarm_go">chevron_right</span>';
+		list_html += '</a></div></div>';
+		check = true;
+	});
+	$('.con_alarm').prepend(list_html).trigger("create");
+	
+}
 
 		
 </script>

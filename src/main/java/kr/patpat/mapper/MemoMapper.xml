@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.patpat.mapper.MemoMapper">
+
+	<resultMap type="kr.patpat.entity.Memo" id="memo">
+		<result property="memoIdx" column="memo_idx"/>
+		<result property="mbIdx" column="mb_idx"/>
+		<result property="categoryIdx" column="category_idx"/>
+		<result property="memoContent" column="memo_content"/>
+		<result property="photo" column="photo"/>
+		<result property="memoAt" column="memo_at"/>
+		<result property="memoUpdateAt" column="memo_update_at"/>
+	</resultMap>
+
+	<select id="showMemo" parameterType="String" resultMap="memo">
+		select * from t_memo where memo_idx=#{idx}
+	</select>
+	
+	<update id="updateMemo" parameterType="kr.patpat.entity.Memo">
+		update t_memo set memo_content=#{memoContent}, photo=#{photo}, memo_update_at=now() where memo_idx=#{memoIdx}
+	</update>
+	
+	
+
+</mapper>

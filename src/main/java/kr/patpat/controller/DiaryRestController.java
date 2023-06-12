@@ -30,7 +30,7 @@ public class DiaryRestController {
 	// 메모 목록
 	@GetMapping("/memo-all")
 	public List<HashMap<String, Object>> memoList(@RequestParam("mbIdx") String mbIdx, @RequestParam("date") String date){
-		List<HashMap<String, Object>> data = diaryMapper.selectMemo(mbIdx, date);
+		List<HashMap<String, Object>> data = diaryMapper.selectMemoList(mbIdx, date);
 		return data;
 	};
 	

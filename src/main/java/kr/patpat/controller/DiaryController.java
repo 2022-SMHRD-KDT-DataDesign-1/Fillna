@@ -14,13 +14,13 @@ import kr.patpat.mapper.MemoMapper;
 @Controller
 public class DiaryController {
 	
+	@Autowired
+	private MemoMapper memoMapper;
+	
 	@RequestMapping("/diary")
 	public String diary() {
 		return "menu/diary";
 	}
-	
-	@Autowired
-	private MemoMapper memoMapper;
 	
 	@RequestMapping("/memo")
 	public String memo() {

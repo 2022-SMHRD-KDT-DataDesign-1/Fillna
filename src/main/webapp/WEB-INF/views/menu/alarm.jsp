@@ -185,7 +185,7 @@ function makeview(data){
 		check = true;
 	});
 	$('.con_alarm').prepend(list_html).trigger("create");
-	
+
 }
 
 		

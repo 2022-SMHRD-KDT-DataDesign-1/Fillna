@@ -40,7 +40,7 @@
 					
 					  // 현재 날짜
 					  String today = dateFormat.format(currentDate);
-					  out.print("<input type='hidden' value='"+today+"' id='today'>");
+					  out.print("<input type='hidden' value='"+today.substring(0, 10)+"' id='today'>");
 					
 					  String[] dateList = new String[15];
 					  int i = 0;
@@ -79,13 +79,13 @@
 							    out.print("<p>"+dayOfWeek+"</p>");
 							    out.print("<p>"+temp[2]+"</p>");
 								out.print("</li>");
-								out.print("<input type='hidden' id='thisDate' clsas='today' value='"+dateList[j].substring(0, 10)+"'>");
+								out.print("<input type='hidden' class='thisDate' value='"+dateList[j].substring(0, 10)+"'>");
 							} else{
 								out.print("<li class='date'>");
 							    out.print("<p>"+dayOfWeek+"</p>");
 							    out.print("<p>"+temp[2]+"</p>");
 								out.print("</li>");
-								out.print("<input type='hidden' id='thisDate' value='"+dateList[j].substring(0, 10)+"'>");
+								out.print("<input type='hidden' class='thisDate' value='"+dateList[j].substring(0, 10)+"'>");
 							} 
 						}
 					  }
@@ -201,13 +201,16 @@
 	    });
 	   
 	    
-	    $(".date").on("click", function(){
-	    	$(".date").not(this).removeClass("today");
-	    	$(this).addClass("today");
-	    	
+	    $(".date").on("click", function(e){
+	    	if($(this).hasClass("today")===true){
+	    		e.preventDefault();
+	    	} else{
+		    	$(".date").not(this).removeClass("today");
+		    	$(this).addClass("today");
+	    	}
 	    	var mbIdx = $("#memId").val();
 	    	var petIdx = $("#petId").val();
-	    	var date = $(this).next("#thisDate").val();
+	    	var date = $(this).next(".thisDate").val();
 	    	console.log(date);
 	    	
 	    	$.ajax({
@@ -226,6 +229,7 @@
     	var mbIdx = $("#memId").val();
     	var petIdx = $("#petId").val();
     	var date = $("#today").val();
+    	console.log(date);
     	
     	$.ajax({
     		url : "diary/diary-all",
@@ -251,8 +255,13 @@
         
         $.each(data, function(index, dInfo){
         	listHtml += "<li class='diaryAlarmList'>";
-        	listHtml += "<span>"+dInfo.action_at.hour+":"+dInfo.action_at.minute+"</span>";
-     		listHtml += "<span class='material-symbols-outlined icon_circle";
+        	var min = dInfo.action_at.minute;
+        	if(min < 10){
+	        	listHtml += "<span>"+dInfo.action_at.hour+":0"+dInfo.action_at.minute+"</span>";
+        	} else{
+	        	listHtml += "<span>"+dInfo.action_at.hour+":"+dInfo.action_at.minute+"</span>";
+        	}
+	     		listHtml += "<span class='material-symbols-outlined icon_circle";
     		if(dInfo.alarm_type === "일지"){
     			listHtml += " green circle'>";
     		}else if(dInfo.alarm_type === "주의"){
@@ -281,15 +290,9 @@
 		        	listHtml += "<div class='alarm_detail hide'>";
         		}
 	        	listHtml += "<div class='alarm_title'>";
-	        	listHtml += "<span>["+dInfo.alarm_type+"]</span>";
+	        	listHtml += "<span>["+dInfo.alarm_type+"]</span>";	
 	        	
-	        	var hour = "";
-	        	var min = "";
-	        	
-	        	var len = dInfo.action_at.minute.length;
-	        	console.log(len);
-	        	
-	        	if(dInfo.action_at.minute.length < 2){
+	        	if(min < 10){
 		        	listHtml += "${pvo.petName}가 "+dInfo.action_at.hour+"시 0"+dInfo.action_at.minute+"분에 "+dInfo.category_name+"를 "+dInfo.cnt+"회 하였습니다.</div>";
 	        	} else {
 		        	listHtml += "${pvo.petName}가 "+dInfo.action_at.hour+"시 "+dInfo.action_at.minute+"분에 "+dInfo.category_name+"를 "+dInfo.cnt+"회 하였습니다.</div>";

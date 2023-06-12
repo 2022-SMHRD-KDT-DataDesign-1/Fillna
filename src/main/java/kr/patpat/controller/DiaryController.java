@@ -23,15 +23,16 @@ public class DiaryController {
 	// 오늘의 일지
 	@GetMapping("/diary-all")
 	public List<HashMap<String, Object>> diaryList(@RequestParam("mbIdx") String mbIdx, @RequestParam("petIdx") String petIdx, @RequestParam("date") String date){
-		System.out.println("성공티비"+mbIdx+" "+petIdx+" "+date);
 		List<HashMap<String, Object>> data = diaryMapper.selectAction(mbIdx, petIdx, date);
 		System.out.println(data.toString());
 		return data;
 	};
 	
+	// 메모 목록
 	@GetMapping("/memo-all")
-	public List<Memo> memoList(){
-		return null;
+	public List<HashMap<String, Object>> memoList(@RequestParam("mbIdx") String mbIdx){
+		List<HashMap<String, Object>> data = diaryMapper.selectMemo(mbIdx);
+		return data;
 	};
 	
 	@GetMapping("/record-all")

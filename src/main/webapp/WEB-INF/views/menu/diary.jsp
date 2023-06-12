@@ -99,38 +99,7 @@
 					<!-- 일지 -->
                 </div>
                 <div class="diary_middle">
-                    <div>
-                        <span>메모</span>
-                        <span class="material-symbols-outlined icon_add_circle">
-                            add_circle
-                        </span>
-                    </div>
-                    <ul class="diary_middle_list">
-                        <li>
-                            <div>
-                                <span>써클링</span><span>30분전</span>
-                                <a href="">
-                                    <span class="material-symbols-outlined icon_more">
-                                        more_vert
-                                    </span>
-                                </a>
-                                <img src="resources/images/cat.jpeg" alt="">
-                                <p>귀 내부 상태 양호함. 털 빗질 필요한듯</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <span>써클링</span><span>30분전</span>
-                                <a href="">
-                                    <span class="material-symbols-outlined icon_more">
-                                        more_vert
-                                    </span>
-                                </a>
-                                <img src="resources/images/cat.jpeg" alt="">
-                                <p>귀 내부 상태 양호함. 털 빗질 필요한듯</p>
-                            </div>
-                        </li>
-                    </ul>
+					<!-- 메모 -->
                 </div>
                 <div class="diary_bottom">
                     <div>
@@ -311,6 +280,39 @@
     	console.log("성공티비");
     	$(".diary_top").html(listHtml);
     };
+    
+    // memo
+    function loadMemo(){
+    	var mbIdx = $("#memId").val();
+    	var date = $(".today").next().val();
+    	
+    	$.ajax({
+    		url : "diary/memo-all",
+    		type : "get",
+    		data : {"mbIdx":mbIdx},
+    		dataType : "json",
+    		success : showMemo,
+    		error : function(){alert("error");}
+    	})
+    }
+    
+    function showMemo(data){
+    	var listHtml = "";
+    	listHtml += "<div><span>메모</span>";
+    	listHtml += "<span class='material-symbols-outlined icon_add_circle'>add_circle</span></div>";
+    	listHtml += "<ul class='diary_middle_list'>";
+    	$.each(data, function(index, mInfo){
+    		listHtml += "<li><div>"
+    		listHtml += "<span>"+mInfo.category_name+"</span>";
+    		listHtml += "<span>"+mInfo.memo_update_at+"</span>";
+    		listHtml += "<a href=''><span class='material-symbols-outlined icon_more'>more_vert</span></a>";
+    		listHtml += "<img src='resources/images/cat.jpeg' alt=''>";
+    		listHtml += "<p>"+mInfo.memo_content+"</p></div>";
+    		listHtml += "</li>"
+    	});
+    	listHtml += "</ul>";
+    	$(".diary_middle").html(listHtml);
+    }
    
 
 </script>

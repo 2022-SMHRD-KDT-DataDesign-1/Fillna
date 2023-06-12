@@ -14,7 +14,7 @@ public interface DiaryMapper {
 
 	List<HashMap<String, Object>> selectAction(@Param("mbIdx") String mbIdx, @Param("petIdx") String petIdx, @Param("date") String date);
 
-	List<HashMap<String, Object>> selectMemo(@Param("mbIdx") String mbIdx);
+	List<HashMap<String, Object>> selectMemo(@Param("mbIdx") String mbIdx, String date);
 	
 	
 }

@@ -11,7 +11,7 @@
 	
 	<select id="selectMemo" resultType="java.util.HashMap" parameterType="map">
 		select * from t_memo a inner join t_category b on a.category_idx = b.category_idx
-		where a.mb_idx=#{mbIdx}
+		where a.mb_idx=#{mbIdx} and a.memo_at like concat('%', #{date}, '%')
 	</select>
 	
 	

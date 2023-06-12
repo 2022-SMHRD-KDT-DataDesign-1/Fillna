@@ -168,6 +168,10 @@
 	    	$(this).children(".icon_up").toggleClass("hide");
 	    	$(this).next().toggleClass("hide");
 	    });
+	    
+	    $(document).on("click", ".icon_more", function(){
+	    	$(this).next().toggleClass("hide");
+	    })
 	   
 	    
 	    $(".date").on("click", function(e){
@@ -193,7 +197,7 @@
 	    });
     });
     
-    
+    // 오늘 일지
     function loadDiary(){
     	var mbIdx = $("#memId").val();
     	var petIdx = $("#petId").val();
@@ -281,7 +285,7 @@
     	$(".diary_top").html(listHtml);
     };
     
-    // memo
+    // 메모 목록
     function loadMemo(){
     	var mbIdx = $("#memId").val();
     	var date = $(".today").next().val();
@@ -289,7 +293,7 @@
     	$.ajax({
     		url : "diary/memo-all",
     		type : "get",
-    		data : {"mbIdx":mbIdx},
+    		data : {"mbIdx":mbIdx, "date":date},
     		dataType : "json",
     		success : showMemo,
     		error : function(){alert("error");}
@@ -305,14 +309,29 @@
     		listHtml += "<li><div>"
     		listHtml += "<span>"+mInfo.category_name+"</span>";
     		listHtml += "<span>"+mInfo.memo_update_at+"</span>";
-    		listHtml += "<a href=''><span class='material-symbols-outlined icon_more'>more_vert</span></a>";
+    		listHtml += "<span class='material-symbols-outlined icon_more'>more_vert</span>";
+    		listHtml += "<div class='memo_menu hide'><ul>";
+    		var loc = "/memo/update?idx="+mIinfo.mem_idx;
+    		listHtml += "<li onclick='location.href="+loc+"'>수정하기</li>";
+    		listHtml += "<li onclick='deleteMemo("+mInfo.memo_idx+")'>삭제하기</li></ul></div>";
     		listHtml += "<img src='resources/images/cat.jpeg' alt=''>";
     		listHtml += "<p>"+mInfo.memo_content+"</p></div>";
-    		listHtml += "</li>"
+    		listHtml += "</li>";
     	});
     	listHtml += "</ul>";
     	$(".diary_middle").html(listHtml);
     }
+    
+    function deleteMemo(idx){
+		$.ajax({
+			url : "diary/"+idx, 
+			type : "delete",
+			data : {"idx": idx},
+			success : showMemo,
+			error : function () { alert("error"); }
+		});	
+    }
+    
    
 
 </script>

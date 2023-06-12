@@ -229,9 +229,10 @@
         listHtml += "<span class='material-symbols-outlined icon_pets'>pets</span></p></div>";
             
         listHtml += "<ul class='alaram_list'>";    
+        
         $.each(data, function(index, dInfo){
         	listHtml += "<li>";
-        	listHtml += "<span>"+dInfo.action_at+"</span>";
+        	listHtml += "<span>"+dInfo.action_at.hour+":"+dInfo.action_at.minute+"</span>";
      		listHtml += "<span class='material-symbols-outlined icon_circle";
     		if(dInfo.alarm_type === "일지"){
     			listHtml += " green circle'>";
@@ -248,16 +249,22 @@
         	listHtml += "<span class='material-symbols-outlined icon_up'>arrow_drop_up</span>";
         	listHtml += "</li>";
 			
-        	listHtml += "<div class='alarm_detail'>";
-        	listHtml += "<div class='alarm_title'>";
-        	listHtml += "<span>["+dInfo.alarm_type+"]</span>";
-        	listHtml += "${pvo.petName}가 "+dInfo.action_at+"분에 "+dInfo.category_name+"를 "+dInfo.cnt+"회 하였습니다.</div>";
-        	listHtml += "<div class='alarm_content'>";
-        	listHtml += dInfo.alarm_content+"</div>";
-        	listHtml += "<div class='alarm_go'>";
-        	listHtml += "<a href='#'>이상행동 녹화영상";
-        	listHtml += "<span class='material-symbols-outlined icon_alarm_go'>chevron_right</span>";
-        	listHtml += "</a></div></div>"
+        	if(dInfo.alarm_type != "일지"){
+        		if(index===0){
+		        	listHtml += "<div class='alarm_detail'>";
+        		} else {
+		        	listHtml += "<div class='alarm_detail hide'>";
+        		}
+	        	listHtml += "<div class='alarm_title'>";
+	        	listHtml += "<span>["+dInfo.alarm_type+"]</span>";
+	        	listHtml += "${pvo.petName}가 "+dInfo.action_at+"분에 "+dInfo.category_name+"를 "+dInfo.cnt+"회 하였습니다.</div>";
+	        	listHtml += "<div class='alarm_content'>";
+	        	listHtml += dInfo.alarm_content+"</div>";
+	        	listHtml += "<div class='alarm_go'>";
+	        	listHtml += "<a href='#'>이상행동 녹화영상";
+	        	listHtml += "<span class='material-symbols-outlined icon_alarm_go'>chevron_right</span>";
+	        	listHtml += "</a></div></div>"
+        	}
         });
         
         listHtml += "</ul></div>";

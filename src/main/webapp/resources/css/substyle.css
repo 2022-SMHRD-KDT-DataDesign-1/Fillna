@@ -236,6 +236,7 @@ body{font-family: 'Pretendard';}
           .today_ment2 > p{float: right;width: 67vw;margin-top: 6vw;font-size: 3.5vw;line-height: 1.15;}
           .diary_top > ul{margin-top: 60vw;background: url(../images/line.png) no-repeat;background-position: 15.5vw 1vw;background-size: 0.3vw 53vw;}
           .diary_top>ul>li{margin-left:2vw}
+          .diary_alarm_type{}
 
             /* 메모 */
           .diary_middle{margin-bottom: 17vw;margin-top: 4vw;}

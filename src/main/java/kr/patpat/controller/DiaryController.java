@@ -22,9 +22,9 @@ public class DiaryController {
 	
 	// 오늘의 일지
 	@GetMapping("/diary-all")
-	public List<HashMap<String, Object>> diaryList(@RequestParam("mbIdx") String mbIdx, @RequestParam("petIdx") String petIdx, @RequestParam("today") String today){
-		// System.out.println("성공티비"+mbIdx+" "+petIdx+" "+today);
-		List<HashMap<String, Object>> data = diaryMapper.selectAction(mbIdx, petIdx, today);
+	public List<HashMap<String, Object>> diaryList(@RequestParam("mbIdx") String mbIdx, @RequestParam("petIdx") String petIdx, @RequestParam("date") String date){
+		System.out.println("성공티비"+mbIdx+" "+petIdx+" "+date);
+		List<HashMap<String, Object>> data = diaryMapper.selectAction(mbIdx, petIdx, date);
 		System.out.println(data.toString());
 		return data;
 	};

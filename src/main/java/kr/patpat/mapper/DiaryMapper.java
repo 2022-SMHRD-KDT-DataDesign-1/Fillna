@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Param;
 public interface DiaryMapper {
 
 
-	List<HashMap<String, Object>> selectAction(@Param("mbIdx") String mbIdx, @Param("petIdx") String petIdx, @Param("today") String today);
+	List<HashMap<String, Object>> selectAction(@Param("mbIdx") String mbIdx, @Param("petIdx") String petIdx, @Param("date") String date);
 	
 	
 }

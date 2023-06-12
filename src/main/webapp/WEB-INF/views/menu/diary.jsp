@@ -36,12 +36,11 @@
 					  Date twoWeeksAgoDate = new Date(currentDate.getTime() - twoWeeksInMillis);
 					
 					  // 날짜 포맷 설정
-					  SimpleDateFormat dateFormat = new SimpleDateFormat("dd-E");
-					  SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
+					  SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-E");
 					
 					  // 현재 날짜
-					  String today = dateFormat2.format(currentDate);
-					  out.print("<input type='hidden' value='"+today+"' id='todayDate'>");
+					  String today = dateFormat.format(currentDate);
+					  // out.print("<input type='hidden' value='"+today+"' id='todayDate'>");
 					
 					  String[] dateList = new String[15];
 					  int i = 0;
@@ -59,32 +58,34 @@
 					  for(int j=14; j>=0; j--){
 						String[] temp = dateList[j].split("-");
 						if(j>=0){
-							if(temp[1].equals("월")) {
+							if(temp[3].equals("월")) {
 								dayOfWeek="MON";
-							} else if(temp[1].equals("화")) {
+							} else if(temp[3].equals("화")) {
 								dayOfWeek="TUE";
-							} else if(temp[1].equals("수")) {
+							} else if(temp[3].equals("수")) {
 								dayOfWeek="WED";
-							} else if(temp[1].equals("목")) {
+							} else if(temp[3].equals("목")) {
 								dayOfWeek="THU";
-							} else if(temp[1].equals("금")) {
+							} else if(temp[3].equals("금")) {
 								dayOfWeek="FRI";
-							} else if(temp[1].equals("토")) {
+							} else if(temp[3].equals("토")) {
 								dayOfWeek="SAT";
-							} else if(temp[1].equals("일")) {
+							} else if(temp[3].equals("일")) {
 								dayOfWeek="SUN";
 							}
 							
 							if(j==0){
 								out.print("<li class='date today'>");
 							    out.print("<p>"+dayOfWeek+"</p>");
-							    out.print("<p>"+temp[0]+"</p>");
+							    out.print("<p>"+temp[2]+"</p>");
 								out.print("</li>");
+								out.print("<input type='hidden' id='thisDate' clsas='today' value='"+dateList[j].substring(0, 10)+"'>");
 							} else{
 								out.print("<li class='date'>");
 							    out.print("<p>"+dayOfWeek+"</p>");
-							    out.print("<p>"+temp[0]+"</p>");
+							    out.print("<p>"+temp[2]+"</p>");
 								out.print("</li>");
+								out.print("<input type='hidden' id='thisDate' value='"+dateList[j].substring(0, 10)+"'>");
 							} 
 						}
 					  }
@@ -193,25 +194,43 @@
 	        }
 	    });
 	    
-	    $(".alaram_list").children("li").on("click", function(){
-	        console.log('click');
-	        $(this).children(".icon_up").toggleClass("hide");
-	        $(this).next().toggleClass("hide");
+	    $(document).on("click", ".diaryAlarmList", function(){
+	    	console.log("click");
+	    	$(this).children(".icon_up").toggleClass("hide");
+	    	$(this).next().toggleClass("hide");
 	    });
+	   
 	    
-	    
+	    $(".date").on("click", function(){
+	    	$(".date").not(this).removeClass("today");
+	    	$(this).addClass("today");
+	    	
+	    	var mbIdx = $("#memId").val();
+	    	var petIdx = $("#petId").val();
+	    	var date = $(this).next("#thisDate").val();
+	    	console.log(date);
+	    	
+	    	$.ajax({
+	    		url : "diary/diary-all",
+	    		type : "get",
+	    		data : {"mbIdx":mbIdx, "petIdx":petIdx, "date":date},
+	    		dataType : "json",
+	    		success : showDiary,
+	    		error : function(){alert("error");}
+	    	})
+	    });
     });
     
     
     function loadDiary(){
     	var mbIdx = $("#memId").val();
     	var petIdx = $("#petId").val();
-    	var today = $("#todayDate").val();
+    	var date = $(".today").val();
     	
     	$.ajax({
     		url : "diary/diary-all",
     		type : "get",
-    		data : {"mbIdx":mbIdx, "petIdx":petIdx, "today":today},
+    		data : {"mbIdx":mbIdx, "petIdx":petIdx, "date":date},
     		dataType : "json",
     		success : showDiary,
     		error : function(){alert("error");}
@@ -231,7 +250,7 @@
         listHtml += "<ul class='alaram_list'>";    
         
         $.each(data, function(index, dInfo){
-        	listHtml += "<li>";
+        	listHtml += "<li class='diaryAlarmList'>";
         	listHtml += "<span>"+dInfo.action_at.hour+":"+dInfo.action_at.minute+"</span>";
      		listHtml += "<span class='material-symbols-outlined icon_circle";
     		if(dInfo.alarm_type === "일지"){
@@ -242,12 +261,18 @@
     			listHtml += " red circle'>";
     		}
     		listHtml += "circle</span>";
-        	listHtml += "<span>["+dInfo.alarm_type+"]</span>";
+        	listHtml += "<span class='diary_alarm_type'>["+dInfo.alarm_type+"]</span>";
         	if(dInfo.alarm_type != "일지"){
 	        	listHtml += "<span>-"+dInfo.category_name+" "+dInfo.cnt+"회</span>";
         	}
-        	listHtml += "<span class='material-symbols-outlined icon_up'>arrow_drop_up</span>";
+        	
+        	if(index==0){
+	        	listHtml += "<span class='material-symbols-outlined icon_up'>arrow_drop_up</span>";
+        	} else{
+	        	listHtml += "<span class='material-symbols-outlined icon_up hide'>arrow_drop_up</span>";
+        	}
         	listHtml += "</li>";
+        	
 			
         	if(dInfo.alarm_type != "일지"){
         		if(index===0){
@@ -257,7 +282,7 @@
         		}
 	        	listHtml += "<div class='alarm_title'>";
 	        	listHtml += "<span>["+dInfo.alarm_type+"]</span>";
-	        	listHtml += "${pvo.petName}가 "+dInfo.action_at+"분에 "+dInfo.category_name+"를 "+dInfo.cnt+"회 하였습니다.</div>";
+	        	listHtml += "${pvo.petName}가 "+dInfo.action_at.hour+"시 "+dInfo.action_at.minute+"분에 "+dInfo.category_name+"를 "+dInfo.cnt+"회 하였습니다.</div>";
 	        	listHtml += "<div class='alarm_content'>";
 	        	listHtml += dInfo.alarm_content+"</div>";
 	        	listHtml += "<div class='alarm_go'>";

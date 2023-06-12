@@ -6,7 +6,7 @@
 	<select id="selectAction" resultType="java.util.HashMap" parameterType="map">
 		select * from t_action a inner join t_category b on a.category_idx=b.category_idx
 		inner join t_alarm_content c on a.category_idx=c.category_idx
-		where a.mb_idx=#{mbIdx} and a.pet_idx=#{petIdx} and a.action_at like concat('%', #{today}, '%')
+		where a.mb_idx=#{mbIdx} and a.pet_idx=#{petIdx} and a.action_at like concat('%', #{date}, '%')
 	</select>
 
 </mapper>

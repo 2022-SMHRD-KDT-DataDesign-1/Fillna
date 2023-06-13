@@ -267,13 +267,14 @@ body{font-family: 'Pretendard';}
         .mini_title{font-size: 3.8vw; color:#5e5e5e; margin-bottom: 2vw;}
         .select_symptom_list{width: 100%; padding: 1vw; text-align: left; font-size: 5vw; color:#cd0000; background-color: transparent; border:none; box-sizing: border-box; cursor: pointer; border-bottom: 0.5px solid #d2d2d2; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
         .icon_down{position: absolute; left:85%; font-size: 7vw !important; float: right; color: #d2d2d2; vertical-align: middle; cursor: pointer; z-index: -999;}
-        .icon_up{margin-top:-1vw; font-size: 7vw !important; float: right; color: #d2d2d2; vertical-align: middle; cursor: pointer; z-index: -999;}
+        .icon_memo_up{z-index:-999; position:absolute; left:85%; font-size: 7vw !important; float: right; color: #d2d2d2; vertical-align: middle; cursor: pointer;}
         .sympton_list{margin-top:1vw; display: none; width: 100%; border: 0.5px solid #d2d2d2; box-sizing: border-box; border-radius: 2vw; background-color: #f6f7f8; height: 40vw; overflow-y: scroll;}
         .sympton_list.on{display: block;}
         .sympton_list>li{padding: 1vw; box-sizing: border-box; /*border-radius: 2vw;*/}
         .sympton_list>li>button{width: 100%; border: none; background: none; text-align: left; font-size: 4.2vw; cursor: pointer; border-radius: 2vw; padding: 2vw; box-sizing: border-box;}
         .sympton_list>li:hover,.sympton_list>li:focus{background-color: #eeeeee;}
-
+		
+		.memo_none{border: 1px solid #d2d2d2;text-align: center;width: 100%;box-sizing: border-box;padding: 2vw;color: #696969;border-radius: 2vw;}
 		.memo_menu{border-radius: 2vw;border: 1px solid #d2d2d2;width: 20vw;height: 13vw;position: absolute;margin-left: 17vw;background: #fff;padding: 0;}
         .memo_menu>ul{text-align: center; padding: 1vw; box-sizing: border-box;}
         .memo_menu>ul>li{cursor: pointer; padding:1vw; box-sizing: border-box; font-size: 3.5vw; color:#5e5e5e;}

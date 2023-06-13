@@ -26,5 +26,14 @@ public class AlarmController {
 		return list;
 	}
 	
+	// 알림 타입 가져오기
+	@GetMapping("/cnt/all")
+	public List<Map<String, String>> alarm_cnt(){
+		
+		List<Map<String,String>> list = mapper.alarmCnt();
+		
+		return list;
+	}
+	
 	
 }

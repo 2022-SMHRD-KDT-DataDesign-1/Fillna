@@ -1,3 +1,8 @@
+<%@page import="kr.patpat.entity.Memo"%>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Calendar" %>
+<%@ page import="java.util.Locale" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
@@ -18,31 +23,83 @@
     <body class="bg">
     <div class="wrapper">
 		<jsp:include page="../common/my.jsp"></jsp:include>
-		<jsp:include page="../common/header2.jsp"></jsp:include>
+		<header class="header">
+			<ul>
+			 	<li>
+                    <a href="#">
+                        <span class="material-symbols-outlined icon_ham">
+                            menu
+                        </span>
+                    </a>
+                </li>
+                <li class="icon_alarm_wrap">
+                    <a href="${contextPath}/alarm">
+                        <span class="material-symbols-outlined icon_alarm">
+                            notifications
+                        </span>
+                        <img class="alarm_yn" src="resources/images/icon_red_circle.svg" alt="">
+                    </a>
+                </li>
+		        <li class="title">
+			       <%
+				     	Memo mvo = (Memo)session.getAttribute("mvo");
+				     	String dateString = mvo.getMemoAt();
+				     	SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				     	Date memoDate = dateFormat2.parse(dateString);
+				     	
+				        Calendar calendar = Calendar.getInstance();
+				        calendar.setTime(memoDate);
+				        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+				         
+				        String[] weekDays = {"일", "월", "화", "수", "목", "금", "토"};
+				        
+				        String month = "";
+				        
+				        if(dateString.substring(5, 7).length() < 10) {
+				        	month = dateString.substring(6, 7);
+				        } else if(dateString.substring(5, 7).length() >= 10){
+				        	month = dateString.substring(5, 7);
+				        }
+			       %>
+			       <span class="material-symbols-outlined icon_back" onclick="">
+			            arrow_back
+			       </span>
+			       <span>메모하기 - <%=month%>월 <%=dateString.substring(8, 10)%>일</span>
+			       <span><%=weekDays[dayOfWeek - 1]%>요일</span>
+		        </li>
+	        </ul>
+        </header>
         <div class="content">
             <div class="con">
                 <form action="#" method="post" id="memo_form">
                     <div class="memo_title">
                         <div class="mini_title">메모주제 선택(증상별 정보제공)</div>
                         <div>
-                            <input type="button" class="select_symptom_list" value="써클링">
-                                <span class="material-symbols-outlined icon_down">
-                                    keyboard_arrow_down
-                                </span>
-                                <span class="material-symbols-outlined icon_memo_up hide">
-                                    keyboard_arrow_up
-                                </span>
-                            </input>
+                        <c:if test="${not empty mvo.memoIdx}">
+                            <input type="button" class="select_symptom_list" value="${category}"/>
+                        </c:if>
+                        <c:if test="${empty mvo.memoIdx}">
+                            <input type="button" class="select_symptom_list" value="다시해"/>
+                        </c:if>
+                            <span class="material-symbols-outlined icon_down">
+                                keyboard_arrow_down
+                            </span>
+                            <span class="material-symbols-outlined icon_memo_up hide">
+                                keyboard_arrow_up
+                            </span>
                             <ul class="sympton_list">
-                                <li><button type="button">방귀뿡</button></li>
-                                <li><button type="button">재채기</button></li>
-                                <li><button type="button">똥싸기</button></li>
-                                <li><button type="button">그루밍</button></li>
-                                <li><button type="button">테스트</button></li>
-                                <li><button type="button">고양이</button></li>
-                                <li><button type="button">강아지</button></li>
-                                <li><button type="button">그루밍</button></li>
                                 <li><button type="button">써클링</button></li>
+                                <li><button type="button">발작</button></li>
+                                <li><button type="button">후지마비</button></li>
+                                <li><button type="button">재채기</button></li>
+                                <li><button type="button">피부긁음</button></li>
+                                <li><button type="button">구토</button></li>
+                                <li><button type="button">배변</button></li>
+                                <li><button type="button">그루밍</button></li>
+                                <li><button type="button">개구호흡</button></li>
+                                <li><button type="button">식사</button></li>
+                                <li><button type="button">일지</button></li>
+                                <li><button type="button">기타</button></li>
                             </ul>
                         </div>
                     </div>
@@ -64,7 +121,12 @@
                         </div>
                         <div class="memo_write">
                             <div class="mini_title">메모하기</div>
-                            <textarea name="pet_memo" id="" cols="30" rows="10" placeholder="최대 50자까지 입력이 가능합니다."></textarea>
+                            <c:if test="${not empty mvo.memoContent}">
+	                            <textarea name="pet_memo" id="" cols="30" rows="10" spellcheck="false">${mvo.memoContent}</textarea>
+                            </c:if>
+                            <c:if test="${empty mvo.memoContent}">
+	                            <textarea name="pet_memo" id="" cols="30" rows="10" placeholder="최대 50자까지 입력이 가능합니다." spellcheck="false"></textarea>
+                            </c:if>
                         </div>
                         <div class="memo_save">
                             <a href="">저장</a>
@@ -78,8 +140,6 @@
     </div>
 <script>
     $(document).ready(function(e) {
-    	
-    	$(".title").toggleClass("hide");
 
         let selectBtn = $(".select_symptom_list");
 
@@ -98,7 +158,8 @@
         });
 
         $("#file").change(function(e){
-            let fileName = $("#file").val();
+    		var fileName = $(this).val().toString().split('/').pop().split('\\').pop();
+       	  
             $(".file_name").val(fileName);
         });
 

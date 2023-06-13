@@ -73,7 +73,7 @@ body{font-family: 'Pretendard';}
     .icon_alarm{font-size: 7vw !important;}
     .alarm_yn{position:absolute; width:1.34vw; margin-left: -1.3vw; z-index:-999;}
     .icon_calendar{font-size: 6vw !important; vertical-align: middle;}
-    .icon_back{font-size: 7vw !important; vertical-align: middle; cursor: pointer;}
+    .icon_back{font-size: 6vw !important; vertical-align: text-bottom; cursor: pointer;}
 
     /*content*/
 
@@ -104,7 +104,7 @@ body{font-family: 'Pretendard';}
 
         .bottom_info>p{font-size:4vw;}
         .bottom_info>input{margin-bottom: 3vw; position: relative;}
-        input[type=date]{color:#a1a1a1;width:100%; font-size: 4vw; padding: 2vw; box-sizing: border-box; border:none; border-bottom: 1px solid #cbcbcb; background:none;margin-bottom:5vw;margin-top:1vw;}
+        input[type=date]{z-index: -999; color:#a1a1a1;width:100%; font-size: 4vw; padding: 2vw; box-sizing: border-box; border:none; border-bottom: 1px solid #cbcbcb; background:none;margin-bottom:5vw;margin-top:1vw;}
         input[type=date]::before{content: attr(data-placeholder); width: 100%;}
         input[type=date]:focus::before,
         input[type=date]:valid::before{display: none;}
@@ -251,7 +251,7 @@ body{font-family: 'Pretendard';}
           .diary_middle_list>li>div>span:nth-child(2){font-size: 3vw; color: #aeaeae;}
           .diary_middle_list>li>div>img{width:100%; border-radius: 10px; margin-top:2vw;}
           .diary_middle_list>li>div>p{font-size: 3.5vw; color:#aeaeae; padding: 1vw;}
-          .icon_more{font-size: 4vw !important; color:#5e5e5e; vertical-align:middle; cursor:pointer;}
+          .icon_more{font-size: 4vw !important; color:#5e5e5e; vertical-align:middle; cursor:pointer; float:right;}
 
             /* 이상행동 녹화영상 */
           .diary_bottom{margin-bottom: 17vw;margin-top: 4vw;}
@@ -268,20 +268,20 @@ body{font-family: 'Pretendard';}
         .select_symptom_list{width: 100%; padding: 1vw; text-align: left; font-size: 5vw; color:#cd0000; background-color: transparent; border:none; box-sizing: border-box; cursor: pointer; border-bottom: 0.5px solid #d2d2d2; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
         .icon_down{position: absolute; left:85%; font-size: 7vw !important; float: right; color: #d2d2d2; vertical-align: middle; cursor: pointer; z-index: -999;}
         .icon_memo_up{z-index:-999; position:absolute; left:85%; font-size: 7vw !important; float: right; color: #d2d2d2; vertical-align: middle; cursor: pointer;}
-        .sympton_list{margin-top:1vw; display: none; width: 100%; border: 0.5px solid #d2d2d2; box-sizing: border-box; border-radius: 2vw; background-color: #f6f7f8; height: 40vw; overflow-y: scroll;}
-        .sympton_list.on{display: block;}
+        .sympton_list{margin-top:1vw; display: none; width: 88%; border: 0.5px solid #d2d2d2; box-sizing: border-box; border-radius: 2vw; background-color: #f6f7f8; height: 40vw; overflow-y: scroll;}
+        .sympton_list.on{display: block; position:absolute;}
         .sympton_list>li{padding: 1vw; box-sizing: border-box; /*border-radius: 2vw;*/}
         .sympton_list>li>button{width: 100%; border: none; background: none; text-align: left; font-size: 4.2vw; cursor: pointer; border-radius: 2vw; padding: 2vw; box-sizing: border-box;}
         .sympton_list>li:hover,.sympton_list>li:focus{background-color: #eeeeee;}
 		
 		.memo_none{border: 1px solid #d2d2d2;text-align: center;width: 100%;box-sizing: border-box;padding: 2vw;color: #696969;border-radius: 2vw;}
-		.memo_menu{border-radius: 2vw;border: 1px solid #d2d2d2;width: 20vw;height: 13vw;position: absolute;margin-left: 17vw;background: #fff;padding: 0;}
+		.memo_menu{margin-top: 2vw; border-radius: 2vw;border: 1px solid #d2d2d2;width: 20vw;height: 13vw;position: absolute;margin-left: 17vw;background: #fff;padding: 0;}
         .memo_menu>ul{text-align: center; padding: 1vw; box-sizing: border-box;}
         .memo_menu>ul>li{cursor: pointer; padding:1vw; box-sizing: border-box; font-size: 3.5vw; color:#5e5e5e;}
         .memo_menu>ul>li:hover, .memo_menu>ul>li:active{background-color: #ebebebb4; border-radius: 2vw;}
         .memo_detail{border: 1px solid #cbcbcb; border-radius: 20px; box-sizing: border-box; padding: 4vw; margin:3vw 0; font-size: 3.5vw; line-height: 1.2; text-align: justify;}
         .memo_photo{margin-bottom: 8vw;}
-        .memo_write>textarea{border-radius: 2vw; border: 1px solid #d2d2d2; background-color: #fff; width: 100%; height: 40vw; padding:2vw; box-sizing: border-box; resize: none; font-size: 3.8vw; font-family: 'Pretendard'; color:#5e5e5e}
+        .memo_write>textarea{border-radius: 2vw; border: 1px solid #d2d2d2; background-color: #fff; width: 100%; height: 40vw; padding:2vw; box-sizing: border-box; resize: none; font-size: 4vw; font-family: 'Pretendard'; color:#5e5e5e}
         textarea::placeholder{color:#d2d2d2; font-size: 4.5vw; font-family: 'Pretendard';}
         textarea:focus{outline: none;}
         .memo_save{border-radius: 2vw; background-color: #587789; box-sizing: border-box; padding: 3vw; text-align: center; color:#fff; margin:3vw 0; font-size: 4.5vw; cursor: pointer;}

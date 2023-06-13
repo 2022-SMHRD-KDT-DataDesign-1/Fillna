@@ -13,7 +13,11 @@
 	</resultMap>
 
 	<select id="showMemo" parameterType="String" resultMap="memo">
-		select * from t_memo where memo_idx=#{idx}
+		select * from t_memo where memo_idx=#{memoIdx}
+	</select>
+	
+	<select id="selectCategory" parameterType="String" resultType="String">
+		select category_name from t_category where category_idx=#{categoryIdx}; 
 	</select>
 	
 	<update id="updateMemo" parameterType="kr.patpat.entity.Memo">

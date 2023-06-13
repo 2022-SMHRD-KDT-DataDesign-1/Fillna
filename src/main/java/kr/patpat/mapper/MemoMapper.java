@@ -10,5 +10,7 @@ public interface MemoMapper {
 	void updateMemo(Memo memo);
 
 	Memo showMemo(String idx);
+
+	String selectCategory(String memoIdx);
 }
 

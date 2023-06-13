@@ -14,6 +14,9 @@ public interface AlarmMapper {
 	public Alarm selectAlarm(HashMap<String, Object> userInfo);
 
 	public List<Map<String, String>> alarmContentList();
+
+	public List<Map<String, String>> alarmCnt();
+
 	
 }
 

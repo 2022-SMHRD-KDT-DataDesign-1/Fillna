@@ -135,6 +135,7 @@
 <script>
 	$(document).ready(function(e) {
 		loadDiary();
+		loadMemo();
 		
     	$(".diary_header").toggleClass("hide");
     	$("#diary_footer").toggleClass("this_menu");
@@ -171,7 +172,11 @@
 	    
 	    $(document).on("click", ".icon_more", function(){
 	    	$(this).next().toggleClass("hide");
-	    })
+	    });
+	    
+	    $(document).on("click", ".icon_add_circle", function(){
+	    	$(location).attr('href','${contextPath}/memo');
+	    });
 	   
 	    
 	    $(".date").on("click", function(e){
@@ -194,6 +199,15 @@
 	    		success : showDiary,
 	    		error : function(){alert("error");}
 	    	})
+	    	
+	        $.ajax({
+    		url : "diary/memo-all",
+    		type : "get",
+    		data : {"mbIdx":mbIdx, "date":date},
+    		dataType : "json",
+    		success : showMemo,
+    		error : function(){alert("error");}
+    		})
 	    });
     });
     
@@ -286,7 +300,7 @@
     };
     
     // 메모 목록
-    function loadMemo(){
+	function loadMemo(){
     	var mbIdx = $("#memId").val();
     	var date = $(".today").next().val();
     	
@@ -298,29 +312,35 @@
     		success : showMemo,
     		error : function(){alert("error");}
     	})
-    }
+    };
     
     function showMemo(data){
     	var listHtml = "";
     	listHtml += "<div><span>메모</span>";
     	listHtml += "<span class='material-symbols-outlined icon_add_circle'>add_circle</span></div>";
     	listHtml += "<ul class='diary_middle_list'>";
-    	$.each(data, function(index, mInfo){
-    		listHtml += "<li><div>"
-    		listHtml += "<span>"+mInfo.category_name+"</span>";
-    		listHtml += "<span>"+mInfo.memo_update_at+"</span>";
-    		listHtml += "<span class='material-symbols-outlined icon_more'>more_vert</span>";
-    		listHtml += "<div class='memo_menu hide'><ul>";
-    		var loc = "/memo/update?idx="+mIinfo.mem_idx;
-    		listHtml += "<li onclick='location.href="+loc+"'>수정하기</li>";
-    		listHtml += "<li onclick='deleteMemo("+mInfo.memo_idx+")'>삭제하기</li></ul></div>";
-    		listHtml += "<img src='resources/images/cat.jpeg' alt=''>";
-    		listHtml += "<p>"+mInfo.memo_content+"</p></div>";
-    		listHtml += "</li>";
-    	});
+    	
+    	if (data.length > 0){
+	    	$.each(data, function(index, mInfo){
+	    		listHtml += "<li><div>"
+	    		listHtml += "<span>"+mInfo.category_name+"</span>";
+	    		console.log(typeof(mInfo.memo_update_at));
+	    		listHtml += "<span>"+mInfo.memo_update_at+"</span>";
+	    		listHtml += "<span class='material-symbols-outlined icon_more'>more_vert</span>";
+	    		listHtml += "<div class='memo_menu hide'><ul>";
+	    		var loc = "/memo/update?idx=+mIinfo.mem_idx";
+	    		listHtml += "<li onclick='location.href="+loc+"'>수정하기</li>";
+	    		listHtml += "<li onclick='deleteMemo("+mInfo.memo_idx+")'>삭제하기</li></ul></div>";
+	    		listHtml += "<img src='resources/images/cat.jpeg' alt=''>";
+	    		listHtml += "<p>"+mInfo.memo_content+"</p></div>";
+	    		listHtml += "</li>";
+	    	});
+    	} else {
+    		listHtml += "<div class='memo_none'>작성된 메모가 존재하지 않습니다.</div>";
+    	}
     	listHtml += "</ul>";
     	$(".diary_middle").html(listHtml);
-    }
+    };
     
     function deleteMemo(idx){
 		$.ajax({
@@ -330,8 +350,7 @@
 			success : showMemo,
 			error : function () { alert("error"); }
 		});	
-    }
-    
+    };
    
 
 </script>

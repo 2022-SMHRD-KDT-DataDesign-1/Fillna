@@ -29,7 +29,7 @@
                                 <span class="material-symbols-outlined icon_down">
                                     keyboard_arrow_down
                                 </span>
-                                <span class="material-symbols-outlined icon_up hide">
+                                <span class="material-symbols-outlined icon_memo_up hide">
                                     keyboard_arrow_up
                                 </span>
                             </input>
@@ -85,7 +85,7 @@
 
         selectBtn.on("click", function(){
             console.log("click");
-            $(".icon_up").toggleClass("hide");
+            $(".icon_memo_up").toggleClass("hide");
             $(".icon_down").toggleClass("hide");
             $(".sympton_list").toggleClass("on");
         });
@@ -93,7 +93,7 @@
         $(".sympton_list").children("li").children("button").on("click", function(e){
             selectBtn.val($(this).text());
             $(".sympton_list").toggleClass("on");
-            $(".icon_up").toggleClass("hide");
+            $(".icon_memo_up").toggleClass("hide");
             $(".icon_down").toggleClass("hide");
         });
 

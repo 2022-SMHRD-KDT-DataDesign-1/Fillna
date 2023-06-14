@@ -70,9 +70,9 @@
         </header>
         <div class="content">
             <div class="con">
-                <form action="${contextPath}/write" method="post" id="memo_form" enctype="multipart/form-data">
-                <input type="hidden" value="${mvo.mbIdx}" name="mbIdx">
-                <input type="hidden" value="${mvo.memoIdx}" name="memoIdx">
+                <form method="post" id="memo_form" enctype="multipart/form-data">
+                	<input type="hidden" value="${vo.mbIdx}" name="mbIdx">
+                	<input type="hidden" value="${mvo.memoIdx}" name="memoIdx">
                     <div class="memo_title">
                         <div class="mini_title">메모주제 선택(증상별 정보제공)</div>
                         <div>
@@ -82,6 +82,7 @@
                         <c:if test="${empty mvo.memoIdx}">
                             <input type="button" class="select_symptom_list" value="써클링"/>
                         </c:if>
+                        	<input type="hidden" class="" name="category">
                             <span class="material-symbols-outlined icon_down">
                                 keyboard_arrow_down
                             </span>
@@ -122,26 +123,26 @@
                                 <input class="file_name" value="" disabled>
                             </c:if>
                                 <label for="file" class="memo_upload">upload</label>
-                                <input name="memo_photo" type="file" id="file">
+                                <input name="file" type="file" id="file">
                             </div>
                         </div>
                         <div class="memo_write">
                             <div class="mini_title">메모하기</div>
                             <c:if test="${not empty mvo.memoContent}">
-	                            <textarea name="pet_memo" id="" cols="30" rows="10" spellcheck="false">${mvo.memoContent}</textarea>
+	                            <textarea name="memocontent" id="" cols="30" rows="10" spellcheck="false">${mvo.memoContent}</textarea>
                             </c:if>
                             <c:if test="${empty mvo.memoContent}">
-	                            <textarea name="pet_memo" id="" cols="30" rows="10" placeholder="최대 50자까지 입력이 가능합니다." spellcheck="false"></textarea>
+	                            <textarea name="memocontent" id="" cols="30" rows="10" placeholder="최대 50자까지 입력이 가능합니다." spellcheck="false"></textarea>
                             </c:if>
                         </div>
                         <c:if test="${not empty mvo.memoIdx}">
                         <div class="memo_update">
-	                        <a href="">수정</a>
+	                    	수정
 	                    </div>
                         </c:if>
                         <c:if test="${empty mvo.memoIdx}">
                         <div class="memo_save">
-                            <a href="">저장</a>
+                            저장
                         </div>
                         </c:if>
                     </div>
@@ -177,13 +178,13 @@
         });
 
         $(".memo_save").on("click", function(){
-        	$("#memo_form").attr("action", "${contextPath}/write");
+        	$("#memo_form").attr("action", "${contextPath}/memo/write");
             $("#memo_form").submit();
         });
         
         $(".memo_update").on("click", function(){
-        	$("#memo_form").attr("action", "${contextPath}/updatecom");
-        	$("memo_form").submit();
+        	$("#memo_form").attr("action", "${contextPath}/memo/updatecom");
+        	$("#memo_form").submit();
         });
 
     });

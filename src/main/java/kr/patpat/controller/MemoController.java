@@ -44,22 +44,26 @@ public class MemoController {
 
 	// 메모 작성
 	@PostMapping("/memo/write")
-	public String memoWrite(Memo memo, HttpServletRequest request, MultipartFile file)
+	public String memoWrite(@RequestParam HashMap<String, Object> param, HttpServletRequest request, MultipartFile file)
 			throws IllegalStateException, IOException {
-		String saveImgPath = request.getSession().getServletContext().getRealPath("/").concat("resources") + "/upload/";
-		String fileName = file.getOriginalFilename();
-
-		File saveFile = new File(saveImgPath, fileName);
-
-		file.transferTo(saveFile);
-
-		memo.setMemoPhotoName(fileName);
-		memo.setMemoPhotoPath("/upload/" + fileName);
-
-		Category cate = categoryMapper.selectCategory(memo.getMemoIdx());
-		memo.setCategoryIdx(cate.getCategoryIdx());
-
-		memoMapper.insertMemo(memo);
+		System.out.println("작성 들어왓다"+param.toString());
+		/*
+		 * String saveImgPath =
+		 * request.getSession().getServletContext().getRealPath("/").concat("resources")
+		 * + "/upload/"; String fileName = file.getOriginalFilename();
+		 * 
+		 * File saveFile = new File(saveImgPath, fileName);
+		 * 
+		 * file.transferTo(saveFile);
+		 * 
+		 * memo.setMemoPhotoName(fileName); memo.setMemoPhotoPath("/upload/" +
+		 * fileName);
+		 * 
+		 * Category cate = categoryMapper.selectCategory(memo.getMemoIdx());
+		 * memo.setCategoryIdx(cate.getCategoryIdx());
+		 * 
+		 * memoMapper.insertMemo(memo);
+		 */
 
 		return "redirect:/memo";
 	}
@@ -67,8 +71,6 @@ public class MemoController {
 	// 수정 페이지로 이동
 	@GetMapping("/memo/update")
 	public String memoUpdateForm(@RequestParam("memoIdx") String memoIdx, @RequestParam("date") String date, HttpSession session) {
-		System.out.println(memoIdx+date);
-		
 		
 		Memo memo = memoMapper.showMemo(memoIdx);
 		 

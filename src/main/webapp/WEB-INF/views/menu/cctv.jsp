@@ -17,6 +17,7 @@
     <script src="resources/js/my.js"></script>
 </head>
 <body class="record_bg">
+	<img src="http://127.0.0.1:5000/video_feed">
     <div class="wrapper">
         <div class="modal_overlay hide"></div>
         <div class="my_content">

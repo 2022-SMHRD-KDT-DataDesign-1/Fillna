@@ -178,13 +178,6 @@
 	    	$(".icon_more").next().addClass("hide");
 	    });
 	    
-	    $(document).on("click", ".icon_add_circle", function(){
-	    	var date = $(".today").next().val();
-	    	var url = "${contextPath}/memo?date"+date;
-	    	$(location).attr("href", url);
-	    });
-	    
-	    
 	    
 	    $(".date").on("click", function(e){
 	    	
@@ -326,14 +319,14 @@
     	var listHtml = "";
     	listHtml += "<div><span>메모</span>";
     	var date = $(".today").next().val(); 
-    	console.log(date);
-    	var addMemoUrl = "${contextPath}/memo?date="+date;
+    	var addMemoUrl = "${contextPath}/memo/show?date="+date;
     	listHtml += "<span class='material-symbols-outlined icon_add_circle' onclick='location.href=\""+addMemoUrl+"\"'>add_circle</span></div>";
     	listHtml += "<ul class='diary_middle_list'>";
     	
     	if (data.length > 0){
 	    	$.each(data, function(index, mInfo){
 	    		var ua = mInfo.memo_update_at;
+	    		var date = ua.year+"-"+ua.monthValue+"-"+ua.dayOfMonth;
 	    		var todayDate = new Date();
 	    		var updateDate = new Date(ua.year, ua.monthValue-1, ua.dayOfMonth, ua.hour, ua.minute);
 	    		var diff = Math.abs(todayDate.getTime() - updateDate.getTime());
@@ -352,7 +345,8 @@
 	    		}
 	    		listHtml += "<span class='material-symbols-outlined icon_more'>more_vert</span>";
 	    		listHtml += "<div class='memo_menu hide'><ul>";
-	    		var url = "${contextPath}/memo/update?memoIdx="+mInfo.memo_idx+"&date="+mInfo.memo_at;
+	    		var url = "${contextPath}/memo/update?memoIdx="+mInfo.memo_idx+"&date="+date;
+	    		console.log(typeof(url)+" "+url);
 	    		listHtml += "<li onclick='location.href=\""+url+"\"'>수정하기</li>";
 	    		listHtml += "<li onclick='deleteMemo("+mInfo.memo_idx+")'>삭제하기</li></ul></div>";
 	    		listHtml += "<img src='resources/images/cat.jpeg' alt=''>";

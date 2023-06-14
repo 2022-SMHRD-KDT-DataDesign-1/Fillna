@@ -42,10 +42,9 @@
                 </li>
 		        <li class="title">
 			       <%
-			       		String dateString = session.getAttribute("date");
-						out.print(date);				     	
-			       		SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				     	Date memoDate = dateFormat2.parse(dateString);
+			       		String dateString = (String)session.getAttribute("date");
+			       		SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
+ 				     	Date memoDate = dateFormat2.parse(dateString);
 				     	
 				        Calendar calendar = Calendar.getInstance();
 				        calendar.setTime(memoDate);

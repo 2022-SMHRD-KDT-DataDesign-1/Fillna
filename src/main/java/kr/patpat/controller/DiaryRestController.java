@@ -23,14 +23,14 @@ public class DiaryRestController {
 	@GetMapping("/diary-all")
 	public List<HashMap<String, Object>> diaryList(@RequestParam("mbIdx") String mbIdx, @RequestParam("petIdx") String petIdx, @RequestParam("date") String date){
 		List<HashMap<String, Object>> data = diaryMapper.selectAction(mbIdx, petIdx, date);
-		System.out.println(data.toString());
+		//System.out.println(data.toString());
 		return data;
 	};
 	
 	// 메모 목록
 	@GetMapping("/memo-all")
 	public List<HashMap<String, Object>> memoList(@RequestParam("mbIdx") String mbIdx, @RequestParam("date") String date){
-		System.out.println(mbIdx+" "+date);
+		//System.out.println(mbIdx+" "+date);
 		List<HashMap<String, Object>> data = diaryMapper.selectMemoList(mbIdx, date);
 		return data;
 	};

@@ -7,18 +7,30 @@
 		<result property="mbIdx" column="mb_idx"/>
 		<result property="categoryIdx" column="category_idx"/>
 		<result property="memoContent" column="memo_content"/>
-		<result property="photo" column="photo"/>
 		<result property="memoAt" column="memo_at"/>
 		<result property="memoUpdateAt" column="memo_update_at"/>
+		<result property="memoPhotoName" column="memo_photo_name"/>
+		<result property="memoPhotoPath" column="memo_photo_path"/>
 	</resultMap>
 
 	<select id="showMemo" parameterType="String" resultMap="memo">
-		select * from t_memo where memo_idx=#{idx}
+		select * from t_memo where memo_idx=#{memoIdx}
 	</select>
 	
 	<update id="updateMemo" parameterType="kr.patpat.entity.Memo">
-		update t_memo set memo_content=#{memoContent}, photo=#{photo}, memo_update_at=now() where memo_idx=#{memoIdx}
+		update t_memo set
+		category_idx=#{categoryIdx},
+		memo_content=#{memoContent},
+		memo_update_at=now(),
+		memo_photo_name=#{memoPhotoName},
+		memo_photo_path=#{memoPhotoPath}
+		where memo_idx=#{memoIdx}
 	</update>
+	
+	<insert id="insertMemo" parameterType="kr.patpat.entity.Memo">
+		insert into t_memo(mb_idx, category_idx, memo_content, memo_at, memo_update_at, memo_photo_name, memo_photo_path)
+		values(#{mbIdx}, #{categoryIdx}, #{memoContent}, now(), now(), #{memoPhotoName}, #{memoPhotoPath})
+	</insert>
 	
 	
 

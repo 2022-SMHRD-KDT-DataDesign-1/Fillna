@@ -326,7 +326,11 @@
     	if (data.length > 0){
 	    	$.each(data, function(index, mInfo){
 	    		var ua = mInfo.memo_update_at;
-	    		var date = ua.year+"-"+ua.monthValue+"-"+ua.dayOfMonth;
+	    		if(ua.monthValue >= 10){
+		    		var date = ua.year+"-"+ua.monthValue+"-"+ua.dayOfMonth;
+	    		} else {
+		    		var date = ua.year+"-0"+ua.monthValue+"-"+ua.dayOfMonth;
+	    		}
 	    		var todayDate = new Date();
 	    		var updateDate = new Date(ua.year, ua.monthValue-1, ua.dayOfMonth, ua.hour, ua.minute);
 	    		var diff = Math.abs(todayDate.getTime() - updateDate.getTime());

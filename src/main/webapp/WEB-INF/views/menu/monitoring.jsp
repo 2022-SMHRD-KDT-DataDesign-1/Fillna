@@ -58,6 +58,13 @@
 	width: 23vw !important;
     height: 23vw !important;
 }
+.video{
+    margin-bottom: 1.5vw;
+    cursor: pointer;
+    width: 35vw;
+    height: 20vw;
+    object-fit: cover;
+}
 	</style>
 </head>
 <body class="bg">
@@ -95,7 +102,7 @@
                         <p>최대 7일간 보관됩니다. 중요한 영상은 다운로드 해주세요.</p>
                     </div>
 
-                    <div class="monitoring_wrap">
+<%--                     <div class="monitoring_wrap">
                         <div class="alarm_date rec_date">
                             <img class="icon_check" src="resources/images/icon_check.png" alt="">
                             <span class="today">2023.06.01(목) - 오늘</span>
@@ -107,70 +114,15 @@
                             <ul class="">
                                 <li>
                                     <div>
-                                        <p> </p>
-                                        <p>14:11</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
-                                        <p> </p>
+                                        <video class="video" poster onclick="location.href='${contextPath}/resources/video/vomiting2.mp4';">
+                                        	<source src="${contextPath}/resources/video/vomiting2.mp4" type="video/mp4">
+                                        </video>
                                         <p>14:11</p>
                                     </div>
                                 </li>
                             </ul>
                         </div>
-                        
-                    </div>
-                    <div class="monitoring_wrap">
-                        <div class="alarm_date rec_date">
-                            <img class="icon_check" src="resources/images/icon_check.png" alt="">
-                            <span>2023.05.31(목)</span>
-                        </div>
-                    </div>
-                    <div class="monitoring_wrap">
-                        <div class="alarm_date rec_date">
-                            <img class="icon_check" src="resources/images/icon_check.png" alt="">
-                            <span>2023.05.30(수)</span>
-                        </div>
-                    </div>
-                    <div class="monitoring_wrap">
-                        <div class="alarm_date rec_date">
-                            <img class="icon_check" src="resources/images/icon_check.png" alt="">
-                            <span>2023.05.21(월)</span>
-                            <span class="material-symbols-outlined icon_up">
-                                    arrow_drop_up
-                            </span>
-                        </div>
-                        <div class="m_list">
-                            <ul class="">
-                                <li>
-                                    <div>
-                                        <p> </p>
-                                        <p>14:11</p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        
-                    </div>
-                	<div class="monitoring_wrap">
-                        <div class="alarm_date rec_date">
-                            <img class="icon_check" src="resources/images/icon_check.png" alt="">
-                            <span>2023.05.31(목)</span>
-                        </div>
-                    </div>
-                    <div class="monitoring_wrap">
-                        <div class="alarm_date rec_date">
-                            <img class="icon_check" src="resources/images/icon_check.png" alt="">
-                            <span>2023.05.31(목)</span>
-                        </div>
-                    </div>
-                    <div class="monitoring_wrap">
-                        <div class="alarm_date rec_date">
-                            <img class="icon_check" src="resources/images/icon_check.png" alt="">
-                            <span>2023.05.31(목)</span>
-                        </div>
-                    </div>
+                    </div> --%>
                 </div>
             </div>
 		<jsp:include page="../common/footer.jsp"></jsp:include>
@@ -204,7 +156,17 @@
 	        $('#qrcode').append(qr.createImgTag());
 	        
 	        load_alarm_cnt();
+	        load_week();
 	        load_record_list();
+	        
+/* 	        var time = 0;
+	        setTimeout(function(){
+	        	time = document.getElementsByClassName("video")[0].duration;
+	        	$('.video+p').text("00:"+parseInt(time));
+	        	console.log(time);
+	        },300); */
+	        
+	        
     	});
 	        			
         $(document).on("click","#open-modal",function(){
@@ -253,11 +215,107 @@
     			error : function(){alert("error2");}
     		});
     	}
-    	
+		
     	function record_list(data){
-    		console.log("성공");
     		console.log(data);
+    		var videoHtml = "";
+    		var day = "";
+    		var check = false;
+			var wrap = $('.monitoring_wrap');
+			var checkday = ['2023-06-08','2023-06-07','2023-06-06','2023-06-05','2023-06-04','2023-06-03','2023-06-02'];
+			var videoHtml_list = [];
+			/* 실시간 */
+			/* getCurrentWeek().forEach(function(day,idx,array){
+				checkday.push(day.split(" ")[0]);
+			})*/
+			data.push(data[0]);
+			$.each(data,function(idx,val){
+				var today = val.recordingAt.split(" ")[0];
+				if(day != today){
+					if(check){
+						videoHtml += "</ul></div>";
+						videoHtml_list.push(videoHtml+"+"+today);
+						videoHtml = "";
+						if(idx === data.length-1){
+							return false;
+						}
+					}
+					day = today;
+					videoHtml += '<div class="m_list">';
+					videoHtml += '<ul class="">';
+				}
+				videoHtml += '<li>';
+				videoHtml += '<div>';
+				videoHtml += '<video class="video" poster onclick="location.href=/controller'+val.recordingFile+'">';
+				videoHtml += '<source src="/controller'+val.recordingFile+'" type="video/mp4">';
+				videoHtml += '</video>';
+				videoHtml += '<p>14:11</p>';
+				videoHtml += '</div>';
+				videoHtml += '</li>';
+				check = true;
+			});
+			
+			
+			var tmp = videoHtml_list.splice(-1 , 1);
+			videoHtml_list.splice(0,0,tmp[0]);
+			for(var i = 0; i < 7; i++){
+				/* var week = $('.monitoring_wrap:nth-child('+i+')>.alarm_date>span:nth-last-child(2)').text().slice(0,10).replace(/\./g,"-"); */
+				var today = videoHtml_list[i].split("+")[1];
+				console.log(checkday[i]+"/"+today);
+				if(checkday[i] === today){
+					$('.monitoring_wrap:nth-child('+(i+1)+')').append(videoHtml_list[i].split("+")[0]).trigger("create");
+				}
+				
+			}
     	}
+    	
+    	function getCurrentWeek() {
+    		  var date = new Date();
+    		  var offset = date.getTimezoneOffset() * 60000;
+    		  var day = new Date(date.getTime() - offset);
+    		  var result = [day.toISOString().slice(0, 10)+" "+day.getDay()];
+    		  for (let i = 1; i < 7; i++) {
+    		    day.setTime(day.getTime() - 86400000);
+    		    result.push(day.toISOString().slice(0, 10)+" "+day.getDay());
+    		  }
+    		  return result;
+    		}
+    	
+    	function getToday(){
+    	    var date = new Date();
+    	    var year = date.getFullYear();
+    	    var month = ("0" + (1 + date.getMonth())).slice(-2);
+    	    var day = ("0" + date.getDate()).slice(-2);
+
+    	    return year +"-"+ month + "-"+ day;
+    	}
+    	
+    	function load_week(){
+    		const weekday = ['일','월','화','수','목','금','토'];
+    		var week = getCurrentWeek();
+    		var testWeek = ['2023-06-08 4','2023-06-07 3','2023-06-06 2','2023-06-05 1','2023-06-04 0','2023-06-03 6','2023-06-02 5'];
+    		var weekHtml = "";
+    		var today = getToday();
+    		for(var i = 0; i<week.length;i++){
+    			weekHtml += '<div class="monitoring_wrap">';
+    			weekHtml += '<div class="alarm_date rec_date">';
+    			weekHtml += '<img class="icon_check" src="resources/images/icon_check.png" alt="">';
+    			if(week[i].split(" ")[0] === today){
+    				weekHtml += '<span class="today">'+testWeek[i].split(" ")[0].replace(/-/g,".")+'('+weekday[testWeek[i].split(" ")[1]]+')';
+    				weekHtml += ' - 오늘</span>';
+    				weekHtml += '<span class="material-symbols-outlined icon_up today">';
+    			}else{
+    				weekHtml += '<span>'+testWeek[i].split(" ")[0].replace(/-/g,".")+'('+weekday[testWeek[i].split(" ")[1]]+')';
+    				weekHtml += '</span>';
+    				weekHtml += '<span class="material-symbols-outlined icon_up">';
+    			}
+    			weekHtml += 'arrow_drop_up</span></div></div>';
+    		}
+    		$('.monitoring_bottom').append(weekHtml).trigger("create");
+    		
+    	}
+    	
+    	
     </script>
 </body>
 </html>

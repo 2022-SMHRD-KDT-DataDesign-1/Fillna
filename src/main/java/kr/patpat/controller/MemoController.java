@@ -5,16 +5,20 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.activation.CommandMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.multi.MultiOptionPaneUI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import kr.patpat.entity.Category;
 import kr.patpat.entity.Memo;
@@ -44,9 +48,10 @@ public class MemoController {
 
 	// 메모 작성
 	@PostMapping("/memo/write")
-	public String memoWrite(@RequestParam HashMap<String, Object> param, HttpServletRequest request, MultipartFile file)
+	public String memoWrite(CommandMap commandMap, HttpServletRequest request, MultipartFile file)
 			throws IllegalStateException, IOException {
-		System.out.println("작성 들어왓다"+param.toString());
+		System.out.println("작성 들어왓다");
+		System.out.println(commandMap.getClass());
 		/*
 		 * String saveImgPath =
 		 * request.getSession().getServletContext().getRealPath("/").concat("resources")

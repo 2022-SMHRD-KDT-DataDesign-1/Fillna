@@ -12,5 +12,7 @@ public interface MemoMapper {
 	Memo showMemo(String idx);
 
 	void insertMemo(Memo memo);
+
+	void deleteMemo(int idx);
 }
 

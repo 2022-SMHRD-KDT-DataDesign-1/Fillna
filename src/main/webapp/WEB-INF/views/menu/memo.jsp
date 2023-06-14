@@ -82,7 +82,7 @@
                         <c:if test="${empty mvo.memoIdx}">
                             <input type="button" class="select_symptom_list" value="써클링"/>
                         </c:if>
-                        	<input type="hidden" class="" name="category">
+                        	<input type="hidden" class="sympton" name="category">
                             <span class="material-symbols-outlined icon_down">
                                 keyboard_arrow_down
                             </span>
@@ -166,6 +166,7 @@
 
         $(".sympton_list").children("li").children("button").on("click", function(e){
             selectBtn.val($(this).text());
+            $(".sympton").val($(this).text());
             $(".sympton_list").toggleClass("on");
             $(".icon_memo_up").toggleClass("hide");
             $(".icon_down").toggleClass("hide");

@@ -4,13 +4,16 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.patpat.entity.Recording;
 import kr.patpat.mapper.DiaryMapper;
+import kr.patpat.mapper.MemoMapper;
 
 @RequestMapping("/diary")
 @RestController
@@ -18,6 +21,9 @@ public class DiaryRestController {
 	
 	@Autowired
 	private DiaryMapper diaryMapper;
+	
+	@Autowired
+	private MemoMapper memoMapper;
 	
 	// 오늘의 일지
 	@GetMapping("/diary-all")
@@ -39,6 +45,12 @@ public class DiaryRestController {
 	public List<Recording> recordingList(){
 		return null;
 	};
+	
+	// 메모삭제
+	@DeleteMapping("/{idx}")
+	public void boardDelete(@PathVariable("idx") int idx) {
+		memoMapper.deleteMemo(idx);
+	}
 	
 	
 	

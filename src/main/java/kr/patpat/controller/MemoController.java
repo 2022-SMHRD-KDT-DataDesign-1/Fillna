@@ -39,7 +39,7 @@ public class MemoController {
 	public String memo(@RequestParam("date") String date, HttpSession session) {
 		session.setAttribute("date", date);
 
-		return "menu/memo";
+		return "redirect:/memo";
 	}
 
 	// 메모 작성
@@ -69,17 +69,15 @@ public class MemoController {
 	public String memoUpdateForm(@RequestParam("memoIdx") String memoIdx, @RequestParam("date") String date, HttpSession session) {
 		System.out.println(memoIdx+date);
 		
-		/*
-		 * Memo memo = memoMapper.showMemo(param.get("memoIdx"));
-		 * 
-		 * Category cate = categoryMapper.selectCategory(memo.getCategoryIdx()); String
-		 * category = cate.getCategoryName();
-		 * 
-		 * session.setAttribute("mvo", memo); session.setAttribute("category",category);
-		 * session.setAttribute("date", param.get("date"));
-		 */
+		
+		Memo memo = memoMapper.showMemo(memoIdx);
 		 
-
+		Category cate = categoryMapper.selectCategory(memo.getCategoryIdx()); String
+		category = cate.getCategoryName();
+		 
+		session.setAttribute("mvo", memo); session.setAttribute("category",category);
+		session.setAttribute("date", date);
+		 
 		return "redirect:/memo";
 	}
 

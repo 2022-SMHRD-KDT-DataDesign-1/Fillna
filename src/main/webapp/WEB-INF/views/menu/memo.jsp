@@ -63,7 +63,7 @@
 			       <span class="material-symbols-outlined icon_back" onclick="">
 			            arrow_back
 			       </span>
-			       <span>메모하기 - <%=month%>월 <%=dateString.substring(8, 10)%>일</span>
+			       <span>메모하기 - <%=month%>월 <%=dateString.substring(8)%>일</span>
 			       <span><%=weekDays[dayOfWeek - 1]%>요일</span>
 		        </li>
 	        </ul>
@@ -80,7 +80,7 @@
                             <input type="button" class="select_symptom_list" value="${category}"/>
                         </c:if>
                         <c:if test="${empty mvo.memoIdx}">
-                            <input type="button" class="select_symptom_list" value="다시해"/>
+                            <input type="button" class="select_symptom_list" value="써클링"/>
                         </c:if>
                             <span class="material-symbols-outlined icon_down">
                                 keyboard_arrow_down

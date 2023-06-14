@@ -17,7 +17,6 @@
     <script src="resources/js/my.js"></script>
 </head>
 <body class="record_bg">
-	<img src="http://222.102.104.176:5000/video_feed">
     <div class="wrapper">
         <div class="modal_overlay hide"></div>
         <div class="my_content">
@@ -105,12 +104,13 @@
             </div>
         </header>
         <!-- info -->
-        <div class="record_message">
+        <img class="cctv_video" src="http://222.102.104.176:5000/video_feed" >
+        <!-- <div class="record_message">
             <div>
                 <p>CCTV 영상 수신이 고르지 못합니다.</p>
                 <p>네트워크를 확인해주세요.</p>
             </div>
-        </div>
+        </div> -->
         <!-- bottom menu -->
         <div class="record_bottom">
             <div>

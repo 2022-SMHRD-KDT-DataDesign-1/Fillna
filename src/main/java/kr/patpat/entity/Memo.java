@@ -16,11 +16,13 @@ public class Memo {
 	
 	private String memoContent;
 	
-	private String photo;
-	
 	private String memoAt;
 	
 	private String memoUpdateAt;
+	
+	private String memoPhotoName;
+	
+	private String memoPhotoPath;
 
 	public String getMemoIdx() {
 		return memoIdx;
@@ -54,14 +56,6 @@ public class Memo {
 		this.memoContent = memoContent;
 	}
 
-	public String getPhoto() {
-		return photo;
-	}
-
-	public void setPhoto(String photo) {
-		this.photo = photo;
-	}
-
 	public String getMemoAt() {
 		return memoAt;
 	}
@@ -76,6 +70,22 @@ public class Memo {
 
 	public void setMemoUpdateAt(String memoUpdateAt) {
 		this.memoUpdateAt = memoUpdateAt;
+	}
+
+	public String getMemoPhotoName() {
+		return memoPhotoName;
+	}
+
+	public void setMemoPhotoName(String memoPhotoName) {
+		this.memoPhotoName = memoPhotoName;
+	}
+
+	public String getMemoPhotoPath() {
+		return memoPhotoPath;
+	}
+
+	public void setMemoPhotoPath(String memoPhotoPath) {
+		this.memoPhotoPath = memoPhotoPath;
 	}
 
 	

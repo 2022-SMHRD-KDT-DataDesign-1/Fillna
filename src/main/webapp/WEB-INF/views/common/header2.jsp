@@ -69,11 +69,7 @@
                 
                 <!-- memo header -->
                 <li class="title hide">
-                    <span class="material-symbols-outlined icon_back" onclick="history:back">
-                        arrow_back
-                    </span>
-                    <span>메모하기 - 6월 1일</span>
-                    <span>목요일</span>
+
                 </li>
                 
                 

@@ -135,6 +135,7 @@
 <script>
 	$(document).ready(function(e) {
 		loadDiary();
+		loadMemo();
 		
     	$(".diary_header").toggleClass("hide");
     	$("#diary_footer").toggleClass("this_menu");
@@ -171,10 +172,22 @@
 	    
 	    $(document).on("click", ".icon_more", function(){
 	    	$(this).next().toggleClass("hide");
-	    })
-	   
+	    });
+	    
+	    $("body").click(function(){
+	    	$(".icon_more").next().addClass("hide");
+	    });
+	    
+	    $(document).on("click", ".icon_add_circle", function(){
+	    	var date = $(".today").next().val();
+	    	var url = "${contextPath}/memo?date"+date;
+	    	$(location).attr("href", url);
+	    });
+	    
+	    
 	    
 	    $(".date").on("click", function(e){
+	    	
 	    	if($(this).hasClass("today")===true){
 	    		e.preventDefault();
 	    	} else{
@@ -194,6 +207,15 @@
 	    		success : showDiary,
 	    		error : function(){alert("error");}
 	    	})
+	    	
+	        $.ajax({
+    		url : "diary/memo-all",
+    		type : "get",
+    		data : {"mbIdx":mbIdx, "date":date},
+    		dataType : "json",
+    		success : showMemo,
+    		error : function(){alert("error");}
+    		})
 	    });
     });
     
@@ -286,7 +308,7 @@
     };
     
     // 메모 목록
-    function loadMemo(){
+	function loadMemo(){
     	var mbIdx = $("#memId").val();
     	var date = $(".today").next().val();
     	
@@ -298,29 +320,51 @@
     		success : showMemo,
     		error : function(){alert("error");}
     	})
-    }
+    };
     
     function showMemo(data){
     	var listHtml = "";
     	listHtml += "<div><span>메모</span>";
-    	listHtml += "<span class='material-symbols-outlined icon_add_circle'>add_circle</span></div>";
+    	var date = $(".today").next().val(); 
+    	console.log(date);
+    	var addMemoUrl = "${contextPath}/memo?date="+date;
+    	listHtml += "<span class='material-symbols-outlined icon_add_circle' onclick='location.href=\""+addMemoUrl+"\"'>add_circle</span></div>";
     	listHtml += "<ul class='diary_middle_list'>";
-    	$.each(data, function(index, mInfo){
-    		listHtml += "<li><div>"
-    		listHtml += "<span>"+mInfo.category_name+"</span>";
-    		listHtml += "<span>"+mInfo.memo_update_at+"</span>";
-    		listHtml += "<span class='material-symbols-outlined icon_more'>more_vert</span>";
-    		listHtml += "<div class='memo_menu hide'><ul>";
-    		var loc = "/memo/update?idx="+mIinfo.mem_idx;
-    		listHtml += "<li onclick='location.href="+loc+"'>수정하기</li>";
-    		listHtml += "<li onclick='deleteMemo("+mInfo.memo_idx+")'>삭제하기</li></ul></div>";
-    		listHtml += "<img src='resources/images/cat.jpeg' alt=''>";
-    		listHtml += "<p>"+mInfo.memo_content+"</p></div>";
-    		listHtml += "</li>";
-    	});
+    	
+    	if (data.length > 0){
+	    	$.each(data, function(index, mInfo){
+	    		var ua = mInfo.memo_update_at;
+	    		var todayDate = new Date();
+	    		var updateDate = new Date(ua.year, ua.monthValue-1, ua.dayOfMonth, ua.hour, ua.minute);
+	    		var diff = Math.abs(todayDate.getTime() - updateDate.getTime());
+	    		diff = Math.round(diff / (1000 * 60));
+	    		
+	    		listHtml += "<li class='memo_list_content'><div>"
+	    		listHtml += "<span>"+mInfo.category_name+"</span>";
+	    		if(diff<60){
+		    		listHtml += "<span>"+diff+"분전</span>";
+	    		} else if(diff>=60 && diff<1440){
+	    			diff = Math.round(diff/60);
+		    		listHtml += "<span>"+diff+"시간전</span>";
+	    		} else if(diff>=1440){
+	    			diff = Math.round(diff/60/24);
+		    		listHtml += "<span>"+diff+"일전</span>";
+	    		}
+	    		listHtml += "<span class='material-symbols-outlined icon_more'>more_vert</span>";
+	    		listHtml += "<div class='memo_menu hide'><ul>";
+	    		var url = "${contextPath}/memo/update?memoIdx="+mInfo.memo_idx+"&date="+mInfo.memo_at;
+	    		listHtml += "<li onclick='location.href=\""+url+"\"'>수정하기</li>";
+	    		listHtml += "<li onclick='deleteMemo("+mInfo.memo_idx+")'>삭제하기</li></ul></div>";
+	    		listHtml += "<img src='resources/images/cat.jpeg' alt=''>";
+	    		listHtml += "<p>"+mInfo.memo_content+"</p></div>";
+	    		listHtml += "</li>";
+	    	});
+    	} else {
+    		listHtml += "<div class='memo_none'>작성된 메모가 없습니다.</div>";
+    	}
     	listHtml += "</ul>";
     	$(".diary_middle").html(listHtml);
-    }
+    };
     
     function deleteMemo(idx){
 		$.ajax({
@@ -330,8 +374,7 @@
 			success : showMemo,
 			error : function () { alert("error"); }
 		});	
-    }
-    
+    };
    
 
 </script>

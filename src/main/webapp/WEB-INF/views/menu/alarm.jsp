@@ -11,9 +11,7 @@
     <link rel="stylesheet" href="resources/css/reset.css">
     <link rel="stylesheet" href="resources/css/substyle.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!--     <script src="resources/js/alarm.js"></script> -->
 </head>
 <body class="bg">
     <div class="wrapper">
@@ -22,49 +20,6 @@
         <!-- content -->
         <div>
             <div class="con con_alarm">
-<!--                 <div class="alarm_wrap">
-                    <div class="alarm_date">
-                        <img class="icon_check" src="resources/images/icon_check.png" alt="">
-                        <span class="today">2023.06.01(목) - 오늘</span>
-                    </div>
-                    <div class="alaram_list_wrap">
-                        <ul class="alaram_list">
-                            <li>
-                                <span>17:10</span>
-                                <span class="material-symbols-outlined icon_circle yel circle">
-                                    circle
-                                </span>
-                                <span class="alarm_type">[주의]</span>
-                                <span>- 구토 2회</span>
-                                <span class="material-symbols-outlined icon_up">
-                                    arrow_drop_up
-                                </span>
-                            </li>
-                            <div class="alarm_detail">
-                                <div class="alarm_title">
-                                    <span class="alarm_type">[주의]</span>
-                                    나비가 17:10분에 구토를 2회 하였습니다.
-                                </div>
-                                <div class="alarm_content">
-                                    잦은 구토의 원인은 헤어볼 잦은 구토의 원인은 헤어볼 잦은 구토의 원인은 헤어볼
-                                </div>
-                                <div class="alarm_go">
-                                    <a href="#">
-                                        이상행동 녹화영상
-                                        <span class="material-symbols-outlined icon_alarm_go">
-                                            chevron_right
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- 더보기 -->
-<!--                 <div class="btn_more_wrap">
-                    <button class="btn_more">더보기</button>
-                </div> -->
             </div>
             <!-- bottom -->
 			<jsp:include page="../common/footer.jsp"></jsp:include>
@@ -73,18 +28,32 @@
     </div>
 </div>
 <script type= "text/javascript">
-
+var cnt = 0;
+var data_len = 0;
 $(document).ready(function(e) {
 		
-	    load_alarm();
+	   
+		load_alarm();
 		$(".alarm_header").toggleClass("hide");
-    
-	    $(document).on("click","li", function(e){
-	    	console.log("click");
-	    	$(this).children(".icon_up").toggleClass("hide");
-	    	$(this).next().toggleClass("hide");
-	    })
 
+	    $(document).on("click",".alaram_list > li", function(e){
+	    	console.log("click");
+    		$(this).children(".icon_up").toggleClass("hide");
+	    	$(this).next().toggleClass("hide");
+	    });
+	    
+
+	    $(document).on("click",".btn_more", function(e){
+	    	if(parseInt(data_len / 10) === 0){
+		    	$(".alarm_wrap").slice(cnt,cnt+data_len).toggleClass("hide");
+		    	$(this).toggleClass("hide");
+		    }else{
+		    	$(".alarm_wrap").slice(cnt,cnt+10).toggleClass("hide");
+		    	data_len -= 10;
+		    	cnt += 10;
+		    }
+	    });
+	    
 	});
 	
 /* C61A727500F311EE875C0242AC14000B */	
@@ -126,7 +95,7 @@ function makeview(data){
 	var check = false;
 	var data_day = [];
 	var index = 0;
-	for(var i = 0; i < data.length;i++){
+/*  	for(var i = 0; i < data.length;i++){
 		var today = data[i].alarm_at.split(" ")[0];
 		if(day != today){
 			if(day != ""){
@@ -136,13 +105,15 @@ function makeview(data){
 			day = today;
 		}
 	}
-	data_day.push(data.slice(index,data.length));
-	if(data_day.length >= 10){
+	data_day.push(data.slice(index,data.length)); */
+/*  	if(data_day.length >= 10){
 		const flattenedArray = data_day.splice(0,10).reduce((previousValue, currentValue) => {
 			return previousValue.concat(currentValue);
 		});
 		data = flattenedArray;
-	}  
+ 	} */
+	var first_detail = true;
+	
 	$.each(data, function(idx, val){
         var today = val.alarm_at.split(" ")[0];
         var time = val.alarm_at.split(" ")[1].slice(0,5);
@@ -152,7 +123,7 @@ function makeview(data){
 				list_html += '</ul></div></div>';
 				check = false;
 			}
-			list_html += '<div class="alarm_wrap">';
+			list_html += '<div class="alarm_wrap hide">';
 			list_html += '<div class="alarm_date">';
 			list_html += '<img class="icon_check" src="resources/images/icon_check.png" alt="">';
 			if('2023-06-08' === today){ /* 오늘이라면 */
@@ -180,9 +151,20 @@ function makeview(data){
 		}else{
 			list_html += '<span class="a_alarm_type">['+val.alarm_type +']</span>';
 		}
+
+		if(first_detail){
+			list_html += '<span class="material-symbols-outlined icon_up">arrow_drop_up</span></li>';
+			
+		}else{
+			list_html += '<span class="material-symbols-outlined icon_up hide">arrow_drop_up</span></li>';
+		} 
 		
-		list_html += '<span class="material-symbols-outlined icon_up hide">arrow_drop_up</span></li>';
-		list_html += '<div class="alarm_detail hide">';
+		if(first_detail){
+			list_html += '<div class="alarm_detail first_detail">';
+			first_detail =false;
+		}else{
+			list_html += '<div class="alarm_detail hide">';
+		} 
 		list_html += '<div class="alarm_title">';
 		if(val.alarm_type != "일지"){
 			list_html += '<span class="alarm_type">['+val.alarm_type+']</span>';
@@ -203,13 +185,21 @@ function makeview(data){
 		list_html += '</a></div></div>';
 		check = true;
 	});
+	var button = "";
 	$('.con_alarm').prepend(list_html).trigger("create");
-	console.log($('.alarm_wrap').length);
+	if(data.length >= 10){
+		button += '<div class="btn_more_wrap">';
+        button += '<button class="btn_more">더보기</button>';
+        button += '</div>';
+        $('.alarm_wrap').slice(0,10).toggleClass("hide");
+        cnt = 10;
+        data_len = $('.alarm_wrap').length-10;
+	}else{
+		$('.alarm_wrap').toggleClass("hide");
+	}
+	$('.con_alarm').append(button).trigger("create");
 	
-	/* <div class="btn_more_wrap">
-    <button class="btn_more">더보기</button>
-	</div> */
-
+	
 }
 
 		

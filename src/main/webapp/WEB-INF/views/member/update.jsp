@@ -149,7 +149,7 @@ $(function(){
 	});
 		
 	$("#file").change(function(){
-	    let fileName = $("#file").val();
+		var fileName = $(this).val().toString().split('/').pop().split('\\').pop();
 	    $(".file_name").val(fileName);
 	});
 	

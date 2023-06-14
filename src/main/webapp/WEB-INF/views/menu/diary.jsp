@@ -179,11 +179,14 @@
 	    });
 	    
 	    $(document).on("click", ".icon_add_circle", function(){
-	    	$(location).attr('href','${contextPath}/memo');
+	    	var date = $(".today").next().val();
+	    	var url = "${contextPath}/memo?date"+date;
+	    	$(location).attr("href", url);
 	    });
 	    
+	    
+	    
 	    $(".date").on("click", function(e){
-	    	
 	    	
 	    	if($(this).hasClass("today")===true){
 	    		e.preventDefault();
@@ -322,14 +325,16 @@
     function showMemo(data){
     	var listHtml = "";
     	listHtml += "<div><span>메모</span>";
-    	listHtml += "<span class='material-symbols-outlined icon_add_circle'>add_circle</span></div>";
+    	var date = $(".today").next().val(); 
+    	console.log(date);
+    	var addMemoUrl = "${contextPath}/memo?date="+date;
+    	listHtml += "<span class='material-symbols-outlined icon_add_circle' onclick='location.href=\""+addMemoUrl+"\"'>add_circle</span></div>";
     	listHtml += "<ul class='diary_middle_list'>";
-    	
-    	var todayDate = new Date;
     	
     	if (data.length > 0){
 	    	$.each(data, function(index, mInfo){
 	    		var ua = mInfo.memo_update_at;
+	    		var todayDate = new Date();
 	    		var updateDate = new Date(ua.year, ua.monthValue-1, ua.dayOfMonth, ua.hour, ua.minute);
 	    		var diff = Math.abs(todayDate.getTime() - updateDate.getTime());
 	    		diff = Math.round(diff / (1000 * 60));
@@ -347,7 +352,7 @@
 	    		}
 	    		listHtml += "<span class='material-symbols-outlined icon_more'>more_vert</span>";
 	    		listHtml += "<div class='memo_menu hide'><ul>";
-	    		var url = "${contextPath}/memo/update?memoIdx="+mInfo.memo_idx;
+	    		var url = "${contextPath}/memo/update?memoIdx="+mInfo.memo_idx+"&date="+mInfo.memo_at;
 	    		listHtml += "<li onclick='location.href=\""+url+"\"'>수정하기</li>";
 	    		listHtml += "<li onclick='deleteMemo("+mInfo.memo_idx+")'>삭제하기</li></ul></div>";
 	    		listHtml += "<img src='resources/images/cat.jpeg' alt=''>";

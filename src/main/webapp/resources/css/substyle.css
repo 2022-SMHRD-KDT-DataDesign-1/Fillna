@@ -161,7 +161,8 @@ body{font-family: 'Pretendard';}
         }
 
         /* alarm content */
-        .con_alarm{background:url("../images/line.png") no-repeat;background-position: 8vw 9vw; margin-bottom:20vw;}
+        .red2{background:red;}
+        .con_alarm{background:url("../images/line.png") no-repeat;background-position: 8vw 9vw; margin-bottom:20vw;    background-size: 0.05vw 100%;}
         .alarm_wrap{margin-bottom: 5vw;}
         .icon_check{vertical-align: middle; width: 4.5vw;}
         .alarm_date{overflow: hidden; vertical-align: middle;}
@@ -177,8 +178,8 @@ body{font-family: 'Pretendard';}
         .alaram_list > li > span:nth-child(1){ margin-right: 8vw;}
         .alaram_list > li > span:nth-child(3){left: 19vw;top: 0;}
         .a_alarm_type{position: absolute;left: 19vw;top: 0;}
-        .icon_up{font-size: 6vw !important; vertical-align: middle;}
-        .alarm_detail{padding:5vw; margin: 0 0 6vw 0; width: 100%; border: 1px solid #d2d2d2; border-radius: 15px; background-color: #fff; font-size: 3.8vw; box-sizing: border-box;}
+        .icon_up{font-size: 6vw !important; vertical-align: middle;position: absolute;right: 0;top: -0.5vw;}
+        .alarm_detail{padding: 5vw;margin: 0 0 6vw 6vw;width: 94%;border: 1px solid #d2d2d2;border-radius: 15px;background-color: #fff;font-size: 3.8vw;box-sizing: border-box;line-height: 1.2;text-align:justify;}
         .alarm_title{font-weight: 700; color:#5e5e5e;}
         .alarm_content{padding:2vw 0 2vw 0; font-weight: 300;}
         .alarm_content>span{color:#ff0000; font-weight: 500;}
@@ -235,7 +236,7 @@ body{font-family: 'Pretendard';}
           .today_ment2{color: #696969;position: absolute;width: 88vw;overflow: hidden;top: 63.5vw;}
           .today_ment2 > img{float: left;width: 17vw;}
           .today_ment2 > p{float: right;width: 67vw;margin-top: 6vw;font-size: 3.5vw;line-height: 1.15;}
-          .diary_top > ul{margin-top: 60vw;background: url(../images/line.png) no-repeat;background-position: 15.5vw 1vw;background-size: 0.3vw 53vw;}
+          .diary_top > ul{margin-top: 60vw;background: url(../images/line.png) no-repeat;background-position: 15.5vw 1vw; background-size: 0.05vw 98%;}
           .diary_top>ul>li{margin-left:2vw}
           .diary_alarm_type{}
 

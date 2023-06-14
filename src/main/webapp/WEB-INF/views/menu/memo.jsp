@@ -42,9 +42,9 @@
                 </li>
 		        <li class="title">
 			       <%
-				     	Memo mvo = (Memo)session.getAttribute("mvo");
-				     	String dateString = mvo.getMemoAt();
-				     	SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			       		String dateString = session.getAttribute("date");
+						out.print(date);				     	
+			       		SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				     	Date memoDate = dateFormat2.parse(dateString);
 				     	
 				        Calendar calendar = Calendar.getInstance();
@@ -71,7 +71,9 @@
         </header>
         <div class="content">
             <div class="con">
-                <form action="#" method="post" id="memo_form">
+                <form action="${contextPath}/write" method="post" id="memo_form" enctype="multipart/form-data">
+                <input type="hidden" value="${mvo.mbIdx}" name="mbIdx">
+                <input type="hidden" value="${mvo.memoIdx}" name="memoIdx">
                     <div class="memo_title">
                         <div class="mini_title">메모주제 선택(증상별 정보제공)</div>
                         <div>
@@ -114,7 +116,12 @@
                         <div class="memo_photo">
                             <div class="mini_title">사진 업로드</div>
                             <div class="file_wrap">
+                            <c:if test="${not empty mvo.memoContent}">
+                                <input class="file_name" value="${mvo.memoPhotoName}" disabled>
+                            </c:if>
+                            <c:if test="${empty mvo.memoContent}">
                                 <input class="file_name" value="" disabled>
+                            </c:if>
                                 <label for="file" class="memo_upload">upload</label>
                                 <input name="memo_photo" type="file" id="file">
                             </div>
@@ -128,9 +135,16 @@
 	                            <textarea name="pet_memo" id="" cols="30" rows="10" placeholder="최대 50자까지 입력이 가능합니다." spellcheck="false"></textarea>
                             </c:if>
                         </div>
+                        <c:if test="${not empty mvo.memoIdx}">
+                        <div class="memo_update">
+	                        <a href="">수정</a>
+	                    </div>
+                        </c:if>
+                        <c:if test="${empty mvo.memoIdx}">
                         <div class="memo_save">
                             <a href="">저장</a>
                         </div>
+                        </c:if>
                     </div>
                 </form>
             </div>
@@ -164,8 +178,14 @@
         });
 
         $(".memo_save").on("click", function(){
+        	$("#memo_form").attr("action", "${contextPath}/write");
             $("#memo_form").submit();
-        })
+        });
+        
+        $(".memo_update").on("click", function(){
+        	$("#memo_form").attr("action", "${contextPath}/updatecom");
+        	$("memo_form").submit();
+        });
 
     });
 </script>

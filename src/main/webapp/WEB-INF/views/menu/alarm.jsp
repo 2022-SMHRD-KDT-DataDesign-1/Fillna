@@ -11,9 +11,7 @@
     <link rel="stylesheet" href="resources/css/reset.css">
     <link rel="stylesheet" href="resources/css/substyle.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!--     <script src="resources/js/alarm.js"></script> -->
 </head>
 <body class="bg">
     <div class="wrapper">
@@ -37,13 +35,14 @@ $(document).ready(function(e) {
 	   
 		load_alarm();
 		$(".alarm_header").toggleClass("hide");
-    
-	    $(document).on("click","li", function(e){
+
+	    $(document).on("click",".alaram_list > li", function(e){
 	    	console.log("click");
-	    	$(this).children(".icon_up").toggleClass("hide");
+    		$(this).children(".icon_up").toggleClass("hide");
 	    	$(this).next().toggleClass("hide");
 	    });
 	    
+
 	    $(document).on("click",".btn_more", function(e){
 	    	if(parseInt(data_len / 10) === 0){
 		    	$(".alarm_wrap").slice(cnt,cnt+data_len).toggleClass("hide");
@@ -152,10 +151,16 @@ function makeview(data){
 		}else{
 			list_html += '<span class="a_alarm_type">['+val.alarm_type +']</span>';
 		}
-		
-		list_html += '<span class="material-symbols-outlined icon_up hide">arrow_drop_up</span></li>';
+
 		if(first_detail){
-			list_html += '<div class="alarm_detail">';
+			list_html += '<span class="material-symbols-outlined icon_up">arrow_drop_up</span></li>';
+			
+		}else{
+			list_html += '<span class="material-symbols-outlined icon_up hide">arrow_drop_up</span></li>';
+		} 
+		
+		if(first_detail){
+			list_html += '<div class="alarm_detail first_detail">';
 			first_detail =false;
 		}else{
 			list_html += '<div class="alarm_detail hide">';

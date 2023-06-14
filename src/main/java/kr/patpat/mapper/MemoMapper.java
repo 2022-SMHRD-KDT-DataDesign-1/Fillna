@@ -11,6 +11,6 @@ public interface MemoMapper {
 
 	Memo showMemo(String idx);
 
-	String selectCategory(String memoIdx);
+	void insertMemo(Memo memo);
 }
 

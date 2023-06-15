@@ -50,8 +50,12 @@
     border-radius: 2vw;
 	padding: 3.5vw;
 	position:relative;
-	width: 60vw;
+	width: 50vw;
 	box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 #qrcode>img{
@@ -67,6 +71,13 @@
 }
 .m_list>ul {
 	overflow : auto;
+}
+.material-symbols-outlined{
+	position : relative;
+}
+#qrcode>span:nth-child(1){
+    font-size: 4vw;
+    order: 1;
 }
 	</style>
 </head>
@@ -134,6 +145,7 @@
 	<div id="modal">
 		<div class="modal-content">
 			<div id="qrcode">
+				<span>QR코드를 찍어주세요!</span>
 				<button id="close_btn" class="close-modal">
 					<span class="material-symbols-outlined icon_close">
 	                    close
@@ -164,12 +176,8 @@
 	        load_week();
 	        load_record_list();
 	        
-	        var video = document.querySelectorAll(".video");
-	        for(var i =0; i < video.length; i++){
-	        	video[i].addEventListener('loadedmetadata',function(){
-	        		console.log($(this).duration);
-	        	})
-	        }
+
+
 			
 	        
 	        
@@ -260,7 +268,7 @@
 				videoHtml += '<video class="video" poster onclick="location.href=\''+'/controller'+val.recordingFile+'\'">';
 				videoHtml += '<source src="/controller'+val.recordingFile+'" type="video/mp4">';
 				videoHtml += '</video>';
-				videoHtml += '<p>14:11</p>';
+				/* videoHtml += '<p>14:11</p>'; */
 				videoHtml += '</div>';
 				videoHtml += '</li>';
 				check = true;
@@ -273,7 +281,13 @@
 						$('.monitoring_wrap:nth-last-child('+(j)+')').append(videoHtml_list[6-(j-1)].split("+")[0]).trigger("create");
 					}
 				}
-			
+			}
+			for(var i = 1; i< 8; i++){
+				if($('.monitoring_wrap:nth-last-child('+(8-i)+')>.m_list').length === 0){
+					$('.monitoring_wrap:nth-last-child('+(8-i)+')').append("<p>저장된 동영상이 없습니다.</p>").trigger("create");
+					
+				}
+				
 			}
 		}
     	
@@ -316,7 +330,7 @@
     			}else{
     				weekHtml += '<span>'+testWeek[i].split(" ")[0].replace(/-/g,".")+'('+weekday[testWeek[i].split(" ")[1]]+')';
     				weekHtml += '</span>';
-    				weekHtml += '<span class="material-symbols-outlined icon_up">';
+    				weekHtml += '<span class="material-symbols-outlined icon_up hide">';
     			}
     			weekHtml += 'arrow_drop_up</span></div></div>';
     		}

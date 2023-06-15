@@ -4,8 +4,6 @@
 
 	<resultMap type="kr.patpat.entity.Member" id="member">
 		<result property="mbIdx" column="mb_idx"/>
-		<result property="mbToken" column="mb_token"/>
-		<result property="mbName" column="mb_name"/>
 		<result property="mbNick" column="mb_nick"/>
 		<result property="mbEmail" column="mb_email"/>
 		<result property="mbPhone" column="mb_phone"/>
@@ -23,11 +21,12 @@
 		<result property="petPhoto" column="pet_photo"/>
 		<result property="mbIdx" column="mb_idx"/>
 		<result property="petGender" column="pet_gender"/>
+		<result property="petPhotoPath" column="pet_photo_path"/>
 	</resultMap>
 
 	<insert id="join" parameterType="java.util.HashMap">
-		insert into t_member (mb_token, mb_name, mb_nick, mb_email, mb_phone, mb_profile, mb_alarm, mb_join_at, mb_update_at, admin_yn) 
-		values ('1', '1', #{nickname}, #{email}, '01012345678', '1', null, NOW(), NOW(), 'N');
+		insert into t_member (mb_nick, mb_email, mb_phone, mb_profile, mb_alarm, mb_join_at, mb_update_at, admin_yn) 
+		values (#{nickname}, #{email}, #{phonenumeber}, #{profileImg}, '00:00', NOW(), NOW(), 'N');
 	</insert>
    
 	<select id="selectMember" parameterType="java.util.HashMap" resultMap="member">
@@ -39,20 +38,25 @@
 	</select>
 	
 	<select id="selectPet" parameterType="String" resultMap="pet">
-		select pet_idx, pet_name, pet_adoption_at, pet_photo, mb_idx, pet_gender from t_pet where mb_idx=#{mbIdx}
+		select * from t_pet where mb_idx=#{mbIdx}
 	</select>
    
 	<insert id="joinPet" parameterType="kr.patpat.entity.Member">
-		insert into t_pet(pet_name, pet_adoption_at, pet_photo, mb_idx, pet_gender) 
-		values('pet', null, null, #{mbIdx}, null)
+		insert into t_pet(pet_name, pet_adoption_at, pet_photo, mb_idx, pet_gender, pet_photo_path) 
+		values('pet', null, null, #{mbIdx}, null, null)
 	</insert>
 	
 	<update id="setAlarm" parameterType="java.util.HashMap">
 		update t_member set mb_alarm=#{mb_alarm} where mb_idx=#{mb_idx}
 	</update>
    
-	<update id="setPet" parameterType="java.util.HashMap">
-		update t_pet set pet_name=#{pet_name}, pet_adoption_at=#{pet_adoption_at}, pet_photo=#{pet_photo}, pet_gender=#{pet_gender} where mb_idx=#{mb_idx}
+	<update id="setPet" parameterType="kr.patpat.entity.Pet">
+		update t_pet set pet_name=#{petName},
+		pet_adoption_at=#{petAdoptionAt},
+		pet_photo=#{petPhoto},
+		pet_gender=#{petGender},
+		pet_photo_path=#{petPhotoPath}
+		where mb_idx=#{mbIdx}
 	</update>
 	
 </mapper>

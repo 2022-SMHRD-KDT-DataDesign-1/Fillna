@@ -7,7 +7,7 @@ import kr.patpat.entity.Category;
 @Mapper
 public interface CategoryMapper {
 	
-	Category selectCategory(String memoIdx);
+	Category selectCategory(String categoryName);
 
 	
 }

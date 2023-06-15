@@ -135,7 +135,7 @@
 <script>
 	$(document).ready(function(e) {
 		loadDiary();
-		loadMemo();
+		/* loadMemo(); */
 		
     	$(".diary_header").toggleClass("hide");
     	$("#diary_footer").toggleClass("this_menu");
@@ -163,6 +163,31 @@
 	        $(".date_ul").css("transform", "translate(" + -limit + "px, 0px)");
 	        }
 	    });
+	    
+	    var x1 = 0;
+	    var tabx1 = 0;
+	    var xx1 = 0;
+	    var limit1 = $(".diary_middle_list").width() - $(".diary_middle_list_wrap").width() + 12;
+	    $(document).bind('touchstart', '.diary_middle_list', function(e) {
+	        var event = e.originalEvent;
+	        x1 = event.touches[0].screenX;
+	        tabx1 = $(".diary_middle_list").css("transform").replace(/[^0-9\-.,]/g, '').split(',')[4];
+	    });
+	    $(document).bind('touchmove', '.diary_middle_list', function(e) {
+	        var event = e.originalEvent;
+	        xx1 = parseInt(tabx) + parseInt(event.touches[0].screenX - x1);
+	        $(".diary_middle_list").css("transform", "translate(" + xx1 + "px, 0px)");
+	        event.preventDefault();
+	    });
+	    $(document).bind('touchend', '.diary_middle_list', function(e) {
+	        if ((xx1 > 0) && (tabx1 <= 0)) {
+	        $(".diary_middle_list").css("transform", "translate(0px, 0px)");
+	        }
+	        if (Math.abs(xx1) > limit) {
+	        $(".diary_middle_list").css("transform", "translate(" + -limit1 + "px, 0px)");
+	        }
+	    });
+
 	    
 	    $(document).on("click", ".diaryAlarmList", function(){
 	    	console.log("click");
@@ -223,8 +248,19 @@
     		url : "diary/diary-all",
     		type : "get",
     		data : {"mbIdx":mbIdx, "petIdx":petIdx, "date":date},
+    		async : false,
     		dataType : "json",
     		success : showDiary,
+    		error : function(){alert("error");}
+    	})
+    	
+    	$.ajax({
+    		url : "diary/memo-all",
+    		type : "get",
+    		data : {"mbIdx":mbIdx, "date":date},
+    		async : false,
+    		dataType : "json",
+    		success : showMemo,
     		error : function(){alert("error");}
     	})
     };
@@ -301,7 +337,7 @@
     };
     
     // 메모 목록
-	function loadMemo(){
+/* 	function loadMemo(){
     	var mbIdx = $("#memId").val();
     	var date = $(".today").next().val();
     	
@@ -313,6 +349,16 @@
     		success : showMemo,
     		error : function(){alert("error");}
     	})
+    }; */
+    
+    function deleteMemo(idx){
+		$.ajax({
+			url : "diary/"+idx, 
+			type : "delete",
+			data : {"idx": idx},
+			success : loadDiary,
+			error : function () { alert("error"); }
+		});	
     };
     
     function showMemo(data){
@@ -321,6 +367,7 @@
     	var date = $(".today").next().val(); 
     	var addMemoUrl = "${contextPath}/memo/show?date="+date;
     	listHtml += "<span class='material-symbols-outlined icon_add_circle' onclick='location.href=\""+addMemoUrl+"\"'>add_circle</span></div>";
+    	listHtml += "<div class='diary_middle_list_wrap'>";
     	listHtml += "<ul class='diary_middle_list'>";
     	
     	if (data.length > 0){
@@ -346,34 +393,27 @@
 	    		} else if(diff>=1440){
 	    			diff = Math.round(diff/60/24);
 		    		listHtml += "<span>"+diff+"일전</span>";
+	    		} else if(diff>=525600){
+	    			diff = Math.round(diff/365/60/24);
+	    			listHtml += "<span>"+diff+"년 전</span>";
 	    		}
 	    		listHtml += "<span class='material-symbols-outlined icon_more'>more_vert</span>";
 	    		listHtml += "<div class='memo_menu hide'><ul>";
 	    		var url = "${contextPath}/memo/update?memoIdx="+mInfo.memo_idx+"&date="+date;
-	    		console.log(typeof(url)+" "+url);
 	    		listHtml += "<li onclick='location.href=\""+url+"\"'>수정하기</li>";
-	    		listHtml += "<li onclick='deleteMemo("+mInfo.memo_idx+")'>삭제하기</li></ul></div>";
-	    		listHtml += "<img src='resources/images/cat.jpeg' alt=''>";
+	    		listHtml += "<li class='deleteMemo' onclick='deleteMemo(\""+mInfo.memo_idx+"\")'>삭제하기</li></ul></div>";
+	    		listHtml += "<img src='"+mInfo.memo_photo_path.substr(42)+"' alt=''>";
 	    		listHtml += "<p>"+mInfo.memo_content+"</p></div>";
 	    		listHtml += "</li>";
 	    	});
     	} else {
     		listHtml += "<div class='memo_none'>작성된 메모가 없습니다.</div>";
     	}
-    	listHtml += "</ul>";
+    	listHtml += "</ul></div>";
     	$(".diary_middle").html(listHtml);
     };
     
-    function deleteMemo(idx){
-		$.ajax({
-			url : "diary/"+idx, 
-			type : "delete",
-			data : {"idx": idx},
-			success : showMemo,
-			error : function () { alert("error"); }
-		});	
-    };
-   
+
 
 </script>
 </html>

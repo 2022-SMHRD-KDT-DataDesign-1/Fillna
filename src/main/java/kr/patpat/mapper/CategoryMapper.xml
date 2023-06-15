@@ -8,6 +8,6 @@
 	</resultMap>
 	
     <select id="selectCategory" parameterType="String" resultMap="category">
-		select * from t_category where category_idx=#{categoryIdx}; 
+		select * from t_category where category_name=#{categoryName}; 
 	</select>
 </mapper>

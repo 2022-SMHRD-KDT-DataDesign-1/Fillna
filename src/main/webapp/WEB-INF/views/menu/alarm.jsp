@@ -170,13 +170,13 @@ function makeview(data){
 			list_html += '<span class="alarm_type">['+val.alarm_type+']</span>';
 			list_html += ' '+val.pet_name+'가 '+ time+'분에 '+ val.category_name+'를 '+val.cnt +'회 하였습니다.</div>';
 			list_html += '<div class="alarm_content">';
-			list_html += val.alarm_content;
+			list_html += val.alarm_content.replace(/\n/g,"<br>");
 		}else{
 			list_html += '<span class="alarm_type">['+val.alarm_type+'] </span>';
 			var pet_name = val.alarm_content.split("+")
-			list_html += pet_name[0].replace(/네로/g,val.pet_name);
+			list_html += pet_name[0].replace(/네로/g,val.pet_name).replace(/\n/g,"<br>");
 			list_html += '<div class="alarm_content">';
-			list_html += pet_name[1].replace(/네로/g,val.pet_name);
+			list_html += pet_name[1].replace(/네로/g,val.pet_name).replace(/\n/g,"<br>");
 		}
 
 		list_html += '</div>';

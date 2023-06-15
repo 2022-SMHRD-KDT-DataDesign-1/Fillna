@@ -65,6 +65,9 @@
     height: 20vw;
     object-fit: cover;
 }
+.m_list>ul {
+	overflow : auto;
+}
 	</style>
 </head>
 <body class="bg">
@@ -143,11 +146,13 @@
     	$(document).ready(function(e) {
     		$("#monitoring_footer").toggleClass("this_menu");
     		
-	        $(".rec_date").on("click", function(){
+	        $(document).on("click",".rec_date", function(){
 	            $(this).children(".icon_up").toggleClass("hide");
 	            $(this).next().toggleClass("hide");
 	        });
 			
+	        
+	        
 	        var typeNumber =4;
 	        var errorCorrectionLevel = "L";
 	        var qr = qrcode(typeNumber, errorCorrectionLevel);
@@ -159,12 +164,13 @@
 	        load_week();
 	        load_record_list();
 	        
-/* 	        var time = 0;
-	        setTimeout(function(){
-	        	time = document.getElementsByClassName("video")[0].duration;
-	        	$('.video+p').text("00:"+parseInt(time));
-	        	console.log(time);
-	        },300); */
+	        var video = document.querySelectorAll(".video");
+	        for(var i =0; i < video.length; i++){
+	        	video[i].addEventListener('loadedmetadata',function(){
+	        		console.log($(this).duration);
+	        	})
+	        }
+			
 	        
 	        
     	});
@@ -221,7 +227,6 @@
     		var videoHtml = "";
     		var day = "";
     		var check = false;
-			var wrap = $('.monitoring_wrap');
 			var checkday = ['2023-06-08','2023-06-07','2023-06-06','2023-06-05','2023-06-04','2023-06-03','2023-06-02'];
 			var videoHtml_list = [];
 			/* 실시간 */
@@ -229,6 +234,7 @@
 				checkday.push(day.split(" ")[0]);
 			})*/
 			data.push(data[0]);
+			var first_el = true;
 			$.each(data,function(idx,val){
 				var today = val.recordingAt.split(" ")[0];
 				if(day != today){
@@ -241,12 +247,17 @@
 						}
 					}
 					day = today;
-					videoHtml += '<div class="m_list">';
+					if(first_el){
+						videoHtml += '<div class="m_list">';
+						first_el = false;
+					}else{
+						videoHtml += '<div class="m_list hide">';
+					}
 					videoHtml += '<ul class="">';
 				}
 				videoHtml += '<li>';
 				videoHtml += '<div>';
-				videoHtml += '<video class="video" poster onclick="location.href=/controller'+val.recordingFile+'">';
+				videoHtml += '<video class="video" poster onclick="location.href=\''+'/controller'+val.recordingFile+'\'">';
 				videoHtml += '<source src="/controller'+val.recordingFile+'" type="video/mp4">';
 				videoHtml += '</video>';
 				videoHtml += '<p>14:11</p>';
@@ -254,20 +265,18 @@
 				videoHtml += '</li>';
 				check = true;
 			});
-			
-			
-			var tmp = videoHtml_list.splice(-1 , 1);
-			videoHtml_list.splice(0,0,tmp[0]);
-			for(var i = 0; i < 7; i++){
+			for(var i = 7; i  > 0; i--){
 				/* var week = $('.monitoring_wrap:nth-child('+i+')>.alarm_date>span:nth-last-child(2)').text().slice(0,10).replace(/\./g,"-"); */
-				var today = videoHtml_list[i].split("+")[1];
-				console.log(checkday[i]+"/"+today);
-				if(checkday[i] === today){
-					$('.monitoring_wrap:nth-child('+(i+1)+')').append(videoHtml_list[i].split("+")[0]).trigger("create");
+				var today = videoHtml_list[i-1].split("+")[1];
+				for(var j = 7; j > 0; j--){
+					if(checkday[j-1] === today){
+						$('.monitoring_wrap:nth-last-child('+(j)+')').append(videoHtml_list[6-(j-1)].split("+")[0]).trigger("create");
+					}
 				}
-				
+			
 			}
-    	}
+		}
+    	
     	
     	function getCurrentWeek() {
     		  var date = new Date();

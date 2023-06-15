@@ -15,17 +15,7 @@
 </head>
 <body class="bg">
     <div class="wrapper">
-        <header class="header">
-            <ul>
-                <li>
-                    <a href="#">
-                        <span class="material-symbols-outlined icon_ham">
-                            menu
-                        </span>
-                    </a>
-                </li>
-            </ul>
-        </header>
+    	<div style="height:20.7vw;width:100%;"></div>
         <div class="content member">
             <div class="con">
                 <div class="m_top">
@@ -58,5 +48,7 @@
             </div>
         </div>
     </div>
+    
+    
 </body>
 </html>

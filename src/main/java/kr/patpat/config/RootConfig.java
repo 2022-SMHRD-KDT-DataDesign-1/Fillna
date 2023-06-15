@@ -35,6 +35,7 @@ public class RootConfig {
       return myDataSource;
    }
    
+   
    @Bean
    public SqlSessionFactory sessionFactory() throws Exception{
       SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
@@ -42,6 +43,7 @@ public class RootConfig {
       return (SqlSessionFactory) sessionFactory.getObject();
       
    }
+   
    
    
    

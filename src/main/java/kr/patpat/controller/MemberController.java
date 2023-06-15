@@ -19,12 +19,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import kr.patpat.entity.Member;
+import kr.patpat.entity.Pet;
 import kr.patpat.mapper.MemberMapper;
 
 @Controller
@@ -33,17 +35,26 @@ public class MemberController {
 	@Autowired
 	private MemberMapper memberMapper;
 	
+	@RequestMapping("/welcome")
+	public String welcome() {
+		return "member/welcome";
+	}
 	
 	// update
 	@PostMapping("/update")
-	public void update(@RequestParam HashMap<String, Object> param) {
+	public String update(@RequestParam HashMap<String, String> param, HttpSession session, RedirectAttributes rttr) {
 		System.out.println(param.toString());
+		memberMapper.setAlarm(param);
+		memberMapper.setPet(param);
 		
-		String mb_alarm = (String) param.get("mb_alarm");
-		String pet_name = (String) param.get("pet_name");
-		String pet_adoption = (String) param.get("pet_adoption_at");
-		String pet_gender = (String) param.get("pet_gender");
-		String pet_photo = (String) param.get("pet_photo");
+		Pet pet = memberMapper.selectPet(param.get("mb_idx"));
+		session.setAttribute("pvo", pet);
+		Member member = memberMapper.selectUpdateMember(param.get("mb_idx"));
+		session.setAttribute("vo", member);
+		
+		rttr.addFlashAttribute("msg", "성공티비");
+		
+		return "redirect:/updateForm";
 	}
 	
 	// updateForm
@@ -69,23 +80,27 @@ public class MemberController {
 		
 		if (member != null) {
 			// 이미 가입한 경우
-			session.setAttribute("accessToken", accessToken);
-			session.setAttribute("nickname", userInfo.get("nickname"));
-			session.setAttribute("email", userInfo.get("email"));
+			session.setAttribute("vo", member);
+			String mbIdx = member.getMbIdx();
+			Pet pet = memberMapper.selectPet(mbIdx);
+			session.setAttribute("pvo", pet);
 			
-			return "redirect:/";
+			return "menu/monitoring";
 		} else {
 			// 신규회원인 경우
-			session.setAttribute("accessToken", accessToken);
-			session.setAttribute("nickname", userInfo.get("nickname"));
-			session.setAttribute("email", userInfo.get("email"));
-			
 			memberMapper.join(userInfo);
+			Member memberNew = memberMapper.selectMember(userInfo);
+			session.setAttribute("vo", memberNew);
+			
+			// pet 테이블에 NULL값 INSERT
+			String mbIdx = memberNew.getMbIdx();
+			memberMapper.joinPet(mbIdx);
+			Pet pet = memberMapper.selectPet(mbIdx);
+			session.setAttribute("pvo", pet);
+			
 			return "member/welcome";
 		}
 
-		// JSONPObject kakaoInfo = new JSONPObject(userInfo);
-		// model.addAttribute("kakaoInfo", kakaoInfo);
 	}
 
 	@GetMapping("/logout")
@@ -94,7 +109,8 @@ public class MemberController {
 
 		return "redirect:/login";
 	}
-
+	
+	// 함수1 - token 가져오는 함수
 	private String getAccessToken(String code) {
 		String accessToken = "";
 		String refreshToken = "";
@@ -146,7 +162,8 @@ public class MemberController {
 		}
 		return accessToken;
 	}
-
+	
+	// 함수2 - 가져온 토큰으로 user정보 가져오는 함수
 	private HashMap<String, Object> getUserInfo(String accessToken) {
 		HashMap<String, Object> userInfo = new HashMap<String, Object>();
 
@@ -191,6 +208,34 @@ public class MemberController {
 		}
 		
 		return userInfo;
+	}
+	
+	//함수3 - 로그아웃
+	public void exeLogout(String accessToken) {
+		String reqURL = "https://kapi.kakao.com/v1/user/logout";
+		try {
+			URL url = new URL(reqURL);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("POST");
+			conn.setRequestProperty("Authorization", "Bearer " + accessToken);
+
+			int responseCode = conn.getResponseCode();
+			System.out.println("responseCode : " + responseCode);
+
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+			String result = "";
+			String line = "";
+
+			while ((line = br.readLine()) != null) {
+				result += line;
+			}
+			System.out.println(result);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 }

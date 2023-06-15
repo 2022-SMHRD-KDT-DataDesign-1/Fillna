@@ -1,6 +1,4 @@
 package kr.patpat.entity;
-import java.sql.Timestamp;
-
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -11,68 +9,70 @@ import lombok.ToString;
 public class Pet {
 
     // 반려동물 식별자
-    private String pet_idx;
+    private String petIdx;
 
     // 반려동물 이름
-    private String pet_name;
+    private String petName;
 
     // 반려동물 입양일
-    private Timestamp pet_adoption_at;
+    private String petAdoptionAt;
 
     // 반려동물 사진
-    private String pet_photo;
-
-    // 반려동물 성별
-    private String pet_gender;
+    private String petPhoto;
 
     // 주인 아이디
-    private String mb_idx;
+    private String mbIdx;
+    
+    // 반려동물 성별
+    private String petGender;
+
 
     public String getPetIdx() {
-        return pet_idx;
+        return petIdx;
     }
 
-    public void setPetIdx(String pet_idx) {
-        this.pet_idx = pet_idx;
+    public void setPetIdx(String petIdx) {
+        this.petIdx = petIdx;
     }
 
     public String getPetName() {
-        return pet_name;
+        return petName;
     }
 
-    public void setPetName(String pet_name) {
-        this.pet_name = pet_name;
+    public void setPetName(String petName) {
+        this.petName = petName;
     }
 
-    public Timestamp getPetAdoptionAt() {
-        return pet_adoption_at;
+    public String getPetAdoptionAt() {
+        return petAdoptionAt;
     }
 
-    public void setPetAdoptionAt(Timestamp pet_adoption_at) {
-        this.pet_adoption_at = pet_adoption_at;
+    public void setPetAdoptionAt(String petAdoptionAt) {
+        this.petAdoptionAt = petAdoptionAt;
     }
 
     public String getPetPhoto() {
-        return pet_photo;
+        return petPhoto;
     }
 
-    public void setPetPhoto(String pet_photo) {
-        this.pet_photo = pet_photo;
-    }
-
-    public String getPetGender() {
-        return pet_gender;
-    }
-
-    public void setPetGender(String pet_gender) {
-        this.pet_gender = pet_gender;
+    public void setPetPhoto(String petPhoto) {
+        this.petPhoto = petPhoto;
     }
 
     public String getMbIdx() {
-        return mb_idx;
+    	return mbIdx;
+    }
+    
+    public void setMbIdx(String mbIdx) {
+    	this.mbIdx = mbIdx;
+    }
+    
+    public String getPetGender() {
+        return petGender;
     }
 
-    public void setMbIdx(String mb_idx) {
-        this.mb_idx = mb_idx;
+    public void setPetGender(String petGender) {
+        this.petGender = petGender;
     }
+
 }

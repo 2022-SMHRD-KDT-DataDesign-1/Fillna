@@ -13,6 +13,6 @@ public interface MemoMapper {
 
 	void insertMemo(Memo memo);
 
-	void deleteMemo(int idx);
+	void deleteMemo(String idx);
 }
 

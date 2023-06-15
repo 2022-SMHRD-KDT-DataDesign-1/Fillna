@@ -48,7 +48,7 @@ public class DiaryRestController {
 	
 	// 메모삭제
 	@DeleteMapping("/{idx}")
-	public void boardDelete(@PathVariable("idx") int idx) {
+	public void boardDelete(@PathVariable("idx") String idx) {
 		memoMapper.deleteMemo(idx);
 	}
 	

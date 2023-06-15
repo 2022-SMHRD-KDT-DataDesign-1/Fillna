@@ -315,6 +315,16 @@
     	})
     };
     
+    function deleteMemo(idx){
+		$.ajax({
+			url : "diary/"+idx, 
+			type : "delete",
+			data : {"idx": idx},
+			success : showMemo,
+			error : function () { alert("error"); }
+		});	
+    };
+    
     function showMemo(data){
     	var listHtml = "";
     	listHtml += "<div><span>메모</span>";
@@ -350,10 +360,9 @@
 	    		listHtml += "<span class='material-symbols-outlined icon_more'>more_vert</span>";
 	    		listHtml += "<div class='memo_menu hide'><ul>";
 	    		var url = "${contextPath}/memo/update?memoIdx="+mInfo.memo_idx+"&date="+date;
-	    		console.log(typeof(url)+" "+url);
 	    		listHtml += "<li onclick='location.href=\""+url+"\"'>수정하기</li>";
-	    		listHtml += "<li onclick='deleteMemo("+mInfo.memo_idx+")'>삭제하기</li></ul></div>";
-	    		listHtml += "<img src='resources/images/cat.jpeg' alt=''>";
+	    		listHtml += "<li class='deleteMemo' onclick='deleteMemo(\""+mInfo.memo_idx+"\")'>삭제하기</li></ul></div>";
+	    		listHtml += "<img src='"+mInfo.memo_photo_path.substr(42)+"' alt=''>";
 	    		listHtml += "<p>"+mInfo.memo_content+"</p></div>";
 	    		listHtml += "</li>";
 	    	});
@@ -364,16 +373,7 @@
     	$(".diary_middle").html(listHtml);
     };
     
-    function deleteMemo(idx){
-		$.ajax({
-			url : "diary/"+idx, 
-			type : "delete",
-			data : {"idx": idx},
-			success : showMemo,
-			error : function () { alert("error"); }
-		});	
-    };
-   
+
 
 </script>
 </html>

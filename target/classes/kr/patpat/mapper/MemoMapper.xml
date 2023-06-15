@@ -32,6 +32,9 @@
 		values(#{mbIdx}, #{categoryIdx}, #{memoContent}, now(), now(), #{memoPhotoName}, #{memoPhotoPath})
 	</insert>
 	
+	<delete id="deleteMemo" parameterType="String">
+		delete from t_memo where memo_idx=#{idx}
+	</delete>
 	
 
 </mapper>

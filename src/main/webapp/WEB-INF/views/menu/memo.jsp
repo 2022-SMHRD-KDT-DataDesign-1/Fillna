@@ -68,6 +68,18 @@
 		        </li>
 	        </ul>
         </header>
+        <!-- modal -->
+        <div class="modal hide">
+            <div class="modal_back"></div>
+            <div class="modal_content">
+                파일이 없습니다. 다시 작성해주세요
+                <button class="btn_close">
+                    <span class="material-symbols-outlined icon_close">
+                    close
+                    </span>
+                </button>
+            </div>
+        </div>
         <div class="content">
             <div class="con">
                 <form method="post" id="memo_form" enctype="multipart/form-data">
@@ -82,7 +94,7 @@
                         <c:if test="${empty mvo.memoIdx}">
                             <input type="button" class="select_symptom_list" value="써클링"/>
                         </c:if>
-                        	<input type="hidden" class="" name="category">
+                        	<input type="hidden" class="sympton" name="category">
                             <span class="material-symbols-outlined icon_down">
                                 keyboard_arrow_down
                             </span>
@@ -123,7 +135,7 @@
                                 <input class="file_name" value="" disabled>
                             </c:if>
                                 <label for="file" class="memo_upload">upload</label>
-                                <input name="file" type="file" id="file">
+                                <input type="file" id="file" name="file">
                             </div>
                         </div>
                         <div class="memo_write">
@@ -166,6 +178,7 @@
 
         $(".sympton_list").children("li").children("button").on("click", function(e){
             selectBtn.val($(this).text());
+            $(".sympton").val($(this).text());
             $(".sympton_list").toggleClass("on");
             $(".icon_memo_up").toggleClass("hide");
             $(".icon_down").toggleClass("hide");
@@ -180,14 +193,29 @@
         $(".memo_save").on("click", function(){
         	$("#memo_form").attr("action", "${contextPath}/memo/write");
             $("#memo_form").submit();
+            // uploadFile();
         });
         
         $(".memo_update").on("click", function(){
         	$("#memo_form").attr("action", "${contextPath}/memo/updatecom");
         	$("#memo_form").submit();
+        	// uploadFile();
         });
+        
+    	if(${msgType=="nofile"}){
+    		$(".modal").toggleClass("hide");
+    		$(".btn_close").click(function(){
+    			$(".modal").toggleClass("hide");
+    		});
+    		
+    		$(".modal_back").click(function(){
+    			$(".modal").toggleClass("hide");
+    		});
+    	}
 
     });
+    
+
 </script>
 </body>
 </body>

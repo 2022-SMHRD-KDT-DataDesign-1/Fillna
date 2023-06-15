@@ -246,7 +246,7 @@ body{font-family: 'Pretendard';}
           .icon_add_circle{float: right; color: #5e5e5e; font-size: 6vw !important; vertical-align: middle;}
           .diary_middle>div:first-child{margin-bottom: 2vw; overflow: hidden;}
           .diary_middle_list{display: flex; width: 100%;}
-          .diary_middle_list>li:nth-child(1){margin-right:3%;}
+          .memo_list_content{width:45vw; margin-right:3%;}
           .diary_middle_list>li>div{border-radius: 10px; border:1px solid #d2d2d2; background-color: #fff; text-align: justify;}
           .diary_middle_list>li>div{padding: 2.5vw;}
           .diary_middle_list>li>div>span:nth-child(1){font-weight: 600; margin-right: 2vw; color: #5e5e5e;}

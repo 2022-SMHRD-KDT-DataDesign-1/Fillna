@@ -5,16 +5,21 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.activation.CommandMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.multi.MultiOptionPaneUI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.patpat.entity.Category;
 import kr.patpat.entity.Memo;
@@ -44,28 +49,45 @@ public class MemoController {
 
 	// 메모 작성
 	@PostMapping("/memo/write")
-	public String memoWrite(@RequestParam HashMap<String, Object> param, HttpServletRequest request, MultipartFile file)
-			throws IllegalStateException, IOException {
-		System.out.println("작성 들어왓다"+param.toString());
-		/*
-		 * String saveImgPath =
-		 * request.getSession().getServletContext().getRealPath("/").concat("resources")
-		 * + "/upload/"; String fileName = file.getOriginalFilename();
-		 * 
-		 * File saveFile = new File(saveImgPath, fileName);
-		 * 
-		 * file.transferTo(saveFile);
-		 * 
-		 * memo.setMemoPhotoName(fileName); memo.setMemoPhotoPath("/upload/" +
-		 * fileName);
-		 * 
-		 * Category cate = categoryMapper.selectCategory(memo.getMemoIdx());
-		 * memo.setCategoryIdx(cate.getCategoryIdx());
-		 * 
-		 * memoMapper.insertMemo(memo);
-		 */
-
+	public String memoWrite(@RequestParam("mbIdx") String mbIdx, @RequestParam("category") String category,
+			@RequestParam("memocontent") String memocontent, @RequestParam("file") MultipartFile file, HttpServletRequest request,
+			RedirectAttributes rttr) throws IllegalStateException, IOException {
+		
+		System.out.println("작성 들어왓다"+mbIdx+" "+category+" "+memocontent+" "+file);
+		String saveImgPath = "C:\\Users\\SMHRD\\git\\Fillna\\src\\main\\webapp\\resources\\upload"; 
+		
+		if(!file.isEmpty()) {
+			try {
+				String fileName = file.getOriginalFilename();
+				File uploadFile = new File(saveImgPath, fileName);
+				file.transferTo(uploadFile);
+				
+				Memo memo = new Memo();
+				memo.setMbIdx(mbIdx);
+				memo.setMemoContent(memocontent);
+				memo.setMemoPhotoName(fileName);
+//				memo.setMemoPhotoPath("/upload/" +fileName);
+				memo.setMemoPhotoPath(uploadFile.getAbsolutePath());
+				
+				Category cate = categoryMapper.selectCategory(category);
+				System.out.println(cate);
+				memo.setCategoryIdx(cate.getCategoryIdx());
+				
+				System.out.println(memo.toString());
+				memoMapper.insertMemo(memo);
+				
+				return "redirect:/diary";
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		System.out.println("메모 작성 실패");
+		rttr.addFlashAttribute("msgType", "nofile");
+		
 		return "redirect:/memo";
+
 	}
 
 	// 수정 페이지로 이동

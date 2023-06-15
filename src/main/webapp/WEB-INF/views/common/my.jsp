@@ -37,6 +37,7 @@
                	<c:set var = "length" value = "${fn:length(petPhotoPath)}"/>
                 <img src="${fn:substring(petPhotoPath, 42, length)}" alt="">
 				<%
+					// 반려동물 생년월일
 					Pet pvo = (Pet)session.getAttribute("pvo");
 					String dateString = pvo.getPetAdoptionAt();
 					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -44,13 +45,12 @@
 					
 					// 현재 날짜
 					Date currentDate = new Date();
-					String today = dateFormat.format(currentDate);
 					
 					// 반려동물 나이 출력
-					int diff = today.getTime() - today.getTime();
-					String age = "";
+					long diff = currentDate.getTime() - petDate.getTime();
 					
-					if(diff>=1440){
+					String age = "";
+					if(diff>=1440 && diff <= 525600){
 		    			diff = Math.round(diff/60/24);
 						age = diff+"일";
 		    		} else if(diff>=525600){

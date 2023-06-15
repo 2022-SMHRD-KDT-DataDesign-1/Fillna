@@ -15,6 +15,12 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="resources/js/my.js"></script>
+    
+    <style>
+    	.cctv_video {width: 100%;height: 131vw;}
+   		.cctv_video html{overflow: hidden;}
+    </style>
+    
 </head>
 <body class="record_bg">
     <div class="wrapper">
@@ -104,7 +110,7 @@
             </div>
         </header>
         <!-- info -->
-        <img class="cctv_video" src="http://222.102.104.176:5000/video_feed" >
+        <iframe class="cctv_video" src="http://222.102.104.176:5000/"></iframe>
         <!-- <div class="record_message">
             <div>
                 <p>CCTV 영상 수신이 고르지 못합니다.</p>
@@ -112,23 +118,23 @@
             </div>
         </div> -->
         <!-- bottom menu -->
-        <div class="record_bottom">
-            <div>
-                <a href="#">
-                    <img src="resources/images/icon_home.png" alt="">
-                </a>
-            </div>
-            <div class="icon_record">
-                <a href="#">
-                    <img src="resources/images/icon_record.png" alt="">
-                </a>
-            </div>
-            <div>
-                <a href="#">
-                    <img src="resources/images/icon_menu.png" alt="">
-                </a>
-            </div>
+    <div class="record_bottom">
+        <div>
+            <a href="#">
+                <img src="resources/images/icon_home.png" alt="">
+            </a>
         </div>
+        <div class="icon_record">
+            <a href="#">
+                <img src="resources/images/icon_record.png" alt="">
+            </a>
+        </div>
+        <div>
+            <a href="#">
+                <img src="resources/images/icon_menu.png" alt="">
+            </a>
+        </div>
+    </div>
     </div>
 </body>
 </html>

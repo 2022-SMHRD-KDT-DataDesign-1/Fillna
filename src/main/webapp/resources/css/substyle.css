@@ -37,6 +37,7 @@ body{font-family: 'Pretendard';}
     .my_profile>img{margin-bottom: 1vw; object-fit: cover; border-radius: 50%; width: 23vw; height: 23vw;}
     .my_profile>p{font-weight: 600; color:#515151;}
     .my_profile>p>span{color:#a1a1a1; font-size: 3vw;}
+    .icon_my_gender{vertical-align: middle; font-size: 4vw !important;}
     .my_content>div:nth-child(3){text-align: center;}
     .my_content>div:nth-child(3)>a>img{width: 85%;}
     .my_menu{padding:6vw;}

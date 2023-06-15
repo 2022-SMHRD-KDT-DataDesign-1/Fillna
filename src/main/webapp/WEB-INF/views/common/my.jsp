@@ -61,7 +61,18 @@
 			        	month = dateString.substring(5, 7);
 			        }
 				%>
-                <p>탄이 <span><%=month%>월 <%=dateString.substring(8)%>일 (<%=diff%>살)</span></p>
+                <p>${pvo.petName} <span><%=month%>월 <%=dateString.substring(8)%>일 (<%=diff%>살)</span>
+                	<c:if test="${pvo.petGender=='M'}">
+                		<span class="material-symbols-outlined icon_my_gender">
+	                    	male
+						</span>
+                	</c:if>
+                	<c:if test="${pvo.petGender=='F'}">
+                        <span class="material-symbols-outlined icon_my_gender">
+                            female
+                        </span>
+                	</c:if>
+                </p>
                 
             </div>
             <div>

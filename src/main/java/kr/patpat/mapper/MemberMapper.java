@@ -16,7 +16,7 @@ public interface MemberMapper {
 
 	public void setAlarm(HashMap<String, String> param);
 
-	public void setPet(HashMap<String, String> param);
+	public void setPet(Pet pet);
 
 	public void joinPet(String mbIdx);
 

@@ -1,6 +1,11 @@
+<%@page import="kr.patpat.entity.Pet"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.lang.Math" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
@@ -20,7 +25,7 @@
                 <div class="icon_x">
                     <img src="resources/images/icon_x.png" alt="">
                 </div>
-                <a href="https://kauth.kakao.com/oauth/logout?client_id=08c15618cbd45ecc0b82e9e3777c25b3&logout_redirect_uri=http://localhost:8081/controller/logout">
+                <a href="https://kauth.kakao.com/oauth/logout?client_id=b38c873dac6c4b245d22412fae37e4af&logout_redirect_uri=http://localhost:8081/controller/logout">
                     <img src="resources/images/icon_logout.png" alt="">
                 </a>
                 <a href="${contextPath}/updateForm">
@@ -28,8 +33,37 @@
                 </a>
             </div>
             <div class="my_profile">
-                <img src="resources/images/tan_e_2.png" alt="">
-                <p>탄이 <span>5월 21일 (3년)</span></p>
+                <c:set var="petPhotoPath" value="${pvo.petPhotoPath}"/>
+               	<c:set var = "length" value = "${fn:length(petPhotoPath)}"/>
+                <img src="${fn:substring(petPhotoPath, 42, length)}" alt="">
+				<%
+					Pet pvo = (Pet)session.getAttribute("pvo");
+					String dateString = pvo.getPetAdoptionAt();
+					SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
+					Date petDate = dateFormat2.parse(dateString);
+					
+					// 반려동물 나이 출력
+					int diff = targetDate.getTime() - currentDate.getTime();
+					String age = "";
+					
+					if(diff>=1440){
+		    			diff = Math.round(diff/60/24);
+						age = diff+"일";
+		    		} else if(diff>=525600){
+		    			diff = Math.round(diff/365/60/24);
+		    			age = diff+"년";
+		    		} else {
+		    			age = "0년";
+		    		}
+					
+					String month="";
+			        if(dateString.substring(5, 7).length() < 10) {
+			        	month = dateString.substring(6, 7);
+			        } else if(dateString.substring(5, 7).length() >= 10){
+			        	month = dateString.substring(5, 7);
+			        }
+				%>
+                <p>탄이 <span><%=month%>월 <%=dateString.substring(8)%>일 (<%=age%>)</span></p>
             </div>
             <div>
                 <a href="#">

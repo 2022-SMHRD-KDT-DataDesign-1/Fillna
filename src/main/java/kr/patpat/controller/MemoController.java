@@ -53,7 +53,6 @@ public class MemoController {
 			@RequestParam("memocontent") String memocontent, @RequestParam("file") MultipartFile file, HttpServletRequest request,
 			RedirectAttributes rttr) throws IllegalStateException, IOException {
 		
-		System.out.println("작성 들어왓다"+mbIdx+" "+category+" "+memocontent+" "+file);
 		String saveImgPath = "C:\\Users\\SMHRD\\git\\Fillna\\src\\main\\webapp\\resources\\upload"; 
 		
 		if(!file.isEmpty()) {
@@ -66,11 +65,9 @@ public class MemoController {
 				memo.setMbIdx(mbIdx);
 				memo.setMemoContent(memocontent);
 				memo.setMemoPhotoName(fileName);
-//				memo.setMemoPhotoPath("/upload/" +fileName);
 				memo.setMemoPhotoPath(uploadFile.getAbsolutePath());
 				
 				Category cate = categoryMapper.selectCategory(category);
-				System.out.println(cate);
 				memo.setCategoryIdx(cate.getCategoryIdx());
 				
 				System.out.println(memo.toString());

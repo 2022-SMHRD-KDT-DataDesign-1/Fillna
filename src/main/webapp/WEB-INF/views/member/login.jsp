@@ -41,7 +41,7 @@
             </div>
 
             <div class="login">
-                <a class="btn_yel" href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=08c15618cbd45ecc0b82e9e3777c25b3&redirect_uri=http://localhost:8081/controller/kakaoLogin">
+                <a class="btn_yel" href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=b38c873dac6c4b245d22412fae37e4af&redirect_uri=http://localhost:8081/controller/kakaoLogin">
                     <img src="resources/images/icon_kakao.png" alt="">
                     <span>카카오 로그인</span>
                 </a>

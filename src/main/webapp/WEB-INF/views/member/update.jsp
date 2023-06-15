@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,15 +37,17 @@
         <div class="content">
             <div class="con">
                 <div class="member_info">
-                    <img class="profile_img" src="resources/images/tan_e.png" alt="">
+                	<c:set var="petPhotoPath" value="${pvo.petPhotoPath}"/>
+                	<c:set var = "length" value = "${fn:length(petPhotoPath)}"/>
+                    <img class="profile_img" src="${fn:substring(petPhotoPath, 42, length)}" alt="">
                     <div>
                         <p>${vo.mbNick}</p>
                         <span>${vo.mbNick} (${vo.mbEmail})<br>
-                        010-6792-5045
+                        ${vo.mbPhone}
                         </span>
                     </div>
                 </div>
-                <form action="${contextPath}/update" method="post" id="update_form">
+                <form action="${contextPath}/update" method="post" id="update_form" enctype="multipart/form-data">
                 <input type="hidden" name="mb_idx" value="${vo.mbIdx}">
                 <div class="pet_info">
                     <div class="top_info">
@@ -59,8 +62,8 @@
                     <div class="bottom_info">
                         <h3>선택정보 입력</h3>
                         <p>반려동물 생일</p>
-                        <c:if test="${empty pvo.petAdoptionAt}"><input name="pet_adoption_at" type="date" data-placeholder="선택해주세요" required aria-required="true"></c:if>
-                        <c:if test="${not empty pvo.petAdoptionAt}"><input name="pet_adoption_at" type="date" data-placeholder="${pvo.petAdoptionAt}" value="${pvo.petAdoptionAt}" required aria-required="true"></c:if>
+                        <c:if test="${empty pvo.petAdoptionAt}"><input class="petdate" name="pet_adoption_at" type="date" data-placeholder="선택해주세요" required aria-required="true"></c:if>
+                        <c:if test="${not empty pvo.petAdoptionAt}"><input class="petdate" name="pet_adoption_at" type="date" data-placeholder="${pvo.petAdoptionAt}" value="${pvo.petAdoptionAt}" required aria-required="true"></c:if>
                         <p>반려동물 성별</p>
                         <div>
                             <c:if test="${empty pvo.petGender}">
@@ -118,7 +121,7 @@
 	   							<c:if test="${not empty pvo.petPhoto}">
 		                            <input class="file_name" value="${pvo.petPhoto}" name="pet_photo" readonly="true">
 		                            <label for="file">upload</label>
-		                            <input type="file" id="file">
+		                            <input type="file" id="file" name="file">
 	                        	</c:if>
                         </div>
                     </div>
@@ -157,6 +160,8 @@ $(function(){
         timeFormat:"HH:mm",
         dropdown: true
     });
+	
+
 
 });    
 </script>

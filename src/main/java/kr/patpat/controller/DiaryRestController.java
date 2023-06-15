@@ -1,5 +1,6 @@
 package kr.patpat.controller;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import kr.patpat.entity.Memo;
 import kr.patpat.entity.Recording;
 import kr.patpat.mapper.DiaryMapper;
 import kr.patpat.mapper.MemoMapper;
@@ -49,7 +51,18 @@ public class DiaryRestController {
 	// 메모삭제
 	@DeleteMapping("/{idx}")
 	public void boardDelete(@PathVariable("idx") String idx) {
-		memoMapper.deleteMemo(idx);
+		Memo memo = memoMapper.showMemo(idx);
+		// 파일 경로
+		String saveImgPath = "C:\\Users\\SMHRD\\git\\Fillna\\src\\main\\webapp\\resources\\upload";
+		// 파일 이름
+		String fileName = memo.getMemoPhotoName();
+		File file = new File(saveImgPath, fileName);
+		
+		if(file.exists()) {
+			file.delete();
+			memoMapper.deleteMemo(idx);
+		}
+		
 	}
 	
 	

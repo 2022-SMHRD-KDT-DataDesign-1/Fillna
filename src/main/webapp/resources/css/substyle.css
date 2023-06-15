@@ -53,7 +53,7 @@ body{font-family: 'Pretendard';}
     .my_bottom > a:nth-child(2)::before{content:"｜";position: absolute;left: 0;top: 0;}
     /*header*/
     .header{color: #000;padding:6vw;}
-    .cctv_header {color: #fff; padding: 6vw; position: fixed; width: 88vw;}
+    .cctv_header{color: #fff; padding: 6vw; position: fixed; width: 88vw;}
     .cctv_header>div{float:right;}
     .cctv_video{width:100%;}
     header > ul{overflow: hidden; width:100%;left:0;right:0; text-align: center;}

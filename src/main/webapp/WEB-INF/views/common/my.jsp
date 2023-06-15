@@ -39,11 +39,15 @@
 				<%
 					Pet pvo = (Pet)session.getAttribute("pvo");
 					String dateString = pvo.getPetAdoptionAt();
-					SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
-					Date petDate = dateFormat2.parse(dateString);
+					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+					Date petDate = dateFormat.parse(dateString);
+					
+					// 현재 날짜
+					Date currentDate = new Date();
+					String today = dateFormat.format(currentDate);
 					
 					// 반려동물 나이 출력
-					int diff = targetDate.getTime() - currentDate.getTime();
+					int diff = today.getTime() - today.getTime();
 					String age = "";
 					
 					if(diff>=1440){

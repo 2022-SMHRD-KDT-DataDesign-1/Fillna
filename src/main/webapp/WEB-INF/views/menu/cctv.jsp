@@ -55,26 +55,26 @@
                 <p>네트워크를 확인해주세요.</p>
             </div>
         </div> -->
-        <!-- bottom menu -->
+         <!-- bottom menu -->
 	    <div class="record_bottom">
-	        <div>
-	            <a href="#">
-	                <img src="resources/images/icon_home.png" alt="">
-	            </a>
-	        </div>
-	        <div class="icon_record">
-	            <a href="#">
-	                <img src="resources/images/icon_record.png" alt="">
-	            </a>
-	        </div>
-	        <div>
-	            <a href="#">
-	                <img src="resources/images/icon_menu.png" alt="">
-	            </a>
-	        </div>
+	      <div>
+	          <a href="#">
+	              <img src="resources/images/icon_home.png" alt="">
+	          </a>
+	      </div>
+	      <div class="icon_record">
+	          <a href="#" id="recordBtn">
+	              <img src="resources/images/icon_record.png" alt="">
+	          </a>
+	      </div>
+	      <div>
+	          <a href="#">
+	              <img src="resources/images/icon_menu.png" alt="">
+	          </a>
+	      </div>
 	    </div>
 	    
-	    <iframe class="cctv_video" src="http://222.102.104.176:5000/"></iframe>
+	    <iframe class="cctv_video" src="http://218.149.72.104:5000/"></iframe>
 	    
     </div>
     

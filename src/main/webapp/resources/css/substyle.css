@@ -34,9 +34,10 @@ body{font-family: 'Pretendard';}
     .my_top>a:nth-child(n+3):nth-child(-n+5), .my_top>.icon_x{float: right; margin-left:5vw; cursor:pointer;}
     .my_top>a:nth-child(n+3):nth-child(-n+5)>img, .icon_x>img{width: 4vw; margin-top:1vw;}
     .my_profile{text-align: center; padding:8vw}
-    .my_profile>img{margin-bottom: 1vw; width: 25vw;}
+    .my_profile>img{margin-bottom: 1vw; object-fit: cover; border-radius: 50%; width: 23vw; height: 23vw;}
     .my_profile>p{font-weight: 600; color:#515151;}
     .my_profile>p>span{color:#a1a1a1; font-size: 3vw;}
+    .icon_my_gender{vertical-align: middle; font-size: 4vw !important;}
     .my_content>div:nth-child(3){text-align: center;}
     .my_content>div:nth-child(3)>a>img{width: 85%;}
     .my_menu{padding:6vw;}
@@ -53,7 +54,7 @@ body{font-family: 'Pretendard';}
     .my_bottom > a:nth-child(2)::before{content:"｜";position: absolute;left: 0;top: 0;}
     /*header*/
     .header{color: #000;padding:6vw;}
-    .cctv_header{color:#fff; padding: 6vw;}
+    .cctv_header{color: #fff; padding: 6vw; position: fixed; width: 88vw;}
     .cctv_header>div{float:right;}
     .cctv_video{width:100%;}
     header > ul{overflow: hidden; width:100%;left:0;right:0; text-align: center;}
@@ -91,7 +92,7 @@ body{font-family: 'Pretendard';}
 
         /* member_info */
         .member_info{color:#999; overflow: hidden; box-sizing: border-box;}
-        .member_info>img{width:30%; float:right;}
+        .member_info>img{float:right; object-fit: cover; border-radius: 50%; width: 27vw; height: 27vw;}
         .member_info>div{margin-top: 5vw;}
         .member_info>div>p{color:#333;font-weight:600;width: 80%; border-bottom: 1px solid #999; font-size: 5vw; padding-bottom: 1vw; margin-bottom: 2vw;}
         .member_info>div>span{font-size: 3.5vw;line-height: 1.2;}
@@ -105,7 +106,7 @@ body{font-family: 'Pretendard';}
 
         .bottom_info>p{font-size:4vw;}
         .bottom_info>input{margin-bottom: 3vw; position: relative;}
-        input[type=date]{z-index: -999; color:#a1a1a1;width:100%; font-size: 4vw; padding: 2vw; box-sizing: border-box; border:none; border-bottom: 1px solid #cbcbcb; background:none;margin-bottom:5vw;margin-top:1vw;}
+        input[type=date]{color:#a1a1a1;width:100%; font-size: 4vw; padding: 2vw; box-sizing: border-box; border:none; border-bottom: 1px solid #cbcbcb; background:none;margin-bottom:5vw;margin-top:1vw;}
         input[type=date]::before{content: attr(data-placeholder); width: 100%;}
         input[type=date]:focus::before,
         input[type=date]:valid::before{display: none;}
@@ -245,10 +246,12 @@ body{font-family: 'Pretendard';}
           .diary_middle{margin-bottom: 17vw;margin-top: 4vw;}
           .icon_add_circle{float: right; color: #5e5e5e; font-size: 6vw !important; vertical-align: middle;}
           .diary_middle>div:first-child{margin-bottom: 2vw; overflow: hidden;}
-          .diary_middle_list{display: flex; width: 100%;}
-          .memo_list_content{width:45vw; margin-right:3%;}
-          .diary_middle_list>li>div{border-radius: 10px; border:1px solid #d2d2d2; background-color: #fff; text-align: justify;}
-          .diary_middle_list>li>div{padding: 2.5vw;}
+          .diary_middle_list_wrap{width: 100%;position: relative; overflow: hidden;}
+          .diary_middle_list{display: flex; width: 100%; transform: translate(0vw, 0px);
+            transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);
+            transition-duration: 400ms;}
+          .memo_list_content{margin-right:3vw;}
+          .diary_middle_list>li>div{border-radius: 10px; border:1px solid #d2d2d2; background-color: #fff; text-align: justify; width: 37vw; padding: 2.5vw;}
           .diary_middle_list>li>div>span:nth-child(1){font-weight: 600; margin-right: 2vw; color: #5e5e5e;}
           .diary_middle_list>li>div>span:nth-child(2){font-size: 3vw; color: #aeaeae;}
           .diary_middle_list>li>div>img{width:100%; border-radius: 10px; margin-top:2vw;}

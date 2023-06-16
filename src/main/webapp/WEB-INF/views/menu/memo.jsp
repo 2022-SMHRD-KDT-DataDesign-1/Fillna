@@ -53,12 +53,12 @@
 				        String[] weekDays = {"일", "월", "화", "수", "목", "금", "토"};
 				        
 				        String month = "";
-				        
 				        if(dateString.substring(5, 7).length() < 10) {
 				        	month = dateString.substring(6, 7);
 				        } else if(dateString.substring(5, 7).length() >= 10){
 				        	month = dateString.substring(5, 7);
 				        }
+
 			       %>
 			       <span class="material-symbols-outlined icon_back" onclick="">
 			            arrow_back

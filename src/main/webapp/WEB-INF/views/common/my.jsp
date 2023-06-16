@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Calendar" %> 
 <%@ page import="java.lang.Math" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -37,28 +38,21 @@
                	<c:set var = "length" value = "${fn:length(petPhotoPath)}"/>
                 <img src="${fn:substring(petPhotoPath, 42, length)}" alt="">
 				<%
+					// 현재 날짜
+					Calendar calendar = Calendar.getInstance();
+					calendar.setTime(new java.util.Date());
+ 					int currentYear = calendar.get(Calendar.YEAR);
+					
 					// 반려동물 생년월일
 					Pet pvo = (Pet)session.getAttribute("pvo");
 					String dateString = pvo.getPetAdoptionAt();
 					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 					Date petDate = dateFormat.parse(dateString);
-					
-					// 현재 날짜
-					Date currentDate = new Date();
+					calendar.setTime(petDate);
+					int petYear = calendar.get(Calendar.YEAR);
 					
 					// 반려동물 나이 출력
-					long diff = currentDate.getTime() - petDate.getTime();
-					
-					String age = "";
-					if(diff>=1440 && diff <= 525600){
-		    			diff = Math.round(diff/60/24);
-						age = diff+"일";
-		    		} else if(diff>=525600){
-		    			diff = Math.round(diff/365/60/24);
-		    			age = diff+"년";
-		    		} else {
-		    			age = "0년";
-		    		}
+					int diff = currentYear - petYear;
 					
 					String month="";
 			        if(dateString.substring(5, 7).length() < 10) {
@@ -67,7 +61,19 @@
 			        	month = dateString.substring(5, 7);
 			        }
 				%>
-                <p>탄이 <span><%=month%>월 <%=dateString.substring(8)%>일 (<%=age%>)</span></p>
+                <p>${pvo.petName} <span><%=month%>월 <%=dateString.substring(8)%>일 (<%=diff%>살)</span>
+                	<c:if test="${pvo.petGender=='M'}">
+                		<span class="material-symbols-outlined icon_my_gender">
+	                    	male
+						</span>
+                	</c:if>
+                	<c:if test="${pvo.petGender=='F'}">
+                        <span class="material-symbols-outlined icon_my_gender">
+                            female
+                        </span>
+                	</c:if>
+                </p>
+                
             </div>
             <div>
                 <a href="#">

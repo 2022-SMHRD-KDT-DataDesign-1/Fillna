@@ -195,7 +195,7 @@ public class MemberController {
 
 			accessToken = element.getAsJsonObject().get("access_token").getAsString();
 			refreshToken = element.getAsJsonObject().get("refresh_token").getAsString();
-
+			
 			System.out.println("access_token : " + accessToken);
 			System.out.println("refresh_token : " + refreshToken);
 

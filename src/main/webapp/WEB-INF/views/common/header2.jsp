@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
@@ -44,11 +47,18 @@
                 
                 <!-- diary header -->
                 <li class="diary_header hide">
-                    <span>6월 1일</span>
-                    <span>목요일</span>
-                    <span class="material-symbols-outlined icon_calendar">
-                        calendar_month
-                    </span>
+                <%
+				  // 현재 날짜 가져오기
+				  Date currentDate = new Date();
+				
+				  // 날짜 포맷 설정
+				  SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-E");
+				  
+				  String today = dateFormat.format(currentDate);
+				  out.print("<span>"+today.substring(1, 2)+"월 "+today.substring(3, 5)+"일 </span>");  
+				  out.print("<span>"+today.substring(6, 7)+"요일 </span>");
+                  out.print("<span class='material-symbols-outlined icon_calendar'>calendar_month</span>");
+                %>
                 </li>
                 
                 <!-- chart header -->
@@ -59,11 +69,7 @@
                 
                 <!-- memo header -->
                 <li class="title hide">
-                    <span class="material-symbols-outlined icon_back" onclick="history:back">
-                        arrow_back
-                    </span>
-                    <span>메모하기 - 6월 1일</span>
-                    <span>목요일</span>
+
                 </li>
                 
                 

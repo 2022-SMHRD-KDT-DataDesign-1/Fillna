@@ -145,12 +145,12 @@
                     </p>
                 </li>
                 <li class="landingW_img floatR" data-aos="fade-left" data-aos-easing="linear" data-aos-duration="400">
-                    <img src="resources/images/landingW_img01.png">
+                    <img src="resources/images/landingW_img03.png">
                 </li>
             </ul>
             <ul class="landingW">
                 <li class="landingW_img floatL" data-aos="fade-right" data-aos-easing="linear" data-aos-duration="400">
-                    <img src="resources/images/landingW_img02.png">
+                    <img src="resources/images/landingW_img04.png">
                 </li>
                 <li class="landingW_writing floatR" data-aos="fade-left" data-aos-easing="linear" data-aos-duration="400">
                     <h3>
@@ -176,7 +176,7 @@
                     </p>
                 </li>
                 <li class="landingW_img" data-aos="fade-top" data-aos-easing="linear" data-aos-duration="400">
-                    <img src="resources/images/landingW_img01.png">
+                    <img src="resources/images/landingW_img03.png">
                 </li>
             </ul>
             <ul class="landingWM">
@@ -191,7 +191,7 @@
                     </p>
                 </li>
                 <li class="landingW_img" data-aos="fade-top" data-aos-easing="linear" data-aos-duration="400">
-                    <img src="resources/images/landingW_img02.png">
+                    <img src="resources/images/landingW_img04.png">
                 </li>
             </ul>
             <!--모바일 버전 end-->

@@ -72,6 +72,7 @@ header{width:768px;margin:0 auto;border-bottom:1px solid #cbcbcb;overflow:hidden
 
 .landingWM{display:none;}
 .landingW{width:768px;margin:0 auto;overflow:hidden;}
+.landingW img{vertical-align:middle;}
 .landingW_writing{margin-top:161px;}
 .landingW_writing > h3{font-size:28px;color: #a4a4a4;line-height: 1.15;}
 .landingW_writing > h3 > span{font-weight:800;}

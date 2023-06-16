@@ -10,6 +10,7 @@
 }
 
 body{ font-family: 'Pretendard';}
+body::-webkit-scrollbar{ display: none; }
 
 wrapper{width:100%;}
 header{width:768px;margin:0 auto;border-bottom:1px solid #cbcbcb;overflow:hidden;padding:15px;box-sizing:border-box;}
@@ -142,5 +143,6 @@ a.return-top {
     .landingC2_in > li:nth-child(1) {left: 3vw;bottom: 54vw;}
     .landingC2_in > li:nth-child(2) {left: 42vw;bottom: 47vw;}
     .landingC2_in > li:nth-child(3) {left: 75vw;bottom: 59vw;}
+      
 
 }

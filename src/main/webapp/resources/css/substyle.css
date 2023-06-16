@@ -7,7 +7,8 @@
   font-style: normal;
 }
 
-body{font-family: 'Pretendard';}
+body{font-family: 'Pretendard'; -ms-overflow-style: none;}
+body::-webkit-scrollbar { display: none; }
 .bg{background-color: #f6f7f8}
 .update_bg{background: url('../images/info_bg.png') #f6f7f8 no-repeat; background-size: contain; padding-bottom: 20vw;}
 .record_bg{background-color: #000;}
@@ -20,7 +21,7 @@ body{font-family: 'Pretendard';}
 
     /* modal */
     .hide{display: none !important;}
-    .modal{position: fixed; top:0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;}
+    .modal{position: fixed; top:0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index:100;}
     .modal_overlay{background-color: rgba(56, 56, 56, 0.75); width: 100%; height: 100%; position: absolute; z-index: 999;}
     .modal_back{background-color: rgba(56, 56, 56, 0.75); width: 100%; height: 100%; position: absolute;}
     .modal_content{background-color: #f6f7f8; color: #999; text-align: center; position: relative; padding: 10vw 10vw; border-radius: 15px; font-size:4vw; box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1); z-index: 9999;}
@@ -106,7 +107,7 @@ body{font-family: 'Pretendard';}
 
         .bottom_info>p{font-size:4vw;}
         .bottom_info>input{margin-bottom: 3vw; position: relative;}
-        input[type=date]{color:#a1a1a1;width:100%; font-size: 4vw; padding: 2vw; box-sizing: border-box; border:none; border-bottom: 1px solid #cbcbcb; background:none;margin-bottom:5vw;margin-top:1vw;}
+        input[type=date]{color:#a1a1a1;width:100%; font-size: 4vw; padding: 2vw; box-sizing: border-box; border:none; border-bottom: 1px solid #cbcbcb; background:none;margin-bottom:5vw;margin-top:1vw; z-index:10;}
         input[type=date]::before{content: attr(data-placeholder); width: 100%;}
         input[type=date]:focus::before,
         input[type=date]:valid::before{display: none;}
@@ -303,6 +304,8 @@ body{font-family: 'Pretendard';}
         .chart_type>div.select{border-bottom: 3px solid #cd0000;}
         .chart_type>div>span.select{color:#000;}
         
+        .chart_wrap{margin: 5vw 0vw;}
+        
         .chart_date{color:#5e5e5e;}
         .chart_date>span:nth-child(1){font-size: 5.5vw; font-weight: 800;}
         .chart_date>span:nth-child(2){font-size: 3.5vw; color:#999; margin-left: 2vw;}
@@ -311,7 +314,7 @@ body{font-family: 'Pretendard';}
         .chart_name>span:nth-child(1){vertical-align: middle;}
         .chart_result{color:#cd0000; font-weight: 600; text-align: justify; line-height: 1.2;}
         .chart_list>li>div>.chart_name{overflow: hidden;}
-        .icon_chart_up, .icon_chart_down{float:right; color:#5e5e5e; font-size: 7vw !important; margin-top: -1vw;}
+        .icon_chart_up, .icon_chart_down{float:right; color:#5e5e5e; margin-top: -1vw;}
         
         .chart_detail{color:#606060; line-height: 1.2; text-align: justify; margin:2vw 0;}
         .chart_circle{font-size: 3.8vw !important; vertical-align: bottom; margin-bottom: 0.4vw;}
@@ -348,11 +351,18 @@ body{font-family: 'Pretendard';}
         .this_menu{color:#cd0000; font-weight: 600;}
 
         /* record bottom */
-        .record_bottom{color:#999; width:100%; display:flex; justify-content: center; align-items: center; padding: 8vw; box-sizing: border-box; position: fixed; bottom: 0;}
+        /* .record_bottom{color:#999; width:100%; display:flex; justify-content: center; align-items: center; padding: 8vw; box-sizing: border-box; position: fixed; bottom: 0;}
         .record_bottom>div{margin: 3vw;}
         .record_bottom>div>a{display:block; width: 100%;}
         .record_bottom>div:not(.icon_record)>a>img{width: 11vw;}
-        .icon_record>a>img{width: 14vw;}
+        .icon_record>a>img{width: 14vw;} */
+        
+        .record_bottom1{position: fixed;bottom: 13vw;left: 23vw;}
+        .record_bottom1 > a{display:block; width: 100%;}
+        .record_bottom1 > a > img{width:14vw;}
+        .record_bottom2{position: fixed;bottom: 13vw;right: 23vw;}
+        .record_bottom2 > a{display:block; width: 100%;}
+        .record_bottom2 > a > img{width:14vw;}
 
         /*placeholder 컬러*/
         .top_info input::placeholder {color: #cd0000;}
@@ -376,11 +386,6 @@ body{font-family: 'Pretendard';}
           background: transparent;
           border-radius: 2vw;
         }
-
-        body::-webkit-scrollbar{
-          display: none;
-        }
-
 }
 
 @media screen and (min-width:768px) {

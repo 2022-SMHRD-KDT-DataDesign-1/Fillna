@@ -43,7 +43,7 @@
    
 	<insert id="joinPet" parameterType="kr.patpat.entity.Member">
 		insert into t_pet(pet_name, pet_adoption_at, pet_photo, mb_idx, pet_gender, pet_photo_path) 
-		values('pet', null, null, #{mbIdx}, null, null)
+		values('pet', now(), 'testcat.jpg', #{mbIdx}, 'M', 'C:\Users\SMHRD\git\Fillna\src\main\webapp\resources\photo\testcat.jpg')
 	</insert>
 	
 	<update id="setAlarm" parameterType="java.util.HashMap">

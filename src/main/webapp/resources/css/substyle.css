@@ -411,6 +411,10 @@ body{font-family: 'Pretendard'; }
   'opsz' 48
 }
 
-.scroll::-webkit-scrollbar {
+body{
+ -ms-overflow-style: none;
+ }
+ 
+::-webkit-scrollbar {
   display: none;
 }

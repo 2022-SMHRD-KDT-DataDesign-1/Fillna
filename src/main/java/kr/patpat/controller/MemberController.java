@@ -2,6 +2,7 @@ package kr.patpat.controller;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -19,13 +20,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import kr.patpat.entity.Category;
 import kr.patpat.entity.Member;
+import kr.patpat.entity.Memo;
 import kr.patpat.entity.Pet;
 import kr.patpat.mapper.MemberMapper;
 
@@ -42,18 +46,57 @@ public class MemberController {
 	
 	// update
 	@PostMapping("/update")
-	public String update(@RequestParam HashMap<String, String> param, HttpSession session, RedirectAttributes rttr) {
-		System.out.println(param.toString());
-		memberMapper.setAlarm(param);
-		memberMapper.setPet(param);
+	public String update(@RequestParam HashMap<String, String> param, @RequestParam("file") MultipartFile file, HttpSession session, RedirectAttributes rttr) {
 		
-		Pet pet = memberMapper.selectPet(param.get("mb_idx"));
-		session.setAttribute("pvo", pet);
-		Member member = memberMapper.selectUpdateMember(param.get("mb_idx"));
-		session.setAttribute("vo", member);
+		String saveImgPath = "C:\\Users\\SMHRD\\git\\Fillna\\src\\main\\webapp\\resources\\photo"; 
+		System.out.println(param.toString()+file);
 		
-		rttr.addFlashAttribute("msg", "성공티비");
-		
+		// 반려동물 사진이 없는 경우
+		if(param.get("pet_photo") == null) {
+			if(!file.isEmpty()) {
+				try {
+					String fileName = file.getOriginalFilename();
+					File uploadFile = new File(saveImgPath, fileName);
+					file.transferTo(uploadFile);
+					
+					Pet pet = memberMapper.selectPet(param.get("mb_idx"));
+					pet.setPetName(param.get("pet_name"));
+					pet.setPetAdoptionAt(param.get("pet_adoption_at"));
+					pet.setPetGender(param.get("pet_gender"));
+					pet.setPetPhoto(fileName);
+					pet.setPetPhotoPath(uploadFile.getAbsolutePath());
+					
+					memberMapper.setAlarm(param);
+					memberMapper.setPet(pet);
+					
+					session.setAttribute("pvo", pet);
+					Member member = memberMapper.selectUpdateMember(param.get("mb_idx"));
+					session.setAttribute("vo", member);
+					
+					rttr.addFlashAttribute("msg", "성공티비");
+					return "redirect:/updateForm";
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		} else { // 반려동물 사진이 있는 경우
+			Pet pet = memberMapper.selectPet(param.get("mb_idx"));
+			pet.setPetName(param.get("pet_name"));
+			pet.setPetAdoptionAt(param.get("pet_adoption_at"));
+			pet.setPetGender(param.get("pet_gender"));
+			
+			memberMapper.setAlarm(param);
+			memberMapper.setPet(pet);
+			
+			session.setAttribute("pvo", pet);
+			Member member = memberMapper.selectUpdateMember(param.get("mb_idx"));
+			session.setAttribute("vo", member);
+			
+			rttr.addFlashAttribute("msg", "성공티비");
+			return "redirect:/updateForm";
+		}
+
+		rttr.addFlashAttribute("mgs", "실패티비");
 		return "redirect:/updateForm";
 	}
 	
@@ -75,6 +118,7 @@ public class MemberController {
 		String accessToken = getAccessToken(code);
 
 		HashMap<String, Object> userInfo = getUserInfo(accessToken);
+		System.out.println(userInfo.toString());
 		
 		Member member = memberMapper.selectMember(userInfo);
 		
@@ -127,8 +171,8 @@ public class MemberController {
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
 			StringBuilder sb = new StringBuilder();
 			sb.append("grant_type=authorization_code");
-			sb.append("&client_id=08c15618cbd45ecc0b82e9e3777c25b3"); // 본인이 발급받은 key
-			sb.append("&redirect_uri=http://localhost:8081/controller/kakaoLogin"); // 본인이 설정해 놓은 경로
+			sb.append("&client_id=b38c873dac6c4b245d22412fae37e4af"); // rest api key
+			sb.append("&redirect_uri=http://localhost:8081/controller/kakaoLogin"); // redirect uri
 			sb.append("&code=" + code);
 			bw.write(sb.toString());
 			bw.flush();
@@ -198,9 +242,13 @@ public class MemberController {
 
 			String nickname = properties.getAsJsonObject().get("nickname").getAsString();
 			String email = kakao_account.getAsJsonObject().get("email").getAsString();
-
+			String phonenumeber = kakao_account.getAsJsonObject().get("phone_number").getAsString();
+			String profileImg = properties.getAsJsonObject().get("profile_image").getAsString();
+			
 			userInfo.put("nickname", nickname);
 			userInfo.put("email", email);
+			userInfo.put("phonenumeber", phonenumeber);
+			userInfo.put("profileImg", profileImg);
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

@@ -402,30 +402,46 @@
 
                 </div>
             </div>
-
+			<!-- 월간 -->
             <div class="chart2 hide">
                 <div class="date_wrap">
-                    <div class="date date_month">
-                        <span>5<span>월</span></span>
-                    </div>
-                    <div class="date date_month">
-                        <span>11<span>월</span></span>
-                    </div>
-                    <div class="date date_month">
-                        <span>12<span>월</span></span>
-                    </div>
-                    <div class="date date_month">
-                        <span>9<span>월</span></span>
-                    </div>
-                    <div class="date date_month">
-                        <span>8<span>월</span></span>
-                    </div>
-                    <div class="date date_month">
-                        <span>7<span>월</span></span>
-                    </div>
-                    <div class="date date_month date_today">
-                        <span>8<span>월</span></span>
-                    </div>
+                <ul class="date_ul">
+                <%
+				  for(int j=14; j>=0; j--){
+					String[] temp = dateList[j].split("-");
+					if(j>=0){
+						if(temp[1].equals("월")) {
+							dayOfWeek="MON";
+						} else if(temp[1].equals("화")) {
+							dayOfWeek="TUE";
+						} else if(temp[1].equals("수")) {
+							dayOfWeek="WED";
+						} else if(temp[1].equals("목")) {
+							dayOfWeek="THU";
+						} else if(temp[1].equals("금")) {
+							dayOfWeek="FRI";
+						} else if(temp[1].equals("토")) {
+							dayOfWeek="SAT";
+						} else if(temp[1].equals("일")) {
+							dayOfWeek="SUN";
+						}
+						
+						if(j==0){
+							out.print("<li class='date today'>");
+						    out.print("<p>"+dayOfWeek+"</p>");
+						    out.print("<p>"+temp[0]+"</p>");
+							out.print("</li>");
+						} else{
+							out.print("<li class='date'>");
+						    out.print("<p>"+dayOfWeek+"</p>");
+						    out.print("<p>"+temp[0]+"</p>");
+							out.print("</li>");
+						} 
+					}
+				  }
+	
+				%>
+                </ul>
                 </div>
                 <div class="con">
                     <div class="chart_date">

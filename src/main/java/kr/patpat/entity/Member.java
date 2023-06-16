@@ -14,12 +14,6 @@ public class Member {
 	// 회원 식별자
     private String mbIdx;
 
-    // 회원 토큰
-    private String mbToken;
-
-    // 회원 이름
-    private String mbName;
-
     // 회원 닉네임
     private String mbNick;
 
@@ -50,22 +44,6 @@ public class Member {
 
     public void setMbIdx(String mbIdx) {
         this.mbIdx = mbIdx;
-    }
-
-    public String getMbToken() {
-        return mbToken;
-    }
-
-    public void setMbToken(String mbToken) {
-        this.mbToken = mbToken;
-    }
-
-    public String getMbName() {
-        return mbName;
-    }
-
-    public void setMbName(String mbName) {
-        this.mbName = mbName;
     }
 
     public String getMbNick() {

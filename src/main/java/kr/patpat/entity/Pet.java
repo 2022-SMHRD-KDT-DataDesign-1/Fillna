@@ -25,6 +25,8 @@ public class Pet {
     
     // 반려동물 성별
     private String petGender;
+    
+    private String petPhotoPath;
 
 
     public String getPetIdx() {
@@ -74,5 +76,13 @@ public class Pet {
     public void setPetGender(String petGender) {
         this.petGender = petGender;
     }
+
+	public String getPetPhotoPath() {
+		return petPhotoPath;
+	}
+
+	public void setPetPhotoPath(String petPhotoPath) {
+		this.petPhotoPath = petPhotoPath;
+	}
 
 }

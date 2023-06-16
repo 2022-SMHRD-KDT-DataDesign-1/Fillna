@@ -20,11 +20,11 @@
     	.cctv_video {width: 100%;height: 100vh;}
    		.cctv_video html{overflow: hidden;}
     </style>
-    
+   
 </head>
 <body class="record_bg">
     <div class="wrapper" style="position:absolute;z-index:0;">
-        <jsp:include page="../common/my.jsp"></jsp:include>
+        <%-- <jsp:include page="../common/my.jsp"></jsp:include> --%>
         <!-- header -->
         <header class="cctv_header">
             <ul>
@@ -56,28 +56,41 @@
             </div>
         </div> -->
         <!-- bottom menu -->
-	    <div class="record_bottom">
-	        <div>
-	            <a href="#">
-	                <img src="resources/images/icon_home.png" alt="">
-	            </a>
-	        </div>
-	        <div class="icon_record">
-	            <a href="#">
-	                <img src="resources/images/icon_record.png" alt="">
-	            </a>
-	        </div>
-	        <div>
-	            <a href="#">
-	                <img src="resources/images/icon_menu.png" alt="">
-	            </a>
-	        </div>
-	    </div>
+
+        <div class="record_bottom1">
+            <a href="#">
+                <img src="resources/images/icon_home.png" alt="">
+            </a>
+        </div>
+        
+        <div class="record_bottom2">
+            <a href="#">
+                <img src="resources/images/icon_menu.png" alt="">
+            </a>
+        </div>
+
 	    
-	    <iframe class="cctv_video" src="http://222.102.104.176:5000/"></iframe>
+	    <iframe class="cctv_video" src="http://222.102.104.176:5000"></iframe>
 	    
     </div>
-    
-     
+     <script>
+	 	
+	    
+	 // 버튼 요소를 가져옵니다
+	    const recordBtn = document.querySelector('.recordBtn');
+	    console.log('성공1');
+	    // 클릭 이벤트 리스너를 추가합니다
+	    recordBtn.addEventListener('click', () => {
+	      // .cctv_a 요소를 가져옵니다
+	      const cctvA = document.querySelector('.cctv_a');
+	      console.log('성공2');
+	      // .cctv_a 요소가 존재하는지 확인합니다
+	      if (cctvA) {
+	        // .cctv_a 요소를 클릭합니다
+	        cctvA.click();
+	        console.log('성공3');
+	      }
+	    });
+    </script>
 </body>
 </html>

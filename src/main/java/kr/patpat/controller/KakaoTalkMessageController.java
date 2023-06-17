@@ -1,10 +1,9 @@
 package kr.patpat.controller;
 
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -73,14 +72,16 @@ public class KakaoTalkMessageController {
 	   Map responseBody = response.getBody();
 	   
 	   System.out.println("로그인"+responseBody);
-	   getFriend(token.get("access_token"));
+	   String uuid = getFriend(token.get("access_token"));
+	   SendMessage(uuid,token.get("access_token"));
 	   
+	   System.out.println("완료");
    }
    
    
 
    
-   public void getFriend(String access_token) {
+   public String getFriend(String access_token) {
 	   String apiUrl = "https://kapi.kakao.com/v1/api/talk/friends?limit=1&friend_order=favorite&order=asc";
 	   
 	   HttpHeaders headers = new HttpHeaders();
@@ -89,9 +90,38 @@ public class KakaoTalkMessageController {
 	   ResponseEntity<Map> response = restTemplate.exchange(apiUrl,HttpMethod.GET,new HttpEntity<>(headers), Map.class);
 	   
 	   Map responseBody = response.getBody();
+	   List<Map<String, Object>> elements =   (List<Map<String,Object>>)responseBody.get("elements");
+	   Map<String,Object> firstElement = elements.get(0);
+	   String uuid = (String) firstElement.get("uuid");
+
+	   System.out.println(uuid);
+	   return uuid;
+   }
+   
+   public void SendMessage(String uuid , String token) {
+	   String apiUrl = "https://kapi.kakao.com/v1/api/talk/friends/message/default/send";
 	   
-	   System.out.println("친구"+responseBody);
+	   HttpHeaders headers = new HttpHeaders();
+	   headers.set("Authorization", "Bearer "+token);
 	   
+	   String template_object = "{";
+       template_object += "\"object_type\": \"text\",";
+       template_object += "\"text\": '텍스트 영역입니다.\",";
+       template_object += "\"link\": {";
+       template_object += "\"web_url\": \"https://developers.kakao.com\",";
+       template_object += "\"mobile_web_url\": \"https://developers.kakao.com\"";
+       template_object += "},"; 
+       template_object += "\"button_title\": \"바로 확인\"";
+       template_object += "}";
+	   
+	   System.out.println(uuid+"/"+token);
+	   UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromUriString(apiUrl)
+	            .queryParam("receiver_uuids", uuid)
+	            .queryParam("template_object",template_object);
+	   
+	   
+	   ResponseEntity<String> response = restTemplate.exchange(uriBuilder.toUriString(), HttpMethod.GET, new HttpEntity<>(headers),String.class);
+	   System.out.println(response);
 	   
 	   
    }

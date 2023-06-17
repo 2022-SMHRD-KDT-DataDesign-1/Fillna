@@ -59,45 +59,48 @@
                 }
                 
             	// 월요일 날짜 출력
-               	Date todayMon = dateFormat.parse(dateFormat.format(calendar.getTime()));
+            	String today = dateFormat.format(calendar.getTime());
+               	Date todayMon = dateFormat.parse(today);
+               	String[] todayTemp = today.split("-");
                	
             	calendar.setTime(todayMon);
             	String[] dateChart = new String[10];
-               	for(int i = 1; i <= 10; i++){
+               	for(int i = 1; i <= 9; i++){
               		calendar.add(Calendar.DAY_OF_MONTH, -7);
-               		out.println("test : "+dateFormat.format(calendar.getTime())+"<br>");
                		dateChart[i-1] = dateFormat.format(calendar.getTime());
                	}
                	
 			    String month = "";
-			    for(int j=9; j>=0; j--){
+			    String todayMonth = "";
+			    for(int j=8; j>=0; j--){
  				  String[] temp = dateChart[j].split("-");
 				  if(Integer.parseInt(dateChart[j].substring(5, 7)) >= 10){
 					  month = dateChart[j].substring(5, 7);
+					  todayMonth = today.substring(5, 7);
 				  } else {
 					  month = dateChart[j].substring(6, 7);
+					  todayMonth = today.substring(6, 7);
 				  }
-				  if(j==0){
-					  out.print("<li class='date today'>");
-				      out.print("<p>"+month+"월</p>");
-				      out.print("<p>"+temp[2]+"</p>");
-					  out.print("</li>");
-					  out.print("<input type='hidden' class='thisDate' value='"+dateChart[j]+"'>");
-				  } else{
-					  out.print("<li class='date'>");
-				      out.print("<p>"+month+"월</p>");
-				      out.print("<p>"+temp[2]+"</p>");
-					  out.print("</li>");
-					  out.print("<input type='hidden' class='thisDate' value='"+dateChart[j]+"'>");
-				  }
+				  out.print("<li class='date'>");
+			      out.print("<p>"+month+"월</p>");
+			      out.print("<p>"+temp[2]+"</p>");
+				  out.print("</li>");
+				  out.print("<input type='hidden' class='thisDate' value='"+dateChart[j]+"'>");
 			    }
+			    
+				out.print("<li class='date today'>");
+			    out.print("<p>"+todayMonth+"월</p>");
+			    out.print("<p>"+todayTemp[2]+"</p>");
+				out.print("</li>");
+				out.print("<input type='hidden' class='thisDate' value='"+today+"'>");
+				
 				%>
                 </ul>
                 </div>
                 <div class="con">
                     <div class="chart_date">
-                        <span>6월 1주</span>
-                        <span>23.06.05~23.06.11</span>
+                        <span class="month_week"></span>
+                        <span class="week_range">23.06.05~23.06.11</span>
                     </div>
                     <div class="chart">
                         <div class="chart_total">
@@ -746,14 +749,35 @@
     	        $(".date_ul").css("transform", "translate(" + -limit + "px, 0px)");
     	        }
     	    });
+    	    
+    	    /* 몇월 몇주 날짜 범위 출력 */
+	    	var weekAndMonth = new Date($(".today").next().val());
+	    	var month = weekAndMonth.getMonth()+1;
+	    	var week = Math.ceil((weekAndMonth.getDate() + weekAndMonth.getDay()) / 7);
+	    	var txt = month+"월"+week+"주";
+	    	$(".month_week").text(txt);
+	    	
+	    	// 오늘 날짜
+	    	var today = new Date();
+	    	var year = today.getFullYear();
+	    	var month = today.getMonth() + 1; // getMonth()는 0부터 시작하므로 +1
+	    	var day = today.getDate();
+	    	var formattedDate = (''+year).slice(-2) + '.' + ('0' + month).slice(-2) + '.' + ('0' + day).slice(-2);
+	    	
+			// 선택된 날짜
+			var targetDate = $(".today").next().val();
+			targetDate = targetDate.split("-").join(".").slice(2);
+			
+	    	$(".week_range").text(targetDate+"~"+formattedDate);
 
-
+	    	/* 차트 열고 닫기 */
             $(".chart_list").children("li").on("click", function(){
                 $(this).find(".chart_hide").toggleClass("hide");
                 $(this).find(".icon_chart_up").toggleClass("hide");
                 $(this).find(".icon_chart_down").toggleClass("hide");
             });
 
+	    	/* 주간,월간 변환 */
             $(".chart_type>div:eq(0)").on("click", function(){
             	$(".weekly").addClass("select");
             	$(".chart1").removeClass("hide");
@@ -768,6 +792,41 @@
             	$(".chart1").addClass("hide");
             });
             
+            /* 주간 차트 출력 함수 */
+            function showChartWeek(data){
+            	var chrt = $("#totalWeeklyChart");
+            	var labels = ["써클링", "발작", "후지마비", "재채기", "피부긁음", "구토", "배변", "그루밍", '개구호흡', '식사'];
+            	/* weekly-total */
+            	var totalWeeklyChart = new Chart(chrt, {
+            		type:"polarArea",
+            		data:{
+            			labels:labels,
+            			datasets:[{
+            				label:"weekly-total",
+            				data:[],
+            				backgroundColor: ['rgb(205, 0, 0)', 'rgb(248, 150, 140)', 'rgb(241, 232, 73)', 'rgb(73, 230, 241)', 'rgb(241, 73, 139)', 'rgb(99, 99, 202)', 
+    	                        'rgb(120, 223, 152)', 'rgb(195, 224, 85)', 'rgb(231, 129, 129)', 'rgb(253, 126, 126)'],
+            			}],
+            		},
+            		options:{
+            			responsive: true,
+            			plugins:{
+            				legend:{
+            					display:true,
+            					labels:{
+            						color:"rgb(94, 94, 94)",
+            						boxWidth:10,
+            						boxHeight:10,
+            						font:{size:13}
+            					}
+            				}
+            			}
+            		}
+            	})
+            	/* weekly-category */
+            	
+            }
+            
             // 날짜 클릭시 차트 출력(주간)
     	    $(".chart1").find(".date").on("click", function(e){
     	    	
@@ -777,6 +836,38 @@
     		    	$(".date").not(this).removeClass("today");
     		    	$(this).addClass("today");
     	    	}
+    	    	
+    	    	/* 몇월 몇주 날짜 범위 출력 */
+    	    	var weekAndMonth = new Date($(this).next().val());
+    	    	var month = weekAndMonth.getMonth()+1;
+    	    	var week = Math.ceil((weekAndMonth.getDate() + weekAndMonth.getDay()) / 7);
+    	    	var txt = month+"월"+week+"주";
+    	    	$(".month_week").text(txt);
+    	    	
+    	    	var selectDate = $(".today").next().val();
+    			var targetDate = new Date(selectDate);
+    			targetDate.setDate(targetDate.getDate()+6);
+   			  	var year = targetDate.getFullYear();
+   			  	var month = targetDate.getMonth() + 1;
+   			  	var day = targetDate.getDate();
+   			  	
+   			  	var formattedDate = ('0'+year).slice(-2) + '.' + ('0' + month).slice(-2) + '.' + ('0' + day).slice(-2);
+    			
+   				selectDate = selectDate.split("-").join(".").slice(2);
+    	    	$(".week_range").text(selectDate+"~"+formattedDate);
+    	    	
+    	    	/* 데이터 불러오기 start */
+    	    	var mbIdx = $("#memId").val();
+    	    	var petIdx = $("#petId").val();
+				
+    	    	$.ajax({
+    	    		url : "chart/weekly",
+    	    		type : "post",
+    	    		data : {"mbIdx":mbIdx, "petIdx":petIdx, "startDate":selectDate, "endDate":formattedDate},
+    	    		dataType : "json",
+    	    		success : showChartWeek,
+    	    		error : function(){alert("error");}
+    	    	})
     	    });
     	    	
 

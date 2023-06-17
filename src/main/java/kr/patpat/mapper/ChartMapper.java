@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ChartMapper {
 
-	List<HashMap<String, String>> selectWeekly(String mbIdx, String petIdx);
+	List<HashMap<String, String>> selectWeekly(HashMap<String, String> param);
 
 }
 

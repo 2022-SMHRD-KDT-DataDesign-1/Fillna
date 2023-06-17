@@ -19,8 +19,8 @@ public class ChartRestController {
 	private ChartMapper chartMapper;
 	
 	@PostMapping("/weekly")
-	public List<HashMap<String, String>> showWeeklyChart(@RequestParam("mbIdx") String mbIdx, @RequestParam("petIdx") String petIdx) {
-		List<HashMap<String, String>> data =  chartMapper.selectWeekly(mbIdx, petIdx);
+	public List<HashMap<String, String>> showWeeklyChart(@RequestParam HashMap<String, String> param) {
+		List<HashMap<String, String>> data =  chartMapper.selectWeekly(param);
 		
 		return data;
 	}

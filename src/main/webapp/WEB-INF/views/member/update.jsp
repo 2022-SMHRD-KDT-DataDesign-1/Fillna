@@ -39,7 +39,7 @@
                 <div class="member_info">
                 	<c:set var="petPhotoPath" value="${pvo.petPhotoPath}"/>
                 	<c:set var = "length" value = "${fn:length(petPhotoPath)}"/>
-                    <img class="profile_img" src="${fn:substring(petPhotoPath, 42, length)}" alt="">
+                    <img class="profile_img" src="${fn:substring(petPhotoPath, 40, length)}" alt="">
                     <div>
                         <p>${vo.mbNick}</p>
                         <span>${vo.mbNick} (${vo.mbEmail})<br>
@@ -116,12 +116,12 @@
      	                        <c:if test="${empty pvo.petPhoto}">
 		                            <input class="file_name" value="" name="pet_photo" readonly="true">
 		                            <label for="file">upload</label>
-		                            <input type="file" id="file">
+		                            <input type="file" id="file" multiple="true">
 	                        	</c:if>
 	   							<c:if test="${not empty pvo.petPhoto}">
 		                            <input class="file_name" value="${pvo.petPhoto}" name="pet_photo" readonly="true">
 		                            <label for="file">upload</label>
-		                            <input type="file" id="file" name="file">
+		                            <input type="file" id="file" name="file" multiple="true">
 	                        	</c:if>
                         </div>
                     </div>

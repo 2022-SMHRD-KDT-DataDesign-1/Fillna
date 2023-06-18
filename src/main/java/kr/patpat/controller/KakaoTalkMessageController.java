@@ -86,6 +86,7 @@ public class KakaoTalkMessageController {
 	   SendMessage(uuid,token.get("access_token"));
 	   
 	   System.out.println("완료");
+
 	   
 	   return "member/admin";
    }

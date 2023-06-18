@@ -1,20 +1,27 @@
 package kr.patpat.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import com.google.gson.JsonArray;
+
+import kr.patpat.mapper.AlarmMapper;
 
 @Controller
 @RequestMapping("/kakaotalk")
@@ -27,6 +34,9 @@ public class KakaoTalkMessageController {
    public String adLogin(){
 	   return "member/admin";
    }
+   
+   @Autowired
+   private AlarmMapper mapper;
    
    public Map<String, String> getToken(String code) {
 	   
@@ -57,7 +67,7 @@ public class KakaoTalkMessageController {
    }
    
    @GetMapping("/login")
-   public void refreshToken(@RequestParam(value = "code",required=false)String code) {
+   public String refreshToken(@RequestParam(value = "code",required=false)String code) {
 	   
 	   Map<String, String> token = getToken(code);
 	   System.out.println(token);
@@ -76,6 +86,8 @@ public class KakaoTalkMessageController {
 	   SendMessage(uuid,token.get("access_token"));
 	   
 	   System.out.println("완료");
+	   
+	   return "member/admin";
    }
    
    
@@ -99,29 +111,56 @@ public class KakaoTalkMessageController {
    }
    
    public void SendMessage(String uuid , String token) {
-	   String apiUrl = "https://kapi.kakao.com/v1/api/talk/friends/message/default/send";
+	   String apiUrl = "https://kapi.kakao.com/v1/api/talk/friends/message/send";
 	   
 	   HttpHeaders headers = new HttpHeaders();
 	   headers.set("Authorization", "Bearer "+token);
+	   headers.set("Content-type","application/x-www-form-urlencoded");
 	   
-	   String template_object = "{";
-       template_object += "\"object_type\": \"text\",";
-       template_object += "\"text\": '텍스트 영역입니다.\",";
-       template_object += "\"link\": {";
-       template_object += "\"web_url\": \"https://developers.kakao.com\",";
-       template_object += "\"mobile_web_url\": \"https://developers.kakao.com\"";
-       template_object += "},"; 
-       template_object += "\"button_title\": \"바로 확인\"";
-       template_object += "}";
+	   uuid = uuid.trim();
 	   
-	   System.out.println(uuid+"/"+token);
-	   UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromUriString(apiUrl)
-	            .queryParam("receiver_uuids", uuid)
-	            .queryParam("template_object",template_object);
+	   // 기본 템플릿
+		/*
+		 * String template_string = "{"; template_string += "\"object_type\":\"text\",";
+		 * template_string += "\"text\":\"텍스트 영역입니다.\","; template_string +=
+		 * "\"link\":{"; template_string += "\"web_url\":\"\","; template_string +=
+		 * "\"mobile_web_url\":\"\""; template_string += "},"; template_string +=
+		 * "\"button_title\":\"바로 확인\""; template_string += "}";
+		 */
 	   
 	   
-	   ResponseEntity<String> response = restTemplate.exchange(uriBuilder.toUriString(), HttpMethod.GET, new HttpEntity<>(headers),String.class);
-	   System.out.println(response);
+       // 사용자 정의 템플릿
+       List<Map<String, String>> list = mapper.alarmContentList();
+       
+       Map<String,String> content = list.get(0);
+       String val = content.get("alarm_content");
+       System.out.println();
+       String template_id = "95063";
+       String template_args = "{\"alarm_content\":\""+val.replaceAll("\\※","※").replaceAll("\\①","①").replaceAll("\\②","②")
+    		   .replaceAll("\\③","").replaceAll("\\④","").replaceAll("\\⑤","").replaceAll("\n","")+"\"}";
+       
+       System.out.println(template_args);
+       
+	   JsonArray uuidsArray = new JsonArray(); uuidsArray.add(uuid);
+	   System.out.println("UUIDs: " + uuidsArray.toString());
+	  
+	   
+       MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+       params.add("receiver_uuids", uuidsArray.toString());
+       params.add("template_id", template_id);
+	   params.add("template_args", template_args);  
+       
+       HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(params, headers);
+       
+       
+	   try {
+		   ResponseEntity<String> response = restTemplate.exchange(apiUrl, HttpMethod.POST, requestEntity, String.class);
+		   System.out.println(response);
+		   
+	   }catch(HttpClientErrorException e) {
+		   System.out.println(e.getResponseBodyAsString());
+	   
+	   }
 	   
 	   
    }

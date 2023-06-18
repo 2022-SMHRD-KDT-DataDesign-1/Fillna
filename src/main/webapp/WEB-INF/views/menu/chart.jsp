@@ -25,8 +25,8 @@
     <div class="wrapper">
 		<jsp:include page="../common/my.jsp"></jsp:include>
 		<jsp:include page="../common/header2.jsp"></jsp:include>
-<%-- 		<input type="hidden" value="${vo.mbIdx}" id="memId">
-        <input type="hidden" value="${pvo.petIdx}" id="petId"> --%>
+		<input type="hidden" value="${vo.mbIdx}" id="memId">
+        <input type="hidden" value="${pvo.petIdx}" id="petId">
         <div class="content chart_con">
             <div class="chart_type">
                 <div class="select weekly">
@@ -54,8 +54,8 @@
                 int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
 
                 // 오늘이 월요일이 아닌 경우, 이전 월요일로 이동
-                if (dayOfWeek != Calendar.MONDAY) {
-                	calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+                if (dayOfWeek != Calendar.SUNDAY) {
+                	calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
                 }
                 
             	// 월요일 날짜 출력
@@ -100,18 +100,16 @@
                 <div class="con">
                     <div class="chart_date">
                         <span class="month_week"></span>
-                        <span class="week_range">23.06.05~23.06.11</span>
+                        <span class="week_range"></span>
                     </div>
                     <div class="chart">
                         <div class="chart_total">
                             <div class="chart_name">TOTAL</div>
                             <div class="chart_wrap">
-                                <!-- chart 들어갈 자리 -->
+                                <!-- chart -->
                                 <canvas id="totalWeeklyChart" class="myChart" aria-level="chart"></canvas>
                             </div>
                             <div class="chart_result">
-                                일주일 기준, 이상행동의 일 평균 시간과 횟수는 다음과 같습니다. 그루밍 평균 4.5시간, 귀/피부 긁는 행동 3회,
-                                재채기 2회, 식사 10회, 배변 5회, 구토 0회, 써클링 0회, 개구호흡 0회, 발작 0회, 후지마비 0회입니다.
                             </div>
                         </div>
                         <ul class="chart_list">
@@ -762,13 +760,18 @@
 	    	var year = today.getFullYear();
 	    	var month = today.getMonth() + 1; // getMonth()는 0부터 시작하므로 +1
 	    	var day = today.getDate();
+	    	var endDay = today.getDate() + 1;
+	    	
 	    	var formattedDate = (''+year).slice(-2) + '.' + ('0' + month).slice(-2) + '.' + ('0' + day).slice(-2);
+	    	var endDate = year+'-'+month+'-'+endDay;
 	    	
 			// 선택된 날짜
-			var targetDate = $(".today").next().val();
-			targetDate = targetDate.split("-").join(".").slice(2);
+			var selectDate = $(".today").next().val();
+			targetDate = selectDate.split("-").join(".").slice(2);
 			
 	    	$(".week_range").text(targetDate+"~"+formattedDate);
+	    	
+	    	loadWeeklyChart(selectDate, endDate);
 
 	    	/* 차트 열고 닫기 */
             $(".chart_list").children("li").on("click", function(){
@@ -795,15 +798,24 @@
             /* 주간 차트 출력 함수 */
             function showChartWeek(data){
             	var chrt = $("#totalWeeklyChart");
-            	var labels = ["써클링", "발작", "후지마비", "재채기", "피부긁음", "구토", "배변", "그루밍", '개구호흡', '식사'];
+				var categoryName = [];
+				var sum = [];
+				
+				for(var key in data){
+					if(data.hasOwnProperty(key)){
+						categoryName.push(data[key].category_name);
+						sum.push(data[key].sum);
+					}
+				}
+            	
             	/* weekly-total */
             	var totalWeeklyChart = new Chart(chrt, {
             		type:"polarArea",
             		data:{
-            			labels:labels,
+            			labels:categoryName,
             			datasets:[{
             				label:"weekly-total",
-            				data:[],
+            				data:sum,
             				backgroundColor: ['rgb(205, 0, 0)', 'rgb(248, 150, 140)', 'rgb(241, 232, 73)', 'rgb(73, 230, 241)', 'rgb(241, 73, 139)', 'rgb(99, 99, 202)', 
     	                        'rgb(120, 223, 152)', 'rgb(195, 224, 85)', 'rgb(231, 129, 129)', 'rgb(253, 126, 126)'],
             			}],
@@ -823,9 +835,63 @@
             			}
             		}
             	})
+            	
+            	var dividedSum = [];
+            	for (var i = 0; i < sum.length; i++) {
+            		dividedSum.push(Math.round(sum[i] / 7));
+            	}
+
+            	var totalDetailHtml = "일주일 기준, 이상행동의 일 평균 시간과 횟수는 다음과 같습니다. 그루밍 평균 "+dividedSum[7]+"시간, 귀/피부 긁는 행동 "+dividedSum[4]+"회, 재채기"+dividedSum[3]+"회, 식사 "+dividedSum[9]+"회, 배변 "+dividedSum[6]+"회, 구토 "+dividedSum[5]+"회, 써클링 "+dividedSum[0]+"회, 개구호흡 "+dividedSum[8]+"회, 발작 "+dividedSum[1]+"회, 후지마비 "+dividedSum[2]+"회입니다.";
+            	$(".chart_result").text(totalDetailHtml);
+            	
             	/* weekly-category */
+            	Object.values(data).forEach(function(item){
+            		var categoryChartHtml = "";
+            		categoryChartHtml += "<li><div><div class='chart_name'>";
+            		categoryChartHtml += "<span>"+item.category_name+"</span>";
+            		categoryChartHtml += "<span class='material-symbols-outlined icon_circle green chart_circle>circle</span>";
+            		categoryChartHtml += "<span class='material-symbols-outlined icon_chart_up'>keyboard_arrow_up</span>";
+            		categoryChartHtml += "<span class='material-symbols-outlined icon_chart_down hide'>keyboard_arrow_down</span></div>";
+            		categoryChartHtml += "<div class='chart_hide'><div class='chart_week'>";
+            		categoryChartHtml += "<canvas id='categoryChart' class='myChart' aria-level='chart'></canvas></div>";
+            		categoryChartHtml += "<div class='chart_result'>";
+            		
+					if(item.category_name == "그루밍") { 
+	            		if(item.sum >= item.cnt) {
+							categoryChartHtml += item.category_name+"시간은 전체적으로 높은 편으로, 한 주 평균 "+item.sum+"시간 정도입니다.";
+						} else {
+							categoryChartHtml += item.category_name+"시간은 한 주 평균 "+item.sum+"시간 입니다.";
+						}
+					} else {
+	            		if(item.sum >= item.cnt) {
+							categoryChartHtml += item.category_name+"횟수는 전체적으로 높은 편으로, 한 주 평균 "+item.sum+"회 정도입니다.";
+						} else {
+							categoryChartHtml += item.category_name+"횟수는 한 주 평균 "+item.sum+"회 정도입니다.";
+						}
+					}
+					categoryChartHtml += "일() 월() 화() 수() 목() 금() 토() 로 확인됩니다.";
+					categoryChartHtml += "<div class='chart_detail'>"+item.alarm_content+"</div>";
+					categoryChartHtml += "</div></div></li>";
+						
+            	});
+
             	
             }
+            
+            // loadWeeklyChart
+            function loadWeeklyChart(selectDate, endDate) {
+    	    	var mbIdx = $("#memId").val();
+    	    	var petIdx = $("#petId").val();
+            	
+    	    	$.ajax({
+    	    		url : "chart/weekly",
+    	    		type : "post",
+    	    		data : {"mbIdx":mbIdx, "petIdx":petIdx, "startDate":selectDate, "endDate":endDate},
+    	    		dataType : "json",
+    	    		success : function(data){console.log(data);},
+    	    		error : function(){alert("error");}
+    	    	})
+            };
             
             // 날짜 클릭시 차트 출력(주간)
     	    $(".chart1").find(".date").on("click", function(e){
@@ -850,24 +916,26 @@
    			  	var year = targetDate.getFullYear();
    			  	var month = targetDate.getMonth() + 1;
    			  	var day = targetDate.getDate();
+   			  	var endDay = targetDate.getDate() + 1;
    			  	
    			  	var formattedDate = ('0'+year).slice(-2) + '.' + ('0' + month).slice(-2) + '.' + ('0' + day).slice(-2);
-    			
+    			var endDate = year+'-'+month+'-'+endDay;
+   			  	
    				selectDate = selectDate.split("-").join(".").slice(2);
     	    	$(".week_range").text(selectDate+"~"+formattedDate);
     	    	
-    	    	/* 데이터 불러오기 start */
-    	    	var mbIdx = $("#memId").val();
+    	    	/* 데이터 불러오기 */
+/*     	    	var mbIdx = $("#memId").val();
     	    	var petIdx = $("#petId").val();
 				
     	    	$.ajax({
     	    		url : "chart/weekly",
     	    		type : "post",
-    	    		data : {"mbIdx":mbIdx, "petIdx":petIdx, "startDate":selectDate, "endDate":formattedDate},
+    	    		data : {"mbIdx":mbIdx, "petIdx":petIdx, "startDate":selectDate, "endDate":endDate},
     	    		dataType : "json",
     	    		success : showChartWeek,
     	    		error : function(){alert("error");}
-    	    	})
+    	    	}) */
     	    });
     	    	
 

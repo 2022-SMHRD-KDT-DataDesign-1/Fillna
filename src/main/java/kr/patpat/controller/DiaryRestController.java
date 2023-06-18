@@ -29,8 +29,8 @@ public class DiaryRestController {
 	
 	// 오늘의 일지
 	@GetMapping("/diary-all")
-	public List<HashMap<String, Object>> diaryList(@RequestParam("mbIdx") String mbIdx, @RequestParam("petIdx") String petIdx, @RequestParam("date") String date){
-		List<HashMap<String, Object>> data = diaryMapper.selectAction(mbIdx, petIdx, date);
+	public List<HashMap<String, Object>> diaryList(@RequestParam("mbIdx") String mbIdx, @RequestParam("date") String date){
+		List<HashMap<String, Object>> data = diaryMapper.selectAction(mbIdx, date);
 		//System.out.println(data.toString());
 		return data;
 	};

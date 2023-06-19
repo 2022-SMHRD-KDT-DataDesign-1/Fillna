@@ -94,7 +94,7 @@ body::-webkit-scrollbar { display: none; }
 
         /* member_info */
         .member_info{color:#999; overflow: hidden; box-sizing: border-box;}
-        .member_info>img{float:right; object-fit: cover; border-radius: 50%; width: 23vw; height: 23vw;}
+        .member_info>img{float:right; object-fit: cover; border-radius: 50%; width: 20vw; height: 20vw;}
         .member_info>div{margin-top: 5vw;}
         .member_info>div>p{color:#333;font-weight:600;width: 80%; border-bottom: 1px solid #999; font-size: 5vw; padding-bottom: 1vw; margin-bottom: 2vw;}
         .member_info>div>span{font-size: 3.5vw;line-height: 1.2;}

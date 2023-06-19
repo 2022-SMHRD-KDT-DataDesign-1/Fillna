@@ -270,7 +270,17 @@
         listHtml += "<div class='today_ment'>";
         listHtml += "오늘 하루, 탄이와 얼마나 오랫동안 눈을 맞추었나요?</div>";
         listHtml += "<div class='today_ment2'>";
-        listHtml += "<img src='resources/images//tan_e_2.png' alt=''>";
+        $.ajax({
+        	url : "diary/"+"${vo.mbIdx}",
+        	type : "get",
+        	data : {"idx": "${vo.mbIdx}"},
+        	dataType : "json",
+        	success :function(data){
+        		console.log(data.petPhotoPath);
+	        	listHtml += "<img src="+data+" alt=''>";
+        	},	
+        	error : function(){alert("error");}
+        })
         listHtml += "<p>나비는 오늘 조금 힘들었어요.<br>구토, 심한 재채기로 컨디션이 정상적이지 않아요.<br>식사에는 큰 문제는 없었지만, 물과 밥양을 확인해주세요.<br>그루밍도 평소보다 적게 했어요. 피부와 구강상태를 한번 체크해주세요<br><br>당분간 세심하게 나비를 신경써주세요";
         listHtml += "<span class='material-symbols-outlined icon_pets'>pets</span></p></div>";
             

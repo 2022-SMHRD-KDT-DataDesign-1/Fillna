@@ -353,7 +353,7 @@ body::-webkit-scrollbar { display: none; }
         .bottom>div>a>p{font-size:3.3vw; padding-top:0.5vw}
         .bottom>div:nth-child(3)>a>p{font-size:3.3vw; padding-top:1vw}
         .bottom>div>a{display: block; width: 100%;}
-        .this_menu{color:#cd0000; font-weight: 600;}
+        .this_menu{color:#cd0000; font-weight: 800;}
 
         /* record bottom */
         /* .record_bottom{color:#999; width:100%; display:flex; justify-content: center; align-items: center; padding: 8vw; box-sizing: border-box; position: fixed; bottom: 0;}

@@ -986,7 +986,7 @@
     	    	if($(this).hasClass("today")===true){
     	    		e.preventDefault();
     	    	} else{
-    		    	$(".date").not(this).removeClass("date_today");
+    	    		$(".chart1").find(".date").not(this).removeClass("date_today");
     		    	$(this).addClass("date_today");
     	    	}
     	    	
@@ -1011,19 +1011,11 @@
     	    	
     			targetDate = selectDate.split("-").join(".").slice(2);
     			
-    			
-    			
     			// week
     	    	$("#week_range").text(sixDaysAgo+"~"+targetDate);
-    			
-    	    	// Month
-    			var m = $(".chart2").find(".date_today > p:eq(0)").text();
-    	    	$("#month_range").text(m);
+
     	    	
     	    	$(".chart").removeClass("hide");
-    	    	
-    	    	var mbIdx = $("#memId").val();
-    	    	var petIdx = $("#petId").val();
 
             }
             
@@ -1032,7 +1024,7 @@
     	    	if($(this).hasClass("date_today")===true){
     	    		e.preventDefault();
     	    	} else{
-    		    	$(".date").not(this).removeClass("date_today");
+    		    	$(".chart1").find(".date").not(this).removeClass("date_today");
     		    	$(this).addClass("date_today");
     	    	}
     	    	
@@ -1057,10 +1049,6 @@
     			
     			// week
     	    	$("#week_range").text(sixDaysAgo+"~"+targetDate);
-    			
-    	    	// Month
-    			var m = $(".chart2").find(".date_today > p:eq(0)").text();
-    	    	$("#month_range").text(m);
     	    	
 				$(".chart").addClass("hide");
 				
@@ -1079,8 +1067,43 @@
             // 오늘 이외의 날짜 클릭시 모달 창 출력
     	    $(".chart1").find(".date").not(".test").on("click", changeDateNotToday);
             
-    	    $(".chart2").find(".test").on("click", changeDate);
-    	    $(".chart2").find(".date").not(".test").on("click", changeDateNotToday);
+    	 	// 날짜 클릭시
+    	    $(".chart2").find(".test").on("click", function(){
+    	    	if($(this).hasClass("date_today")===true){
+    	    		e.preventDefault();
+    	    	} else{
+    	    		$(".chart2").find(".date").not(this).removeClass("date_today");
+    		    	$(this).addClass("date_today");
+    	    	}
+    			
+    			var m = $(".chart2").find(".date_today > p:eq(0)").text();
+    	    	$("#month_range").text(m);
+    	    	
+				$(".chart").removeClass("hide");
+    	    });
+    	 	// 오늘 이외의 날짜 클릭시 모달 창 출력
+    	    $(".chart2").find(".date").not(".test").on("click", function(){
+    	    	if($(this).hasClass("date_today")===true){
+    	    		e.preventDefault();
+    	    	} else{
+    		    	$(".chart2").find(".date").not(this).removeClass("date_today");
+    		    	$(this).addClass("date_today");
+    	    	}
+    			
+    			var m = $(".chart2").find(".date_today > p:eq(0)").text();
+    	    	$("#month_range").text(m);
+    	    	
+				$(".chart").addClass("hide");
+				
+				$(".modal").removeClass("hide");
+				$(".btn_close").click(function(){
+					$(".modal").addClass("hide");
+				});
+				
+				$(".modal").click(function(){
+					$(".modal").addClass("hide");
+				});
+    	    });
     	    
             
             /* weekly-total */

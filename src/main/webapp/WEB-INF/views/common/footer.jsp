@@ -17,20 +17,20 @@
                         <p>모니터링</p>
                     </a>
                 </div>
-                <div id="chart_footer">
-                    <a href="${contextPath}/chart">
-                        <span class="material-symbols-outlined">
-                            analytics
-                        </span>
-                        <p>PATPAT리포트</p>
-                    </a>
-                </div>
                 <div id="diary_footer">
                     <a href="${contextPath}/diary">
                         <span class="material-symbols-outlined">
                         edit_square
                         </span>
                         <p>건강수첩</p>
+                    </a>
+                </div>
+                <div id="chart_footer">
+                    <a href="${contextPath}/chart">
+                        <span class="material-symbols-outlined">
+                            analytics
+                        </span>
+                        <p>건강리포트</p>
                     </a>
                 </div>
             </div>

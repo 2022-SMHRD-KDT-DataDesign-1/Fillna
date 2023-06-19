@@ -100,7 +100,7 @@ $(document).ready(function(e) {
 function load_alarm(){
 	var startDate = $("#startDate").val();
 	var endDate = $("#endDate").val();
-	console.log(startDate+" "+endDate);
+	//console.log(startDate+" "+endDate);
 	
 	$.ajax({
 		url : "alarm/all-test",
@@ -121,6 +121,8 @@ function makeview(data){
 		  var year = date.getFullYear();
 		  var month = date.getMonth() + 1; // 월은 0부터 시작하므로 1을 더해줌
 		  var day = date.getDate();
+		  if(month<10){ month = '0'+month; }
+		  if(day<10){ day = '0'+day; }
 		  return year + "-" + month + "-" + day;
 	}
 
@@ -136,19 +138,87 @@ function makeview(data){
 	
 	for(var i = 0; i <= 20; i++) {
 		  var currentDate = new Date(today.getTime() - i * 24 * 60 * 60 * 1000);
-		  console.log("날짜: " + formatDate(currentDate));
-		  console.log("요일: " + getDayOfWeek(currentDate));
+		  //console.log("날짜: " + formatDate(currentDate));
+		  //console.log("요일: " + getDayOfWeek(currentDate));
 		  
 		  var date = formatDate(currentDate);
 		  var dayOfWeek = getDayOfWeek(currentDate);
+		  var time = data[i].alarm_at.split(" ")[1].slice(0, 5);
 		  
-		  if(date == data[i].alarm_at.split(" ")[0]){
-			  console.log(data);
+		  list_html += '<div class="alarm_wrap hide">';
+		  list_html += '<div class="alarm_date">';
+		  list_html += '<img class="icon_check" src="resources/images/icon_check.png" alt="">';
+		  if(i==0){
+			  list_html += '<span class="today">'+date.replace(/-/g,".")+'('+dayOfWeek+') - 오늘</span>';
+		  } else {
+			  list_html += '<span>'+date.replace(/-/g,".")+'('+dayOfWeek+')</span>';
 		  }
+		  list_html += '</div>';
+		  list_html += '<div class="alaram_list_wrap">';
+		  list_html += '<ul class="alaram_list">';
 		  
+		  //console.log(data[21].alarm_at.split(" ")[0]);
 		  
+		  for(var j = 0; j < data.length; j++){
+		  list_html += '<li>';
+  			  if(date == data[j].alarm_at.split(" ")[0]){
+				  list_html += '<span>'+time+'</span>';
+				  list_html += '<span class="material-symbols-outlined icon_circle';
+					if(data[i].alarm_type === "일지"){
+						list_html += ' green circle">';
+					}else if(data[i].alarm_type === "주의"){
+						list_html += ' yel circle">';
+					}else{
+						list_html += ' red circle">';
+					}
+					list_html += 'circle</span>';
+					if(data[i].alarm_type != "일지"){
+						list_html += '<span class="a_alarm_type">['+data[i].alarm_type +'] - '+data[i].category_name+' '+data[i].cnt +'회</span>';
+					}else{
+						list_html += '<span class="a_alarm_type">['+data[i].alarm_type +']</span>';
+					}
+					
+					if(i==0){
+						list_html += '<span class="material-symbols-outlined icon_up">arrow_drop_up</span></li>';
+						list_html += '<div class="alarm_detail first_detail">';
+					} else {
+						list_html += '<span class="material-symbols-outlined icon_up hide">arrow_drop_up</span></li>';
+						list_html += '<div class="alarm_detail hide">';
+					}
+					list_html += '<div class="alarm_title">';
+					if(data[i].alarm_type != "일지"){
+						list_html += '<span class="alarm_type">['+data[i].alarm_type+']</span>';
+						list_html += ' '+data[i].pet_name+'가 '+ time+'분에 '+ data[i].category_name+'를 '+data[i].cnt +'회 하였습니다.</div>';
+						list_html += '<div class="alarm_content">';
+						list_html += data[i].alarm_content.replace(/\n/g,"<br>");
+					}else{
+						list_html += '<span class="alarm_type">['+data[i].alarm_type+'] </span>';
+						var pet_name = data[i].alarm_content.split("+")
+						list_html += pet_name[0].replace(/네로/g,data[i].pet_name).replace(/\n/g,"<br>");
+						list_html += '<div class="alarm_content">';
+						list_html += pet_name[1].replace(/네로/g,data[i].pet_name).replace(/\n/g,"<br>");
+					}
+					list_html += '</div>';
+					list_html += '<div class="alarm_go"><a href="#">이상행동 녹화영상';
+					list_html += '<span class="material-symbols-outlined icon_alarm_go">chevron_right</span>';
+					list_html += '</a></div></div>';
+  			  }
+		  }
+		  list_html += '</ul></div></div>';
 	}
-	
+	var button = "";
+	$('.con_alarm').prepend(list_html).trigger("create");
+	if(data.length >= 10){
+		button += '<div class="btn_more_wrap">';
+        button += '<button class="btn_more">더보기</button>';
+        button += '</div>';
+        $('.alarm_wrap').slice(0,10).toggleClass("hide");
+        cnt = 10;
+        data_len = $('.alarm_wrap').length-10;
+	}else{
+		$('.alarm_wrap').toggleClass("hide");
+	}
+	$('.con_alarm').append(button).trigger("create");
 	//console.log(data);
 }
 

@@ -485,72 +485,58 @@
 	                        <p>4월</p>
 	                        <p>30</p>
 	                    </li>
-	                    <input type="hidden" value="2023-03-12">
 	                    <li class="date">
 	                        <p>5월</p>
 	                        <p>31</p>
 	                    </li>
-	                    <input type="hidden" value="2023-03-19">
 	                    <li class="date">
 	                        <p>6월</p>
 	                        <p>30</p>
 	                    </li>
-	                    <input type="hidden" value="2023-03-26">
 	                    <li class="date">
 	                        <p>7월</p>
 	                        <p>31</p>
 	                    </li>
-	                    <input type="hidden" value="2023-04-02">
 	                    <li class="date">
 	                        <p>8월</p>
 	                        <p>31</p>
 	                    </li>
-	                    <input type="hidden" value="2023-04-09">
 	                    <li class="date">
 	                        <p>9월</p>
 	                        <p>30</p>
 	                    </li>
-	                    <input type="hidden" value="2023-04-16">
 	                    <li class="date">
 	                        <p>10월</p>
 	                        <p>31</p>
 	                    </li>
-	                    <input type="hidden" value="2023-04-23">
 	                    <li class="date">
 	                        <p>11월</p>
 	                        <p>30</p>
 	                    </li>
-	                    <input type="hidden" value="2023-04-30">
 	                    <li class="date">
 	                        <p>12월</p>
 	                        <p>31</p>
 	                    </li>
-	                    <input type="hidden" value="2023-05-07">
 	                    <li class="date">
 	                        <p>1월</p>
 	                        <p>31</p>
 	                    </li>
-	                    <input type="hidden" value="2023-05-14">
 	                    <li class="date">
 	                        <p>2월</p>
 	                        <p>28</p>
 	                    </li>
-	                    <input type="hidden" value="2023-05-28">
 	                    <li class="date">
 	                        <p>3월</p>
 	                        <p>31</p>
 	                    </li>
-	                    <input type="hidden" value="2023-06-04">
 	                    <li class="date">
 	                        <p>4월</p>
 	                        <p>30</p>
 	                    </li>
-	                    <input type="hidden" value="2023-05">
 	                    <li class="date date_today test">
 	                        <p>5월</p>
 	                        <p>31</p>
 	                    </li>
-	                    <input type="hidden" value="2023-06">
 	                </ul>
 	            </div>
                 <div class="con">
@@ -904,6 +890,7 @@
 					
                 </div>
 
+		</div>
 		<jsp:include page="../common/footer.jsp"></jsp:include>
         </div>
     </div>
@@ -915,14 +902,14 @@
         	$("#chart_footer").toggleClass("this_menu");
         	
     	    /* 몇월 몇주 날짜 범위 출력 */
-	    	var weekAndMonth = new Date($(".today").next().val());
+	    	var weekAndMonth = new Date($(".date_today").next().val());
 	    	var month = weekAndMonth.getMonth()+1;
 	    	var week = Math.ceil((weekAndMonth.getDate() + weekAndMonth.getDay()) / 7) - 1;
 	    	var txt = month+"월"+week+"주";
 	    	$("#month_week").text(txt);
 	    	
 
-			var selectDate = $(".today").next().val();
+			var selectDate = $(".date_today").next().val();
 			var currentDate = new Date(selectDate);
 			currentDate.setDate(currentDate.getDate() - 6);
 			
@@ -975,6 +962,11 @@
             	$(".chart1").removeClass("hide");
             	$(".monthly").removeClass("select");
             	$(".chart2").addClass("hide");
+            	
+            	$(".chart").removeClass("hide");
+            	//$(".chart_date_ul li").last().css({'backgroundColor': '#f6cccc', 'color': '#cd0000'});
+            	$(".chart1 > .date_wrap > .chart_date_ul li").last().addClass("date_today");
+            	$(".chart2 > .date_wrap > .chart_date_ul li").last().removeClass("date_today");
             });
 
             $(".chart_type>div:eq(1)").on("click", function(){
@@ -982,25 +974,30 @@
             	$(".chart2").removeClass("hide");
             	$(".weekly").removeClass("select");
             	$(".chart1").addClass("hide");
+            	
+            	$(".chart").removeClass("hide");
+            	//$(".chart_date_ul li").last().css({'backgroundColor': '#f6cccc', 'color': '#cd0000'});
+            	$(".chart2 > .date_wrap > .chart_date_ul li").last().addClass("date_today");
+            	$(".chart1 > .date_wrap > .chart_date_ul li").last().removeClass("date_today");
             });
                        
-            /* chart1 -> 주간날짜 클릭시 이벤트 */
+            /* 오늘 날짜 클릭시 이벤트 */
            	var changeDate = function(){
     	    	if($(this).hasClass("today")===true){
     	    		e.preventDefault();
     	    	} else{
-    		    	$(".date").not(this).removeClass("today");
-    		    	$(this).addClass("today");
+    		    	$(".date").not(this).removeClass("date_today");
+    		    	$(this).addClass("date_today");
     	    	}
     	    	
     	    	/* 몇월 몇주 날짜 범위 출력 */
-    	    	var weekAndMonth = new Date($(this).next().val());
+    	    	var weekAndMonth = new Date($(".chart1").find(".date").not(".test").next().val());
     	    	var month = weekAndMonth.getMonth()+1;
     	    	var week = Math.ceil((weekAndMonth.getDate() + weekAndMonth.getDay()) / 7);
     	    	var txt = month+"월"+week+"주";
     	    	$("#month_week").text(txt);
     	    	
-    			var selectDate = $(this).next().val();
+    			var selectDate = $(".chart1").find(".date").not(".test").next().val();
     			var currentDate = new Date(selectDate);
     			currentDate.setDate(currentDate.getDate() - 6);
     			
@@ -1012,7 +1009,12 @@
     	    	
     			targetDate = selectDate.split("-").join(".").slice(2);
     			
+    			// week
     	    	$("#week_range").text(sixDaysAgo+"~"+targetDate);
+    			
+    	    	// Month
+    			var m = $(".chart2").find(".date_today > p:eq(0)").text();
+    	    	$("#month_range").text(m);
     	    	
     	    	$(".chart").removeClass("hide");
     	    	
@@ -1021,7 +1023,8 @@
 
             }
             
-            $(".chart1").find(".test").on("click", function(){
+            /* 오늘 이외의 날짜 클릭시 이벤트 */
+            var changeDateNotToday = function(){
     	    	if($(this).hasClass("date_today")===true){
     	    		e.preventDefault();
     	    	} else{
@@ -1036,7 +1039,7 @@
     	    	var txt = month+"월"+week+"주";
     	    	$("#month_week").text(txt);
     	    	
-    			var selectDate = $(this).next().val();
+    			var selectDate = $(".chart1").find(".date").not(".test").next().val();
     			var currentDate = new Date(selectDate);
     			currentDate.setDate(currentDate.getDate() - 6);
     			
@@ -1048,45 +1051,12 @@
     	    	
     			targetDate = selectDate.split("-").join(".").slice(2);
     			
+    			// week
     	    	$("#week_range").text(sixDaysAgo+"~"+targetDate);
-    	    	
-    	    	$(".chart").removeClass("hide");
-    	    	
-    	    	var mbIdx = $("#memId").val();
-    	    	var petIdx = $("#petId").val();
-
-            });
-            
-            // 오늘 이외의 날짜 클릭시 모달 창 출력
-    	    $(".chart1").find(".date").not(".test").on("click", function(e){
-    	    	if($(this).hasClass("date_today")===true){
-    	    		e.preventDefault();
-    	    	} else{
-    		    	$(".date").not(this).removeClass("date_today");
-    		    	$(this).addClass("date_today");
-    	    	}
-    	    	
-    	    	/* 몇월 몇주 날짜 범위 출력 */
-    	    	var weekAndMonth = new Date($(this).next().val());
-    	    	var month = weekAndMonth.getMonth()+1;
-    	    	var week = Math.ceil((weekAndMonth.getDate() + weekAndMonth.getDay()) / 7);
-    	    	var txt = month+"월"+week+"주";
-    	    	$("#month_week").text(txt);
-    	    	
-    			var selectDate = $(this).next().val();
-    			var currentDate = new Date(selectDate);
-    			currentDate.setDate(currentDate.getDate() - 6);
     			
-    			var year = currentDate.getFullYear();
-    			var month = currentDate.getMonth() + 1; // 월은 0부터 시작하므로 1을 더해줌
-    			var day = currentDate.getDate();
-    			
-    			var sixDaysAgo = ('0'+year).slice(-2) + '.' + ('0' + month).slice(-2) + '.' + ('0' + day).slice(-2);
-    	    	
-    			targetDate = selectDate.split("-").join(".").slice(2);
-    			
-    	    	$("#week_range").text(sixDaysAgo+"~"+targetDate);
-    	    	
+    	    	// Month
+    			var m = $(".chart2").find(".date_today > p:eq(0)").text();
+    	    	$("#month_range").text(m);
     	    	
 				$(".chart").addClass("hide");
 				
@@ -1098,8 +1068,16 @@
 				$(".modal").click(function(){
 					$(".modal").addClass("hide");
 				});
-				
-    	    });
+            }
+            
+            // 날짜 클릭시
+            $(".chart1").find(".test").on("click", changeDate);
+            // 오늘 이외의 날짜 클릭시 모달 창 출력
+    	    $(".chart1").find(".date").not(".test").on("click", changeDateNotToday);
+            
+    	    $(".chart2").find(".test").on("click", changeDate);
+    	    $(".chart2").find(".date").not(".test").on("click", changeDateNotToday);
+    	    
             
             /* weekly-total */
     	    var chrt = $("#totalWeeklyChart");
@@ -1193,7 +1171,8 @@
 					}
 				});
 				
-				//var datas2 = [[], [], [], [], [], [], [], [], [], []]
+				var datas2 = [[3.03, 2.36, 3.41, 2.47, 3.44], [5, 2, 6, 5, 3], [3, 5, 4, 2, 1], [13, 12, 10, 9, 15], [5, 4, 4, 3, 6], 
+					[0, 2, 0, 0, 1], [0, 0, 0, 0, 0], [0, 0, 0, 0, 1], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]
         		var chrt2 = $("#monthlyChart"+i);
 				var monthlyChart =  new Chart(chrt2, {
 					type: 'line',
@@ -1201,7 +1180,7 @@
 						labels: ['1주', '2주', '3주', '4주', '5주'],
 						datasets: [{
 							label: 'category-monthly',
-							data: datas[i],
+							data: datas2[i],
 							backgroundColor: 'rgba(78, 179, 211, 0.7)'
 						}]
 					},

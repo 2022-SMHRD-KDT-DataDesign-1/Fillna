@@ -301,7 +301,8 @@
 		    		videoHtml += '<span class="material-symbols-outlined icon_up hide">arrow_drop_up</span></div>';
 		    		videoHtml += '<div class="m_list hide"><ul>';
 	    		}
-	    		
+	    		// 날짜가 일치할때만 데이터 출력
+    			var cnt = 0;
 	    		for(var j = 0; j < data.length; j++){
 	    			if(date === data[j].recordingAt.split(" ")[0]){
 	    				videoHtml += '<li><div>';
@@ -309,9 +310,15 @@
 	    				videoHtml += '<source src="/controller'+data[j].recordingFile+'" type="video/mp4"></video>';
 	    				videoHtml += '</div>';
 	    				videoHtml += '</li>';
-	    			}
+	    				cnt += 1;
+	    			} 
 	    		}
-	    		videoHtml += '</ul></div></div>';
+	    		// 동영상 없을 경우
+    			if(cnt == 0){
+	    			videoHtml += '<li class="video_none">저장된 동영상이 없습니다.</li>';
+    			}
+	    		
+    			videoHtml += '</ul></div></div>';
     			
     		}
     		$('.monitoring_bottom').append(videoHtml).trigger("create");

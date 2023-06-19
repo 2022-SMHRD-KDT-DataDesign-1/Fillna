@@ -986,7 +986,7 @@
     	    	if($(this).hasClass("today")===true){
     	    		e.preventDefault();
     	    	} else{
-    		    	$(".date").not(this).removeClass("date_today");
+    	    		$(".chart1").find(".date").not(this).removeClass("date_today");
     		    	$(this).addClass("date_today");
     	    	}
     	    	
@@ -1024,7 +1024,7 @@
     	    	if($(this).hasClass("date_today")===true){
     	    		e.preventDefault();
     	    	} else{
-    		    	$(".date").not(this).removeClass("date_today");
+    		    	$(".chart1").find(".date").not(this).removeClass("date_today");
     		    	$(this).addClass("date_today");
     	    	}
     	    	
@@ -1072,7 +1072,7 @@
     	    	if($(this).hasClass("date_today")===true){
     	    		e.preventDefault();
     	    	} else{
-    		    	$(".date").not(this).removeClass("date_today");
+    	    		$(".chart2").find(".date").not(this).removeClass("date_today");
     		    	$(this).addClass("date_today");
     	    	}
     			
@@ -1086,7 +1086,7 @@
     	    	if($(this).hasClass("date_today")===true){
     	    		e.preventDefault();
     	    	} else{
-    		    	$(".date").not(this).removeClass("date_today");
+    		    	$(".chart2").find(".date").not(this).removeClass("date_today");
     		    	$(this).addClass("date_today");
     	    	}
     			

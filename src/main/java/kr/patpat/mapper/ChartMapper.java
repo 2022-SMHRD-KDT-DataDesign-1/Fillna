@@ -10,5 +10,9 @@ public interface ChartMapper {
 
 	List<HashMap<String, String>> selectWeekly(HashMap<String, String> param);
 
+	List<HashMap<String, String>> selectWeeklyTotal(HashMap<String, String> param);
+
+	List<HashMap<String, String>> selectMonthly(HashMap<String, String> param);
+
 }
 

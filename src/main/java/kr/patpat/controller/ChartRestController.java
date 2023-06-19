@@ -22,16 +22,39 @@ public class ChartRestController {
 	
 	@PostMapping(value = "/weekly", produces = "text/plain;charset=UTF-8")
 	public String showWeeklyChart(@RequestParam HashMap<String, String> param) {
-		System.out.println(param.toString());
 		
 		List<HashMap<String, String>> res =  chartMapper.selectWeekly(param);
+		//System.out.println(res);
+		// json 형태로 변환
+		Gson gson = new Gson();
+		String data = gson.toJson(res);
+		
+		return data;
+	}
+	
+	@PostMapping(value = "/weekly-total", produces = "text/plain;charset=UTF-8")
+	public String showWeeklyTotalChart(@RequestParam HashMap<String, String> param) {
+		
+		List<HashMap<String, String>> res = chartMapper.selectWeeklyTotal(param);
 		
 		// json 형태로 변환
 		Gson gson = new Gson();
 		String data = gson.toJson(res);
-		System.out.println(data);
 		
 		return data;
+	}
+	
+	
+	@PostMapping(value = "/monthly", produces = "text/plain;charset=UTF-8")
+	public String showMonthlyChart(@RequestParam HashMap<String, String> param) {
+		List<HashMap<String, String>> res = chartMapper.selectMonthly(param);
+		
+		// json 형태로 변환
+		Gson gson = new Gson();
+		String data = gson.toJson(res);
+		
+		return data;
+		
 	}
 
 

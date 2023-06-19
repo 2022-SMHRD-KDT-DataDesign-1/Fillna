@@ -69,12 +69,10 @@
             </a>
         </div>
 
-	    
-	    <iframe class="cctv_video" src="http://222.102.104.176:5000"></iframe>
+	    <iframe class="cctv_video" src="http://218.149.72.104:5000/"></iframe>
 	    
     </div>
      <script>
-	 	
 	    
 	 // 버튼 요소를 가져옵니다
 	    const recordBtn = document.querySelector('.recordBtn');

@@ -116,12 +116,12 @@
      	                        <c:if test="${empty pvo.petPhoto}">
 		                            <input class="file_name" value="" name="pet_photo" readonly="true">
 		                            <label for="file">upload</label>
-		                            <input type="file" id="file">
+		                            <input type="file" id="file" multiple="true">
 	                        	</c:if>
 	   							<c:if test="${not empty pvo.petPhoto}">
 		                            <input class="file_name" value="${pvo.petPhoto}" name="pet_photo" readonly="true">
 		                            <label for="file">upload</label>
-		                            <input type="file" id="file" name="file">
+		                            <input type="file" id="file" name="file" multiple="true">
 	                        	</c:if>
                         </div>
                     </div>

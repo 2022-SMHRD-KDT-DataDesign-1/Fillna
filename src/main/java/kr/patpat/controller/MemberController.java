@@ -58,7 +58,14 @@ public class MemberController {
 					String fileName = file.getOriginalFilename();
 					File uploadFile = new File(saveImgPath, fileName);
 					file.transferTo(uploadFile);
-					
+					try {
+						
+						Thread.sleep(1200); // 1.2초 대기
+						
+					} catch (InterruptedException e) {
+						
+						e.printStackTrace();
+					}
 					Pet pet = memberMapper.selectPet(param.get("mb_idx"));
 					pet.setPetName(param.get("pet_name"));
 					pet.setPetAdoptionAt(param.get("pet_adoption_at"));
@@ -73,15 +80,6 @@ public class MemberController {
 					session.setAttribute("vo", member);
 					
 					rttr.addFlashAttribute("msg", "성공티비");
-					try {
-
-						Thread.sleep(3000); //3초 대기
-
-					} catch (InterruptedException e) {
-
-						e.printStackTrace();
-
-					}
 					return "redirect:/updateForm";
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -106,6 +104,14 @@ public class MemberController {
 				pet.setPetPhotoPath(uploadFile.getAbsolutePath());
 				try {
 					file.transferTo(uploadFile);
+					try {
+						
+						Thread.sleep(1200); //1.2초 대기
+						
+					} catch (InterruptedException e) {
+						
+						e.printStackTrace();
+					}
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -117,15 +123,6 @@ public class MemberController {
 			Member member = memberMapper.selectUpdateMember(param.get("mb_idx"));
 			session.setAttribute("vo", member);
 			
-		   try {
-
-				Thread.sleep(3000); //3초 대기
-
-			} catch (InterruptedException e) {
-
-				e.printStackTrace();
-
-			}
 			rttr.addFlashAttribute("msg", "성공티비");
 			return "redirect:/updateForm";
 		}

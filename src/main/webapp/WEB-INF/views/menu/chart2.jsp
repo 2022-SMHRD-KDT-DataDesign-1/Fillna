@@ -1019,6 +1019,7 @@
     	    	// Month
     			var m = $(".chart2").find(".date_today > p:eq(0)").text();
     	    	$("#month_range").text(m);
+    	    	console.log(m);
     	    	
     	    	$(".chart").removeClass("hide");
     	    	

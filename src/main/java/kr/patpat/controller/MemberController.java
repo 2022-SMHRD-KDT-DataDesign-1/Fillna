@@ -48,7 +48,7 @@ public class MemberController {
 	@PostMapping("/update")
 	public String update(@RequestParam HashMap<String, String> param, @RequestParam("file") MultipartFile file, HttpSession session, RedirectAttributes rttr) {
 		
-		String saveImgPath = "C:\\Users\\win\\git\\Fillna\\src\\main\\webapp\\resources\\photo"; 
+		String saveImgPath = "C:\\Users\\SMHRD\\git\\Fillna\\src\\main\\webapp\\resources\\photo"; 
 		System.out.println(param.toString()+file);
 		
 		// 반려동물 사진이 없는 경우
@@ -65,7 +65,6 @@ public class MemberController {
 					pet.setPetGender(param.get("pet_gender"));
 					pet.setPetPhoto(fileName);
 					pet.setPetPhotoPath(uploadFile.getAbsolutePath());
-					
 					memberMapper.setAlarm(param);
 					memberMapper.setPet(pet);
 					
@@ -76,7 +75,7 @@ public class MemberController {
 					rttr.addFlashAttribute("msg", "성공티비");
 					try {
 
-						Thread.sleep(2300); //2.3초 대기
+						Thread.sleep(3000); //3초 대기
 
 					} catch (InterruptedException e) {
 
@@ -96,6 +95,13 @@ public class MemberController {
 			if(!file.isEmpty()) {
 				String fileName = file.getOriginalFilename();
 				File uploadFile = new File(saveImgPath, fileName);
+				
+				String oldImg = pet.getPetPhoto();
+				File oldFile = new File(saveImgPath+"/"+oldImg);
+				
+				if(oldFile.exists()) {
+					oldFile.delete();
+				}
 				pet.setPetPhoto(fileName);
 				pet.setPetPhotoPath(uploadFile.getAbsolutePath());
 				try {
@@ -113,7 +119,7 @@ public class MemberController {
 			
 		   try {
 
-				Thread.sleep(2300); //2.3초 대기
+				Thread.sleep(3000); //3초 대기
 
 			} catch (InterruptedException e) {
 

@@ -25,8 +25,8 @@
     <div class="wrapper">
 		<jsp:include page="../common/my.jsp"></jsp:include>
 		<jsp:include page="../common/header2.jsp"></jsp:include>
-<%-- 		<input type="hidden" value="${vo.mbIdx}" id="memId">
-        <input type="hidden" value="${pvo.petIdx}" id="petId"> --%>
+		<input type="hidden" value="${vo.mbIdx}" id="memId">
+        <input type="hidden" value="${pvo.petIdx}" id="petId">
         <div class="content chart_con">
             <div class="chart_type">
                 <div class="select weekly">
@@ -54,61 +54,62 @@
                 int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
 
                 // 오늘이 월요일이 아닌 경우, 이전 월요일로 이동
-                if (dayOfWeek != Calendar.MONDAY) {
-                	calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+                if (dayOfWeek != Calendar.SUNDAY) {
+                	calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
                 }
                 
             	// 월요일 날짜 출력
-               	Date todayMon = dateFormat.parse(dateFormat.format(calendar.getTime()));
+            	String today = dateFormat.format(calendar.getTime());
+               	Date todayMon = dateFormat.parse(today);
+               	String[] todayTemp = today.split("-");
                	
             	calendar.setTime(todayMon);
             	String[] dateChart = new String[10];
-               	for(int i = 1; i <= 10; i++){
+               	for(int i = 1; i <= 9; i++){
               		calendar.add(Calendar.DAY_OF_MONTH, -7);
-               		out.println("test : "+dateFormat.format(calendar.getTime())+"<br>");
                		dateChart[i-1] = dateFormat.format(calendar.getTime());
                	}
                	
 			    String month = "";
-			    for(int j=9; j>=0; j--){
+			    String todayMonth = "";
+			    for(int j=8; j>=0; j--){
  				  String[] temp = dateChart[j].split("-");
 				  if(Integer.parseInt(dateChart[j].substring(5, 7)) >= 10){
 					  month = dateChart[j].substring(5, 7);
+					  todayMonth = today.substring(5, 7);
 				  } else {
 					  month = dateChart[j].substring(6, 7);
+					  todayMonth = today.substring(6, 7);
 				  }
-				  if(j==0){
-					  out.print("<li class='date today'>");
-				      out.print("<p>"+month+"월</p>");
-				      out.print("<p>"+temp[2]+"</p>");
-					  out.print("</li>");
-					  out.print("<input type='hidden' class='thisDate' value='"+dateChart[j]+"'>");
-				  } else{
-					  out.print("<li class='date'>");
-				      out.print("<p>"+month+"월</p>");
-				      out.print("<p>"+temp[2]+"</p>");
-					  out.print("</li>");
-					  out.print("<input type='hidden' class='thisDate' value='"+dateChart[j]+"'>");
-				  }
+				  out.print("<li class='date'>");
+			      out.print("<p>"+month+"월</p>");
+			      out.print("<p>"+temp[2]+"</p>");
+				  out.print("</li>");
+				  out.print("<input type='hidden' class='thisDate' value='"+dateChart[j]+"'>");
 			    }
+			    
+				out.print("<li class='date today'>");
+			    out.print("<p>"+todayMonth+"월</p>");
+			    out.print("<p>"+todayTemp[2]+"</p>");
+				out.print("</li>");
+				out.print("<input type='hidden' class='thisDate' value='"+today+"'>");
+				
 				%>
                 </ul>
                 </div>
                 <div class="con">
                     <div class="chart_date">
-                        <span>6월 1주</span>
-                        <span>23.06.05~23.06.11</span>
+                        <span class="month_week"></span>
+                        <span class="week_range"></span>
                     </div>
                     <div class="chart">
                         <div class="chart_total">
                             <div class="chart_name">TOTAL</div>
                             <div class="chart_wrap">
-                                <!-- chart 들어갈 자리 -->
+                                <!-- chart -->
                                 <canvas id="totalWeeklyChart" class="myChart" aria-level="chart"></canvas>
                             </div>
                             <div class="chart_result">
-                                일주일 기준, 이상행동의 일 평균 시간과 횟수는 다음과 같습니다. 그루밍 평균 4.5시간, 귀/피부 긁는 행동 3회,
-                                재채기 2회, 식사 10회, 배변 5회, 구토 0회, 써클링 0회, 개구호흡 0회, 발작 0회, 후지마비 0회입니다.
                             </div>
                         </div>
                         <ul class="chart_list">
@@ -746,14 +747,40 @@
     	        $(".date_ul").css("transform", "translate(" + -limit + "px, 0px)");
     	        }
     	    });
+    	    
+    	    /* 몇월 몇주 날짜 범위 출력 */
+	    	var weekAndMonth = new Date($(".today").next().val());
+	    	var month = weekAndMonth.getMonth()+1;
+	    	var week = Math.ceil((weekAndMonth.getDate() + weekAndMonth.getDay()) / 7);
+	    	var txt = month+"월"+week+"주";
+	    	$(".month_week").text(txt);
+	    	
+	    	// 오늘 날짜
+	    	var today = new Date();
+	    	var year = today.getFullYear();
+	    	var month = today.getMonth() + 1; // getMonth()는 0부터 시작하므로 +1
+	    	var day = today.getDate();
+	    	var endDay = today.getDate() + 1;
+	    	
+	    	var formattedDate = (''+year).slice(-2) + '.' + ('0' + month).slice(-2) + '.' + ('0' + day).slice(-2);
+	    	var endDate = year+'-'+month+'-'+endDay;
+	    	
+			// 선택된 날짜
+			var selectDate = $(".today").next().val();
+			targetDate = selectDate.split("-").join(".").slice(2);
+			
+	    	$(".week_range").text(targetDate+"~"+formattedDate);
+	    	
+	    	loadWeeklyChart(selectDate, endDate);
 
-
+	    	/* 차트 열고 닫기 */
             $(".chart_list").children("li").on("click", function(){
                 $(this).find(".chart_hide").toggleClass("hide");
                 $(this).find(".icon_chart_up").toggleClass("hide");
                 $(this).find(".icon_chart_down").toggleClass("hide");
             });
 
+	    	/* 주간,월간 변환 */
             $(".chart_type>div:eq(0)").on("click", function(){
             	$(".weekly").addClass("select");
             	$(".chart1").removeClass("hide");
@@ -768,6 +795,104 @@
             	$(".chart1").addClass("hide");
             });
             
+            /* 주간 차트 출력 함수 */
+            function showChartWeek(data){
+            	var chrt = $("#totalWeeklyChart");
+				var categoryName = [];
+				var sum = [];
+				
+				for(var key in data){
+					if(data.hasOwnProperty(key)){
+						categoryName.push(data[key].category_name);
+						sum.push(data[key].sum);
+					}
+				}
+            	
+            	/* weekly-total */
+            	var totalWeeklyChart = new Chart(chrt, {
+            		type:"polarArea",
+            		data:{
+            			labels:categoryName,
+            			datasets:[{
+            				label:"weekly-total",
+            				data:sum,
+            				backgroundColor: ['rgb(205, 0, 0)', 'rgb(248, 150, 140)', 'rgb(241, 232, 73)', 'rgb(73, 230, 241)', 'rgb(241, 73, 139)', 'rgb(99, 99, 202)', 
+    	                        'rgb(120, 223, 152)', 'rgb(195, 224, 85)', 'rgb(231, 129, 129)', 'rgb(253, 126, 126)'],
+            			}],
+            		},
+            		options:{
+            			responsive: true,
+            			plugins:{
+            				legend:{
+            					display:true,
+            					labels:{
+            						color:"rgb(94, 94, 94)",
+            						boxWidth:10,
+            						boxHeight:10,
+            						font:{size:13}
+            					}
+            				}
+            			}
+            		}
+            	})
+            	
+            	var dividedSum = [];
+            	for (var i = 0; i < sum.length; i++) {
+            		dividedSum.push(Math.round(sum[i] / 7));
+            	}
+
+            	var totalDetailHtml = "일주일 기준, 이상행동의 일 평균 시간과 횟수는 다음과 같습니다. 그루밍 평균 "+dividedSum[7]+"시간, 귀/피부 긁는 행동 "+dividedSum[4]+"회, 재채기"+dividedSum[3]+"회, 식사 "+dividedSum[9]+"회, 배변 "+dividedSum[6]+"회, 구토 "+dividedSum[5]+"회, 써클링 "+dividedSum[0]+"회, 개구호흡 "+dividedSum[8]+"회, 발작 "+dividedSum[1]+"회, 후지마비 "+dividedSum[2]+"회입니다.";
+            	$(".chart_result").text(totalDetailHtml);
+            	
+            	/* weekly-category */
+            	Object.values(data).forEach(function(item){
+            		var categoryChartHtml = "";
+            		categoryChartHtml += "<li><div><div class='chart_name'>";
+            		categoryChartHtml += "<span>"+item.category_name+"</span>";
+            		categoryChartHtml += "<span class='material-symbols-outlined icon_circle green chart_circle>circle</span>";
+            		categoryChartHtml += "<span class='material-symbols-outlined icon_chart_up'>keyboard_arrow_up</span>";
+            		categoryChartHtml += "<span class='material-symbols-outlined icon_chart_down hide'>keyboard_arrow_down</span></div>";
+            		categoryChartHtml += "<div class='chart_hide'><div class='chart_week'>";
+            		categoryChartHtml += "<canvas id='categoryChart' class='myChart' aria-level='chart'></canvas></div>";
+            		categoryChartHtml += "<div class='chart_result'>";
+            		
+					if(item.category_name == "그루밍") { 
+	            		if(item.sum >= item.cnt) {
+							categoryChartHtml += item.category_name+"시간은 전체적으로 높은 편으로, 한 주 평균 "+item.sum+"시간 정도입니다.";
+						} else {
+							categoryChartHtml += item.category_name+"시간은 한 주 평균 "+item.sum+"시간 입니다.";
+						}
+					} else {
+	            		if(item.sum >= item.cnt) {
+							categoryChartHtml += item.category_name+"횟수는 전체적으로 높은 편으로, 한 주 평균 "+item.sum+"회 정도입니다.";
+						} else {
+							categoryChartHtml += item.category_name+"횟수는 한 주 평균 "+item.sum+"회 정도입니다.";
+						}
+					}
+					categoryChartHtml += "일() 월() 화() 수() 목() 금() 토() 로 확인됩니다.";
+					categoryChartHtml += "<div class='chart_detail'>"+item.alarm_content+"</div>";
+					categoryChartHtml += "</div></div></li>";
+						
+            	});
+
+            	
+            }
+            
+            // loadWeeklyChart
+            function loadWeeklyChart(selectDate, endDate) {
+    	    	var mbIdx = $("#memId").val();
+    	    	var petIdx = $("#petId").val();
+            	
+    	    	$.ajax({
+    	    		url : "chart/weekly",
+    	    		type : "post",
+    	    		data : {"mbIdx":mbIdx, "petIdx":petIdx, "startDate":selectDate, "endDate":endDate},
+    	    		dataType : "json",
+    	    		success : function(data){console.log(data);},
+    	    		error : function(){alert("error");}
+    	    	})
+            };
+            
             // 날짜 클릭시 차트 출력(주간)
     	    $(".chart1").find(".date").on("click", function(e){
     	    	
@@ -777,6 +902,40 @@
     		    	$(".date").not(this).removeClass("today");
     		    	$(this).addClass("today");
     	    	}
+    	    	
+    	    	/* 몇월 몇주 날짜 범위 출력 */
+    	    	var weekAndMonth = new Date($(this).next().val());
+    	    	var month = weekAndMonth.getMonth()+1;
+    	    	var week = Math.ceil((weekAndMonth.getDate() + weekAndMonth.getDay()) / 7);
+    	    	var txt = month+"월"+week+"주";
+    	    	$(".month_week").text(txt);
+    	    	
+    	    	var selectDate = $(".today").next().val();
+    			var targetDate = new Date(selectDate);
+    			targetDate.setDate(targetDate.getDate()+6);
+   			  	var year = targetDate.getFullYear();
+   			  	var month = targetDate.getMonth() + 1;
+   			  	var day = targetDate.getDate();
+   			  	var endDay = targetDate.getDate() + 1;
+   			  	
+   			  	var formattedDate = ('0'+year).slice(-2) + '.' + ('0' + month).slice(-2) + '.' + ('0' + day).slice(-2);
+    			var endDate = year+'-'+month+'-'+endDay;
+   			  	
+   				selectDate = selectDate.split("-").join(".").slice(2);
+    	    	$(".week_range").text(selectDate+"~"+formattedDate);
+    	    	
+    	    	/* 데이터 불러오기 */
+/*     	    	var mbIdx = $("#memId").val();
+    	    	var petIdx = $("#petId").val();
+				
+    	    	$.ajax({
+    	    		url : "chart/weekly",
+    	    		type : "post",
+    	    		data : {"mbIdx":mbIdx, "petIdx":petIdx, "startDate":selectDate, "endDate":endDate},
+    	    		dataType : "json",
+    	    		success : showChartWeek,
+    	    		error : function(){alert("error");}
+    	    	}) */
     	    });
     	    	
 

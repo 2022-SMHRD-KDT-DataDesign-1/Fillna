@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.patpat.entity.Memo;
+import kr.patpat.entity.Pet;
 import kr.patpat.entity.Recording;
 import kr.patpat.mapper.DiaryMapper;
+import kr.patpat.mapper.MemberMapper;
 import kr.patpat.mapper.MemoMapper;
 
 @RequestMapping("/diary")
@@ -26,6 +28,9 @@ public class DiaryRestController {
 	
 	@Autowired
 	private MemoMapper memoMapper;
+	
+	@Autowired
+	private MemberMapper memberMapper;
 	
 	// 오늘의 일지
 	@GetMapping("/diary-all")
@@ -63,6 +68,14 @@ public class DiaryRestController {
 			memoMapper.deleteMemo(idx);
 		}
 		
+	}
+	
+	@GetMapping("/{idx}")
+	public Pet getPetPhoto(@PathVariable("idx") String idx) {
+		
+		Pet pet = memberMapper.selectPet(idx);
+		
+		return pet;
 	}
 	
 	

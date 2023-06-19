@@ -965,8 +965,8 @@
             	
             	$(".chart").removeClass("hide");
             	//$(".chart_date_ul li").last().css({'backgroundColor': '#f6cccc', 'color': '#cd0000'});
-            	$(".chart1 > .date_wrap > .chart_date_ul li").last().addClass("date_today");
-            	$(".chart2 > .date_wrap > .chart_date_ul li").last().removeClass("date_today");
+            	//$(".chart1 > .date_wrap > .chart_date_ul li").last().addClass("date_today");
+            	//$(".chart2 > .date_wrap > .chart_date_ul li").last().removeClass("date_today");
             });
 
             $(".chart_type>div:eq(1)").on("click", function(){
@@ -977,8 +977,8 @@
             	
             	$(".chart").removeClass("hide");
             	//$(".chart_date_ul li").last().css({'backgroundColor': '#f6cccc', 'color': '#cd0000'});
-            	$(".chart2 > .date_wrap > .chart_date_ul li").last().addClass("date_today");
-            	$(".chart1 > .date_wrap > .chart_date_ul li").last().removeClass("date_today");
+            	//$(".chart2 > .date_wrap > .chart_date_ul li").last().addClass("date_today");
+            	//$(".chart1 > .date_wrap > .chart_date_ul li").last().removeClass("date_today");
             });
                        
             /* 오늘 날짜 클릭시 이벤트 */

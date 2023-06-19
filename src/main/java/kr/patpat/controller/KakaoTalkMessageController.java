@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -29,7 +31,7 @@ public class KakaoTalkMessageController {
    
    RestTemplate restTemplate = new RestTemplate();
    private final String client_id = "b38c873dac6c4b245d22412fae37e4af";
-   
+   private String template_id = "";
    @GetMapping("/admin")
    public String adLogin(){
 	   return "member/admin";
@@ -67,8 +69,17 @@ public class KakaoTalkMessageController {
    }
    
    @GetMapping("/login")
-   public String refreshToken(@RequestParam(value = "code",required=false)String code) {
-	   
+   public String refreshToken(@RequestParam(value = "code",required=false)String code, HttpSession session) {
+       if (session.getAttribute("cnt") == null) {
+    	   session.setAttribute("cnt", "1");
+    	   template_id = "95063";
+       }else if(session.getAttribute("cnt") == "1") {
+    	   session.setAttribute("cnt", "2");
+    	   template_id = "95121";
+       }else if(session.getAttribute("cnt") == "2") {
+    	   session.removeAttribute("cnt");
+    	   template_id = "95123";
+       }
 	   Map<String, String> token = getToken(code);
 	   System.out.println(token);
 	   String apiUrl = "https://kapi.kakao.com/v2/user/me";
@@ -129,18 +140,21 @@ public class KakaoTalkMessageController {
 		 * "\"button_title\":\"바로 확인\""; template_string += "}";
 		 */
 	   
-	   
        // 사용자 정의 템플릿
        List<Map<String, String>> list = mapper.alarmContentList();
-       
+
        Map<String,String> content = list.get(0);
        String val = content.get("alarm_content");
        System.out.println();
-       String template_id = "95063";
-       String template_args = "{\"alarm_content\":\""+val.replaceAll("\\※","※").replaceAll("\\①","①").replaceAll("\\②","②")
-    		   .replaceAll("\\③","").replaceAll("\\④","").replaceAll("\\⑤","").replaceAll("\n","")+"\"}";
-       
-       System.out.println(template_args);
+		/*
+		 * String template_args =
+		 * "{\"alarm_content\":\""+val.replaceAll("\\※","※").replaceAll("\\①","①").
+		 * replaceAll("\\②","②")
+		 * .replaceAll("\\③","").replaceAll("\\④","").replaceAll("\\⑤","").replaceAll(
+		 * "\n","")+"\"}";
+		 * 
+		 * System.out.println(template_args);
+		 */
        
 	   JsonArray uuidsArray = new JsonArray(); uuidsArray.add(uuid);
 	   System.out.println("UUIDs: " + uuidsArray.toString());
@@ -149,7 +163,7 @@ public class KakaoTalkMessageController {
        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
        params.add("receiver_uuids", uuidsArray.toString());
        params.add("template_id", template_id);
-	   params.add("template_args", template_args);  
+		/* params.add("template_args", template_args); */ 
        
        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(params, headers);
        

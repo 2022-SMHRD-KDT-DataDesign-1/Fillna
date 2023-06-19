@@ -222,7 +222,7 @@
     	
     	function load_record_list(){
     		$.ajax({
-    			url : "recording/all",
+    			url : "recording/direct/all",
     			type : "get",
     			dataType : "json",
     			success : record_list,

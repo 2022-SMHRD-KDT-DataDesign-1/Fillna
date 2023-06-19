@@ -18,6 +18,18 @@
     <link rel="stylesheet" href="resources/css/substyle.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<style>
+	.video{
+    margin-bottom: 1.5vw;
+    cursor: pointer;
+    width: 35vw;
+    height: 20vw;
+    object-fit: cover;
+}
+.diary_bottom>ul {
+	overflow : auto;
+}
+	</style>
 </head>
 <body class="bg">
     <div class="wrapper">
@@ -108,7 +120,7 @@
 					<!-- 메모 -->
                 </div>
                 <div class="diary_bottom">
-                    <div>
+<!--                     <div>
                         <span>이상행동 녹화영상 LIST</span>
                         <span>총 5개의 영상</span>
                     </div>
@@ -127,7 +139,7 @@
                             <div>
                             </div>
                         </li>
-                    </ul>
+                    </ul> -->
                 </div>
             </div>
 
@@ -250,6 +262,15 @@
     		success : showMemo,
     		error : function(){alert("error");}
     		})
+    		
+	    	$.ajax({
+	    		url : "recording/ai/all",
+	    		type : "get",
+	    		data : {"date":date},
+	    		dataType : "json",
+	    		success : showAi,
+	    		error : function(){alert("error");}
+	    	})
 	    });
 	    
 	    
@@ -284,6 +305,14 @@
     		success : showMemo,
     		error : function(){alert("error");}
     	})
+    	$.ajax({
+	    		url : "recording/ai/all",
+	    		type : "get",
+	    		data : {"date":date},
+	    		dataType : "json",
+	    		success : showAi,
+	    		error : function(){alert("error");}
+	    	})
     };
     
     function showDiary(data){
@@ -432,6 +461,32 @@
     	listHtml += "</ul></div>";
     	$(".diary_middle").html(listHtml);
     };
+    
+    function showAi(data){
+    	var listHtml = "";
+   		listHtml += "<div>";
+   		listHtml += "<span>이상행동 녹화영상 LIST</span>";
+    	listHtml += "<span>총 "+data.length+"개의 영상</span>"
+    	listHtml += "</div>";
+    	listHtml += '<ul class=\"diary_bottom_list_1">';
+    	$.each(data,function(idx,val){
+    		listHtml += "<li>";
+    		listHtml += "<div>";				
+    		listHtml += '<video class="video" poster onclick="location.href=\''+'/controller'+val.recordingFile+'\'">';
+			listHtml += '<source src="/controller'+val.recordingFile+'" type="video/mp4">';
+			listHtml += '</video>';
+			listHtml += "</div>";
+			if(idx == 0){
+				listHtml += "<span>2:28 발작</span>";
+			}else{
+				listHtml += "<span>0:34 개구호흡</span>";
+			}
+			listHtml += "</li>";
+    	});
+			listHtml += "</ul>";
+    	
+    	$(".diary_bottom").append(listHtml).trigger("create");
+    }
     
 
 

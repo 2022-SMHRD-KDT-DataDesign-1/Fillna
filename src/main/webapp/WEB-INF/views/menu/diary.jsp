@@ -284,7 +284,7 @@
         	} else{
 	        	listHtml += "<span>"+dInfo.alarm_at.hour+":"+dInfo.alarm_at.minute+"</span>";
         	}
-	     		listHtml += "<span class='material-symbols-outlined icon_circle";
+	     	listHtml += "<span class='material-symbols-outlined icon_circle";
     		if(dInfo.alarm_type === "일지"){
     			listHtml += " green circle'>";
     		}else if(dInfo.alarm_type === "주의"){

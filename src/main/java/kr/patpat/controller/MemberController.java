@@ -95,6 +95,7 @@ public class MemberController {
 			if(!file.isEmpty()) {
 				String fileName = file.getOriginalFilename();
 				File uploadFile = new File(saveImgPath, fileName);
+				
 				String oldImg = pet.getPetPhoto();
 				File oldFile = new File(saveImgPath+"/"+oldImg);
 				

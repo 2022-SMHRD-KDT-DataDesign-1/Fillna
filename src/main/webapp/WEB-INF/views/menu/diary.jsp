@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.lang.Math" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
@@ -23,6 +25,9 @@
 		<jsp:include page="../common/header2.jsp"></jsp:include>
 		<input type="hidden" value="${vo.mbIdx}" id="memId">
         <input type="hidden" value="${pvo.petIdx}" id="petId">
+        <c:set var="petPhotoPath" value="${pvo.petPhotoPath}"/>
+        <c:set var = "length" value = "${fn:length(petPhotoPath)}"/>
+        <input type="hidden" value="${fn:substring(petPhotoPath, 42, length)}" id="petPhotoPath">
         <div>
             <!-- date -->
             <div class="date_wrap">
@@ -96,6 +101,7 @@
             <!-- content -->
             <div class="con">
                 <div class="diary_top">
+
 					<!-- 일지 -->
                 </div>
                 <div class="diary_middle">
@@ -245,6 +251,8 @@
     		error : function(){alert("error");}
     		})
 	    });
+	    
+	    
     });
     
     // 오늘 일지
@@ -261,7 +269,11 @@
     		dataType : "json",
     		success : showDiary,
     		error : function(){alert("error");}
-    	})
+    	}).done(function(){
+    		var photoPath = $("#petPhotoPath").val();
+    		console.log(photoPath);
+    		$("#petProfile").attr("src", photoPath);
+    	});
 
     	$.ajax({
     		url : "diary/memo-all",
@@ -280,7 +292,7 @@
         listHtml += "<div class='today_ment'>";
         listHtml += "오늘 하루, 탄이와 얼마나 오랫동안 눈을 맞추었나요?</div>";
         listHtml += "<div class='today_ment2'>";
-       	listHtml += "<img src="+path+" alt=''>";
+       	listHtml += "<img id='petProfile' src='' alt=''>";
         listHtml += "<p>나비는 오늘 조금 힘들었어요.<br>구토, 심한 재채기로 컨디션이 정상적이지 않아요.<br>식사에는 큰 문제는 없었지만, 물과 밥양을 확인해주세요.<br>그루밍도 평소보다 적게 했어요. 피부와 구강상태를 한번 체크해주세요<br><br>당분간 세심하게 나비를 신경써주세요";
         listHtml += "<span class='material-symbols-outlined icon_pets'>pets</span></p></div>";
             

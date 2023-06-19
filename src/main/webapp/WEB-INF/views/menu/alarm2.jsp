@@ -138,6 +138,15 @@ function makeview(data){
 		  var currentDate = new Date(today.getTime() - i * 24 * 60 * 60 * 1000);
 		  console.log("날짜: " + formatDate(currentDate));
 		  console.log("요일: " + getDayOfWeek(currentDate));
+		  
+		  var date = formatDate(currentDate);
+		  var dayOfWeek = getDayOfWeek(currentDate);
+		  
+		  if(date == data[i].alarm_at.split(" ")[0]){
+			  console.log(data);
+		  }
+		  
+		  
 	}
 	
 	//console.log(data);

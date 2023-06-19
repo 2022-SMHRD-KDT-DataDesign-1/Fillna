@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.patpat.mapper.DiaryMapper">
+
+
+	<select id="selectAction" resultType="java.util.HashMap" parameterType="map">
+		select * from t_alarm a join t_alarm_content b on a.alarm_content_idx=b.alarm_content_idx
+		join t_category c on b.category_idx=c.category_idx
+		where a.mb_idx=#{mbIdx} and a.alarm_at like concat('%', #{date}, '%')
+	</select>
+	
+	<select id="selectMemoList" resultType="java.util.HashMap" parameterType="map">
+		select * from t_memo a inner join t_category b on a.category_idx = b.category_idx
+		where a.mb_idx=#{mbIdx} and a.memo_at like concat('%', #{date}, '%') order by memo_update_at desc
+	</select>
+	
+	
+
+</mapper>

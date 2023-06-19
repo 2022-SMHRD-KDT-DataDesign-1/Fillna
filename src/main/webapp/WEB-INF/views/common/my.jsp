@@ -36,7 +36,7 @@
             <div class="my_profile">
                 <c:set var="petPhotoPath" value="${pvo.petPhotoPath}"/>
                	<c:set var = "length" value = "${fn:length(petPhotoPath)}"/>
-                <img src="${fn:substring(petPhotoPath, 40, length)}" alt="">
+                <img src="${fn:substring(petPhotoPath, 42, length)}" alt="">
 				<%
 					// 현재 날짜
 					Calendar calendar = Calendar.getInstance();

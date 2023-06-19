@@ -20,7 +20,7 @@ public class MainController {
 	
 	@RequestMapping("/chart")
 	public String chart() {
-		return "menu/chart";
+		return "menu/chart2";
 	}
 	
 	@RequestMapping("/monitoring")

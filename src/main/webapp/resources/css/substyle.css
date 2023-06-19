@@ -175,7 +175,7 @@ body::-webkit-scrollbar { display: none; }
         .yel{color: #ffae00;}
         .red{color: #ff0000;}
         .green{color: #18cc00;}
-        .today{color:#cd0000 !important;}
+        .today{color:#cd0000 !important; background-color: #f6cccc !important;}
         .alarm_date>span:nth-child(2){margin-left:3vw; font-weight: 800; font-size: 4vw; vertical-align: middle; color:#5e5e5e;}
         .alaram_list_wrap{padding: 2vw;}
         .alaram_list>li{margin:0 0 2vw 15vw; font-size: 3.8vw; letter-spacing: 0.1vw; cursor: pointer; position: relative;}
@@ -224,10 +224,10 @@ body::-webkit-scrollbar { display: none; }
         /* diary content */
         .date_wrap{width:100%;overflow:hidden;position:relative;}
         .date_ul{border-spacing: 3vw 0vw;width:auto;display:table;transform: translate(-120vw, 0px);transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);transition-duration: 400ms;}
-        .date_chart_ul{transform: translate(-45vw, 0px) !important;}
+        .chart_date_ul{border-spacing: 3vw 0vw;width:auto;display:table;transform: translate(-101vw, 0);transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);transition-duration: 400ms;}
         .date{display:table-cell;border-radius: 5px; background-color: #e6e6e6; padding: 2vw 2.5vw; text-align: center; color:#999; margin-right: 3vw; cursor: pointer;}
         .date_today{background-color: #f6cccc; color: #cd0000;}
-        .date>p:nth-child(1){font-size: 3vw;}
+        .date>p:nth-child(1){font-size: 2.9vw;}
         .date>p:nth-child(2){font-weight: 800; font-size: 5vw; margin-top:1vw}
         .icon_pets{font-size:4vw !important;color:#f6cccc;vertical-align:middle;margin-top:-1vw;}
 
@@ -316,6 +316,7 @@ body::-webkit-scrollbar { display: none; }
         .chart_name{color:#5e5e5e; font-size: 4.5vw; font-weight: 800;}
         .chart_name>span:nth-child(1){vertical-align: middle;}
         .chart_result{color:#cd0000; font-weight: 600; text-align: justify; line-height: 1.2;}
+        .chart_week{margin: 3vw 0;}
         .chart_list>li>div>.chart_name{overflow: hidden;}
         .icon_chart_up, .icon_chart_down{float:right; color:#5e5e5e; margin-top: -1vw;}
         

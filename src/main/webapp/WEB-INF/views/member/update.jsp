@@ -39,7 +39,7 @@
                 <div class="member_info">
                 	<c:set var="petPhotoPath" value="${pvo.petPhotoPath}"/>
                 	<c:set var = "length" value = "${fn:length(petPhotoPath)}"/>
-                    <img class="profile_img" src="${fn:substring(petPhotoPath, 42, length)}" alt="">
+                    <img class="profile_img" src="${vo.mbProfile}" alt="">
                     <div>
                         <p>${vo.mbNick}</p>
                         <span>${vo.mbNick} (${vo.mbEmail})<br>
@@ -57,7 +57,7 @@
 	                    <c:if test="${not empty vo.mbAlarm}"><input type="text" placeholder="${vo.mbAlarm}" name="mb_alarm" id="time" value="${vo.mbAlarm}"></c:if>
                         <p>반려동물 이름</p>
                        	<c:if test="${empty pvo.petName}"><input type="text" placeholder="pet" name="pet_name"></c:if>
-                        <c:if test="${not empty pvo.petName}"><input type="text" placeholder="${pvo.petName}" value="${pvo.petName}" name="pet_name"></c:if>
+                        <c:if test="${not empty pvo.petName}"><input type="text" value="${pvo.petName}" name="pet_name"></c:if>
                     </div>
                     <div class="bottom_info">
                         <h3>선택정보 입력</h3>

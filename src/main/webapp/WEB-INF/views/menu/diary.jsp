@@ -120,11 +120,11 @@
 					<!-- 메모 -->
                 </div>
                 <div class="diary_bottom">
-<!--                     <div>
-                        <span>이상행동 녹화영상 LIST</span>
+<!--                		<div>
+                     <span>이상행동 녹화영상 LIST</span>
                         <span>총 5개의 영상</span>
-                    </div>
-                    <ul class="diary_bottom_list_1">
+                    </div> -->
+<!--                     <ul class="diary_bottom_list_1">
                         <li>
                             <div>
                             </div>
@@ -269,7 +269,7 @@
 	    		data : {"date":date},
 	    		dataType : "json",
 	    		success : showAi,
-	    		error : function(){alert("error");}
+	    		error : function(){$(".diary_bottom").html("").trigger("create");}
 	    	})
 	    });
 	    
@@ -311,7 +311,7 @@
 	    		data : {"date":date},
 	    		dataType : "json",
 	    		success : showAi,
-	    		error : function(){alert("error");}
+	    		error : function(){console.log("error");}
 	    	})
     };
     
@@ -484,8 +484,9 @@
 			listHtml += "</li>";
     	});
 			listHtml += "</ul>";
-    	
-    	$(".diary_bottom").append(listHtml).trigger("create");
+    	if($(".diary_bottom_list_1>li").length == 0){
+	    	$(".diary_bottom").append(listHtml).trigger("create");
+    	}
     }
     
 

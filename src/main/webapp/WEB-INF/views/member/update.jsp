@@ -39,7 +39,7 @@
                 <div class="member_info">
                 	<c:set var="petPhotoPath" value="${pvo.petPhotoPath}"/>
                 	<c:set var = "length" value = "${fn:length(petPhotoPath)}"/>
-                    <img class="profile_img" src="${fn:substring(petPhotoPath, 42, length)}" alt="">
+                    <img class="profile_img" src="${vo.mbProfile}" alt="">
                     <div>
                         <p>${vo.mbNick}</p>
                         <span>${vo.mbNick} (${vo.mbEmail})<br>

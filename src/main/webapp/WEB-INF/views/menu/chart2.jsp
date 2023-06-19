@@ -117,7 +117,7 @@
                         <p>11</p>
                     </li>
                     <input type="hidden" value="2023-06-11">
-                    <li class="date today test">
+                    <li class="date date_today test">
                         <p>6월</p>
                         <p>18</p>
                     </li>
@@ -546,7 +546,7 @@
 	                        <p>30</p>
 	                    </li>
 	                    <input type="hidden" value="2023-05">
-	                    <li class="date today test">
+	                    <li class="date date_today test">
 	                        <p>5월</p>
 	                        <p>31</p>
 	                    </li>
@@ -1022,11 +1022,11 @@
             }
             
             $(".chart1").find(".test").on("click", function(){
-    	    	if($(this).hasClass("today")===true){
+    	    	if($(this).hasClass("date_today")===true){
     	    		e.preventDefault();
     	    	} else{
-    		    	$(".date").not(this).removeClass("today");
-    		    	$(this).addClass("today");
+    		    	$(".date").not(this).removeClass("date_today");
+    		    	$(this).addClass("date_today");
     	    	}
     	    	
     	    	/* 몇월 몇주 날짜 범위 출력 */
@@ -1059,11 +1059,11 @@
             
             // 오늘 이외의 날짜 클릭시 모달 창 출력
     	    $(".chart1").find(".date").not(".test").on("click", function(e){
-    	    	if($(this).hasClass("today")===true){
+    	    	if($(this).hasClass("date_today")===true){
     	    		e.preventDefault();
     	    	} else{
-    		    	$(".date").not(this).removeClass("today");
-    		    	$(this).addClass("today");
+    		    	$(".date").not(this).removeClass("date_today");
+    		    	$(this).addClass("date_today");
     	    	}
     	    	
     	    	/* 몇월 몇주 날짜 범위 출력 */

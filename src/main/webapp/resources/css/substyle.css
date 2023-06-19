@@ -94,7 +94,7 @@ body::-webkit-scrollbar { display: none; }
 
         /* member_info */
         .member_info{color:#999; overflow: hidden; box-sizing: border-box;}
-        .member_info>img{float:right; object-fit: cover; border-radius: 50%; width: 27vw; height: 27vw;}
+        .member_info>img{float:right; object-fit: cover; border-radius: 50%; width: 23vw; height: 23vw;}
         .member_info>div{margin-top: 5vw;}
         .member_info>div>p{color:#333;font-weight:600;width: 80%; border-bottom: 1px solid #999; font-size: 5vw; padding-bottom: 1vw; margin-bottom: 2vw;}
         .member_info>div>span{font-size: 3.5vw;line-height: 1.2;}
@@ -175,7 +175,7 @@ body::-webkit-scrollbar { display: none; }
         .yel{color: #ffae00;}
         .red{color: #ff0000;}
         .green{color: #18cc00;}
-        .today{color:#cd0000 !important; background-color: #f6cccc !important;}
+        .today{color:#cd0000 !important;}
         .alarm_date>span:nth-child(2){margin-left:3vw; font-weight: 800; font-size: 4vw; vertical-align: middle; color:#5e5e5e;}
         .alaram_list_wrap{padding: 2vw;}
         .alaram_list>li{margin:0 0 2vw 15vw; font-size: 3.8vw; letter-spacing: 0.1vw; cursor: pointer; position: relative;}

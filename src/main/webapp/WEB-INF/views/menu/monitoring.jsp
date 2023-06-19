@@ -219,6 +219,11 @@
         	$("#modal, body").css("overflow", "");
         });
         
+        $(document).on("click","#modal",function(){
+        	$('#modal').css("display","none");
+        	$("#modal, body").css("overflow", "");
+        });
+        
         function load_alarm_cnt(){
 	    	$.ajax({
 	    		url : "alarm/cnt/all",

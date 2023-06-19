@@ -325,8 +325,6 @@ body::-webkit-scrollbar { display: none; }
         .chart_circle{font-size: 3.8vw !important; vertical-align: middle; margin-left:1vw;}
 
 
-		#diary_footer{margin-left: 3vw;}
-		#chart_footer{margin-right: -3vw;}
 
         /* login_btm */
         .s_btm > div > a > span, .m_btm > a > span{vertical-align:middle;}

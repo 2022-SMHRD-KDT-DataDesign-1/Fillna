@@ -904,7 +904,7 @@
     	    /* 몇월 몇주 날짜 범위 출력 */
 	    	var weekAndMonth = new Date($(".date_today").next().val());
 	    	var month = weekAndMonth.getMonth()+1;
-	    	var week = Math.ceil((weekAndMonth.getDate() + weekAndMonth.getDay()) / 7) - 1;
+	    	var week = Math.ceil((weekAndMonth.getDate() + weekAndMonth.getDay()) / 7);
 	    	var txt = month+"월"+week+"주";
 	    	$("#month_week").text(txt);
 	    	
@@ -965,8 +965,8 @@
             	
             	$(".chart").removeClass("hide");
             	//$(".chart_date_ul li").last().css({'backgroundColor': '#f6cccc', 'color': '#cd0000'});
-            	$(".chart1 > .date_wrap > .chart_date_ul li").last().addClass("date_today");
-            	$(".chart2 > .date_wrap > .chart_date_ul li").last().removeClass("date_today");
+            	//$(".chart1 > .date_wrap > .chart_date_ul li").last().addClass("date_today");
+            	//$(".chart2 > .date_wrap > .chart_date_ul li").last().removeClass("date_today");
             });
 
             $(".chart_type>div:eq(1)").on("click", function(){
@@ -977,8 +977,8 @@
             	
             	$(".chart").removeClass("hide");
             	//$(".chart_date_ul li").last().css({'backgroundColor': '#f6cccc', 'color': '#cd0000'});
-            	$(".chart2 > .date_wrap > .chart_date_ul li").last().addClass("date_today");
-            	$(".chart1 > .date_wrap > .chart_date_ul li").last().removeClass("date_today");
+            	//$(".chart2 > .date_wrap > .chart_date_ul li").last().addClass("date_today");
+            	//$(".chart1 > .date_wrap > .chart_date_ul li").last().removeClass("date_today");
             });
                        
             /* 오늘 날짜 클릭시 이벤트 */
@@ -991,13 +991,15 @@
     	    	}
     	    	
     	    	/* 몇월 몇주 날짜 범위 출력 */
-    	    	var weekAndMonth = new Date($(".chart1").find(".date").not(".test").next().val());
+    	    	var test = $(".chart1").find(".test").next().val();
+    	    	//console.log(test);
+    	    	var weekAndMonth = new Date(test);
     	    	var month = weekAndMonth.getMonth()+1;
     	    	var week = Math.ceil((weekAndMonth.getDate() + weekAndMonth.getDay()) / 7);
     	    	var txt = month+"월"+week+"주";
     	    	$("#month_week").text(txt);
     	    	
-    			var selectDate = $(".chart1").find(".date").not(".test").next().val();
+    			var selectDate = $(".chart1").find(".test").next().val();
     			var currentDate = new Date(selectDate);
     			currentDate.setDate(currentDate.getDate() - 6);
     			
@@ -1008,6 +1010,8 @@
     			var sixDaysAgo = ('0'+year).slice(-2) + '.' + ('0' + month).slice(-2) + '.' + ('0' + day).slice(-2);
     	    	
     			targetDate = selectDate.split("-").join(".").slice(2);
+    			
+    			
     			
     			// week
     	    	$("#week_range").text(sixDaysAgo+"~"+targetDate);

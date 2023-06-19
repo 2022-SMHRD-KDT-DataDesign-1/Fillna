@@ -2,8 +2,53 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.patpat.mapper.ChartMapper">
 
-	<select id="selectWeekly" parameterType="map" resultType="java.util.HashMap">
-		select * from t_category a join t_action b on a.category_idx = b.category_idx where category_name not in ('일지')
-		and b.mb_idx=#{mbIdx} and b.pet_idx=#{petIdx}
+	<select id="selectWeekly" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+select a.category_name, d.sub_date, ifnull(d.sum, 0) as sum, e.alarm_type, e.cnt, e.alarm_content from t_category a left join(select c.sub_date, c.category_name, sum(c.cnt) as sum from (
+				select a.category_name, b.action_at as action_date, b.cnt, substring(action_at,1,10) as sub_date
+				from t_category a join t_action b on a.category_idx = b.category_idx 
+				where b.mb_idx='C61A727500F311EE875C0242AC14000B' and b.pet_idx='C6456C6000F311EE875C0242AC14000B' 
+				and b.action_at between '2023-06-12' and '2023-06-18') c group by c.category_name, c.sub_date with rollup) d 
+on d.category_name = a.category_name join t_alarm_content e on a.category_idx = e.category_idx
+where a.category_name not in ('일지')
+order by case when a.category_name = "그루밍" then 1
+         when a.category_name = "피부긁음" then 2
+         when a.category_name = "재채기" then 3
+            when a.category_name = "식사" then 4
+            when a.category_name = "배변" then 5
+            when a.category_name = "구토" then 6
+            when a.category_name = "써클링" then 7
+            when a.category_name = "개구호흡" then 8
+            when a.category_name = "발작" then 9
+            when a.category_name = "후지마비" then 10
+            when a.category_name = "일지" then 11
+end;
+	</select>
+	
+	<select id="selectWeeklyTotal" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select distinct(a.category_name), ifnull(b.sum,0) as sum from t_category a left join (
+		select a.category_name, sum(b.cnt) as sum from t_category a join t_action b on a.category_idx = b.category_idx 
+		where b.mb_idx=#{mbIdx} and b.pet_idx=#{petIdx} 
+		and b.action_at between '2023-06-12' and '2023-06-18' group by a.category_name) b on a.category_name = b.category_name join t_alarm_content c on a.category_idx = c.category_idx
+		where a.category_name not in ('일지')
+		order by case when a.category_name = "그루밍" then 1
+         when a.category_name = "피부긁음" then 2
+         when a.category_name = "재채기" then 3
+            when a.category_name = "식사" then 4
+            when a.category_name = "배변" then 5
+            when a.category_name = "구토" then 6
+            when a.category_name = "써클링" then 7
+            when a.category_name = "개구호흡" then 8
+            when a.category_name = "발작" then 9
+            when a.category_name = "후지마비" then 10
+            when a.category_name = "일지" then 11
+      end
+	</select>
+	
+	<select id="selectMonthlyTotal" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	select distinct(a.category_name), ifnull(b.sum,0) as sum from t_category a left join (
+		select a.category_name, sum(b.cnt) as sum from t_category a join t_action b on a.category_idx = b.category_idx 
+		where b.mb_idx='C61A727500F311EE875C0242AC14000B' and b.pet_idx='C6456C6000F311EE875C0242AC14000B' 
+		and b.action_at between '2023-06-01' and '2023-06-30' group by a.category_name) b on a.category_name = b.category_name join t_alarm_content c on a.category_idx = c.category_idx
+	where a.category_name not in ('일지');
 	</select>
 </mapper>

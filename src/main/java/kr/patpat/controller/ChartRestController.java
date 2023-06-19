@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.gson.Gson;
+
 import kr.patpat.mapper.ChartMapper;
 
 @RequestMapping("/chart")
@@ -18,11 +20,41 @@ public class ChartRestController {
 	@Autowired
 	private ChartMapper chartMapper;
 	
-	@PostMapping("/weekly")
-	public List<HashMap<String, String>> showWeeklyChart(@RequestParam("mbIdx") String mbIdx, @RequestParam("petIdx") String petIdx) {
-		List<HashMap<String, String>> data =  chartMapper.selectWeekly(mbIdx, petIdx);
+	@PostMapping(value = "/weekly", produces = "text/plain;charset=UTF-8")
+	public String showWeeklyChart(@RequestParam HashMap<String, String> param) {
+		
+		List<HashMap<String, String>> res =  chartMapper.selectWeekly(param);
+		//System.out.println(res);
+		// json 형태로 변환
+		Gson gson = new Gson();
+		String data = gson.toJson(res);
 		
 		return data;
+	}
+	
+	@PostMapping(value = "/weekly-total", produces = "text/plain;charset=UTF-8")
+	public String showWeeklyTotalChart(@RequestParam HashMap<String, String> param) {
+		
+		List<HashMap<String, String>> res = chartMapper.selectWeeklyTotal(param);
+		
+		// json 형태로 변환
+		Gson gson = new Gson();
+		String data = gson.toJson(res);
+		
+		return data;
+	}
+	
+	
+	@PostMapping(value = "/monthly", produces = "text/plain;charset=UTF-8")
+	public String showMonthlyChart(@RequestParam HashMap<String, String> param) {
+		List<HashMap<String, String>> res = chartMapper.selectMonthly(param);
+		
+		// json 형태로 변환
+		Gson gson = new Gson();
+		String data = gson.toJson(res);
+		
+		return data;
+		
 	}
 
 

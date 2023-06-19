@@ -220,7 +220,7 @@
 	    	$.ajax({
 	    		url : "diary/diary-all",
 	    		type : "get",
-	    		data : {"mbIdx":mbIdx, "petIdx":petIdx, "date":date},
+	    		data : {"mbIdx":mbIdx, "date":date},
 	    		dataType : "json",
 	    		success : showDiary,
 	    		error : function(){alert("error");}
@@ -240,14 +240,13 @@
     // 오늘 일지
     function loadDiary(){
     	var mbIdx = $("#memId").val();
-    	var petIdx = $("#petId").val();
     	var date = $("#today").val();
     	console.log(date);
     	
     	$.ajax({
     		url : "diary/diary-all",
     		type : "get",
-    		data : {"mbIdx":mbIdx, "petIdx":petIdx, "date":date},
+    		data : {"mbIdx":mbIdx, "date":date},
     		async : false,
     		dataType : "json",
     		success : showDiary,
@@ -279,13 +278,13 @@
         
         $.each(data, function(index, dInfo){
         	listHtml += "<li class='diaryAlarmList'>";
-        	var min = dInfo.action_at.minute;
+        	var min = dInfo.alarm_at.minute;
         	if(min < 10){
-	        	listHtml += "<span>"+dInfo.action_at.hour+":0"+dInfo.action_at.minute+"</span>";
+	        	listHtml += "<span>"+dInfo.alarm_at.hour+":0"+dInfo.alarm_at.minute+"</span>";
         	} else{
-	        	listHtml += "<span>"+dInfo.action_at.hour+":"+dInfo.action_at.minute+"</span>";
+	        	listHtml += "<span>"+dInfo.alarm_at.hour+":"+dInfo.alarm_at.minute+"</span>";
         	}
-	     		listHtml += "<span class='material-symbols-outlined icon_circle";
+	     	listHtml += "<span class='material-symbols-outlined icon_circle";
     		if(dInfo.alarm_type === "일지"){
     			listHtml += " green circle'>";
     		}else if(dInfo.alarm_type === "주의"){
@@ -315,11 +314,10 @@
         		}
 	        	listHtml += "<div class='alarm_title'>";
 	        	listHtml += "<span>["+dInfo.alarm_type+"]</span>";	
-	        	
 	        	if(min < 10){
-		        	listHtml += "${pvo.petName}가 "+dInfo.action_at.hour+"시 0"+dInfo.action_at.minute+"분에 "+dInfo.category_name+"를 "+dInfo.cnt+"회 하였습니다.</div>";
+		        	listHtml += "${pvo.petName}가 "+dInfo.alarm_at.hour+"시 0"+dInfo.alarm_at.minute+"분에 "+dInfo.category_name+"를 "+dInfo.cnt+"회 하였습니다.</div>";
 	        	} else {
-		        	listHtml += "${pvo.petName}가 "+dInfo.action_at.hour+"시 "+dInfo.action_at.minute+"분에 "+dInfo.category_name+"를 "+dInfo.cnt+"회 하였습니다.</div>";
+		        	listHtml += "${pvo.petName}가 "+dInfo.alarm_at.hour+"시 "+dInfo.alarm_at.minute+"분에 "+dInfo.category_name+"를 "+dInfo.cnt+"회 하였습니다.</div>";
 	        	}
 	        	listHtml += "<div class='alarm_content'>";
 	        	listHtml += dInfo.alarm_content+"</div>";

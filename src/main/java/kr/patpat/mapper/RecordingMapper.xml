@@ -18,6 +18,19 @@
 			 , date_format(recording_at, '%Y-%m-%d %H:%i:%s') as recording_at
  		  from t_recording
          where mb_idx = 'C61A727500F311EE875C0242AC14000B'
-           and recording_at BETWEEN DATE_ADD('2023-06-08 17:14:53',INTERVAL -6 DAY ) AND '2023-06-08 17:14:53';
+           and recording_at BETWEEN DATE_ADD('2023-06-08 17:14:53',INTERVAL -6 DAY ) AND '2023-06-08 17:14:53'
+           and recording_type = "direct_recorded"
+	</select>
+	
+	<select id="recording_ai_List" resultMap="recording" parameterType="string">
+		select recording_idx
+			 , mb_idx
+			 , action_idx
+			 , recording_file
+			 , date_format(recording_at, '%Y-%m-%d %H:%i:%s') as recording_at
+ 		  from t_recording
+         where mb_idx = 'C61A727500F311EE875C0242AC14000B'
+           and recording_at like concat('%', #{date}, '%')
+           and recording_type = "ai_generated"
 	</select> 
 </mapper>

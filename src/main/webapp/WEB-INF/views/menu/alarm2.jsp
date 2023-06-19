@@ -143,7 +143,7 @@ function makeview(data){
 		  
 		  var date = formatDate(currentDate);
 		  var dayOfWeek = getDayOfWeek(currentDate);
-		  var time = data[i].alarm_at.split(" ")[1].slice(0, 5);
+		  
 		  
 		  list_html += '<div class="alarm_wrap hide">';
 		  list_html += '<div class="alarm_date">';
@@ -157,25 +157,26 @@ function makeview(data){
 		  list_html += '<div class="alaram_list_wrap">';
 		  list_html += '<ul class="alaram_list">';
 		  
-		  //console.log(data[21].alarm_at.split(" ")[0]);
 		  
 		  for(var j = 0; j < data.length; j++){
 		  list_html += '<li>';
+		  	  // 날짜가 일치할때만 데이터 출력
   			  if(date == data[j].alarm_at.split(" ")[0]){
+  				  var time = data[j].alarm_at.split(" ")[1].slice(0, 5);
 				  list_html += '<span>'+time+'</span>';
 				  list_html += '<span class="material-symbols-outlined icon_circle';
-					if(data[i].alarm_type === "일지"){
+					if(data[j].alarm_type === "일지"){
 						list_html += ' green circle">';
-					}else if(data[i].alarm_type === "주의"){
+					}else if(data[j].alarm_type === "주의"){
 						list_html += ' yel circle">';
 					}else{
 						list_html += ' red circle">';
 					}
 					list_html += 'circle</span>';
-					if(data[i].alarm_type != "일지"){
-						list_html += '<span class="a_alarm_type">['+data[i].alarm_type +'] - '+data[i].category_name+' '+data[i].cnt +'회</span>';
+					if(data[j].alarm_type != "일지"){
+						list_html += '<span class="a_alarm_type">['+data[j].alarm_type +'] - '+data[j].category_name+' '+data[j].cnt +'회</span>';
 					}else{
-						list_html += '<span class="a_alarm_type">['+data[i].alarm_type +']</span>';
+						list_html += '<span class="a_alarm_type">['+data[j].alarm_type +']</span>';
 					}
 					
 					if(i==0){
@@ -186,17 +187,17 @@ function makeview(data){
 						list_html += '<div class="alarm_detail hide">';
 					}
 					list_html += '<div class="alarm_title">';
-					if(data[i].alarm_type != "일지"){
-						list_html += '<span class="alarm_type">['+data[i].alarm_type+']</span>';
-						list_html += ' '+data[i].pet_name+'가 '+ time+'분에 '+ data[i].category_name+'를 '+data[i].cnt +'회 하였습니다.</div>';
+					if(data[j].alarm_type != "일지"){
+						list_html += '<span class="alarm_type">['+data[j].alarm_type+']</span>';
+						list_html += ' '+data[j].pet_name+'가 '+ time+'분에 '+ data[j].category_name+'를 '+data[j].cnt +'회 하였습니다.</div>';
 						list_html += '<div class="alarm_content">';
-						list_html += data[i].alarm_content.replace(/\n/g,"<br>");
+						list_html += data[j].alarm_content.replace(/\n/g,"<br>");
 					}else{
-						list_html += '<span class="alarm_type">['+data[i].alarm_type+'] </span>';
-						var pet_name = data[i].alarm_content.split("+")
-						list_html += pet_name[0].replace(/네로/g,data[i].pet_name).replace(/\n/g,"<br>");
+						list_html += '<span class="alarm_type">['+data[j].alarm_type+'] </span>';
+						var pet_name = data[j].alarm_content.split("+")
+						list_html += pet_name[0].replace(/네로/g,data[j].pet_name).replace(/\n/g,"<br>");
 						list_html += '<div class="alarm_content">';
-						list_html += pet_name[1].replace(/네로/g,data[i].pet_name).replace(/\n/g,"<br>");
+						list_html += pet_name[1].replace(/네로/g,data[j].pet_name).replace(/\n/g,"<br>");
 					}
 					list_html += '</div>';
 					list_html += '<div class="alarm_go"><a href="#">이상행동 녹화영상';

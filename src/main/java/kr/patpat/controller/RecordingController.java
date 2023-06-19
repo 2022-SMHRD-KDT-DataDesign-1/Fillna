@@ -1,9 +1,11 @@
 package kr.patpat.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,10 +20,10 @@ public class RecordingController {
 	@Autowired
 	private RecordingMapper mapper;
 	
-	@GetMapping("/direct/all")
-	public List<Recording> recording_list(){
+	@PostMapping("/direct/all")
+	public List<Recording> recording_list(@RequestParam HashMap<String, String> param){
 		
-		List<Recording> list = mapper.recordingList();
+		List<Recording> list = mapper.recordingList(param);
 		
 		return list;
 		

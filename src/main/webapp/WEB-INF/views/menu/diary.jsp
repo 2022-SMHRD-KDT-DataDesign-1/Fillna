@@ -136,14 +136,24 @@
 	$(document).ready(function(e) {
 		loadDiary();
 		/* loadMemo(); */
-		
+
     	$(".diary_header").toggleClass("hide");
     	$("#diary_footer").toggleClass("this_menu");
-    	
+    	var path = "";
 	    var x = 0;
 	    var tabx = 0;
 	    var xx = 0;
 	    var limit = $(".date_ul").width() - $(".date_wrap").width() + 12;
+    	$.ajax({
+        	url : "diary/"+"${vo.mbIdx}",
+        	type : "get",
+        	data : {"idx": "${vo.mbIdx}"},
+        	dataType : "json",
+        	success :function(data){
+        		path = data.petPhotoPath.substr(42,data.petPhotoPath.length);
+        	},	
+        	error : function(){alert("error");}
+        });
 	    $(".date_ul").bind('touchstart', function(e) {
 	        var event = e.originalEvent;
 	        x = event.touches[0].screenX;
@@ -252,7 +262,7 @@
     		success : showDiary,
     		error : function(){alert("error");}
     	})
-    	
+
     	$.ajax({
     		url : "diary/memo-all",
     		type : "get",
@@ -270,17 +280,7 @@
         listHtml += "<div class='today_ment'>";
         listHtml += "오늘 하루, 탄이와 얼마나 오랫동안 눈을 맞추었나요?</div>";
         listHtml += "<div class='today_ment2'>";
-        $.ajax({
-        	url : "diary/"+"${vo.mbIdx}",
-        	type : "get",
-        	data : {"idx": "${vo.mbIdx}"},
-        	dataType : "json",
-        	success :function(data){
-        		console.log(data.petPhotoPath);
-	        	listHtml += "<img src="+data+" alt=''>";
-        	},	
-        	error : function(){alert("error");}
-        })
+       	listHtml += "<img src="+path+" alt=''>";
         listHtml += "<p>나비는 오늘 조금 힘들었어요.<br>구토, 심한 재채기로 컨디션이 정상적이지 않아요.<br>식사에는 큰 문제는 없었지만, 물과 밥양을 확인해주세요.<br>그루밍도 평소보다 적게 했어요. 피부와 구강상태를 한번 체크해주세요<br><br>당분간 세심하게 나비를 신경써주세요";
         listHtml += "<span class='material-symbols-outlined icon_pets'>pets</span></p></div>";
             

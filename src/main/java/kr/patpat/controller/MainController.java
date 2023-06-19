@@ -15,7 +15,7 @@ public class MainController {
 	
 	@RequestMapping("/alarm")
 	public String alarm() {
-		return "menu/alarm";
+		return "menu/alarm2";
 	}
 	
 	@RequestMapping("/chart")

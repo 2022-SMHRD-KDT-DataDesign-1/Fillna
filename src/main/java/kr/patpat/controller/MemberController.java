@@ -122,7 +122,6 @@ public class MemberController {
 			session.setAttribute("pvo", pet);
 			Member member = memberMapper.selectUpdateMember(param.get("mb_idx"));
 			session.setAttribute("vo", member);
-			
 			rttr.addFlashAttribute("msg", "성공티비");
 			return "redirect:/updateForm";
 		}

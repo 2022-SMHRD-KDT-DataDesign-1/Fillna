@@ -229,6 +229,7 @@
 	    		url : "alarm/cnt/all",
 	    		type : "get",
 	    		dataType : "json",
+	    		data : {"mbIdx":"${vo.mbIdx}"},
 	    		success : alarm_cnt,
 	    		error : function(){alert("error1");}
 	    	});
@@ -238,6 +239,7 @@
     		var war_cnt = 0;
     		var eg_cnt  = 0;
     		console.log(data.length);
+    		console.log(data);
     		$.each(data, function(idx,val){
     			if(val.alarm_type === "긴급"){
     				eg_cnt = val.cnt

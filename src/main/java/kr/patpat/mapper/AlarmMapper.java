@@ -15,9 +15,9 @@ public interface AlarmMapper {
 
 	public List<Map<String, String>> alarmContentList();
 
-	public List<Map<String, String>> alarmCnt();
-
 	public List<Map<String, String>> showAlarmList(HashMap<String, String> param);
+
+	public List<Map<String, String>> alarmCnt(String mbIdx);
 
 	
 }

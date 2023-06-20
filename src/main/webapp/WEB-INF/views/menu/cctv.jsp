@@ -24,7 +24,7 @@
 </head>
 <body class="record_bg">
     <div class="wrapper" style="position:absolute;z-index:0;">
-        <%-- <jsp:include page="../common/my.jsp"></jsp:include> --%>
+        <jsp:include page="../common/my.jsp"></jsp:include>
         <!-- header -->
         <header class="cctv_header">
             <ul>
@@ -58,13 +58,13 @@
         <!-- bottom menu -->
 
         <div class="record_bottom1">
-            <a href="#">
+            <a href="${contextPath}/diary">
                 <img src="resources/images/icon_home.png" alt="">
             </a>
         </div>
         
         <div class="record_bottom2">
-            <a href="#">
+            <a href="${contextPath}/monitoring">
                 <img src="resources/images/icon_menu.png" alt="">
             </a>
         </div>

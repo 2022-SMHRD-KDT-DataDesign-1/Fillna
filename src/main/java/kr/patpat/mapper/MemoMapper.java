@@ -1,5 +1,7 @@
 package kr.patpat.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import kr.patpat.entity.Memo;
@@ -15,6 +17,6 @@ public interface MemoMapper {
 
 	void deleteMemo(String idx);
 
-	String showMemoCategoryDetail(String category);
+	List<String> showMemoCategoryDetail(String category);
 }
 

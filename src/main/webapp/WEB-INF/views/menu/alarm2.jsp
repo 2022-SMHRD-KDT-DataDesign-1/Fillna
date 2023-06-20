@@ -164,6 +164,7 @@ function makeview(data){
 		  list_html += '<li>';
 		  	  // 날짜가 일치할때만 데이터 출력
   			  if(date == data[j].alarm_at.split(" ")[0]){
+  				  console.log(data[j].alarm_at.split(" ")[0]);
   				  var time = data[j].alarm_at.split(" ")[1].slice(0, 5);
 				  list_html += '<span>'+time+'</span>';
 				  list_html += '<span class="material-symbols-outlined icon_circle';

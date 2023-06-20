@@ -2,6 +2,7 @@ package kr.patpat.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -104,9 +105,10 @@ public class MemoController {
 	}
 	
 	@ResponseBody
-	@GetMapping("/memo/category")
-	public String memoShowCategory(String category) {
-		String memoDetail = memoMapper.showMemoCategoryDetail(category);
+	@GetMapping(value = "/memo/category", produces = "text/plain;charset=UTF-8")
+	public List<String> memoShowCategory(String category) {
+		List<String> memoDetail = memoMapper.showMemoCategoryDetail(category);
+		System.out.println(memoDetail);
 		return memoDetail;
 	}
 }

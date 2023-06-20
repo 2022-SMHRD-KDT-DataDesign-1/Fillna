@@ -173,6 +173,8 @@
             $(".icon_memo_up").toggleClass("hide");
             $(".icon_down").toggleClass("hide");
             $(".sympton_list").toggleClass("on");
+            
+
         });
 
         $(".sympton_list").children("li").children("button").on("click", function(e){
@@ -181,6 +183,22 @@
             $(".sympton_list").toggleClass("on");
             $(".icon_memo_up").toggleClass("hide");
             $(".icon_down").toggleClass("hide");
+            
+            var category = $(".sympton").val();
+            
+       		$.ajax({
+        		url : "memo/category",
+        		type : "get",
+        		data : {"category":category},
+        		dataType : "json",
+        		success : function(data){
+        			$.each(data, function(idx, val){
+						console.log(data);
+        			 	//$("#memo_detail").html(data.replace(/\n/g,"<br><br>"));
+        			});
+        		},
+        		error : function(){alert("error");}
+    		}); 
         });
 
         $("#file").change(function(e){
@@ -212,25 +230,8 @@
     		});
     	}
     	
-    	// memo detail
-/*     	$("#sympton").on("change", function(){
-    		var category = $(this).val();
-    		console.log("change click");
-    		
-     		$.ajax({
-        		url : "memo/category",
-        		type : "get",
-        		data : {"category":category},
-        		dataType : "json",
-        		success : function(data){
-        			$("#memo_detail").text(data);
-        		},
-        		error : function(){alert("error");}
-    		});
-    	}); */
-    	
-    	
 
+    	
     });
     
     

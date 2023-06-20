@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.lang.Math" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
@@ -16,6 +18,31 @@
     <link rel="stylesheet" href="resources/css/substyle.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<style>
+	.video{
+    margin-bottom: 1.5vw;
+    cursor: pointer;
+    width: 35vw;
+    height: 20vw;
+    object-fit: cover;
+}
+.diary_bottom>ul {
+	overflow : auto;
+}
+.diary_bottom_list_1>li>div{
+	background-corlor : none;
+}
+.diary_bottom>ul{
+	padding-left: 5vw;
+    padding-top: 3vw;
+}
+.diary_bottom_list_1>li{
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    flex-direction: column;
+}
+	</style>
 </head>
 <body class="bg">
     <div class="wrapper">
@@ -23,6 +50,9 @@
 		<jsp:include page="../common/header2.jsp"></jsp:include>
 		<input type="hidden" value="${vo.mbIdx}" id="memId">
         <input type="hidden" value="${pvo.petIdx}" id="petId">
+        <c:set var="petPhotoPath" value="${pvo.petPhotoPath}"/>
+        <c:set var = "length" value = "${fn:length(petPhotoPath)}"/>
+        <input type="hidden" value="${fn:substring(petPhotoPath, 42, length)}" id="petPhotoPath">
         <div>
             <!-- date -->
             <div class="date_wrap">
@@ -75,7 +105,7 @@
 							}
 							
 							if(j==0){
-								out.print("<li class='date today'>");
+								out.print("<li class='date date_today'>");
 							    out.print("<p>"+dayOfWeek+"</p>");
 							    out.print("<p>"+temp[2]+"</p>");
 								out.print("</li>");
@@ -96,17 +126,19 @@
             <!-- content -->
             <div class="con">
                 <div class="diary_top">
+
 					<!-- 일지 -->
                 </div>
                 <div class="diary_middle">
 					<!-- 메모 -->
                 </div>
                 <div class="diary_bottom">
-                    <div>
-                        <span>이상행동 녹화영상 LIST</span>
-                        <span>총 5개의 영상</span>
+               		<div>
+                     	<span>이상행동 녹화영상 LIST</span>
+                        <span></span>
                     </div>
-                    <ul class="diary_bottom_list_1">
+                    
+<!--                     <ul class="diary_bottom_list_1">
                         <li>
                             <div>
                             </div>
@@ -121,7 +153,7 @@
                             <div>
                             </div>
                         </li>
-                    </ul>
+                    </ul> -->
                 </div>
             </div>
 
@@ -136,14 +168,30 @@
 	$(document).ready(function(e) {
 		loadDiary();
 		/* loadMemo(); */
-		
+
     	$(".diary_header").toggleClass("hide");
     	$("#diary_footer").toggleClass("this_menu");
     	
+    	
+    	var path = "";
+    	
+    	//상단 터치 슬라이드
 	    var x = 0;
 	    var tabx = 0;
 	    var xx = 0;
 	    var limit = $(".date_ul").width() - $(".date_wrap").width() + 12;
+	    
+    	$.ajax({
+        	url : "diary/"+"${vo.mbIdx}",
+        	type : "get",
+        	data : {"idx": "${vo.mbIdx}"},
+        	dataType : "json",
+        	success :function(data){
+        		path = data.petPhotoPath.substr(42,data.petPhotoPath.length);
+        	},	
+        	error : function(){alert("error");}
+        });
+    	
 	    $(".date_ul").bind('touchstart', function(e) {
 	        var event = e.originalEvent;
 	        x = event.touches[0].screenX;
@@ -164,7 +212,9 @@
 	        }
 	    });
 	    
-	    var x1 = 0;
+	    
+	    //메모 터치슬라이드
+	    /* var x1 = 0;
 	    var tabx1 = 0;
 	    var xx1 = 0;
 	    var limit1 = $(".diary_middle_list").width() - $(".diary_middle_list_wrap").width() + 12;
@@ -183,11 +233,11 @@
 	        if ((xx1 > 0) && (tabx1 <= 0)) {
 	        $(".diary_middle_list").css("transform", "translate(0px, 0px)");
 	        }
-	        if (Math.abs(xx1) > limit) {
+	        if (Math.abs(xx1) > limit1) {
 	        $(".diary_middle_list").css("transform", "translate(" + -limit1 + "px, 0px)");
 	        }
 	    });
-
+ */
 	    
 	    $(document).on("click", ".diaryAlarmList", function(){
 	    	console.log("click");
@@ -206,11 +256,11 @@
 	    
 	    $(".date").on("click", function(e){
 	    	
-	    	if($(this).hasClass("today")===true){
+	    	if($(this).hasClass("date_today")===true){
 	    		e.preventDefault();
 	    	} else{
-		    	$(".date").not(this).removeClass("today");
-		    	$(this).addClass("today");
+		    	$(".date").not(this).removeClass("date_today");
+		    	$(this).addClass("date_today");
 	    	}
 	    	var mbIdx = $("#memId").val();
 	    	var petIdx = $("#petId").val();
@@ -224,7 +274,10 @@
 	    		dataType : "json",
 	    		success : showDiary,
 	    		error : function(){alert("error");}
-	    	})
+	    	}).done(function(){
+	    		var photoPath = $("#petPhotoPath").val();
+	    		$("#petProfile").attr("src", photoPath);
+	    	});
 	    	
 	        $.ajax({
     		url : "diary/memo-all",
@@ -234,7 +287,22 @@
     		success : showMemo,
     		error : function(){alert("error");}
     		})
+    		
+	    	$.ajax({
+	    		url : "recording/ai/all",
+	    		type : "get",
+	    		data : {"date":date},
+	    		dataType : "json",
+	    		success : showAi,
+	    		error : function(){
+	    			$(".diary_bottom").html("").trigger("create");
+	    			var listHtml = "<div><span>이상행동 녹화영상 LIST</span><span></span></div>";
+	    			$(".diary_bottom").append(listHtml).trigger("create");
+	    			}
+	    	})
 	    });
+	    
+	    
     });
     
     // 오늘 일지
@@ -251,8 +319,11 @@
     		dataType : "json",
     		success : showDiary,
     		error : function(){alert("error");}
-    	})
-    	
+    	}).done(function(){
+    		var photoPath = $("#petPhotoPath").val();
+    		$("#petProfile").attr("src", photoPath);
+    	});
+
     	$.ajax({
     		url : "diary/memo-all",
     		type : "get",
@@ -262,6 +333,14 @@
     		success : showMemo,
     		error : function(){alert("error");}
     	})
+    	$.ajax({
+	    		url : "recording/ai/all",
+	    		type : "get",
+	    		data : {"date":date},
+	    		dataType : "json",
+	    		success : showAi,
+	    		error : function(){console.log("error");}
+	    	})
     };
     
     function showDiary(data){
@@ -270,17 +349,7 @@
         listHtml += "<div class='today_ment'>";
         listHtml += "오늘 하루, 탄이와 얼마나 오랫동안 눈을 맞추었나요?</div>";
         listHtml += "<div class='today_ment2'>";
-        $.ajax({
-        	url : "diary/"+"${vo.mbIdx}",
-        	type : "get",
-        	data : {"idx": "${vo.mbIdx}"},
-        	dataType : "json",
-        	success :function(data){
-        		console.log(data.petPhotoPath);
-	        	listHtml += "<img src="+data+" alt=''>";
-        	},	
-        	error : function(){alert("error");}
-        })
+       	listHtml += "<img id='petProfile' src='' alt=''>";
         listHtml += "<p>나비는 오늘 조금 힘들었어요.<br>구토, 심한 재채기로 컨디션이 정상적이지 않아요.<br>식사에는 큰 문제는 없었지만, 물과 밥양을 확인해주세요.<br>그루밍도 평소보다 적게 했어요. 피부와 구강상태를 한번 체크해주세요<br><br>당분간 세심하게 나비를 신경써주세요";
         listHtml += "<span class='material-symbols-outlined icon_pets'>pets</span></p></div>";
             
@@ -372,7 +441,7 @@
     function showMemo(data){
     	var listHtml = "";
     	listHtml += "<div><span>메모</span>";
-    	var date = $(".today").next().val(); 
+    	var date = $(".date_today").next().val(); 
     	var addMemoUrl = "${contextPath}/memo/show?date="+date;
     	listHtml += "<span class='material-symbols-outlined icon_add_circle' onclick='location.href=\""+addMemoUrl+"\"'>add_circle</span></div>";
     	listHtml += "<div class='diary_middle_list_wrap'>";
@@ -420,6 +489,30 @@
     	listHtml += "</ul></div>";
     	$(".diary_middle").html(listHtml);
     };
+    
+    function showAi(data){
+    	var listHtml = "";
+    	$('.diary_bottom>div>span:nth-last-child(1)').text("총 "+data.length+"개의 영상");
+    	listHtml += '<ul class=\"diary_bottom_list_1">';
+    	$.each(data,function(idx,val){
+    		listHtml += "<li>";
+    		/* listHtml += "<div>";	 */			
+    		listHtml += '<video class="video" poster onclick="location.href=\''+'/controller'+val.recordingFile+'\'">';
+			listHtml += '<source src="/controller'+val.recordingFile+'" type="video/mp4">';
+			listHtml += '</video>';
+			/* listHtml += "</div>"; */
+			if(idx == 0){
+				listHtml += "<span>2:28 발작</span>";
+			}else{
+				listHtml += "<span>0:34 개구호흡</span>";
+			}
+			listHtml += "</li>";
+    	});
+			listHtml += "</ul>";
+    	if($(".diary_bottom_list_1>li").length == 0){
+	    	$(".diary_bottom").append(listHtml).trigger("create");
+    	}
+    }
     
 
 

@@ -30,7 +30,7 @@
                         <span class="material-symbols-outlined">
                             analytics
                         </span>
-                        <p>PATPAT리포트</p>
+                        <p>건강리포트</p>
                     </a>
                 </div>
             </div>

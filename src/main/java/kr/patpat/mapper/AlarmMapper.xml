@@ -21,9 +21,24 @@
 		select ( select alarm_type from t_alarm_content where alarm_content_idx = A.alarm_content_idx ) as alarm_type
 			 , convert(count(*),char) as cnt
 		  from t_alarm as A
-		 where mb_idx = 'C61A727500F311EE875C0242AC14000B'
+		 where mb_idx = #{mbIdx}
 		   and alarm_at BETWEEN DATE_ADD('2023-06-08 17:14:53',INTERVAL -2 DAY ) AND '2023-06-08 17:14:53'
 		  group by alarm_type
 		 having alarm_type != '일지'
 	</select>
+	
+	<select id="showAlarmList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+			select alarm_idx 
+	 		 , convert(( select cnt from t_action where action_idx = A.action_idx ), char) as cnt
+     		 , ( select pet_name from t_pet where mb_idx = #{mbIdx} ) as pet_name
+     		 , mb_idx
+     		 , ( select alarm_type from t_alarm_content where alarm_content_idx = A.alarm_content_idx ) as alarm_type
+     		 , ( select alarm_content from t_alarm_content where alarm_content_idx = A.alarm_content_idx ) as alarm_content
+     	  	 , ( select category_name from t_category where category_idx = ( select category_idx from t_alarm_content where alarm_content_idx = A.alarm_content_idx )) as category_name
+	 		 , date_format(alarm_at, '%Y-%m-%d %H:%i:%s') as alarm_at
+     		 , alarm_week
+	 	  from t_alarm as A
+	     where mb_idx = #{mbIdx} and alarm_at between #{startDate} and date_add(#{endDate}, interval 1 day)
+	     order by alarm_at desc
+	</select> 
 </mapper>

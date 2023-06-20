@@ -21,7 +21,7 @@
 </head>
 <body>
     <body class="bg">
-    <div class="wrapper">
+    <div class="wrapper memo_wrapper">
 		<jsp:include page="../common/my.jsp"></jsp:include>
 		<header class="header">
 			<ul>

@@ -343,14 +343,9 @@
     function showDiary(data){
     	var listHtml = "";
     	
-		var aa = data[0].alarm_at;
-		var alarmDate = "";
-		if(aa.monthValue >= 10){
-    		alarmDate = aa.year+"-"+aa.monthValue+"-"+aa.dayOfMonth;
-		} else {
-    		alarmDate = aa.year+"-0"+aa.monthValue+"-"+aa.dayOfMonth;
-		}
-		console.log(alarmDate);
+    	console.log(data);
+		var alarmDate = data[0].alarm_at.split(" ")[0];
+
 		
     	if(alarmDate == '2023-06-20'){
 	        listHtml += "<div>오늘의 일지</div>";
@@ -382,12 +377,9 @@
         
         $.each(data, function(index, dInfo){
         	listHtml += "<li class='diaryAlarmList'>";
-        	var min = dInfo.alarm_at.minute;
-        	if(min < 10){
-	        	listHtml += "<span>"+dInfo.alarm_at.hour+":0"+dInfo.alarm_at.minute+"</span>";
-        	} else{
-	        	listHtml += "<span>"+dInfo.alarm_at.hour+":"+dInfo.alarm_at.minute+"</span>";
-        	}
+        	//var min = dInfo.alarm_at.minute;
+        	var time = dInfo.alarm_at.split(" ")[1].slice(0, 5);
+        	listHtml += "<span>"+time+"</span>";
 	     	listHtml += "<span class='material-symbols-outlined icon_circle";
     		if(dInfo.alarm_type === "일지"){
     			listHtml += " green circle'>";
@@ -397,9 +389,11 @@
     			listHtml += " red circle'>";
     		}
     		listHtml += "circle</span>";
-        	listHtml += "<span class='diary_alarm_type'>["+dInfo.alarm_type+"]</span>";
         	if(dInfo.alarm_type != "일지"){
+	        	listHtml += "<span class='diary_alarm_type'>["+dInfo.alarm_type+"]</span>";
 	        	listHtml += "<span>-"+dInfo.category_name+" "+dInfo.cnt+"회</span>";
+        	}else{
+        		listHtml += '<span>['+dInfo.alarm_type +']</span>';
         	}
         	
         	if(index==0 && dInfo.alarm_type != '일지'){
@@ -408,28 +402,32 @@
 	        	listHtml += "<span class='material-symbols-outlined icon_up hide'>arrow_drop_up</span>";
         	}
         	listHtml += "</li>";
-        	
-			
+
+       		if(index===0){
+	        	listHtml += "<div class='alarm_detail'>";
+       		} else {
+	        	listHtml += "<div class='alarm_detail hide'>";
+       		}
+        	listHtml += "<div class='alarm_title'>";
         	if(dInfo.alarm_type != "일지"){
-        		if(index===0){
-		        	listHtml += "<div class='alarm_detail'>";
-        		} else {
-		        	listHtml += "<div class='alarm_detail hide'>";
-        		}
-	        	listHtml += "<div class='alarm_title'>";
 	        	listHtml += "<span>["+dInfo.alarm_type+"]</span>";	
-	        	if(min < 10){
-		        	listHtml += "${pvo.petName}가 "+dInfo.alarm_at.hour+"시 0"+dInfo.alarm_at.minute+"분에 "+dInfo.category_name+"를 "+dInfo.cnt+"회 하였습니다.</div>";
-	        	} else {
-		        	listHtml += "${pvo.petName}가 "+dInfo.alarm_at.hour+"시 "+dInfo.alarm_at.minute+"분에 "+dInfo.category_name+"를 "+dInfo.cnt+"회 하였습니다.</div>";
-	        	}
+	        	listHtml += "${pvo.petName}가 "+time+"분에 "+dInfo.category_name+"를 "+dInfo.cnt+"회 하였습니다.</div>";
 	        	listHtml += "<div class='alarm_content'>";
-	        	listHtml += dInfo.alarm_content+"</div>";
-	        	listHtml += "<div class='alarm_go'>";
-	        	listHtml += "<a href='#'>이상행동 녹화영상";
-	        	listHtml += "<span class='material-symbols-outlined icon_alarm_go'>chevron_right</span>";
-	        	listHtml += "</a></div></div>"
+	        	listHtml += dInfo.alarm_content.replace(/\n/g,"<br>");
+        	} else {
+        		listHtml += '<span>['+dInfo.alarm_type+']</span>';
+        		var pet_name = dInfo.alarm_content.split("+")
+				listHtml += pet_name[0].replace(/네로/g,dInfo.pet_name).replace(/"/g, '').replace(/\n/g,"<br>");
+        		listHtml += '</div>'
+        		listHtml += '<div class="alarm_content">';
+        		listHtml += pet_name[1].replace(/네로/g,dInfo.pet_name).replace(/\n/g,"<br>");
         	}
+        	listHtml += "</div>";
+        	listHtml += "<div class='alarm_go'>";
+        	listHtml += "<a href='#'>이상행동 녹화영상";
+        	listHtml += "<span class='material-symbols-outlined icon_alarm_go'>chevron_right</span>";
+        	listHtml += "</a></div></div>"
+        	
         });
         
         listHtml += "</ul></div>";

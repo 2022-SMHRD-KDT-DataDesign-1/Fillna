@@ -38,7 +38,7 @@
 	 		 , date_format(alarm_at, '%Y-%m-%d %H:%i:%s') as alarm_at
      		 , alarm_week
 	 	  from t_alarm as A
-	     where mb_idx = #{mbIdx} and alarm_at between #{startDate} and #{endDate}
+	     where mb_idx = #{mbIdx} and alarm_at between #{startDate} and date_add(#{endDate}, interval 1 day)
 	     order by alarm_at desc
 	</select> 
 </mapper>

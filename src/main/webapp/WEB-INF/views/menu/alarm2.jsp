@@ -45,6 +45,7 @@
     	  String endDate = year+"-"+month+"-"+day;
     	  
     	%>
+    	<input type='hidden' value='${vo.mbIdx}' id="mbIdx">
     	<input type='hidden' value='<%=endDate %>' id='endDate'>
     	<input type='hidden' value='<%=startDate %>' id='startDate'>
             <div class="con con_alarm">
@@ -100,12 +101,13 @@ $(document).ready(function(e) {
 function load_alarm(){
 	var startDate = $("#startDate").val();
 	var endDate = $("#endDate").val();
+	var mbIdx = $("#mbIdx").val();
 	//console.log(startDate+" "+endDate);
 	
 	$.ajax({
 		url : "alarm/all-test",
 		type : "post",
-		data : {"startDate": startDate, "endDate": endDate},
+		data : {"startDate": startDate, "endDate": endDate, "mbIdx": mbIdx},
 		dataType : "json",
 		success : makeview,
 		error : function(){alert("error");}

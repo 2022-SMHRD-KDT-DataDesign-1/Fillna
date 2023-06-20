@@ -306,7 +306,7 @@ body::-webkit-bar { display: none; }
         .chart_month{}
         .chart_month>span:nth-child(1){vertical-align: middle; font-weight: 800; font-size: 5vw;}
         .chart_month>span>span{font-size: 3vw; font-weight: 400; vertical-align: middle;}
-        .chart_type{padding: 6vw; display: flex;}
+        .chart_type{padding: 6vw; display: flex;padding-top:0;}
         .chart_type>div{border-bottom: 3px solid #bdbdbd; width: 100%; text-align: center; padding: 2vw; box-sizing: border-box; cursor: pointer;}
         .chart_type>div>span{font-size: 4.5vw; color:#bdbdbd; font-weight: 800;}
         .chart_type>div.select{border-bottom: 3px solid #cd0000;}

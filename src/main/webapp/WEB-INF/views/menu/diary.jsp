@@ -265,7 +265,7 @@
 	    	var mbIdx = $("#memId").val();
 	    	var petIdx = $("#petId").val();
 	    	var date = $(this).next(".thisDate").val();
-	    	console.log(date);
+	    	//console.log(date);
 	    	
 	    	$.ajax({
 	    		url : "diary/diary-all",
@@ -305,7 +305,7 @@
     function loadDiary(){
     	var mbIdx = $("#memId").val();
     	var date = $("#today").val();
-    	console.log(date);
+    	//console.log(date);
     	
     	$.ajax({
     		url : "diary/diary-all",
@@ -343,9 +343,8 @@
     function showDiary(data){
     	var listHtml = "";
     	
-    	console.log(data);
+    	//console.log(data);
 		var alarmDate = data[0].alarm_at.split(" ")[0];
-
 		
     	if(alarmDate == '2023-06-20'){
 	        listHtml += "<div>오늘의 일지</div>";

@@ -17,7 +17,7 @@ body::-webkit-bar { display: none; }
 @media screen and (max-width:767px){ 
     /*전체*/
     .wrapper{width:100%;font-size:3.8vw;}
-    .memo_wrapper{margin-bottom: 30vw;}
+    .memo_wrapper, .diary_wrapper{margin-bottom: 30vw;}
     input, a, button, span{font-family: 'Pretendard';}
 
     /* modal */
@@ -243,9 +243,9 @@ body::-webkit-bar { display: none; }
           .diary_bottom>div:first-child>span:first-child,
           .diary_bottom>div:nth-child(3)>span:first-child{font-size: 4.5vw; font-weight: 700; color:#5e5e5e; margin-bottom: 2vw;}
           .today_ment{font-family: 'ROEHOE-CHAN';width: 100%;background: #F6CCCC;position: absolute;left: 0;top: 54vw;padding: 4vw 0;text-align: center;font-size:4vw;}
-          .today_ment2{color: #696969;position: absolute;width: 88vw;overflow: hidden;top: 63.5vw;}
+          .today_ment2{color: #696969;position: absolute;width: 88vw;overflow: hidden;top: 61.5vw;}
           .today_ment2 > img{float: left;width: 17vw; border-radius: 50%; height: 17vw; object-fit: cover;}
-          .today_ment2 > p{float: right;width: 67vw;margin-top: 6vw;font-size: 3.5vw;line-height: 1.15;}
+          .today_ment2 > p{float: right;width: 67vw;margin-top: 6vw;font-size: 3.5vw;line-height: 1.15; text-align: justify;}
           .diary_top > ul{margin-top: 60vw;background: url(../images/line.png) no-repeat;background-position: 15.5vw 1vw; background-size: 0.05vw 98%;}
           .diary_top>ul>li{margin-left:2vw}
           .diary_alarm_type{}
@@ -262,7 +262,7 @@ body::-webkit-bar { display: none; }
           .diary_middle_list>li>div{border-radius: 10px; border:1px solid #d2d2d2; background-color: #fff; text-align: justify; width: 37vw; padding: 2.5vw;}
           .diary_middle_list>li>div>span:nth-child(1){font-weight: 600; margin-right: 2vw; color: #5e5e5e;}
           .diary_middle_list>li>div>span:nth-child(2){font-size: 3vw; color: #aeaeae;}
-          .diary_middle_list>li>div>img{width:100%; border-radius: 10px; margin-top:2vw;}
+          .diary_middle_list>li>div>img{width:100%; border-radius: 10px; margin-top:2vw; object-fit: cover; height: 28vw;}
           .diary_middle_list>li>div>p{font-size: 3.5vw; color:#aeaeae; padding: 1vw;}
           .icon_more{font-size: 4vw !important; color:#5e5e5e; vertical-align:middle; cursor:pointer; float:right;}
 

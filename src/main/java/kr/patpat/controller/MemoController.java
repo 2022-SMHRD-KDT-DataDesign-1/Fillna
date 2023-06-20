@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -100,5 +101,12 @@ public class MemoController {
 	public String memoUpdate(Memo memo, HttpServletRequest request, MultipartFile file) {
 		System.out.println("수정티비");
 		return null;
+	}
+	
+	@ResponseBody
+	@GetMapping("/memo/category")
+	public String memoShowCategory(String category) {
+		String memoDetail = memoMapper.showMemoCategoryDetail(category);
+		return memoDetail;
 	}
 }

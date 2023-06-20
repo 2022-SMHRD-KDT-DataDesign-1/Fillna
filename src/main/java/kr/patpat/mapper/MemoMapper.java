@@ -14,5 +14,7 @@ public interface MemoMapper {
 	void insertMemo(Memo memo);
 
 	void deleteMemo(String idx);
+
+	String showMemoCategoryDetail(String category);
 }
 

@@ -252,7 +252,10 @@
 	    		dataType : "json",
 	    		success : showDiary,
 	    		error : function(){alert("error");}
-	    	})
+	    	}).done(function(){
+	    		var photoPath = $("#petPhotoPath").val();
+	    		$("#petProfile").attr("src", photoPath);
+	    	});
 	    	
 	        $.ajax({
     		url : "diary/memo-all",
@@ -292,7 +295,6 @@
     		error : function(){alert("error");}
     	}).done(function(){
     		var photoPath = $("#petPhotoPath").val();
-    		console.log(photoPath);
     		$("#petProfile").attr("src", photoPath);
     	});
 

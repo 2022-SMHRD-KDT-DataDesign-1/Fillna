@@ -172,7 +172,7 @@ public class KakaoTalkMessageController {
 	  
        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
        params.add("receiver_uuids", uuidsArray.toString());
-       params.add("template_id", "95121");
+       params.add("template_id", "95123");
 		/* params.add("template_args", template_args); */ 
        
        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(params, headers);

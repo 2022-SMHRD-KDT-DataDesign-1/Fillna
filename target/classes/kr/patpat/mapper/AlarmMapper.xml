@@ -22,7 +22,7 @@
 			 , convert(count(*),char) as cnt
 		  from t_alarm as A
 		 where mb_idx = #{mbIdx}
-		   and alarm_at BETWEEN DATE_ADD('2023-06-08 17:14:53',INTERVAL -2 DAY ) AND '2023-06-08 17:14:53'
+		   and alarm_at BETWEEN DATE_ADD(now(),INTERVAL -2 DAY ) AND now()
 		  group by alarm_type
 		 having alarm_type != '일지'
 	</select>

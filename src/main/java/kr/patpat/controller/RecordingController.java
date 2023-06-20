@@ -30,10 +30,9 @@ public class RecordingController {
 	}
 	
 	@GetMapping("/ai/all")
-	public List<Recording> recording_ai_list(@RequestParam("date") String date){
-		System.out.println(date);
-		List<Recording> list = mapper.recording_ai_List(date);
-		System.out.println(list.get(0));
+	public List<Recording> recording_ai_list(@RequestParam HashMap<String, String> param){
+		List<Recording> list = mapper.recording_ai_List(param);
+		
 		return list;
 	}
 	

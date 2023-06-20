@@ -36,8 +36,8 @@
 		delete from t_memo where memo_idx=#{idx}
 	</delete>
 	
-	<select id="showMemoCategoryDetail" parameterType="String" resultType="java.util.List">
-		select a.alarm_content from t_alarm_content a join t_category b on a.category_idx = b.category_idx
+	<select id="showMemoCategoryDetail" parameterType="String" resultType="java.util.HashMap">
+		select a.* from t_alarm_content a join t_category b on a.category_idx = b.category_idx
 		where b.category_name=#{category};
 	</select>
 	

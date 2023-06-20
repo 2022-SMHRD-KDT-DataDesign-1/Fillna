@@ -29,6 +29,19 @@
 .diary_bottom>ul {
 	overflow : auto;
 }
+.diary_bottom_list_1>li>div{
+	background-corlor : none;
+}
+.diary_bottom>ul{
+	padding-left: 5vw;
+    padding-top: 3vw;
+}
+.diary_bottom_list_1>li{
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    flex-direction: column;
+}
 	</style>
 </head>
 <body class="bg">
@@ -92,7 +105,7 @@
 							}
 							
 							if(j==0){
-								out.print("<li class='date today'>");
+								out.print("<li class='date date_today'>");
 							    out.print("<p>"+dayOfWeek+"</p>");
 							    out.print("<p>"+temp[2]+"</p>");
 								out.print("</li>");
@@ -120,10 +133,11 @@
 					<!-- 메모 -->
                 </div>
                 <div class="diary_bottom">
-<!--                		<div>
-                     <span>이상행동 녹화영상 LIST</span>
-                        <span>총 5개의 영상</span>
-                    </div> -->
+               		<div>
+                     	<span>이상행동 녹화영상 LIST</span>
+                        <span></span>
+                    </div>
+                    
 <!--                     <ul class="diary_bottom_list_1">
                         <li>
                             <div>
@@ -242,11 +256,11 @@
 	    
 	    $(".date").on("click", function(e){
 	    	
-	    	if($(this).hasClass("today")===true){
+	    	if($(this).hasClass("date_today")===true){
 	    		e.preventDefault();
 	    	} else{
-		    	$(".date").not(this).removeClass("today");
-		    	$(this).addClass("today");
+		    	$(".date").not(this).removeClass("date_today");
+		    	$(this).addClass("date_today");
 	    	}
 	    	var mbIdx = $("#memId").val();
 	    	var petIdx = $("#petId").val();
@@ -260,7 +274,10 @@
 	    		dataType : "json",
 	    		success : showDiary,
 	    		error : function(){alert("error");}
-	    	})
+	    	}).done(function(){
+	    		var photoPath = $("#petPhotoPath").val();
+	    		$("#petProfile").attr("src", photoPath);
+	    	});
 	    	
 	        $.ajax({
     		url : "diary/memo-all",
@@ -277,7 +294,11 @@
 	    		data : {"date":date},
 	    		dataType : "json",
 	    		success : showAi,
-	    		error : function(){$(".diary_bottom").html("").trigger("create");}
+	    		error : function(){
+	    			$(".diary_bottom").html("").trigger("create");
+	    			var listHtml = "<div><span>이상행동 녹화영상 LIST</span><span></span></div>";
+	    			$(".diary_bottom").append(listHtml).trigger("create");
+	    			}
 	    	})
 	    });
 	    
@@ -300,7 +321,6 @@
     		error : function(){alert("error");}
     	}).done(function(){
     		var photoPath = $("#petPhotoPath").val();
-    		console.log(photoPath);
     		$("#petProfile").attr("src", photoPath);
     	});
 
@@ -421,7 +441,7 @@
     function showMemo(data){
     	var listHtml = "";
     	listHtml += "<div><span>메모</span>";
-    	var date = $(".today").next().val(); 
+    	var date = $(".date_today").next().val(); 
     	var addMemoUrl = "${contextPath}/memo/show?date="+date;
     	listHtml += "<span class='material-symbols-outlined icon_add_circle' onclick='location.href=\""+addMemoUrl+"\"'>add_circle</span></div>";
     	listHtml += "<div class='diary_middle_list_wrap'>";
@@ -472,18 +492,15 @@
     
     function showAi(data){
     	var listHtml = "";
-   		listHtml += "<div>";
-   		listHtml += "<span>이상행동 녹화영상 LIST</span>";
-    	listHtml += "<span>총 "+data.length+"개의 영상</span>"
-    	listHtml += "</div>";
+    	$('.diary_bottom>div>span:nth-last-child(1)').text("총 "+data.length+"개의 영상");
     	listHtml += '<ul class=\"diary_bottom_list_1">';
     	$.each(data,function(idx,val){
     		listHtml += "<li>";
-    		listHtml += "<div>";				
+    		/* listHtml += "<div>";	 */			
     		listHtml += '<video class="video" poster onclick="location.href=\''+'/controller'+val.recordingFile+'\'">';
 			listHtml += '<source src="/controller'+val.recordingFile+'" type="video/mp4">';
 			listHtml += '</video>';
-			listHtml += "</div>";
+			/* listHtml += "</div>"; */
 			if(idx == 0){
 				listHtml += "<span>2:28 발작</span>";
 			}else{

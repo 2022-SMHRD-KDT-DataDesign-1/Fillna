@@ -2,6 +2,7 @@ package kr.patpat.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -100,5 +102,13 @@ public class MemoController {
 	public String memoUpdate(Memo memo, HttpServletRequest request, MultipartFile file) {
 		System.out.println("수정티비");
 		return null;
+	}
+	
+	@ResponseBody
+	@GetMapping(value = "/memo/category", produces = "text/plain;charset=UTF-8")
+	public List<String> memoShowCategory(String category) {
+		List<String> memoDetail = memoMapper.showMemoCategoryDetail(category);
+		System.out.println(memoDetail);
+		return memoDetail;
 	}
 }

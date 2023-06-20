@@ -94,7 +94,7 @@
                         <c:if test="${empty mvo.memoIdx}">
                             <input type="button" class="select_symptom_list" value="써클링"/>
                         </c:if>
-                        	<input type="hidden" class="sympton" name="category">
+                        	<input type="hidden" class="sympton" id="sympton" name="category">
                             <span class="material-symbols-outlined icon_down">
                                 keyboard_arrow_down
                             </span>
@@ -117,7 +117,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="memo_detail">
+                    <div class="memo_detail" id="memo_detail">
                         ※ 성묘 : 써클링을 지속적으로 하는 경우 뇌병변, 인지장애, 두부외상, 뇌수막염 등이 의심됩니다.
                         외상으로 머리를 다치지 않았는지 확인해 주시기 바랍니다.
                         <br><br>
@@ -170,10 +170,11 @@
         let selectBtn = $(".select_symptom_list");
 
         selectBtn.on("click", function(){
-            console.log("click");
             $(".icon_memo_up").toggleClass("hide");
             $(".icon_down").toggleClass("hide");
             $(".sympton_list").toggleClass("on");
+            
+
         });
 
         $(".sympton_list").children("li").children("button").on("click", function(e){
@@ -182,6 +183,22 @@
             $(".sympton_list").toggleClass("on");
             $(".icon_memo_up").toggleClass("hide");
             $(".icon_down").toggleClass("hide");
+            
+            var category = $(".sympton").val();
+            
+       		$.ajax({
+        		url : "memo/category",
+        		type : "get",
+        		data : {"category":category},
+        		dataType : "json",
+        		success : function(data){
+        			$.each(data, function(idx, val){
+						console.log(data);
+        			 	//$("#memo_detail").html(data.replace(/\n/g,"<br><br>"));
+        			});
+        		},
+        		error : function(){alert("error");}
+    		}); 
         });
 
         $("#file").change(function(e){
@@ -212,8 +229,12 @@
     			$(".modal").toggleClass("hide");
     		});
     	}
+    	
 
+    	
     });
+    
+    
     
 
 </script>

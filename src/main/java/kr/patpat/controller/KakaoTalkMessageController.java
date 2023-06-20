@@ -150,11 +150,12 @@ public class KakaoTalkMessageController {
 		 */
 	   
        // 사용자 정의 템플릿
-       List<Map<String, String>> list = mapper.alarmContentList();
-       
-       Map<String,String> content = list.get(0);
-       String val = content.get("alarm_content");
-       System.out.println();
+		/*
+		 * List<Map<String, String>> list = mapper.alarmContentList();
+		 * 
+		 * Map<String,String> content = list.get(0); String val =
+		 * content.get("alarm_content");
+		 */
 		/*
 		 * String template_args =
 		 * "{\"alarm_content\":\""+val.replaceAll("\\※","※").replaceAll("\\①","①").
@@ -171,7 +172,7 @@ public class KakaoTalkMessageController {
 	  
        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
        params.add("receiver_uuids", uuidsArray.toString());
-       params.add("template_id", template_id);
+       params.add("template_id", "95121");
 		/* params.add("template_args", template_args); */ 
        
        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(params, headers);

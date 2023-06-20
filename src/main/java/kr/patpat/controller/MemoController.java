@@ -91,8 +91,8 @@ public class MemoController {
 		
 		Memo memo = memoMapper.showMemo(memoIdx);
 		 
-		Category cate = categoryMapper.selectCategory(memo.getCategoryIdx()); String
-		category = cate.getCategoryName();
+		List<Category> cate = categoryMapper.selectCategory(memo.getCategoryIdx()); String
+		category = cate.get(0).getCategoryName();
 		 
 		session.setAttribute("mvo", memo); session.setAttribute("category",category);
 		session.setAttribute("date", date);

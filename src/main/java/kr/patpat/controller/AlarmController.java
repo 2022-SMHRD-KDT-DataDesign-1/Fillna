@@ -32,6 +32,8 @@ public class AlarmController {
 	// 고운 수정
 	@PostMapping("/all-test")
 	public List<Map<String, String>> showAlarmList(@RequestParam HashMap<String, String> param){
+		//System.out.println(param);
+		
 		List<Map<String, String>> data = mapper.showAlarmList(param);
 		
 		return data;

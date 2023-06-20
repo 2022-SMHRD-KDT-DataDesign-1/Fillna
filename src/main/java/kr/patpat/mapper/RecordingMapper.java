@@ -13,6 +13,6 @@ public interface RecordingMapper {
 
 	public List<Recording> recordingList(HashMap<String, String> param);
 
-	public List<Recording> recording_ai_List(String date);
+	public List<Recording> recording_ai_List(HashMap<String, String> param);
 
 }

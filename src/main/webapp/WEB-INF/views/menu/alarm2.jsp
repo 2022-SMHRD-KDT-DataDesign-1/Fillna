@@ -182,7 +182,7 @@ function makeview(data){
 						list_html += '<span class="a_alarm_type">['+data[j].alarm_type +']</span>';
 					}
 					
-					if(i==0){
+					if(j==0){
 						list_html += '<span class="material-symbols-outlined icon_up">arrow_drop_up</span></li>';
 						list_html += '<div class="alarm_detail first_detail">';
 					} else {

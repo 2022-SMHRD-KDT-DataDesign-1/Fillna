@@ -28,6 +28,7 @@
     	  Calendar calendar = Calendar.getInstance();
     	  
     	  // 오늘 날짜로 설정
+    	  calendar.add(Calendar.DAY_OF_MONTH, 1);
     	  int year = calendar.get(Calendar.YEAR);
     	  int month = calendar.get(Calendar.MONTH) + 1; // 월은 0부터 시작하므로 1을 더해줌
     	  int day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -164,6 +165,7 @@ function makeview(data){
 		  list_html += '<li>';
 		  	  // 날짜가 일치할때만 데이터 출력
   			  if(date == data[j].alarm_at.split(" ")[0]){
+  				  console.log(data[j].alarm_at.split(" ")[0]);
   				  var time = data[j].alarm_at.split(" ")[1].slice(0, 5);
 				  list_html += '<span>'+time+'</span>';
 				  list_html += '<span class="material-symbols-outlined icon_circle';

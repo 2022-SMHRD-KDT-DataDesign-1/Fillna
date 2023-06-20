@@ -352,7 +352,7 @@
 	        listHtml += "오늘 하루, 네로와 얼마나 오랫동안 눈을 맞추었나요?</div>";
 	        listHtml += "<div class='today_ment2'>";
 	       	listHtml += "<img id='petProfile' src='' alt=''>";
-	        listHtml += "<p>네로는 오늘 조금 힘들었어요.<br>발작과 개구호흡으로 컨디션이 최악이에요.<br>식사도 평소보다 적은 횟수라 걱정이에요. 물과 밥양을 확인해주세요.<br>그루밍도 평소보다 적게 했어요. 피부와 구강상태를 한번 체크해주세요<br><br>네로에게 평소보다 훨씬 더 사랑을 담아 신경써주세요";
+	        listHtml += "<p>네로는 오늘 정말 위험했어요.<br>발작과 개구호흡으로 컨디션이 최악이에요.<br>식사도 평소보다 적은 횟수라 걱정이에요. 물과 밥양을 확인해주세요.<br>그루밍도 평소보다 적게 했어요. 피부와 구강상태를 한번 체크해주세요<br><br>네로에게 평소보다 훨씬 더 사랑을 담아 신경써주세요";
 	        listHtml += "<span class='material-symbols-outlined icon_pets'>pets</span></p></div>";
     	} else if(alarmDate == '2023-06-11'){
 	        listHtml += "<div>오늘의 일지</div>";

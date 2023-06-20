@@ -50,7 +50,7 @@ public class MemoController {
 	public String memoWrite(@RequestParam("mbIdx") String mbIdx, @RequestParam("category") String category,
 			@RequestParam("memocontent") String memocontent, @RequestParam("file") MultipartFile file, HttpServletRequest request,
 			RedirectAttributes rttr) throws IllegalStateException, IOException {
-		
+		System.out.println("작성들어옴");
 		String saveImgPath = "C:\\Users\\SMHRD\\git\\Fillna\\src\\main\\webapp\\resources\\upload"; 
 		
 		if(!file.isEmpty()) {
@@ -65,8 +65,8 @@ public class MemoController {
 				memo.setMemoPhotoName(fileName);
 				memo.setMemoPhotoPath(uploadFile.getAbsolutePath());
 				
-				Category cate = categoryMapper.selectCategory(category);
-				memo.setCategoryIdx(cate.getCategoryIdx());
+				List<Category> cate = categoryMapper.selectCategory(category);
+				memo.setCategoryIdx(cate.get(0).getCategoryIdx());
 				
 				System.out.println(memo.toString());
 				memoMapper.insertMemo(memo);
@@ -91,8 +91,8 @@ public class MemoController {
 		
 		Memo memo = memoMapper.showMemo(memoIdx);
 		 
-		Category cate = categoryMapper.selectCategory(memo.getCategoryIdx()); String
-		category = cate.getCategoryName();
+		List<Category> cate = categoryMapper.selectCategory(memo.getCategoryIdx()); String
+		category = cate.get(0).getCategoryName();
 		 
 		session.setAttribute("mvo", memo); session.setAttribute("category",category);
 		session.setAttribute("date", date);

@@ -41,9 +41,9 @@ public class AlarmController {
 	
 	// 알림 타입 가져오기
 	@GetMapping("/cnt/all")
-	public List<Map<String, String>> alarm_cnt(){
+	public List<Map<String, String>> alarm_cnt(@RequestParam("mbIdx") String mbIdx){
 		
-		List<Map<String,String>> list = mapper.alarmCnt();
+		List<Map<String,String>> list = mapper.alarmCnt(mbIdx);
 		
 		return list;
 	}

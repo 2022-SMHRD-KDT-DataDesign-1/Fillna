@@ -15,6 +15,11 @@
     <link rel="stylesheet" href="resources/css/substyle.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<style>
+		.alarm_yn{
+			display:none;
+		}
+	</style>
 </head>
 <body class="bg">
     <div class="wrapper">
@@ -161,7 +166,7 @@ function makeview(data){
 		  
 		  
 		  for(var j = 0; j < data.length; j++){
-		  list_html += '<li>';
+		  	list_html += '<li>';
 		  	  // 날짜가 일치할때만 데이터 출력
   			  if(date == data[j].alarm_at.split(" ")[0]){
   				  console.log(data[j].alarm_at.split(" ")[0]);
@@ -199,6 +204,7 @@ function makeview(data){
 						list_html += '<span class="alarm_type">['+data[j].alarm_type+'] </span>';
 						var pet_name = data[j].alarm_content.split("+")
 						list_html += pet_name[0].replace(/네로/g,data[j].pet_name).replace(/\n/g,"<br>");
+						list_html += '</div>'
 						list_html += '<div class="alarm_content">';
 						list_html += pet_name[1].replace(/네로/g,data[j].pet_name).replace(/\n/g,"<br>");
 					}

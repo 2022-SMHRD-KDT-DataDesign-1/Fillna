@@ -17,7 +17,7 @@
 	     order by alarm_at desc
 	</select>
 	
-	<select id="alarmCnt" resultType="HashMap">
+	<select id="alarmCnt" resultType="HashMap" parameterType="String">
 		select ( select alarm_type from t_alarm_content where alarm_content_idx = A.alarm_content_idx ) as alarm_type
 			 , convert(count(*),char) as cnt
 		  from t_alarm as A

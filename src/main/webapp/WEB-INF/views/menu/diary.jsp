@@ -45,7 +45,7 @@
 	</style>
 </head>
 <body class="bg">
-    <div class="wrapper">
+    <div class="wrapper diary_wrapper">
     	<jsp:include page="../common/my.jsp"></jsp:include>
 		<jsp:include page="../common/header2.jsp"></jsp:include>
 		<input type="hidden" value="${vo.mbIdx}" id="memId">
@@ -342,13 +342,41 @@
     
     function showDiary(data){
     	var listHtml = "";
-        listHtml += "<div>오늘의 일지</div>";
-        listHtml += "<div class='today_ment'>";
-        listHtml += "오늘 하루, 탄이와 얼마나 오랫동안 눈을 맞추었나요?</div>";
-        listHtml += "<div class='today_ment2'>";
-       	listHtml += "<img id='petProfile' src='' alt=''>";
-        listHtml += "<p>나비는 오늘 조금 힘들었어요.<br>구토, 심한 재채기로 컨디션이 정상적이지 않아요.<br>식사에는 큰 문제는 없었지만, 물과 밥양을 확인해주세요.<br>그루밍도 평소보다 적게 했어요. 피부와 구강상태를 한번 체크해주세요<br><br>당분간 세심하게 나비를 신경써주세요";
-        listHtml += "<span class='material-symbols-outlined icon_pets'>pets</span></p></div>";
+    	
+		var aa = data[0].alarm_at;
+		var alarmDate = "";
+		if(aa.monthValue >= 10){
+    		alarmDate = aa.year+"-"+aa.monthValue+"-"+aa.dayOfMonth;
+		} else {
+    		alarmDate = aa.year+"-0"+aa.monthValue+"-"+aa.dayOfMonth;
+		}
+		console.log(alarmDate);
+		
+    	if(alarmDate == '2023-06-20'){
+	        listHtml += "<div>오늘의 일지</div>";
+	        listHtml += "<div class='today_ment'>";
+	        listHtml += "오늘 하루, 네로와 얼마나 오랫동안 눈을 맞추었나요?</div>";
+	        listHtml += "<div class='today_ment2'>";
+	       	listHtml += "<img id='petProfile' src='' alt=''>";
+	        listHtml += "<p>네로는 오늘 조금 힘들었어요.<br>발작과 개구호흡으로 컨디션이 최악이에요.<br>식사도 평소보다 적은 횟수라 걱정이에요. 물과 밥양을 확인해주세요.<br>그루밍도 평소보다 적게 했어요. 피부와 구강상태를 한번 체크해주세요<br><br>네로에게 평소보다 훨씬 더 사랑을 담아 신경써주세요";
+	        listHtml += "<span class='material-symbols-outlined icon_pets'>pets</span></p></div>";
+    	} else if(alarmDate == '2023-06-11'){
+	        listHtml += "<div>오늘의 일지</div>";
+	        listHtml += "<div class='today_ment'>";
+	        listHtml += "네로에게는 당신이 세상의 전부라는 사실. 알고있나요?</div>";
+	        listHtml += "<div class='today_ment2'>";
+	       	listHtml += "<img id='petProfile' src='' alt=''>";
+	        listHtml += "<p>네로는 오늘 조금 힘들었어요.<br>심하게 귀/피부 긁는 행동, 심한 그루밍으로 컨디션이 정상적이지 않아요.<br>식사에는 큰 문제는 없었지만, 물과 밥양을 확인해주세요.<br>피부와 구강상태가 많이 걱정되니 반드시 체크해야해요.<br><br>당분간 세심하게 네로를 신경써주세요";
+	        listHtml += "<span class='material-symbols-outlined icon_pets'>pets</span></p></div>";
+    	} else {
+	        listHtml += "<div>오늘의 일지</div>";
+	        listHtml += "<div class='today_ment'>";
+	        listHtml += "오늘 하루, 네로와 얼마나 오랫동안 눈을 맞추었나요?</div>";
+	        listHtml += "<div class='today_ment2'>";
+	       	listHtml += "<img id='petProfile' src='' alt=''>";
+	        listHtml += "<p>네로는 오늘 조금 힘들었어요.<br>발작과 개구호흡으로 컨디션이 최악이에요.<br>식사도 평소보다 적은 횟수라 걱정이에요. 물과 밥양을 확인해주세요.<br>그루밍도 평소보다 적게 했어요. 피부와 구강상태를 한번 체크해주세요<br><br>네로에게 평소보다 훨씬 더 사랑을 담아 신경써주세요";
+	        listHtml += "<span class='material-symbols-outlined icon_pets'>pets</span></p></div>";
+    	}
             
         listHtml += "<ul class='alaram_list'>";    
         
@@ -476,7 +504,7 @@
 	    		var url = "${contextPath}/memo/update?memoIdx="+mInfo.memo_idx+"&date="+date;
 	    		listHtml += "<li onclick='location.href=\""+url+"\"'>수정하기</li>";
 	    		listHtml += "<li class='deleteMemo' onclick='deleteMemo(\""+mInfo.memo_idx+"\")'>삭제하기</li></ul></div>";
-	    		listHtml += "<img src='"+mInfo.memo_photo_path.substr(42)+"' alt=''>";
+	    		listHtml += "<img src='"+mInfo.memo_photo_path.substr(42)+"' alt='' id='petMemoPhoto'>";
 	    		listHtml += "<p>"+mInfo.memo_content+"</p></div>";
 	    		listHtml += "</li>";
 	    	});

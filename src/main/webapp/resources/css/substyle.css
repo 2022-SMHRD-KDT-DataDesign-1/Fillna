@@ -246,7 +246,7 @@ body::-webkit-bar { display: none; }
           .today_ment2{color: #696969;position: absolute;width: 88vw;overflow: hidden;top: 61.5vw;}
           .today_ment2 > img{float: left;width: 17vw; border-radius: 50%; height: 17vw; object-fit: cover;}
           .today_ment2 > p{float: right;width: 67vw;margin-top: 6vw;font-size: 3.5vw;line-height: 1.15; text-align: justify;}
-          .diary_top > ul{margin-top: 60vw;background: url(../images/line.png) no-repeat;background-position: 15.594vw 1vw; background-size: 0.05vw 95%;}
+          .diary_top > ul{margin-top: 60vw;background: url(../images/line.png) no-repeat;background-position: 15.66vw 1vw; background-size: 0.05vw 97%;}
           .diary_top>ul>li{margin-left:2vw}
           .diary_alarm_type{}
 

@@ -4,9 +4,18 @@
 
 
 	<select id="selectAction" resultType="java.util.HashMap" parameterType="map">
-		select * from t_alarm a join t_alarm_content b on a.alarm_content_idx=b.alarm_content_idx
-		join t_category c on b.category_idx=c.category_idx
-		where a.mb_idx=#{mbIdx} and a.alarm_at like concat('%', #{date}, '%') order by alarm_at desc
+		select alarm_idx 
+	 		 , convert(( select cnt from t_action where action_idx = A.action_idx ), char) as cnt
+     		 , ( select pet_name from t_pet where mb_idx = #{mbIdx} ) as pet_name
+     		 , mb_idx
+     		 , ( select alarm_type from t_alarm_content where alarm_content_idx = A.alarm_content_idx ) as alarm_type
+     		 , ( select alarm_content from t_alarm_content where alarm_content_idx = A.alarm_content_idx ) as alarm_content
+     	  	 , ( select category_name from t_category where category_idx = ( select category_idx from t_alarm_content where alarm_content_idx = A.alarm_content_idx )) as category_name
+	 		 , date_format(alarm_at, '%Y-%m-%d %H:%i:%s') as alarm_at
+     		 , alarm_week
+	 	  from t_alarm as A
+	     where mb_idx = #{mbIdx} and alarm_at like concat('%', #{date}, '%')
+	     order by alarm_at desc
 	</select>
 	
 	<select id="selectMemoList" resultType="java.util.HashMap" parameterType="map">

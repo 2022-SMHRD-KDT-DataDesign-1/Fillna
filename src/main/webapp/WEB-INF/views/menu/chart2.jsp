@@ -24,7 +24,7 @@
 <body class="bg">
     <div class="wrapper">
 		<jsp:include page="../common/my.jsp"></jsp:include>
-		<jsp:include page="../common/header2.jsp"></jsp:include>
+		<jsp:include page="../common/header1.jsp"></jsp:include>
 		<!-- modal -->
         <div class="modal hide">
             <div class="modal_back"></div>

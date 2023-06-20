@@ -237,6 +237,7 @@
     	function alarm_cnt(data){
     		var war_cnt = 0;
     		var eg_cnt  = 0;
+    		console.log(data.length);
     		$.each(data, function(idx,val){
     			if(val.alarm_type === "긴급"){
     				eg_cnt = val.cnt

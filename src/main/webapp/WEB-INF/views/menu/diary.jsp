@@ -417,7 +417,7 @@
         	} else {
         		listHtml += '<span>['+dInfo.alarm_type+']</span>';
         		var pet_name = dInfo.alarm_content.split("+")
-				listHtml += pet_name[0].replace(/네로/g,dInfo.pet_name).replace(/\n/g,"<br>");
+				listHtml += pet_name[0].replace(/네로/g,dInfo.pet_name).replace(/"/g, '').replace(/\n/g,"<br>");
         		listHtml += '</div>'
         		listHtml += '<div class="alarm_content">';
         		listHtml += pet_name[1].replace(/네로/g,dInfo.pet_name).replace(/\n/g,"<br>");

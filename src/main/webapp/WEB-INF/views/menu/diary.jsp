@@ -526,10 +526,18 @@
 				listHtml += '<source src="/controller'+val.recordingFile+'" type="video/mp4">';
 				listHtml += '</video>';
 				/* listHtml += "</div>"; */
-				if(idx == 0){
-					listHtml += "<span>2:28 발작</span>";
-				}else{
-					listHtml += "<span>0:34 개구호흡</span>";
+				if(data[0].recordingAt.split(" ")[0] == '2023-06-20'){
+					if(idx == 0){
+						listHtml += "<span>2:28 발작</span>";
+					}else{
+						listHtml += "<span>0:34 개구호흡</span>";
+					}
+				} else {
+					if(idx == 0){
+						listHtml += "<span>0:15 피부긁음</span>";
+					}else{
+						listHtml += "<span>0:13 그루밍</span>";
+					}
 				}
 				listHtml += "</li>";
 	    	});

@@ -18,7 +18,7 @@
 			 , date_format(recording_at, '%Y-%m-%d %H:%i:%s') as recording_at
  		  from t_recording
          where mb_idx = 'C61A727500F311EE875C0242AC14000B'
-           and recording_at BETWEEN #{startDate} AND #{endDate}
+           and recording_at BETWEEN #{startDate} AND date_add(#{endDate}, interval 1 day)
            and recording_type = "direct_recorded"
 	</select>
 	

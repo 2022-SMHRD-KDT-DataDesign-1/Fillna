@@ -26,13 +26,13 @@
     height: 20vw;
     object-fit: cover;
 }
-.diary_bottom>ul {
+..diary_bottom_list_1 {
 	overflow : auto;
 }
 .diary_bottom_list_1>li>div{
 	background-corlor : none;
 }
-.diary_bottom>ul{
+.diary_bottom_list_1{
 	padding-left: 5vw;
     padding-top: 3vw;
 }
@@ -133,10 +133,10 @@
 					<!-- 메모 -->
                 </div>
                 <div class="diary_bottom">
-               		<div>
+<!--                		<div>
                      	<span>이상행동 녹화영상 LIST</span>
                         <span></span>
-                    </div>
+                    </div> -->
                     
 <!--                     <ul class="diary_bottom_list_1">
                         <li>
@@ -294,11 +294,7 @@
 	    		data : {"date":date},
 	    		dataType : "json",
 	    		success : showAi,
-	    		error : function(){
-	    			//$(".diary_bottom").html("").trigger("create");
-	    			//var listHtml = "<div><span>이상행동 녹화영상 LIST</span><span></span></div>";
-	    			//$(".diary_bottom").append(listHtml).trigger("create");
-	    			}
+	    		error : function(){console.log("error");}
 	    	})
 	    });
 	    
@@ -494,10 +490,10 @@
     function showAi(data){
     	console.log(data);
     	var listHtml = "";
-    	$('.diary_bottom>div>span:nth-last-child(1)').text("총 "+data.length+"개의 영상");
-    	listHtml += '<ul class="diary_bottom_list_1">';
-    	
+    	listHtml += "<div><span>이상행동 녹화영상 LIST</span><span>총 "+data.length+"개의 영상</span></div>";
+
 		if(data.length > 0){
+	    	listHtml += '<ul class="diary_bottom_list_1">';
 	    	$.each(data,function(idx,val){
 	    		listHtml += "<li>";
 	    		/* listHtml += "<div>";	 */			
@@ -513,13 +509,15 @@
 				listHtml += "</li>";
 	    	});
 		} else {
-			listHtml+= "<li class='video_none'>저장된 동영상이 없습니다.</li>"
+			listHtml += '<ul class="">';
+			listHtml+= "<li class='diary_video_none'>저장된 동영상이 없습니다.</li>"
 		}
 		
 		listHtml += "</ul>";
-    	if($(".diary_bottom_list_1>li").length == 0){
+/*     	if($(".diary_bottom_list_1>li").length == 0){
 	    	$(".diary_bottom").append(listHtml).trigger("create");
-    	}
+    	} */
+    	$(".diary_bottom").html(listHtml);
     }
     
 

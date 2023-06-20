@@ -402,9 +402,9 @@
 	        	listHtml += "<span>-"+dInfo.category_name+" "+dInfo.cnt+"회</span>";
         	}
         	
-        	if(index==0){
+        	if(index==0 && dInfo.alarm_type != '일지'){
 	        	listHtml += "<span class='material-symbols-outlined icon_up'>arrow_drop_up</span>";
-        	} else{
+        	} else {
 	        	listHtml += "<span class='material-symbols-outlined icon_up hide'>arrow_drop_up</span>";
         	}
         	listHtml += "</li>";

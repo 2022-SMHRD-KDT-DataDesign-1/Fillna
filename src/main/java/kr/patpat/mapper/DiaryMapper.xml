@@ -6,7 +6,7 @@
 	<select id="selectAction" resultType="java.util.HashMap" parameterType="map">
 		select * from t_alarm a join t_alarm_content b on a.alarm_content_idx=b.alarm_content_idx
 		join t_category c on b.category_idx=c.category_idx
-		where a.mb_idx=#{mbIdx} and a.alarm_at like concat('%', #{date}, '%')
+		where a.mb_idx=#{mbIdx} and a.alarm_at like concat('%', #{date}, '%') order by alarm_at desc
 	</select>
 	
 	<select id="selectMemoList" resultType="java.util.HashMap" parameterType="map">

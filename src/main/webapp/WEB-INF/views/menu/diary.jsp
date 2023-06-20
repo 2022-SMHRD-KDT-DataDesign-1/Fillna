@@ -157,11 +157,16 @@
 
     	$(".diary_header").toggleClass("hide");
     	$("#diary_footer").toggleClass("this_menu");
+    	
+    	
     	var path = "";
+    	
+    	//상단 터치 슬라이드
 	    var x = 0;
 	    var tabx = 0;
 	    var xx = 0;
 	    var limit = $(".date_ul").width() - $(".date_wrap").width() + 12;
+	    
     	$.ajax({
         	url : "diary/"+"${vo.mbIdx}",
         	type : "get",
@@ -172,6 +177,7 @@
         	},	
         	error : function(){alert("error");}
         });
+    	
 	    $(".date_ul").bind('touchstart', function(e) {
 	        var event = e.originalEvent;
 	        x = event.touches[0].screenX;
@@ -192,7 +198,9 @@
 	        }
 	    });
 	    
-	    var x1 = 0;
+	    
+	    //메모 터치슬라이드
+	    /* var x1 = 0;
 	    var tabx1 = 0;
 	    var xx1 = 0;
 	    var limit1 = $(".diary_middle_list").width() - $(".diary_middle_list_wrap").width() + 12;
@@ -211,11 +219,11 @@
 	        if ((xx1 > 0) && (tabx1 <= 0)) {
 	        $(".diary_middle_list").css("transform", "translate(0px, 0px)");
 	        }
-	        if (Math.abs(xx1) > limit) {
+	        if (Math.abs(xx1) > limit1) {
 	        $(".diary_middle_list").css("transform", "translate(" + -limit1 + "px, 0px)");
 	        }
 	    });
-
+ */
 	    
 	    $(document).on("click", ".diaryAlarmList", function(){
 	    	console.log("click");

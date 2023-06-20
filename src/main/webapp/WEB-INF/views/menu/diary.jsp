@@ -295,9 +295,9 @@
 	    		dataType : "json",
 	    		success : showAi,
 	    		error : function(){
-	    			$(".diary_bottom").html("").trigger("create");
-	    			var listHtml = "<div><span>이상행동 녹화영상 LIST</span><span></span></div>";
-	    			$(".diary_bottom").append(listHtml).trigger("create");
+	    			//$(".diary_bottom").html("").trigger("create");
+	    			//var listHtml = "<div><span>이상행동 녹화영상 LIST</span><span></span></div>";
+	    			//$(".diary_bottom").append(listHtml).trigger("create");
 	    			}
 	    	})
 	    });
@@ -333,14 +333,15 @@
     		success : showMemo,
     		error : function(){alert("error");}
     	})
+    	
     	$.ajax({
-	    		url : "recording/ai/all",
-	    		type : "get",
-	    		data : {"date":date},
-	    		dataType : "json",
-	    		success : showAi,
-	    		error : function(){console.log("error");}
-	    	})
+    		url : "recording/ai/all",
+    		type : "get",
+    		data : {"date":date},
+    		dataType : "json",
+    		success : showAi,
+    		error : function(){console.log("error");}
+	    })
     };
     
     function showDiary(data){
@@ -491,24 +492,31 @@
     };
     
     function showAi(data){
+    	console.log(data);
     	var listHtml = "";
     	$('.diary_bottom>div>span:nth-last-child(1)').text("총 "+data.length+"개의 영상");
-    	listHtml += '<ul class=\"diary_bottom_list_1">';
-    	$.each(data,function(idx,val){
-    		listHtml += "<li>";
-    		/* listHtml += "<div>";	 */			
-    		listHtml += '<video class="video" poster onclick="location.href=\''+'/controller'+val.recordingFile+'\'">';
-			listHtml += '<source src="/controller'+val.recordingFile+'" type="video/mp4">';
-			listHtml += '</video>';
-			/* listHtml += "</div>"; */
-			if(idx == 0){
-				listHtml += "<span>2:28 발작</span>";
-			}else{
-				listHtml += "<span>0:34 개구호흡</span>";
-			}
-			listHtml += "</li>";
-    	});
-			listHtml += "</ul>";
+    	listHtml += '<ul class="diary_bottom_list_1">';
+    	
+		if(data.length > 0){
+	    	$.each(data,function(idx,val){
+	    		listHtml += "<li>";
+	    		/* listHtml += "<div>";	 */			
+	    		listHtml += '<video class="video" poster onclick="location.href=\''+'/controller'+val.recordingFile+'\'">';
+				listHtml += '<source src="/controller'+val.recordingFile+'" type="video/mp4">';
+				listHtml += '</video>';
+				/* listHtml += "</div>"; */
+				if(idx == 0){
+					listHtml += "<span>2:28 발작</span>";
+				}else{
+					listHtml += "<span>0:34 개구호흡</span>";
+				}
+				listHtml += "</li>";
+	    	});
+		} else {
+			listHtml+= "<li class='video_none'>저장된 동영상이 없습니다.</li>"
+		}
+		
+		listHtml += "</ul>";
     	if($(".diary_bottom_list_1>li").length == 0){
 	    	$(".diary_bottom").append(listHtml).trigger("create");
     	}

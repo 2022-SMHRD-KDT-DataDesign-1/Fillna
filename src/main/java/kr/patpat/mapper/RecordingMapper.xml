@@ -22,7 +22,7 @@
            and recording_type = "direct_recorded"
 	</select>
 	
-	<select id="recording_ai_List" resultMap="recording" parameterType="string">
+	<select id="recording_ai_List" resultMap="recording" parameterType="java.util.HashMap">
 		select recording_idx
 			 , mb_idx
 			 , action_idx

@@ -135,6 +135,7 @@ function makeview(data){
 			list_html += '<div class="alaram_list_wrap">';
 			list_html += '<ul class="alaram_list">';
         }
+		
 		list_html += '<li>';
 		list_html += '<span>'+ time +'</span>';
 		list_html += '<span class="material-symbols-outlined icon_circle';

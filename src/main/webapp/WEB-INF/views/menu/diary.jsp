@@ -105,7 +105,7 @@
 							}
 							
 							if(j==0){
-								out.print("<li class='date today'>");
+								out.print("<li class='date date_today'>");
 							    out.print("<p>"+dayOfWeek+"</p>");
 							    out.print("<p>"+temp[2]+"</p>");
 								out.print("</li>");
@@ -256,11 +256,11 @@
 	    
 	    $(".date").on("click", function(e){
 	    	
-	    	if($(this).hasClass("today")===true){
+	    	if($(this).hasClass("date_today")===true){
 	    		e.preventDefault();
 	    	} else{
-		    	$(".date").not(this).removeClass("today");
-		    	$(this).addClass("today");
+		    	$(".date").not(this).removeClass("date_today");
+		    	$(this).addClass("date_today");
 	    	}
 	    	var mbIdx = $("#memId").val();
 	    	var petIdx = $("#petId").val();
@@ -441,7 +441,7 @@
     function showMemo(data){
     	var listHtml = "";
     	listHtml += "<div><span>메모</span>";
-    	var date = $(".today").next().val(); 
+    	var date = $(".date_today").next().val(); 
     	var addMemoUrl = "${contextPath}/memo/show?date="+date;
     	listHtml += "<span class='material-symbols-outlined icon_add_circle' onclick='location.href=\""+addMemoUrl+"\"'>add_circle</span></div>";
     	listHtml += "<div class='diary_middle_list_wrap'>";

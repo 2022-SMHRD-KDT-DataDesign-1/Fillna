@@ -120,7 +120,7 @@
                     <div class="memo_detail" id="memo_detail">
                         ※ 성묘 : 써클링을 지속적으로 하는 경우 뇌병변, 인지장애, 두부외상, 뇌수막염 등이 의심됩니다.
                         외상으로 머리를 다치지 않았는지 확인해 주시기 바랍니다.
-                        <br><br>
+                        <br>
                         ※ 노령묘 : 한 자리에서 지속적으로 써클링을 하는 경우 초기 치매가 의심됩니다. 벽을 타고 돌거나,
                         방향감각 상실 등을 동반할 수 있습니다.
                     </div>
@@ -194,7 +194,9 @@
         		success : function(data){
          			$.each(data, function(idx, val){
 						console.log(data);
-        			 	$("#memo_detail").html(data.replace(/\n/g,"<br><br>"));
+						console.log(data[idx].alarm_content.split("\※"));
+						//var text = data[idx].alarm_content.split("\※");
+        			 	$("#memo_detail").html(data[idx].alarm_content.replace(/\n/g,"<br>"));
         			}); 
         		},
         		error : function(){alert("error");}

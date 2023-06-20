@@ -8,7 +8,7 @@
 }
 
 body{font-family: 'Pretendard'; -ms-overflow-style: none;}
-body::-webkit-scrollbar { display: none; }
+body::-webkit-bar { display: none; }
 .bg{background-color: #f6f7f8}
 .update_bg{background: url('../images/info_bg.png') #f6f7f8 no-repeat; background-size: contain; padding-bottom: 20vw;}
 .record_bg{background-color: #000;}

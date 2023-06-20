@@ -441,7 +441,7 @@
     function showMemo(data){
     	var listHtml = "";
     	listHtml += "<div><span>메모</span>";
-    	var date = $(".today").next().val(); 
+    	var date = $(".date_today").next().val(); 
     	var addMemoUrl = "${contextPath}/memo/show?date="+date;
     	listHtml += "<span class='material-symbols-outlined icon_add_circle' onclick='location.href=\""+addMemoUrl+"\"'>add_circle</span></div>";
     	listHtml += "<div class='diary_middle_list_wrap'>";

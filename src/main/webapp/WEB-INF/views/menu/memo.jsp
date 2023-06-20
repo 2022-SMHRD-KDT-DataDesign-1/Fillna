@@ -213,11 +213,11 @@
     	}
     	
     	// memo detail
-    	$("#sympton").on("change", function(){
+/*     	$("#sympton").on("change", function(){
     		var category = $(this).val();
     		console.log("change click");
     		
-/*      		$.ajax({
+     		$.ajax({
         		url : "memo/category",
         		type : "get",
         		data : {"category":category},
@@ -226,8 +226,8 @@
         			$("#memo_detail").text(data);
         		},
         		error : function(){alert("error");}
-    		});  */
-    	});
+    		});
+    	}); */
     	
     	
 

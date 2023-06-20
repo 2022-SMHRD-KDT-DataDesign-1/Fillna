@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.lang.Math" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
@@ -16,6 +18,31 @@
     <link rel="stylesheet" href="resources/css/substyle.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<style>
+	.video{
+    margin-bottom: 1.5vw;
+    cursor: pointer;
+    width: 35vw;
+    height: 20vw;
+    object-fit: cover;
+}
+.diary_bottom>ul {
+	overflow : auto;
+}
+.diary_bottom_list_1>li>div{
+	background-corlor : none;
+}
+.diary_bottom>ul{
+	padding-left: 5vw;
+    padding-top: 3vw;
+}
+.diary_bottom_list_1>li{
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    flex-direction: column;
+}
+	</style>
 </head>
 <body class="bg">
     <div class="wrapper">
@@ -23,6 +50,9 @@
 		<jsp:include page="../common/header2.jsp"></jsp:include>
 		<input type="hidden" value="${vo.mbIdx}" id="memId">
         <input type="hidden" value="${pvo.petIdx}" id="petId">
+        <c:set var="petPhotoPath" value="${pvo.petPhotoPath}"/>
+        <c:set var = "length" value = "${fn:length(petPhotoPath)}"/>
+        <input type="hidden" value="${fn:substring(petPhotoPath, 42, length)}" id="petPhotoPath">
         <div>
             <!-- date -->
             <div class="date_wrap">
@@ -96,17 +126,18 @@
             <!-- content -->
             <div class="con">
                 <div class="diary_top">
+
 					<!-- 일지 -->
                 </div>
                 <div class="diary_middle">
 					<!-- 메모 -->
                 </div>
                 <div class="diary_bottom">
-                    <div>
-                        <span>이상행동 녹화영상 LIST</span>
-                        <span>총 5개의 영상</span>
+               		<div>
+                     <span>이상행동 녹화영상 LIST</span>
+                        <span></span>
                     </div>
-                    <ul class="diary_bottom_list_1">
+<!--                     <ul class="diary_bottom_list_1">
                         <li>
                             <div>
                             </div>
@@ -121,7 +152,7 @@
                             <div>
                             </div>
                         </li>
-                    </ul>
+                    </ul> -->
                 </div>
             </div>
 
@@ -244,7 +275,18 @@
     		success : showMemo,
     		error : function(){alert("error");}
     		})
+    		
+	    	$.ajax({
+	    		url : "recording/ai/all",
+	    		type : "get",
+	    		data : {"date":date},
+	    		dataType : "json",
+	    		success : showAi,
+	    		error : function(){$(".diary_bottom").html("").trigger("create");}
+	    	})
 	    });
+	    
+	    
     });
     
     // 오늘 일지
@@ -261,7 +303,11 @@
     		dataType : "json",
     		success : showDiary,
     		error : function(){alert("error");}
-    	})
+    	}).done(function(){
+    		var photoPath = $("#petPhotoPath").val();
+    		console.log(photoPath);
+    		$("#petProfile").attr("src", photoPath);
+    	});
 
     	$.ajax({
     		url : "diary/memo-all",
@@ -272,6 +318,14 @@
     		success : showMemo,
     		error : function(){alert("error");}
     	})
+    	$.ajax({
+	    		url : "recording/ai/all",
+	    		type : "get",
+	    		data : {"date":date},
+	    		dataType : "json",
+	    		success : showAi,
+	    		error : function(){console.log("error");}
+	    	})
     };
     
     function showDiary(data){
@@ -280,7 +334,7 @@
         listHtml += "<div class='today_ment'>";
         listHtml += "오늘 하루, 탄이와 얼마나 오랫동안 눈을 맞추었나요?</div>";
         listHtml += "<div class='today_ment2'>";
-       	listHtml += "<img src="+path+" alt=''>";
+       	listHtml += "<img id='petProfile' src='' alt=''>";
         listHtml += "<p>나비는 오늘 조금 힘들었어요.<br>구토, 심한 재채기로 컨디션이 정상적이지 않아요.<br>식사에는 큰 문제는 없었지만, 물과 밥양을 확인해주세요.<br>그루밍도 평소보다 적게 했어요. 피부와 구강상태를 한번 체크해주세요<br><br>당분간 세심하게 나비를 신경써주세요";
         listHtml += "<span class='material-symbols-outlined icon_pets'>pets</span></p></div>";
             
@@ -420,6 +474,30 @@
     	listHtml += "</ul></div>";
     	$(".diary_middle").html(listHtml);
     };
+    
+    function showAi(data){
+    	var listHtml = "";
+    	$('.diary_bottom>div>span:nth-last-child(1)').text("총 "+data.length+"개의 영상");
+    	listHtml += '<ul class=\"diary_bottom_list_1">';
+    	$.each(data,function(idx,val){
+    		listHtml += "<li>";
+    		/* listHtml += "<div>";	 */			
+    		listHtml += '<video class="video" poster onclick="location.href=\''+'/controller'+val.recordingFile+'\'">';
+			listHtml += '<source src="/controller'+val.recordingFile+'" type="video/mp4">';
+			listHtml += '</video>';
+			/* listHtml += "</div>"; */
+			if(idx == 0){
+				listHtml += "<span>2:28 발작</span>";
+			}else{
+				listHtml += "<span>0:34 개구호흡</span>";
+			}
+			listHtml += "</li>";
+    	});
+			listHtml += "</ul>";
+    	if($(".diary_bottom_list_1>li").length == 0){
+	    	$(".diary_bottom").append(listHtml).trigger("create");
+    	}
+    }
     
 
 

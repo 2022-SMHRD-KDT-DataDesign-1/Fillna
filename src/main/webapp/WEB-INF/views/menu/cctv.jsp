@@ -69,7 +69,7 @@
             </a>
         </div>
 
-	    <iframe class="cctv_video" src="http://218.149.72.104:5000/"></iframe>
+	    <iframe class="cctv_video" src="http://220.95.2.113:5000/"></iframe>
 	    
     </div>
      <script>

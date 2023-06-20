@@ -1,5 +1,6 @@
 package kr.patpat.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -17,6 +18,6 @@ public interface MemoMapper {
 
 	void deleteMemo(String idx);
 
-	List<String> showMemoCategoryDetail(String category);
+	List<HashMap<String, String>> showMemoCategoryDetail(String category);
 }
 

@@ -188,14 +188,14 @@
             
        		$.ajax({
         		url : "memo/category",
-        		type : "get",
+        		type : "post",
         		data : {"category":category},
         		dataType : "json",
         		success : function(data){
-        			$.each(data, function(idx, val){
+         			$.each(data, function(idx, val){
 						console.log(data);
-        			 	//$("#memo_detail").html(data.replace(/\n/g,"<br><br>"));
-        			});
+        			 	$("#memo_detail").html(data.replace(/\n/g,"<br><br>"));
+        			}); 
         		},
         		error : function(){alert("error");}
     		}); 

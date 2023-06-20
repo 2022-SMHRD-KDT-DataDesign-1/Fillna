@@ -202,7 +202,7 @@ body::-webkit-bar { display: none; }
         .monitoring_top>div:first-child>a{display: block; width: 100%;}
         .monitoring_top>div:first-child>a>span{margin-left:11vw;}
         .monitoring_top>div:first-child>a>span>span{color: #cd0000; font-weight: 800;}
-        .monitoring_top>div:nth-child(2){color: #fff; height: 30vw; overflow: hidden; background: url('../images/logo_black.png') #9c9c9c no-repeat center; background-size: 20vw;}
+        .monitoring_top>div:nth-child(2){color: #fff; height: 30vw; overflow: hidden; background: url('../images/logo_ddong.png') #9c9c9c no-repeat center; background-size: 20vw;}
         .monitoring_top>div:nth-child(2)>p{float:left; font-size: 3.8vw;}
         .monitoring_top>div:nth-child(2)>div{text-align: center; padding-top:10vw;}
         .monitoring_top>div:nth-child(2)>div>span{border: 2px solid #fff; border-radius: 30px; padding: 1vw 10vw;}

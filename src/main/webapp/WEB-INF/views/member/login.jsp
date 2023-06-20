@@ -20,7 +20,7 @@
             <div class="con">
                 <div class="m_top">
                     <a href="#">
-                        <img src="resources/images/logo_black.png">
+                        <img src="resources/images/logo_ddong.png">
                     </a>
                     <div>
                         안녕하세요<br>

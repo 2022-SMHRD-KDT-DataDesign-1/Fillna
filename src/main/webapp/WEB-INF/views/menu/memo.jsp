@@ -198,11 +198,16 @@
 						console.log(data);
 						console.log(data[idx].alarm_content.split("\※"));
 						//var text = data[idx].alarm_content.split("\※");
-        			 	$("#memo_detail").html(data[idx].alarm_content.replace(/\n/g,"<br>"));
+        			 	if(data[0].alarm_content === "제공되는 정보가 없습니다"){
+        			 		$("#memo_detail").css({"text-align": "center", "padding": "8vw 0"});
+	        			 	$("#memo_detail").html(data[idx].alarm_content.replace(/\n/g,"<br>"));
+        			 	} else {
+	        			 	$("#memo_detail").html(data[idx].alarm_content.replace(/\n/g,"<br>"));
+        			 	}
         			}); 
         		},
         		error : function(){alert("error");}
-    		}); 
+    		});
         });
 
         $("#file").change(function(e){

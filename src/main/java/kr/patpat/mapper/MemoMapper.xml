@@ -29,7 +29,7 @@
 	
 	<insert id="insertMemo" parameterType="kr.patpat.entity.Memo">
 		insert into t_memo(mb_idx, category_idx, memo_content, memo_at, memo_update_at, memo_photo_name, memo_photo_path)
-		values(#{mbIdx}, #{categoryIdx}, #{memoContent}, now(), now(), #{memoPhotoName}, #{memoPhotoPath})
+		values(#{mbIdx}, #{categoryIdx}, #{memoContent}, #{memoAt}, now(), #{memoPhotoName}, #{memoPhotoPath})
 	</insert>
 	
 	<delete id="deleteMemo" parameterType="String">

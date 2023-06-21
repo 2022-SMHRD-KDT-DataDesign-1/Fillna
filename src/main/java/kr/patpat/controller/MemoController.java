@@ -47,7 +47,7 @@ public class MemoController {
 
 	// 메모 작성
 	@PostMapping("/memo/write")
-	public String memoWrite(@RequestParam("mbIdx") String mbIdx, @RequestParam("category") String category,
+	public String memoWrite(@RequestParam("memoAt") String memoAt, @RequestParam("mbIdx") String mbIdx, @RequestParam("category") String category,
 			@RequestParam("memocontent") String memocontent, @RequestParam("file") MultipartFile file, HttpServletRequest request,
 			RedirectAttributes rttr) throws IllegalStateException, IOException {
 		System.out.println("작성들어옴");
@@ -62,6 +62,7 @@ public class MemoController {
 				Memo memo = new Memo();
 				memo.setMbIdx(mbIdx);
 				memo.setMemoContent(memocontent);
+				memo.setMemoAt(memoAt);
 				memo.setMemoPhotoName(fileName);
 				memo.setMemoPhotoPath(uploadFile.getAbsolutePath());
 				

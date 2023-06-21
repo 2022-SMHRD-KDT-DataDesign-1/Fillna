@@ -242,8 +242,8 @@ body::-webkit-bar { display: none; }
           .diary_middle>div:first-child,
           .diary_bottom>div:first-child>span:first-child,
           .diary_bottom>div:nth-child(3)>span:first-child{font-size: 4.5vw; font-weight: 700; color:#5e5e5e; margin-bottom: 2vw;}
-          .today_ment{font-family: 'ROEHOE-CHAN';width: 100%;background: #F6CCCC;position: absolute;left: 0;top: 54vw;padding: 4vw 0;text-align: center;font-size:4vw;}
-          .today_ment2{color: #696969;position: absolute;width: 88vw;overflow: hidden;top: 61.5vw;}
+          .today_ment {font-family: 'ROEHOE-CHAN';width: 100%;background: #F6CCCC;position: absolute;left: 0;top: 52vw;padding: 5vw 0;text-align: center;font-size: 4.3vw;font-weight: 600;}
+          .today_ment2 {color: #696969;position: absolute;width: 88vw;overflow: hidden;top: 62.5vw;}
           .today_ment2 > img{float: left;width: 17vw; border-radius: 50%; height: 17vw; object-fit: cover;}
           .today_ment2 > p{float: right;width: 67vw;margin-top: 6vw;font-size: 3.5vw;line-height: 1.15; text-align: justify;}
           .diary_top > ul{margin-top: 60vw;background: url(../images/line.png) no-repeat;background-position: 15.66vw 1vw; background-size: 0.05vw 97%;}

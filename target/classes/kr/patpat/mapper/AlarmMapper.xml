@@ -21,7 +21,7 @@
 		select ( select alarm_type from t_alarm_content where alarm_content_idx = A.alarm_content_idx ) as alarm_type
 			 , convert(count(*),char) as cnt
 		  from t_alarm as A
-		 where mb_idx = #{mbIdx}
+		 where mb_idx = 'D79C3A790E7B11EEB3C80242C0A80002'
 		   and alarm_at BETWEEN DATE_ADD(now(),INTERVAL -2 DAY ) AND now()
 		  group by alarm_type
 		 having alarm_type != '일지'

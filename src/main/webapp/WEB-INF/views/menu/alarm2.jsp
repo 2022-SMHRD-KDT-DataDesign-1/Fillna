@@ -145,8 +145,8 @@ function makeview(data){
 	
 	for(var i = 0; i <= 20; i++) {
 		  var currentDate = new Date(today.getTime() - i * 24 * 60 * 60 * 1000);
-		  //console.log("날짜: " + formatDate(currentDate));
-		  //console.log("요일: " + getDayOfWeek(currentDate));
+		  console.log("날짜: " + formatDate(currentDate));
+		  console.log("요일: " + getDayOfWeek(currentDate));
 		  
 		  var date = formatDate(currentDate);
 		  var dayOfWeek = getDayOfWeek(currentDate);

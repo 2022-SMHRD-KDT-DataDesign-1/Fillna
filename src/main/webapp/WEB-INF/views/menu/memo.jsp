@@ -58,9 +58,11 @@
 				        } else if(dateString.substring(5, 7).length() >= 10){
 				        	month = dateString.substring(5, 7);
 				        }
+				        
+				        String memoAt = dateFormat2.format(memoDate);
 
 			       %>
-			       <span class="material-symbols-outlined icon_back" onclick="">
+			       <span class="material-symbols-outlined icon_back" onclick="history.back(-1)">
 			            arrow_back
 			       </span>
 			       <span>메모하기 - <%=month%>월 <%=dateString.substring(8)%>일</span>
@@ -83,6 +85,7 @@
         <div class="content">
             <div class="con">
                 <form method="post" id="memo_form" enctype="multipart/form-data">
+                	<input type="hidden" value="<%=memoAt%>" name="memoAt">
                 	<input type="hidden" value="${vo.mbIdx}" name="mbIdx">
                 	<input type="hidden" value="${mvo.memoIdx}" name="memoIdx">
                     <div class="memo_title">
@@ -112,7 +115,6 @@
                                 <li><button type="button">그루밍</button></li>
                                 <li><button type="button">개구호흡</button></li>
                                 <li><button type="button">식사</button></li>
-                                <li><button type="button">일지</button></li>
                                 <li><button type="button">기타</button></li>
                             </ul>
                         </div>

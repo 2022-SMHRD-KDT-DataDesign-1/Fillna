@@ -228,8 +228,10 @@ body::-webkit-bar { display: none; }
 		.diary_video_none{margin-top:4vw;border: 1px solid #d2d2d2; padding: 2vw;border-radius: 2vw; color: #696969; text-align:center;}
         /* diary content */
         .date_wrap{width:100%;overflow:hidden;position:relative;}
+        .date_wrap2{width:100%;overflow:hidden;position:relative;}
         .date_ul{border-spacing: 3vw 0vw;width:auto;display:table;transform: translate(-120vw, 0px);transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);transition-duration: 400ms;}
         .chart_date_ul{border-spacing: 3vw 0vw;width:auto;display:table;transform: translate(-101vw, 0);transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);transition-duration: 400ms;}
+        .chart_date_ul2{border-spacing: 3vw 0vw;width:auto;display:table;transform: translate(-101vw, 0);transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);transition-duration: 400ms;}
         .date{display:table-cell;border-radius: 5px; background-color: #e6e6e6; padding: 2vw 2.5vw; text-align: center; color:#999; margin-right: 3vw; cursor: pointer;}
         .date_today{background-color: #f6cccc; color: #cd0000;}
         .date>p:nth-child(1){font-size: 2.9vw;}

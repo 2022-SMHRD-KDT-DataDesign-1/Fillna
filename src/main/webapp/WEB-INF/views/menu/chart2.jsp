@@ -479,8 +479,8 @@
             <!-- =================================================================================================================================================================== -->
 			<!-- 월간 -->
             <div class="chart2 hide">
-	            <div class="date_wrap">
-	                <ul class="chart_date_ul">
+	            <div class="date_wrap2">
+	                <ul class="chart_date_ul2">
 	                    <li class="date">
 	                        <p>4월</p>
 	                        <p>30</p>
@@ -946,6 +946,31 @@
     	        }
     	        if (Math.abs(xx) > limit) {
     	        $(".chart_date_ul").css("transform", "translate(" + -limit + "px, 0px)");
+    	        }
+    	    });
+    	    
+    	 // 상단 날짜 슬라이드
+    	    var x2 = 0;
+    	    var tabx2 = 0;
+    	    var xx2 = 0;
+    	    var limit2 = $(".chart_date_ul2").width() - $(".date_wrap2").width() + 12;
+    	    $(".chart_date_ul2").bind('touchstart', function(e) {
+    	        var event2 = e.originalEvent;
+    	        x2 = event2.touches[0].screenX;
+    	        tabx2 = $(".chart_date_ul2").css("transform").replace(/[^0-9\-.,]/g, '').split(',')[4];
+    	    });
+    	    $(".chart_date_ul2").bind('touchmove', function(e) {
+    	        var event2 = e.originalEvent;
+    	        xx2 = parseInt(tabx2) + parseInt(event2.touches[0].screenX - x2);
+    	        $(".chart_date_ul2").css("transform", "translate(" + xx2 + "px, 0px)");
+    	        event2.preventDefault();
+    	    });
+    	    $(".chart_date_ul2").bind('touchend', function(e) {
+    	        if ((xx2 > 0) && (tabx2 <= 0)) {
+    	        $(".chart_date_ul2").css("transform", "translate(0px, 0px)");
+    	        }
+    	        if (Math.abs(xx2) > limit2) {
+    	        $(".chart_date_ul2").css("transform", "translate(" + -limit2 + "px, 0px)");
     	        }
     	    });
     	    

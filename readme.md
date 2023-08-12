@@ -2,6 +2,8 @@
 <p align="center"><img src="https://github.com/2022-SMHRD-KDT-DataDesign-1/Fillna/assets/122239382/7c8322c6-4b3c-46ca-857c-0a8b6025f29c" width="150"></p>
 
 ## 프로젝트 소개
+펫CCTV를 활용하여 반려동물의 건강관리를 위한 이상행동(구토, 발작, 개구호흡 등)을 탐지하고 기록 및 알림으로 제공하는 웹서비스입니다.
+
 ## 기술스택
 
 **FrontEnd**<br>
@@ -24,6 +26,9 @@
 <img src="https://img.shields.io/badge/jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white">
 <img src="https://img.shields.io/badge/google colab-F9AB00?style=for-the-badge&logo=google colab&logoColor=white">
 
-## 화면구성
-
-## 주요기능
+## 화면구성 및 주요기능
+![FILLNA_page-0002](https://github.com/2022-SMHRD-KDT-DataDesign-1/Fillna/assets/122239382/5a9f4109-c918-4418-8da1-283628bf4939)
+![FILLNA_page-0008](https://github.com/2022-SMHRD-KDT-DataDesign-1/Fillna/assets/122239382/faeb4503-a191-4af9-8204-afb1957b816f)
+![FILLNA_page-0010](https://github.com/2022-SMHRD-KDT-DataDesign-1/Fillna/assets/122239382/dc101c8b-5dad-4529-8808-e5cb6e598022)
+![FILLNA_page-0011](https://github.com/2022-SMHRD-KDT-DataDesign-1/Fillna/assets/122239382/0fbfa38a-7e8d-4559-a8bd-e86700899820)
+![FILLNA_page-0012](https://github.com/2022-SMHRD-KDT-DataDesign-1/Fillna/assets/122239382/4a24cd30-0773-4543-9433-e982cf29fbd3)
